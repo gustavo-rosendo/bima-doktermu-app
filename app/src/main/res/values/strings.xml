@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Dokter Pribadimu</string>
+
+    <string name="sign_in_fb">Sign in with Facebook</string>
+    <string name="sign_in_gplus">Sign in with Google+</string>
+    <string name="sign_in_email">Prefer to use your email?</string>
+    <string name="sign_in">Sign in</string>
+    <string name="register">Register</string>
 </resources>

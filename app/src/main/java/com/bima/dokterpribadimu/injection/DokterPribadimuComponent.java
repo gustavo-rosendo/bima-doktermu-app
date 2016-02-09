@@ -2,7 +2,7 @@ package com.bima.dokterpribadimu.injection;
 
 import android.app.Application;
 
-import com.bima.dokterpribadimu.view.activities.MainActivity;
+import com.bima.dokterpribadimu.view.activities.LoginActivity;
 
 import javax.inject.Singleton;
 
@@ -19,7 +19,7 @@ import dagger.Component;
 
 public interface DokterPribadimuComponent {
 
-    void inject(MainActivity mainActivity);
+    void inject(LoginActivity loginActivity);
 
     final class Initializer {
         public static DokterPribadimuComponent init(Application application) {
