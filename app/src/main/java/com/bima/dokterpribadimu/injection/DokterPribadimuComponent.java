@@ -3,6 +3,7 @@ package com.bima.dokterpribadimu.injection;
 import android.app.Application;
 
 import com.bima.dokterpribadimu.view.activities.LoginActivity;
+import com.bima.dokterpribadimu.view.activities.RegisterActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
 
 import javax.inject.Singleton;
@@ -22,6 +23,7 @@ public interface DokterPribadimuComponent {
 
     void inject(LoginActivity loginActivity);
     void inject(SignInActivity signInActivity);
+    void inject(RegisterActivity registerActivity);
 
     final class Initializer {
         public static DokterPribadimuComponent init(Application application) {

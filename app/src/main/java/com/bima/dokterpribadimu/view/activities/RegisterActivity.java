@@ -5,29 +5,29 @@ import android.os.Bundle;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
-import com.bima.dokterpribadimu.databinding.ActivitySignInBinding;
+import com.bima.dokterpribadimu.databinding.ActivityRegisterBinding;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
-import com.bima.dokterpribadimu.viewmodel.SignInViewModel;
+import com.bima.dokterpribadimu.viewmodel.RegisterViewModel;
 
-public class SignInActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity {
 
-    private ActivitySignInBinding binding;
-    private SignInViewModel signInViewModel;
+    private ActivityRegisterBinding binding;
+    private RegisterViewModel registerViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
 
-        signInViewModel = new SignInViewModel(this);
-        binding.setSignInViewmodel(signInViewModel);
+        registerViewModel = new RegisterViewModel(this);
+        binding.setRegisterViewmodel(registerViewModel);
 
         DokterPribadimuApplication.getComponent().inject(this);
     }
 
     @Override
     protected void onDestroy() {
-        signInViewModel.release();
+        registerViewModel.release();
 
         super.onDestroy();
     }

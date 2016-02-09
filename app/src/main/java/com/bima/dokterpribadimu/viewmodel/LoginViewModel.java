@@ -7,6 +7,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.view.View;
 
+import com.bima.dokterpribadimu.view.activities.RegisterActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
 
 /**
@@ -30,6 +31,16 @@ public class LoginViewModel extends BaseObservable {
             @Override
             public void onClick(View view) {
                 activity.startActivity(new Intent(activity, SignInActivity.class));
+            }
+        };
+    }
+
+    @Bindable
+    public View.OnClickListener getRegisterClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.startActivity(new Intent(activity, RegisterActivity.class));
             }
         };
     }

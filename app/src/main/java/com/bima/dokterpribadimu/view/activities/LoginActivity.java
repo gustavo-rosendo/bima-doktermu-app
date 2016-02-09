@@ -19,7 +19,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
-        loginViewModel = new LoginViewModel(LoginActivity.this);
+        loginViewModel = new LoginViewModel(this);
         binding.setLoginViewmodel(loginViewModel);
 
         DokterPribadimuApplication.getComponent().inject(this);
@@ -30,9 +30,5 @@ public class LoginActivity extends BaseActivity {
         loginViewModel.release();
 
         super.onDestroy();
-    }
-
-    public void openThis() {
-
     }
 }

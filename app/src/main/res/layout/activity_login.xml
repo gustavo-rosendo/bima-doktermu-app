@@ -85,7 +85,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/generic_xlarge_margin"
                 android:layout_marginStart="@dimen/generic_xlarge_margin"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:onClick="@{login_viewmodel.registerClickListener}">
 
                 <TextView
                     android:layout_width="wrap_content"
