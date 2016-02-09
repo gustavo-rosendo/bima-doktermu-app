@@ -6,6 +6,7 @@
     <string name="sign_in_gplus">Sign in with Google+</string>
     <string name="sign_in_email">Prefer to use your email?</string>
     <string name="sign_in">Sign in</string>
+    <string name="email_registration">Email registration</string>
     <string name="register">Register</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
