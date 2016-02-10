@@ -6,4 +6,7 @@
     <dimen name="landing_bima_text_width">125dp</dimen>
     <dimen name="landing_bima_text_height">75dp</dimen>
 
+    <!-- drawer -->
+    <dimen name="drawer_width">260dp</dimen>
+
 </resources>

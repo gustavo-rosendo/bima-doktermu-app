@@ -13,6 +13,7 @@
     <dimen name="generic_small_margin">4dp</dimen>
     <dimen name="generic_large_margin">16dp</dimen>
     <dimen name="generic_xlarge_margin">32dp</dimen>
+    <dimen name="generic_xxlarge_margin">48dp</dimen>
     <dimen name="generic_normal_padding">8dp</dimen>
     <dimen name="generic_small_padding">4dp</dimen>
     <dimen name="generic_large_padding">16dp</dimen>
@@ -28,5 +29,10 @@
     <dimen name="landing_bima_icon_height">150dp</dimen>
     <dimen name="landing_bima_text_width">150dp</dimen>
     <dimen name="landing_bima_text_height">90dp</dimen>
+
+    <!-- drawer -->
+    <dimen name="drawer_width">320dp</dimen>
+    <dimen name="drawer_bima_icon_width">160dp</dimen>
+    <dimen name="drawer_bima_icon_height">80dp</dimen>
 
 </resources>
