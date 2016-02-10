@@ -23,4 +23,10 @@
     <dimen name="generic_image_button_padding">12dp</dimen>
     <dimen name="generic_separator_height">1dp</dimen>
 
+    <!-- landing -->
+    <dimen name="landing_bima_icon_width">150dp</dimen>
+    <dimen name="landing_bima_icon_height">150dp</dimen>
+    <dimen name="landing_bima_text_width">150dp</dimen>
+    <dimen name="landing_bima_text_height">90dp</dimen>
+
 </resources>

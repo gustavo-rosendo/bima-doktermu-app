@@ -12,7 +12,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/generic_xlarge_padding">
+        android:padding="@dimen/generic_xlarge_padding"
+        android:background="@drawable/landing_bg">
+
+        <ImageView
+            android:id="@+id/login_bima_icon"
+            android:layout_width="@dimen/landing_bima_icon_width"
+            android:layout_height="@dimen/landing_bima_icon_height"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/bima_logo_icon"
+            android:contentDescription="@string/app_name"/>
+
+        <ImageView
+            android:layout_width="@dimen/landing_bima_text_width"
+            android:layout_height="@dimen/landing_bima_text_height"
+            android:layout_below="@+id/login_bima_icon"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/bima_logo_text"
+            android:contentDescription="@string/app_name"/>
 
         <Button
             android:layout_width="match_parent"
