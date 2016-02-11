@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_id": "dokter-pribadimu",
+    "project_number": "423310825659",
+    "name": "Dokter Pribadimu"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423310825659:android:6af355750dc1e79d",
+        "client_id": "android:com.bima.dokterpribadimu",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.bima.dokterpribadimu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423310825659-vlsra18h7fvq7ojkl4hslghfk0nvqhv3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bima.dokterpribadimu",
+            "certificate_hash": "D43EA956D81EA8A36253076AED8415CA7AE2B60F"
+          }
+        },
+        {
+          "client_id": "423310825659-dno5q9o29sc7vcvu79f7ugpgujeo813i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

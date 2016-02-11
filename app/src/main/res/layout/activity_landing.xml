@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="login_viewmodel"
-            type="com.bima.dokterpribadimu.viewmodel.LoginViewModel" />
+            name="landing_viewmodel"
+            type="com.bima.dokterpribadimu.viewmodel.LandingViewModel" />
     </data>
 
     <RelativeLayout
@@ -32,6 +32,7 @@
             android:contentDescription="@string/app_name"/>
 
         <Button
+            android:id="@+id/login_facebook_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/generic_button_height"
             android:layout_marginBottom="@dimen/generic_large_margin"
@@ -79,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:onClick="@{login_viewmodel.signInClickListener}">
+                android:onClick="@{landing_viewmodel.signInClickListener}">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -103,7 +104,7 @@
                 android:layout_marginLeft="@dimen/generic_xlarge_margin"
                 android:layout_marginStart="@dimen/generic_xlarge_margin"
                 android:orientation="vertical"
-                android:onClick="@{login_viewmodel.registerClickListener}">
+                android:onClick="@{landing_viewmodel.registerClickListener}">
 
                 <TextView
                     android:layout_width="wrap_content"

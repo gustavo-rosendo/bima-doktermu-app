@@ -8,22 +8,21 @@ import android.view.View;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
-import com.bima.dokterpribadimu.databinding.ActivityHomeBinding;
+import com.bima.dokterpribadimu.databinding.ActivityEmailRegistrationSuccessBinding;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
-import com.bima.dokterpribadimu.view.fragments.HomeFragment;
+import com.bima.dokterpribadimu.view.fragments.RegistrationSuccessFragment;
 
-public class HomeActivity extends BaseActivity {
+public class RegistrationSuccessActivity extends BaseActivity {
 
-    private ActivityHomeBinding binding;
+    private ActivityEmailRegistrationSuccessBinding binding;
     private DrawerFragment drawerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_email_registration_success);
 
         DokterPribadimuApplication.getComponent().inject(this);
 
@@ -40,7 +39,7 @@ public class HomeActivity extends BaseActivity {
     private void init() {
         initViews();
         setupDrawerFragment();
-        setupHomeFragment();
+        setupRegistrationSuccessFragment();
     }
 
     private void initViews() {
@@ -53,7 +52,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void setupDrawerFragment() {
-        drawerFragment = DrawerFragment.newInstance(Constants.DRAWER_TYPE_HOME);
+        drawerFragment = DrawerFragment.newInstance(Constants.DRAWER_TYPE_OTHER);
         drawerFragment.setOnDrawerItemPressedListener(new DrawerFragment.OnDrawerItemPressed() {
             @Override
             public void onDrawerItemPressed(int selectedDrawerType) {
@@ -67,10 +66,10 @@ public class HomeActivity extends BaseActivity {
                 .commit();
     }
 
-    private void setupHomeFragment() {
+    private void setupRegistrationSuccessFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction
-                .replace(R.id.fragment_container, HomeFragment.newInstance())
+                .replace(R.id.fragment_container, RegistrationSuccessFragment.newInstance())
                 .commit();
     }
 }

@@ -3,6 +3,7 @@ package com.bima.dokterpribadimu.view.base;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
+import com.facebook.appevents.AppEventsLogger;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 /**
@@ -21,4 +22,12 @@ public class BaseActivity extends RxAppCompatActivity {
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }*/
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Logs 'app deactivate' App Event.
+        AppEventsLogger.deactivateApp(this);
+    }
 }

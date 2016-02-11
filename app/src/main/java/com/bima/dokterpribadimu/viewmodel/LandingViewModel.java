@@ -13,11 +13,11 @@ import com.bima.dokterpribadimu.view.activities.SignInActivity;
 /**
  * Created by apradanas on 2/9/16.
  */
-public class LoginViewModel extends BaseObservable {
+public class LandingViewModel extends BaseObservable {
 
     private Activity activity;
 
-    public LoginViewModel(Activity activity) {
+    public LandingViewModel(Activity activity) {
         this.activity = activity;
     }
 

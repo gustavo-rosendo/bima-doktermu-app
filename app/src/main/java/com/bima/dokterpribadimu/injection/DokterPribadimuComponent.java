@@ -2,12 +2,14 @@ package com.bima.dokterpribadimu.injection;
 
 import android.app.Application;
 
+import com.bima.dokterpribadimu.view.activities.RegistrationSuccessActivity;
 import com.bima.dokterpribadimu.view.activities.HomeActivity;
-import com.bima.dokterpribadimu.view.activities.LoginActivity;
+import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.RegisterActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
 import com.bima.dokterpribadimu.view.fragments.HomeFragment;
+import com.bima.dokterpribadimu.view.fragments.RegistrationSuccessFragment;
 
 import javax.inject.Singleton;
 
@@ -24,11 +26,13 @@ import dagger.Component;
 
 public interface DokterPribadimuComponent {
 
-    void inject(LoginActivity loginActivity);
+    void inject(LandingActivity landingActivity);
     void inject(SignInActivity signInActivity);
     void inject(RegisterActivity registerActivity);
+    void inject(RegistrationSuccessActivity registrationSuccessActivity);
     void inject(HomeActivity homeActivity);
     void inject(DrawerFragment drawerFragment);
+    void inject(RegistrationSuccessFragment registrationSuccessFragment);
     void inject(HomeFragment homeFragment);
 
     final class Initializer {
