@@ -4,7 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- generic -->
-    <dimen name="generic_toolbar_height">48dp</dimen>
+    <dimen name="generic_toolbar_height">56dp</dimen>
+    <dimen name="generic_toolbar_button_height">56dp</dimen>
     <dimen name="generic_tab_indicator_height">5dp</dimen>
     <dimen name="generic_button_height">48dp</dimen>
     <dimen name="generic_large_button_height">64dp</dimen>
@@ -21,6 +22,7 @@
     <dimen name="generic_normal_corner_radius">20dp</dimen>
     <dimen name="generic_small_corner_radius">8dp</dimen>
     <dimen name="generic_large_corner_radius">24dp</dimen>
+    <dimen name="generic_toolbar_image_button_padding">16dp</dimen>
     <dimen name="generic_image_button_padding">12dp</dimen>
     <dimen name="generic_separator_height">1dp</dimen>
 
@@ -33,6 +35,6 @@
     <!-- drawer -->
     <dimen name="drawer_width">320dp</dimen>
     <dimen name="drawer_bima_icon_width">160dp</dimen>
-    <dimen name="drawer_bima_icon_height">80dp</dimen>
+    <dimen name="drawer_bima_icon_height">72dp</dimen>
 
 </resources>

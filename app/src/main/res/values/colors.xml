@@ -8,4 +8,7 @@
 
     <color name="gplus_red">#DD4B39</color>
     <color name="gplus_red_dark">#B03C2D</color>
+
+    <color name="grey_soft">#F6F6F6</color>
+    <color name="grey_dark">#525252</color>
 </resources>

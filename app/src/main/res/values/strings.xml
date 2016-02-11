@@ -17,4 +17,13 @@
     <string name="home_info">Now, you have access to BIMA services directly on your phone.</string>
     <string name="home_lets_get_started">Let\'s get started!</string>
 
+    <!-- doctor on call -->
+    <string name="doctor_on_call">Doctor on call</string>
+
+    <!-- about bima -->
+    <string name="about_bima">About Bima</string>
+
+    <!-- sign out -->
+    <string name="sign_out">Sign out</string>
+
 </resources>

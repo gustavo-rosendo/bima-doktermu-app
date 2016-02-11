@@ -3,18 +3,104 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/drawer_bima_image"
             android:layout_width="@dimen/drawer_bima_icon_width"
             android:layout_height="@dimen/drawer_bima_icon_height"
-            android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/generic_large_margin"
+            android:layout_marginBottom="@dimen/generic_large_margin"
             android:src="@drawable/bima_drawer_logo"
             android:contentDescription="@string/app_name"/>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/drawer_home_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:layout_below="@+id/drawer_bima_image"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:background="@drawable/drawer_button_bg_selector">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
+                android:text="@string/home"
+                android:textSize="18sp"
+                android:textColor="@color/grey_dark"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/drawer_doctor_on_call_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:layout_below="@+id/drawer_home_button"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:background="@drawable/drawer_button_bg_selector">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
+                android:text="@string/doctor_on_call"
+                android:textSize="18sp"
+                android:textColor="@color/grey_dark"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/drawer_about_bima_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:layout_below="@+id/drawer_doctor_on_call_button"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:background="@drawable/drawer_button_bg_selector">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
+                android:text="@string/about_bima"
+                android:textSize="18sp"
+                android:textColor="@color/grey_dark"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/drawer_sign_out_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:background="@drawable/drawer_button_bg_selector">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
+                android:text="@string/sign_out"
+                android:textSize="18sp"
+                android:textColor="@color/grey_dark"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </layout>

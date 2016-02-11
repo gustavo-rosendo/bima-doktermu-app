@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.bima.dokterpribadimu.injection.DokterPribadimuComponent;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
@@ -25,6 +27,7 @@ public class DokterPribadimuApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         sInstance = this;
         mComponent = DokterPribadimuComponent.Initializer.init(this);

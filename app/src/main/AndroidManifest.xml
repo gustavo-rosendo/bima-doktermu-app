@@ -23,6 +23,9 @@
         <activity android:name=".view.activities.SignInActivity" />
         <activity android:name=".view.activities.RegisterActivity" />
         <activity android:name=".view.activities.HomeActivity"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="10a1d9677d854aab43358157fdafd6cd556f2f76" />
     </application>
 
 </manifest>

@@ -43,7 +43,6 @@ public class HomeActivity extends BaseActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction
                 .replace(R.id.fragment_drawer, DrawerFragment.newInstance())
-                .addToBackStack(null)
                 .commit();
     }
 
@@ -51,7 +50,6 @@ public class HomeActivity extends BaseActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction
                 .replace(R.id.fragment_container, HomeFragment.newInstance())
-                .addToBackStack(null)
                 .commit();
     }
 }

@@ -34,9 +34,9 @@
 
                         <ImageButton
                             android:id="@+id/toolbar_home_button"
-                            android:layout_width="@dimen/generic_button_height"
-                            android:layout_height="@dimen/generic_button_height"
-                            android:padding="@dimen/generic_image_button_padding"
+                            android:layout_width="@dimen/generic_toolbar_button_height"
+                            android:layout_height="@dimen/generic_toolbar_button_height"
+                            android:padding="@dimen/generic_toolbar_image_button_padding"
                             android:src="@drawable/ic_menu"
                             android:background="?android:attr/selectableItemBackground"
                             android:scaleType="fitXY"/>
