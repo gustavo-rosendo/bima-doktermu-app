@@ -25,13 +25,13 @@ public class GplusClient implements LoginClient, GoogleApiClient.OnConnectionFai
     private Activity activity;
     private LoginListener loginListener;
 
-    private GoogleApiClient googleApiClient;
+    private static GoogleApiClient googleApiClient;
 
     private static GplusClient instance;
 
     public static GplusClient getInstance() {
         if (instance == null) {
-            return new GplusClient();
+            instance = new GplusClient();
         }
         return instance;
     }
@@ -39,7 +39,6 @@ public class GplusClient implements LoginClient, GoogleApiClient.OnConnectionFai
     public static void release() {
         if (instance != null) {
             instance.activity = null;
-            instance = null;
         }
     }
 
@@ -54,14 +53,17 @@ public class GplusClient implements LoginClient, GoogleApiClient.OnConnectionFai
                 .build();
 
         googleApiClient = new GoogleApiClient.Builder(activity)
-                .addOnConnectionFailedListener(this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+                    .addOnConnectionFailedListener(this)
+                    .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                    .build();
+
     }
 
     @Override
     public void onStart() {
-
+        if (!googleApiClient.isConnected()) {
+            googleApiClient.connect();
+        }
     }
 
     @Override
@@ -96,15 +98,17 @@ public class GplusClient implements LoginClient, GoogleApiClient.OnConnectionFai
 
     @Override
     public void signOut() {
-        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
-                        if (loginListener != null) {
-                            loginListener.onSignOut();
+        if (googleApiClient.isConnected()) {
+            Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+                    new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(Status status) {
+                            if (loginListener != null) {
+                                loginListener.onSignOut();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 
     @Override

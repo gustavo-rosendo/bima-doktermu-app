@@ -26,6 +26,8 @@ public class DrawerFragment extends BaseFragment {
 
     private OnDrawerItemPressed onDrawerItemPressedListener;
 
+    private LoginClient loginClient;
+
     private FragmentDrawerBinding binding;
     private int activeDrawer;
 
@@ -63,9 +65,22 @@ public class DrawerFragment extends BaseFragment {
         super.onDestroy();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        loginClient.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        loginClient.onStop();
+    }
+
     private void init() {
         initBundle();
         initViews();
+        initLoginClient();
     }
 
     private void initBundle() {
@@ -130,15 +145,19 @@ public class DrawerFragment extends BaseFragment {
         });
     }
 
+    private void initLoginClient() {
+        GplusClient.getInstance().init(getActivity(), null);
+        loginClient = GplusClient.getInstance();
+    }
+
     private void signOutFacebook() {
-        LoginClient loginClient = FacebookClient.getInstance();
+        loginClient = FacebookClient.getInstance();
         loginClient.init(getActivity(), null);
         loginClient.signOut();
     }
 
     private void signOutGPlus() {
-        LoginClient loginClient = GplusClient.getInstance();
-        loginClient.init(getActivity(), null);
+        loginClient = GplusClient.getInstance();
         loginClient.signOut();
     }
 

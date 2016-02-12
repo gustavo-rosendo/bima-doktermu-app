@@ -16,6 +16,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "423310825659-uiburhie1au98d90q8f3vk5pp7omtou8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bima.dokterpribadimu",
+            "certificate_hash": "A4B47C70EB3722E7A4F6027748E4D7E0B8862746"
+          }
+        },
+        {
           "client_id": "423310825659-vlsra18h7fvq7ojkl4hslghfk0nvqhv3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

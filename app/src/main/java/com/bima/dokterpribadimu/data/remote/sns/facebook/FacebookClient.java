@@ -45,7 +45,7 @@ public class FacebookClient implements LoginClient {
 
     public static FacebookClient getInstance() {
         if (instance == null) {
-            return new FacebookClient();
+            instance = new FacebookClient();
         }
         return instance;
     }
@@ -53,7 +53,6 @@ public class FacebookClient implements LoginClient {
     public static void release() {
         if (instance != null) {
             instance.activity = null;
-            instance = null;
         }
     }
 
