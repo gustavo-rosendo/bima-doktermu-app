@@ -8,6 +8,10 @@ import android.os.Bundle;
 
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.ActivityLoadingBinding;
+import com.bima.dokterpribadimu.model.UserProfile;
+import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.GsonUtils;
+import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 
 import java.util.concurrent.TimeUnit;
@@ -39,6 +43,14 @@ public class LoadingActivity extends BaseActivity {
 
         initAnim();
         runSplash();
+    }
+
+    @Override
+    protected void onDestroy() {
+        scaleAnim.end();
+        scaleAnim = null;
+
+        super.onDestroy();
     }
 
     private void initAnim() {
@@ -75,10 +87,15 @@ public class LoadingActivity extends BaseActivity {
                 .subscribe(new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
-                        startLandingActivity();
-
-                        scaleAnim.end();
-                        scaleAnim = null;
+                        UserProfile userProfile = GsonUtils.fromJson(
+                                StorageUtils.getString(LoadingActivity.this, Constants.KEY_USER_PROFILE, ""),
+                                UserProfile.class
+                        );
+                        if (userProfile == null) {
+                            startLandingActivity();
+                        } else {
+                            startDoctorCallActivityOnTop();
+                        }
 
                         finish();
                     }

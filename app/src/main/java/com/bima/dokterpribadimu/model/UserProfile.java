@@ -11,16 +11,19 @@ public class UserProfile {
     private String lastName;
     private String email;
     private String profilePicture;
+    private String loginType;
 
     public UserProfile(
             String id, String name, String firstName,
-            String lastName, String email, String profilePicture) {
+            String lastName, String email, String profilePicture,
+            String loginType) {
         this.id = id;
         this.name = name;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.profilePicture = profilePicture;
+        this.loginType = loginType;
     }
 
     public String getId() {
@@ -69,5 +72,13 @@ public class UserProfile {
 
     public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public String getLoginType() {
+        return loginType;
+    }
+
+    public void setLoginType(String loginType) {
+        this.loginType = loginType;
     }
 }

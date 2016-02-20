@@ -69,7 +69,8 @@ public class SignInFragment extends BaseFragment {
                                                                         "",
                                                                         "",
                                                                         email,
-                                                                        ""
+                                                                        "",
+                                                                        Constants.LOGIN_TYPE_EMAIL
                                                                 );
                                     StorageUtils.putString(
                                             getActivity(),

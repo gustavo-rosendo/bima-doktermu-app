@@ -65,7 +65,7 @@ public class BaseFragment extends RxFragment {
                 .showDialog();
     }
 
-    protected void startHomeActivity() {
+    protected void startDoctorCallActivity() {
         startActivity(new Intent(getActivity(), DoctorCallActivity.class));
     }
 
