@@ -28,7 +28,9 @@ public class LoadingActivity extends BaseActivity {
     private static final String SCALE_X_ANIMATION = "scaleX";
     private static final String SCALE_Y_ANIMATION = "scaleY";
 
-    ActivityLoadingBinding binding;
+    private ActivityLoadingBinding binding;
+
+    private AnimatorSet scaleAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class LoadingActivity extends BaseActivity {
         scaleX.setRepeatMode(ObjectAnimator.REVERSE);
         scaleY.setRepeatMode(ObjectAnimator.REVERSE);
 
-        AnimatorSet scaleAnim = new AnimatorSet();
+        scaleAnim = new AnimatorSet();
         scaleAnim.setDuration(ANIMATION_DURATION);
         scaleAnim.play(scaleX).with(scaleY);
 
@@ -74,6 +76,10 @@ public class LoadingActivity extends BaseActivity {
                     @Override
                     public void onCompleted() {
                         startLandingActivity();
+
+                        scaleAnim.end();
+                        scaleAnim = null;
+
                         finish();
                     }
 

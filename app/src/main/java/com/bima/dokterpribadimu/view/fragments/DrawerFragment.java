@@ -1,20 +1,17 @@
 package com.bima.dokterpribadimu.view.fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
-import com.bima.dokterpribadimu.data.remote.sns.LoginClient;
-import com.bima.dokterpribadimu.data.remote.sns.facebook.FacebookClient;
-import com.bima.dokterpribadimu.data.remote.sns.gplus.GplusClient;
+import com.bima.dokterpribadimu.data.sns.LoginClient;
+import com.bima.dokterpribadimu.data.sns.facebook.FacebookClient;
+import com.bima.dokterpribadimu.data.sns.gplus.GplusClient;
 import com.bima.dokterpribadimu.databinding.FragmentDrawerBinding;
 import com.bima.dokterpribadimu.utils.Constants;
-import com.bima.dokterpribadimu.view.activities.HomeActivity;
-import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 
 /**
@@ -108,7 +105,7 @@ public class DrawerFragment extends BaseFragment {
                 }
 
                 if (activeDrawer != Constants.DRAWER_TYPE_HOME) {
-                    startActivity(new Intent(getActivity(), HomeActivity.class));
+                    startHomeActivity();
                 }
             }
         });
@@ -140,7 +137,7 @@ public class DrawerFragment extends BaseFragment {
 
                 signOutFacebook();
                 signOutGPlus();
-                startActivity(new Intent(getActivity(), LandingActivity.class));
+                startLandingActivityOnTop();
             }
         });
     }

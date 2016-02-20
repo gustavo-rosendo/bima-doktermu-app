@@ -5,24 +5,29 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
-import com.bima.dokterpribadimu.databinding.ActivityEmailRegistrationSuccessBinding;
+import com.bima.dokterpribadimu.databinding.ActivityHomeBinding;
+import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.GsonUtils;
+import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
-import com.bima.dokterpribadimu.view.fragments.RegistrationSuccessFragment;
+import com.bima.dokterpribadimu.view.fragments.HomeFragment;
 
-public class RegistrationSuccessActivity extends BaseActivity {
+public class DoctorCallActivity extends BaseActivity {
 
-    private ActivityEmailRegistrationSuccessBinding binding;
+    private ActivityHomeBinding binding;
     private DrawerFragment drawerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_email_registration_success);
+        setContentView(R.layout.activity_home);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
 
         DokterPribadimuApplication.getComponent().inject(this);
 
@@ -39,7 +44,12 @@ public class RegistrationSuccessActivity extends BaseActivity {
     private void init() {
         initViews();
         setupDrawerFragment();
-        setupRegistrationSuccessFragment();
+        setupHomeFragment();
+
+        UserProfile userProfile = GsonUtils.fromJson(
+                StorageUtils.getString(this, Constants.KEY_USER_PROFILE, ""),
+                UserProfile.class);
+        Toast.makeText(DoctorCallActivity.this, "Hello, " + userProfile.getName(), Toast.LENGTH_SHORT).show();
     }
 
     private void initViews() {
@@ -52,7 +62,7 @@ public class RegistrationSuccessActivity extends BaseActivity {
     }
 
     private void setupDrawerFragment() {
-        drawerFragment = DrawerFragment.newInstance(Constants.DRAWER_TYPE_OTHER);
+        drawerFragment = DrawerFragment.newInstance(Constants.DRAWER_TYPE_HOME);
         drawerFragment.setOnDrawerItemPressedListener(new DrawerFragment.OnDrawerItemPressed() {
             @Override
             public void onDrawerItemPressed(int selectedDrawerType) {
@@ -66,10 +76,10 @@ public class RegistrationSuccessActivity extends BaseActivity {
                 .commit();
     }
 
-    private void setupRegistrationSuccessFragment() {
+    private void setupHomeFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction
-                .replace(R.id.fragment_container, RegistrationSuccessFragment.newInstance())
+                .replace(R.id.fragment_container, HomeFragment.newInstance())
                 .commit();
     }
 }

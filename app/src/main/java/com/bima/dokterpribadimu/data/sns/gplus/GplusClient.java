@@ -1,4 +1,4 @@
-package com.bima.dokterpribadimu.data.remote.sns.gplus;
+package com.bima.dokterpribadimu.data.sns.gplus;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -12,8 +12,9 @@ import com.google.android.gms.common.api.Status;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.bima.dokterpribadimu.data.remote.sns.LoginClient;
-import com.bima.dokterpribadimu.data.remote.sns.LoginListener;
+import com.bima.dokterpribadimu.data.sns.LoginClient;
+import com.bima.dokterpribadimu.data.sns.LoginListener;
+import com.bima.dokterpribadimu.model.UserProfile;
 
 /**
  * Created by apradanas on 2/12/16.
@@ -82,9 +83,19 @@ public class GplusClient implements LoginClient, GoogleApiClient.OnConnectionFai
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
-            loginListener.onSuccess();
+            GoogleSignInAccount signInAccount = result.getSignInAccount();
+
+            UserProfile userProfile = new UserProfile(
+                                                signInAccount.getId(),
+                                                signInAccount.getDisplayName(),
+                                                "",
+                                                "",
+                                                signInAccount.getEmail(),
+                                                signInAccount.getPhotoUrl().toString()
+                                        );
+            loginListener.onSuccess(userProfile);
         } else {
+            Status status = result.getStatus();
             // Signed out, show unauthenticated UI.
             loginListener.onFail();
         }
@@ -113,6 +124,8 @@ public class GplusClient implements LoginClient, GoogleApiClient.OnConnectionFai
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-
+        if (loginListener != null) {
+            loginListener.onFail();
+        }
     }
 }

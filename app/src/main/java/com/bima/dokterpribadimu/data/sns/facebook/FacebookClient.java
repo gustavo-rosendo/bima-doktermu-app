@@ -1,4 +1,4 @@
-package com.bima.dokterpribadimu.data.remote.sns.facebook;
+package com.bima.dokterpribadimu.data.sns.facebook;
 
 import com.google.gson.Gson;
 
@@ -6,9 +6,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.bima.dokterpribadimu.data.remote.sns.LoginClient;
-import com.bima.dokterpribadimu.data.remote.sns.LoginListener;
+import com.bima.dokterpribadimu.data.sns.LoginClient;
+import com.bima.dokterpribadimu.data.sns.LoginListener;
 import com.bima.dokterpribadimu.model.FacebookProfile;
+import com.bima.dokterpribadimu.model.UserProfile;
+import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -74,12 +76,16 @@ public class FacebookClient implements LoginClient {
 
                     @Override
                     public void onCancel() {
-                        // TODO: App code
+                        if (loginListener != null) {
+                            loginListener.onCancel();
+                        }
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
-                        // TODO: App code
+                        if (loginListener != null) {
+                            loginListener.onFail();
+                        }
                     }
                 });
     }
@@ -91,8 +97,7 @@ public class FacebookClient implements LoginClient {
                     @Override
                     public void onCompleted(JSONObject object,
                                             GraphResponse response) {
-                        FacebookProfile fbProfile = new Gson()
-                                .fromJson(object.toString(), FacebookProfile.class);
+                        FacebookProfile fbProfile = GsonUtils.fromJson(object.toString(), FacebookProfile.class);
 
                         if (fbProfile.getId() == null) {
                             loginListener.onFail();
@@ -102,7 +107,16 @@ public class FacebookClient implements LoginClient {
                         String picture = "https://graph.facebook.com/" + fbProfile.getId() + "/picture";
                         String email = fbProfile.getEmail() != null ? fbProfile.getEmail() : "";
 
-                        loginListener.onSuccess();
+                        UserProfile userProfile = new UserProfile(
+                                                            fbProfile.getId(),
+                                                            fbProfile.getName(),
+                                                            fbProfile.getFirstName(),
+                                                            fbProfile.getLastName(),
+                                                            email,
+                                                            picture
+                                                    );
+
+                        loginListener.onSuccess(userProfile);
                     }
                 });
         Bundle parameters = new Bundle();

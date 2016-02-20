@@ -21,6 +21,7 @@
     <dimen name="generic_xlarge_padding">32dp</dimen>
     <dimen name="generic_xxlarge_padding">48dp</dimen>
     <dimen name="generic_normal_corner_radius">20dp</dimen>
+    <dimen name="generic_xsmall_corner_radius">4dp</dimen>
     <dimen name="generic_small_corner_radius">8dp</dimen>
     <dimen name="generic_large_corner_radius">24dp</dimen>
     <dimen name="generic_toolbar_image_button_padding">16dp</dimen>
