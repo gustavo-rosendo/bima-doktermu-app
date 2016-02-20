@@ -7,7 +7,7 @@ import android.text.TextUtils;
  */
 public class ValidationUtils {
 
-    private static final int MINIMUM_PASSWORD_LENGTH = 4;
+    public static final int MINIMUM_PASSWORD_LENGTH = 4;
 
     /**
      * Validate email using Patterns
@@ -26,6 +26,6 @@ public class ValidationUtils {
      */
     public static boolean isValidPassword(CharSequence password) {
         return !TextUtils.isEmpty(password)
-                && password.length() > MINIMUM_PASSWORD_LENGTH;
+                && password.length() >= MINIMUM_PASSWORD_LENGTH;
     }
 }

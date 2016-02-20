@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Dokter Pribadimu</string>
+    <string name="ok">OK</string>
 
     <!-- facebook -->
     <string name="facebook_app_id">1568480343444186</string>
@@ -13,12 +14,6 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="whats_my_password">What\'s my password?</string>
-
-    <!-- email registration -->
-    <string name="email_registration">Email registration</string>
-    <string name="email_registration_success">Success!</string>
-    <string name="email_registration_success_info">Everything went according to plan and you are now ready to use the app!</string>
-    <string name="email_registration_get_started">Get started</string>
 
     <!-- home -->
     <string name="home">Home</string>
@@ -35,7 +30,24 @@
     <!-- sign out -->
     <string name="sign_out">Sign out</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- dialog -->
+    <string name="dialog_get_started">Get started</string>
+    <string name="dialog_try_once_more">Try once more</string>
+    <string name="dialog_take_me_home">Take me back home</string>
+    <string name="dialog_success">Success!</string>
+    <string name="dialog_failed">Ooops!</string>
+    <string name="dialog_done">It\'s done!</string>
+    <string name="dialog_late">It\'s late!</string>
+    <string name="dialog_late_message">Our dedicated doctors have already gone home to take care of their families.
+        They will be back for you tomorrow at 6AM. Good night!</string>
+    <string name="no_connection">No Internet Connection</string>
+    <string name="no_connection_message">Your device is currently offline.
+        Please check your network settings and try again.</string>
+    <string name="dialog_sign_in_success_message">Everything went according to plan and you are now ready to use the app!</string>
+    <string name="dialog_sign_in_failed_message">Houston we had a problem!\n
+        Let\'s give it another try or pin us an email and we\'ll get back to you as soon as possible</string>
+    <string name="invalid_email_message">The email address entered was invalid.
+        Please check again or reenter it.</string>
+    <string name="invalid_password_message">Password length must be at least %d characters.</string>
 
 </resources>

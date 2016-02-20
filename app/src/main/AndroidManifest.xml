@@ -21,7 +21,6 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".view.activities.SignInActivity" />
         <activity android:name=".view.activities.HomeActivity" />
-        <activity android:name=".view.activities.RegistrationSuccessActivity" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

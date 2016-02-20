@@ -108,7 +108,7 @@ public class DrawerFragment extends BaseFragment {
                 }
 
                 if (activeDrawer != Constants.DRAWER_TYPE_HOME) {
-                    startActivity(new Intent(getActivity(), HomeActivity.class));
+                    startHomeActivity();
                 }
             }
         });
@@ -140,7 +140,7 @@ public class DrawerFragment extends BaseFragment {
 
                 signOutFacebook();
                 signOutGPlus();
-                startActivity(new Intent(getActivity(), LandingActivity.class));
+                startLandingActivityOnTop();
             }
         });
     }
