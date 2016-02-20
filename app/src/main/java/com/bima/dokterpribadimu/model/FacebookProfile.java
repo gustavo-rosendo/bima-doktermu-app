@@ -1,7 +1,7 @@
 package com.bima.dokterpribadimu.model;
 
 /**
- * Created by apradanas on 2/11/16.
+ * Created by apradanas on 2/21/16.
  */
 public class FacebookProfile {
 

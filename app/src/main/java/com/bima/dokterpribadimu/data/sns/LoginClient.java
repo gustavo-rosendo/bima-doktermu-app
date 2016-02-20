@@ -1,4 +1,4 @@
-package com.bima.dokterpribadimu.data.remote.sns;
+package com.bima.dokterpribadimu.data.sns;
 
 import android.app.Activity;
 import android.content.Intent;

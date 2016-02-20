@@ -10,6 +10,10 @@ import android.widget.Toast;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.FragmentSignInBinding;
+import com.bima.dokterpribadimu.model.UserProfile;
+import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.GsonUtils;
+import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
@@ -48,7 +52,7 @@ public class SignInFragment extends BaseFragment {
         binding.signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = binding.signInEmailField.getText().toString();
+                final String email = binding.signInEmailField.getText().toString();
                 String password = binding.signInPasswordField.getText().toString();
                 if (validateSignIn(email, password)) {
                     // TODO: request sign-in
@@ -59,7 +63,21 @@ public class SignInFragment extends BaseFragment {
                             new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
                                 @Override
                                 public void onClick(DokterPribadimuDialog dialog) {
-                                    startHomeActivityOnTop();
+                                    UserProfile userProfile = new UserProfile(
+                                                                        "",
+                                                                        email,
+                                                                        "",
+                                                                        "",
+                                                                        email,
+                                                                        ""
+                                                                );
+                                    StorageUtils.putString(
+                                            getActivity(),
+                                            Constants.KEY_USER_PROFILE,
+                                            GsonUtils.toJson(userProfile)
+                                    );
+
+                                    startDoctorCallActivityOnTop();
                                 }
                             });
                 }

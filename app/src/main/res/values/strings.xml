@@ -46,6 +46,7 @@
     <string name="dialog_sign_in_success_message">Everything went according to plan and you are now ready to use the app!</string>
     <string name="dialog_sign_in_failed_message">Houston we had a problem!\n
         Let\'s give it another try or pin us an email and we\'ll get back to you as soon as possible</string>
+    <string name="dialog_sign_in_canceled_message">Sign in was canceled</string>
     <string name="invalid_email_message">The email address entered was invalid.
         Please check again or reenter it.</string>
     <string name="invalid_password_message">Password length must be at least %d characters.</string>

@@ -4,7 +4,7 @@ package com.bima.dokterpribadimu.view.base;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.bima.dokterpribadimu.view.activities.HomeActivity;
+import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.trello.rxlifecycle.components.support.RxFragment;
@@ -66,11 +66,11 @@ public class BaseFragment extends RxFragment {
     }
 
     protected void startHomeActivity() {
-        startActivity(new Intent(getActivity(), HomeActivity.class));
+        startActivity(new Intent(getActivity(), DoctorCallActivity.class));
     }
 
-    protected void startHomeActivityOnTop() {
-        Intent intent = new Intent(getActivity(), HomeActivity.class);
+    protected void startDoctorCallActivityOnTop() {
+        Intent intent = new Intent(getActivity(), DoctorCallActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
