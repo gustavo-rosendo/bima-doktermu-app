@@ -44,7 +44,6 @@ dependencies {
     final RETROFIT_2_VERSION = '2.0.0-beta3'
     final OKHTTP_3_VERSION = '3.0.1'
     final DAGGER_VERSION = '2.0.2'
-    final CALLIGRAPHY_VERSION = '2.1.0'
     final PICASSO_VERSION = '2.5.2'
     final GSON_VERSION = '2.4'
     final RX_JAVA_VERSION = '1.1.0'
@@ -79,11 +78,6 @@ dependencies {
     compile("com.crashlytics.sdk.android:crashlytics:$CRASHLYTICS_VERSION@aar") {
         transitive = true;
     }
-
-    /**
-     *  Custom fonts in Android the easy way
-     */
-    compile "uk.co.chrisjenx:calligraphy:$CALLIGRAPHY_VERSION"
 
     /**
      *  A powerful image downloading and caching library for Android

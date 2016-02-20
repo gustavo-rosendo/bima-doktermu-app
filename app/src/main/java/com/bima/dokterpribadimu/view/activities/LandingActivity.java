@@ -13,13 +13,11 @@ import com.bima.dokterpribadimu.data.remote.sns.facebook.FacebookClient;
 import com.bima.dokterpribadimu.data.remote.sns.gplus.GplusClient;
 import com.bima.dokterpribadimu.databinding.ActivityLandingBinding;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
-import com.bima.dokterpribadimu.viewmodel.LandingViewModel;
 import com.facebook.appevents.AppEventsLogger;
 
 public class LandingActivity extends BaseActivity {
 
     private ActivityLandingBinding binding;
-    private LandingViewModel landingViewModel;
 
     private LoginClient loginClient;
 
@@ -27,9 +25,6 @@ public class LandingActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_landing);
-
-        landingViewModel = new LandingViewModel(this);
-        binding.setLandingViewmodel(landingViewModel);
 
         DokterPribadimuApplication.getComponent().inject(this);
 
@@ -46,8 +41,6 @@ public class LandingActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        landingViewModel.release();
-
         FacebookClient.release();
         GplusClient.release();
 
@@ -75,6 +68,13 @@ public class LandingActivity extends BaseActivity {
                 loginClient = GplusClient.getInstance();
                 loginClient.init(LandingActivity.this, loginListener);
                 loginClient.signIn();
+            }
+        });
+
+        binding.loginEmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startSignInActivity();
             }
         });
     }
