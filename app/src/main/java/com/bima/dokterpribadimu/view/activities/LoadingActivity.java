@@ -74,7 +74,7 @@ public class LoadingActivity extends BaseActivity {
                 .subscribe(new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
-                        startActivity(new Intent(LoadingActivity.this, LandingActivity.class));
+                        startLandingActivity();
                         finish();
                     }
 

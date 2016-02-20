@@ -11,4 +11,7 @@
 
     <color name="grey_soft">#F6F6F6</color>
     <color name="grey_dark">#525252</color>
+
+    <color name="email_green">#18B892</color>
+    <color name="email_green_dark">#139374</color>
 </resources>

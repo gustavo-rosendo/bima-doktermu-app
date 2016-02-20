@@ -27,20 +27,9 @@ public class DokterPribadimuApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        //Fabric.with(this, new Crashlytics());
+        Fabric.with(this, new Crashlytics());
 
         sInstance = this;
         mComponent = DokterPribadimuComponent.Initializer.init(this);
-
-        //initFont();
-    }
-
-    private void initFont() {
-        //Initialize Calligraphy library
-        //Set default font into OpenSans-Regular
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/OpenSans-Regular.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build());
     }
 }
