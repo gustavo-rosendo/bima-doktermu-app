@@ -27,6 +27,12 @@
     <dimen name="generic_separator_height">1dp</dimen>
 
     <!-- landing -->
+    <dimen name="loading_bima_icon_width">155dp</dimen>
+    <dimen name="loading_bima_icon_height">155dp</dimen>
+    <dimen name="loading_bima_text_width">155dp</dimen>
+    <dimen name="loading_bima_text_height">90dp</dimen>
+
+    <!-- landing -->
     <dimen name="landing_bima_icon_width">150dp</dimen>
     <dimen name="landing_bima_icon_height">150dp</dimen>
     <dimen name="landing_bima_text_width">150dp</dimen>
