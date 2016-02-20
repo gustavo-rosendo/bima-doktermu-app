@@ -8,9 +8,15 @@ import android.net.ConnectivityManager;
  */
 public class NetUtils {
 
+    /**
+     * Get network availability
+     * @param context current application context
+     * @return true if network is available, false if otherwise
+     */
     public static boolean isNetworkAvailable(Context context) {
-        return ((ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE))
-                .getActiveNetworkInfo() != null;
+        return context == null
+                || ((ConnectivityManager) context
+                        .getSystemService(Context.CONNECTIVITY_SERVICE))
+                        .getActiveNetworkInfo() != null;
     }
 }

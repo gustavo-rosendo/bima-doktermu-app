@@ -3,7 +3,6 @@ package com.bima.dokterpribadimu.view.activities;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
