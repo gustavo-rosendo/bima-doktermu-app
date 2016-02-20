@@ -6,7 +6,6 @@ import com.bima.dokterpribadimu.injection.DokterPribadimuComponent;
 
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by apradanas on 2/3/16.

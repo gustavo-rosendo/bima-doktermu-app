@@ -12,6 +12,7 @@
     <string name="register">Register</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="whats_my_password">What\'s my password?</string>
 
     <!-- email registration -->
     <string name="email_registration">Email registration</string>
