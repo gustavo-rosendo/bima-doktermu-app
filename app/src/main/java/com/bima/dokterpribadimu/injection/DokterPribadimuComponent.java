@@ -5,6 +5,7 @@ import android.app.Application;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
+import com.bima.dokterpribadimu.view.fragments.DoctorCallFragment;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
 import com.bima.dokterpribadimu.view.fragments.HomeFragment;
 import com.bima.dokterpribadimu.view.fragments.RegisterFragment;
@@ -32,6 +33,7 @@ public interface DokterPribadimuComponent {
     void inject(HomeFragment homeFragment);
     void inject(SignInFragment signInFragment);
     void inject(RegisterFragment registerFragment);
+    void inject(DoctorCallFragment doctorCallFragment);
 
     final class Initializer {
         public static DokterPribadimuComponent init(Application application) {

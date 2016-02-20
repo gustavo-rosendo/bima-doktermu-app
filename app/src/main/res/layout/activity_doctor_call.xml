@@ -48,7 +48,7 @@
                             android:gravity="center_vertical"
                             android:layout_toRightOf="@+id/toolbar_home_button"
                             android:layout_toEndOf="@+id/toolbar_home_button"
-                            android:text="@string/home"
+                            android:text="@string/doctor_on_call"
                             android:textColor="@android:color/white"
                             android:textSize="18sp"/>
 

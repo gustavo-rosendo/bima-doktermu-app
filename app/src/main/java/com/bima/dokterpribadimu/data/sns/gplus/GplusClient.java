@@ -15,6 +15,7 @@ import android.content.Intent;
 import com.bima.dokterpribadimu.data.sns.LoginClient;
 import com.bima.dokterpribadimu.data.sns.LoginListener;
 import com.bima.dokterpribadimu.model.UserProfile;
+import com.bima.dokterpribadimu.utils.Constants;
 
 /**
  * Created by apradanas on 2/12/16.
@@ -91,7 +92,8 @@ public class GplusClient implements LoginClient, GoogleApiClient.OnConnectionFai
                                                 "",
                                                 "",
                                                 signInAccount.getEmail(),
-                                                signInAccount.getPhotoUrl().toString()
+                                                signInAccount.getPhotoUrl().toString(),
+                                                Constants.LOGIN_TYPE_GOOGLE
                                         );
             loginListener.onSuccess(userProfile);
         } else {

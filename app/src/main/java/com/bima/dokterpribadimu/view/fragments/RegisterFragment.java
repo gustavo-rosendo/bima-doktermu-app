@@ -69,7 +69,8 @@ public class RegisterFragment extends BaseFragment {
                                                                         "",
                                                                         "",
                                                                         email,
-                                                                        ""
+                                                                        "",
+                                                                        Constants.LOGIN_TYPE_EMAIL
                                                                 );
                                     StorageUtils.putString(
                                             getActivity(),

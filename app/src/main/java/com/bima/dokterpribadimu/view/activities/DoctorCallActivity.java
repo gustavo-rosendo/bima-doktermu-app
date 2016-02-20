@@ -9,25 +9,26 @@ import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
-import com.bima.dokterpribadimu.databinding.ActivityHomeBinding;
+import com.bima.dokterpribadimu.databinding.ActivityDoctorCallBinding;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
+import com.bima.dokterpribadimu.view.fragments.DoctorCallFragment;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
 import com.bima.dokterpribadimu.view.fragments.HomeFragment;
 
 public class DoctorCallActivity extends BaseActivity {
 
-    private ActivityHomeBinding binding;
+    private ActivityDoctorCallBinding binding;
     private DrawerFragment drawerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        setContentView(R.layout.activity_doctor_call);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_doctor_call);
 
         DokterPribadimuApplication.getComponent().inject(this);
 
@@ -44,7 +45,7 @@ public class DoctorCallActivity extends BaseActivity {
     private void init() {
         initViews();
         setupDrawerFragment();
-        setupHomeFragment();
+        setupDoctorCallFragment();
 
         UserProfile userProfile = GsonUtils.fromJson(
                 StorageUtils.getString(this, Constants.KEY_USER_PROFILE, ""),
@@ -62,7 +63,7 @@ public class DoctorCallActivity extends BaseActivity {
     }
 
     private void setupDrawerFragment() {
-        drawerFragment = DrawerFragment.newInstance(Constants.DRAWER_TYPE_HOME);
+        drawerFragment = DrawerFragment.newInstance(Constants.DRAWER_TYPE_DOCTOR_ON_CALL);
         drawerFragment.setOnDrawerItemPressedListener(new DrawerFragment.OnDrawerItemPressed() {
             @Override
             public void onDrawerItemPressed(int selectedDrawerType) {
@@ -76,10 +77,10 @@ public class DoctorCallActivity extends BaseActivity {
                 .commit();
     }
 
-    private void setupHomeFragment() {
+    private void setupDoctorCallFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction
-                .replace(R.id.fragment_container, HomeFragment.newInstance())
+                .replace(R.id.fragment_container, DoctorCallFragment.newInstance())
                 .commit();
     }
 }

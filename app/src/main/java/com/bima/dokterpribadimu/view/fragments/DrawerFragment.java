@@ -12,6 +12,7 @@ import com.bima.dokterpribadimu.data.sns.facebook.FacebookClient;
 import com.bima.dokterpribadimu.data.sns.gplus.GplusClient;
 import com.bima.dokterpribadimu.databinding.FragmentDrawerBinding;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 
 /**
@@ -86,35 +87,26 @@ public class DrawerFragment extends BaseFragment {
 
     private void initViews() {
         switch (activeDrawer) {
-            case Constants.DRAWER_TYPE_HOME:
-                binding.drawerHomeButton.setSelected(true);
-                break;
             case Constants.DRAWER_TYPE_DOCTOR_ON_CALL:
-                binding.drawerDoctorOnCallButton.setSelected(true);
+                binding.drawerDoctorCallButton.setSelected(true);
                 break;
             case Constants.DRAWER_TYPE_ABOUT:
                 binding.drawerAboutBimaButton.setSelected(true);
                 break;
+            case Constants.DRAWER_TYPE_PROFILE:
+                binding.drawerProfileButton.setSelected(true);
+                break;
         }
 
-        binding.drawerHomeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onDrawerItemPressedListener != null) {
-                    onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_HOME);
-                }
-
-                if (activeDrawer != Constants.DRAWER_TYPE_HOME) {
-                    startHomeActivity();
-                }
-            }
-        });
-
-        binding.drawerDoctorOnCallButton.setOnClickListener(new View.OnClickListener() {
+        binding.drawerDoctorCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (onDrawerItemPressedListener != null) {
                     onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_DOCTOR_ON_CALL);
+                }
+
+                if (activeDrawer != Constants.DRAWER_TYPE_DOCTOR_ON_CALL) {
+                    startDoctorCallActivity();
                 }
             }
         });
@@ -128,6 +120,15 @@ public class DrawerFragment extends BaseFragment {
             }
         });
 
+        binding.drawerProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onDrawerItemPressedListener != null) {
+                    onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_PROFILE);
+                }
+            }
+        });
+
         binding.drawerSignOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,6 +138,9 @@ public class DrawerFragment extends BaseFragment {
 
                 signOutFacebook();
                 signOutGPlus();
+
+                StorageUtils.remove(getActivity(), Constants.KEY_USER_PROFILE);
+
                 startLandingActivityOnTop();
             }
         });
