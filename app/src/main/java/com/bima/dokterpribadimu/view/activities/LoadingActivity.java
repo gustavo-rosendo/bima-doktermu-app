@@ -87,7 +87,7 @@ public class LoadingActivity extends BaseActivity {
                 .subscribe(new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
-                        UserProfile userProfile = GsonUtils.fromJson(
+                        /*UserProfile userProfile = GsonUtils.fromJson(
                                 StorageUtils.getString(LoadingActivity.this, Constants.KEY_USER_PROFILE, ""),
                                 UserProfile.class
                         );
@@ -97,7 +97,7 @@ public class LoadingActivity extends BaseActivity {
                             startDoctorCallActivityOnTop();
                         }
 
-                        finish();
+                        finish();*/
                     }
 
                     @Override
