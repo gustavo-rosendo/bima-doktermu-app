@@ -2,6 +2,7 @@
 build/
 bin/
 gen/
+.iml
 
 # Built application files
 .apk
