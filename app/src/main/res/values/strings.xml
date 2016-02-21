@@ -32,6 +32,14 @@
     <!-- profile -->
     <string name="your_profile">Your profile</string>
     <string name="my_profile">My profile</string>
+    <string name="profile_app_info">BIMA Mobile v%s\nCopyright &#169;BIMA - 2016</string>
+
+    <!-- subscription -->
+    <string name="your_subscription">Your subscription</string>
+    <string name="monthly_plan">Monthly plan:</string>
+    <string name="subscription_enabled">Enabled</string>
+    <string name="subscription_disabled">Disabled</string>
+    <string name="manage_subscription">Manage my subscription</string>
 
     <!-- sign out -->
     <string name="sign_out">Sign out</string>
@@ -56,8 +64,5 @@
     <string name="invalid_email_message">The email address entered was invalid.
         Please check again or reenter it.</string>
     <string name="invalid_password_message">Password length must be at least %d characters.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

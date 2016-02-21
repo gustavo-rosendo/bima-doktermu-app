@@ -7,10 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.FragmentDoctorCallBinding;
 import com.bima.dokterpribadimu.databinding.FragmentProfileBinding;
+import com.bima.dokterpribadimu.model.UserProfile;
+import com.bima.dokterpribadimu.utils.UserProfileUtils;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,7 +41,34 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater, container, false);
 
+        initViews();
+
         return binding.getRoot();
+    }
+
+    private void initViews() {
+        // set default profile picture
+        Picasso.with(getActivity())
+                .load(R.drawable.ic_profile_picture)
+                .into(binding.profilePictureImage);
+
+        UserProfile userProfile = UserProfileUtils.getUserProfile(getActivity());
+
+        try {
+            Picasso.with(getActivity())
+                    .load(userProfile.getProfilePicture())
+                    .fit()
+                    .placeholder(R.drawable.ic_profile_picture)
+                    .error(R.drawable.ic_profile_picture)
+                    .into(binding.profilePictureImage);
+        } catch (RuntimeException re) {
+            re.printStackTrace();
+        }
+
+        binding.profileNameText.setText(userProfile.getName());
+
+        binding.profileAppInfo.setText(
+                String.format(getString(R.string.profile_app_info), BuildConfig.VERSION_NAME));
     }
 
 }
