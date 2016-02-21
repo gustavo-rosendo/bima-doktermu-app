@@ -91,6 +91,7 @@ public class LoadingActivity extends BaseActivity {
                                 StorageUtils.getString(LoadingActivity.this, Constants.KEY_USER_PROFILE, ""),
                                 UserProfile.class
                         );
+
                         if (userProfile == null) {
                             startLandingActivity();
                         } else {

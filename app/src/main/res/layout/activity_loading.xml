@@ -8,24 +8,14 @@
         android:layout_height="match_parent"
         android:padding="@dimen/generic_xlarge_padding"
         android:orientation="vertical"
-        android:background="@drawable/loading_bg">
+        android:background="@color/bima_blue">
 
         <ImageView
             android:id="@+id/loading_bima_icon"
             android:layout_width="@dimen/loading_bima_icon_width"
             android:layout_height="@dimen/loading_bima_icon_height"
-            android:layout_above="@+id/loading_bima_text"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/bima_logo_icon"
-            android:contentDescription="@string/app_name"/>
-
-        <ImageView
-            android:id="@+id/loading_bima_text"
-            android:layout_width="@dimen/loading_bima_text_width"
-            android:layout_height="@dimen/loading_bima_text_height"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/bima_logo_text"
+            android:layout_centerInParent="true"
+            android:src="@drawable/bima_logo_icon_white"
             android:contentDescription="@string/app_name"/>
 
     </RelativeLayout>
