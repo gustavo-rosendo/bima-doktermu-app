@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
-import com.bima.dokterpribadimu.databinding.FragmentDoctorCallBinding;
 import com.bima.dokterpribadimu.databinding.FragmentProfileBinding;
 import com.bima.dokterpribadimu.model.UserProfile;
+import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.squareup.picasso.Picasso;
 
@@ -20,6 +20,8 @@ import com.squareup.picasso.Picasso;
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends Fragment {
+
+    private static final String EMAIL_FILTER_REGEX = "(?<=.{2}).(?=[^@]*?.@)";
 
     private FragmentProfileBinding binding;
 
@@ -69,6 +71,13 @@ public class ProfileFragment extends Fragment {
 
         binding.profileAppInfo.setText(
                 String.format(getString(R.string.profile_app_info), BuildConfig.VERSION_NAME));
+
+        if (userProfile.getLoginType().equals(Constants.LOGIN_TYPE_EMAIL)) {
+            binding.profileEmailAddressText.setText(
+                    userProfile.getEmail().replaceAll(EMAIL_FILTER_REGEX, "*"));
+        } else {
+            binding.profilePersonalInfoLayout.setVisibility(View.GONE);
+        }
     }
 
 }

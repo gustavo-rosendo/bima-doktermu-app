@@ -32,6 +32,10 @@
     <!-- profile -->
     <string name="your_profile">Your profile</string>
     <string name="my_profile">My profile</string>
+    <string name="profile_personal_info">My personal info</string>
+    <string name="profile_email_address">Email address</string>
+    <string name="profile_password">My password</string>
+    <string name="profile_asterisk_password">********</string>
     <string name="profile_app_info">BIMA Mobile v%s\nCopyright &#169;BIMA - 2016</string>
 
     <!-- subscription -->

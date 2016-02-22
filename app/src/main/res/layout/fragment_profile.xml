@@ -2,117 +2,224 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="91dp"
-            android:background="@color/grey_light"/>
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_picture_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="@dimen/generic_large_margin"
-            android:layout_centerHorizontal="true"
-            app:civ_border_width="4dp"
-            app:civ_border_color="@color/grey_light"/>
-
-        <TextView
-            android:id="@+id/profile_name_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/generic_normal_margin"
-            android:layout_marginLeft="@dimen/generic_large_margin"
-            android:layout_marginStart="@dimen/generic_large_margin"
-            android:layout_marginRight="@dimen/generic_large_margin"
-            android:layout_marginEnd="@dimen/generic_large_margin"
-            android:layout_below="@+id/profile_picture_image"
-            android:layout_centerHorizontal="true"
-            android:textAllCaps="true"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/generic_xlarge_margin"
-            android:layout_marginLeft="@dimen/generic_xlarge_margin"
-            android:layout_marginStart="@dimen/generic_xlarge_margin"
-            android:layout_marginRight="@dimen/generic_xlarge_margin"
-            android:layout_marginEnd="@dimen/generic_xlarge_margin"
-            android:layout_below="@+id/profile_name_text">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/your_subscription"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:textSize="16sp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/generic_large_margin">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/monthly_plan"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"/>
-
-                <TextView
-                    android:id="@+id/profile_monthly_subscription_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="@string/subscription_disabled"
-                    android:textColor="@color/orange"
-                    android:textSize="16sp"/>
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/profile_manage_subscription_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/generic_large_margin"
-                android:gravity="end"
-                android:text="@string/manage_subscription"
-                android:textAllCaps="true"
-                android:textColor="@color/bima_blue"
-                android:textSize="16sp"/>
+            android:orientation="vertical">
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/generic_separator_height"
-                android:layout_marginTop="@dimen/generic_xlarge_margin"
+                android:layout_height="91dp"
                 android:background="@color/grey_light"/>
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_picture_image"
+                android:layout_width="@dimen/profile_picture_width_height"
+                android:layout_height="@dimen/profile_picture_width_height"
+                android:layout_marginTop="@dimen/generic_large_margin"
+                android:layout_centerHorizontal="true"
+                app:civ_border_width="4dp"
+                app:civ_border_color="@color/grey_light"/>
+
             <TextView
-                android:id="@+id/profile_app_info"
-                android:layout_width="match_parent"
+                android:id="@+id/profile_name_text"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/generic_xlarge_margin"
+                android:layout_marginTop="@dimen/generic_normal_margin"
                 android:layout_marginLeft="@dimen/generic_large_margin"
                 android:layout_marginStart="@dimen/generic_large_margin"
                 android:layout_marginRight="@dimen/generic_large_margin"
                 android:layout_marginEnd="@dimen/generic_large_margin"
-                android:textColor="@color/grey_a1"
-                android:textSize="16sp"/>
+                android:layout_below="@+id/profile_picture_image"
+                android:layout_centerHorizontal="true"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/generic_xlarge_margin"
+                android:layout_marginBottom="@dimen/generic_xlarge_margin"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
+                android:layout_marginRight="@dimen/generic_xlarge_margin"
+                android:layout_marginEnd="@dimen/generic_xlarge_margin"
+                android:layout_below="@+id/profile_name_text">
 
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/your_subscription"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/generic_large_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/monthly_plan"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/profile_monthly_subscription_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/subscription_disabled"
+                        android:textColor="@color/orange"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/profile_manage_subscription_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_large_margin"
+                    android:gravity="end"
+                    android:text="@string/manage_subscription"
+                    android:textAllCaps="true"
+                    android:textColor="@color/bima_blue"
+                    android:textSize="16sp"/>
+
+                <LinearLayout
+                    android:id="@+id/profile_personal_info_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_xlarge_margin"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/generic_separator_height"
+                        android:background="@color/grey_light"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_xlarge_margin"
+                        android:text="@string/profile_personal_info"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_large_margin"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/profile_email_address"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"/>
+
+                            <TextView
+                                android:id="@+id/profile_email_address_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/generic_normal_margin"
+                                android:text="@string/profile_email_address"
+                                android:textColor="@color/grey_a1"
+                                android:textSize="16sp"/>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="@dimen/generic_small_button_height"
+                            android:layout_height="@dimen/generic_small_button_height"
+                            android:src="@drawable/ic_edit_disabled"
+                            android:contentDescription="@string/app_name"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_large_margin"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/profile_password"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/generic_normal_margin"
+                                android:text="@string/profile_asterisk_password"
+                                android:textColor="@color/grey_a1"
+                                android:textSize="16sp"/>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="@dimen/generic_small_button_height"
+                            android:layout_height="@dimen/generic_small_button_height"
+                            android:src="@drawable/ic_edit"
+                            android:contentDescription="@string/app_name"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:layout_marginTop="@dimen/generic_xlarge_margin"
+                    android:background="@color/grey_light"/>
+
+                <TextView
+                    android:id="@+id/profile_app_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_xlarge_margin"
+                    android:layout_marginLeft="@dimen/generic_large_margin"
+                    android:layout_marginStart="@dimen/generic_large_margin"
+                    android:layout_marginRight="@dimen/generic_large_margin"
+                    android:layout_marginEnd="@dimen/generic_large_margin"
+                    android:textColor="@color/grey_a1"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </layout>
