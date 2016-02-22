@@ -5,6 +5,14 @@ package com.bima.dokterpribadimu.utils;
  */
 public class Constants {
 
+    public static final String BIMA_WEBSITE = "http://www.bimaindonesia.co.id/";
+    public static final String BIMA_FACEBOOK_PAGE = "https://www.facebook.com/Bima-Indonesia-539726116184831/";
+    public static final String BIMA_TWITTER = "https://twitter.com/bima_ind";
+    public static final String BIMA_EMAIL = "cs@bimaindonesia.co.id";
+
+    public static final String FACEBOOK_APP_ID = "com.facebook.katana";
+    public static final String TWITTER_APP_ID = "com.twitter.android";
+
     public static final String NETWORK_IS_UNREACHABLE = "Network is unreachable";
 
     public static final int DRAWER_TYPE_DOCTOR_ON_CALL = 0;

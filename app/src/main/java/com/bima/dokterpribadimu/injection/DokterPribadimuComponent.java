@@ -2,10 +2,12 @@ package com.bima.dokterpribadimu.injection;
 
 import android.app.Application;
 
+import com.bima.dokterpribadimu.view.activities.AboutActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.ProfileActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
+import com.bima.dokterpribadimu.view.fragments.AboutFragment;
 import com.bima.dokterpribadimu.view.fragments.DoctorCallFragment;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
 import com.bima.dokterpribadimu.view.fragments.HomeFragment;
@@ -32,12 +34,14 @@ public interface DokterPribadimuComponent {
     void inject(SignInActivity signInActivity);
     void inject(DoctorCallActivity doctorCallActivity);
     void inject(ProfileActivity profileActivity);
+    void inject(AboutActivity aboutActivity);
     void inject(DrawerFragment drawerFragment);
     void inject(HomeFragment homeFragment);
     void inject(SignInFragment signInFragment);
     void inject(RegisterFragment registerFragment);
     void inject(DoctorCallFragment doctorCallFragment);
     void inject(ProfileFragment profileFragment);
+    void inject(AboutFragment profileFragment);
 
     final class Initializer {
         public static DokterPribadimuComponent init(Application application) {
