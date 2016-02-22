@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/generic_xlarge_margin"
+            android:layout_marginStart="@dimen/generic_xlarge_margin"
+            android:layout_marginRight="@dimen/generic_xlarge_margin"
+            android:layout_marginEnd="@dimen/generic_xlarge_margin">
+
+            <ImageView
+                android:id="@+id/drawer_bima_image"
+                android:layout_width="@dimen/about_bima_icon_width"
+                android:layout_height="@dimen/about_bima_icon_height"
+                android:layout_marginTop="@dimen/generic_large_margin"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/bima_drawer_logo"
+                android:contentDescription="@string/app_name"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_normal_margin"
+                android:text="@string/about_bima_info"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_xlarge_margin"
+                android:text="@string/about_bima_learn_more"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"/>
+
+            <LinearLayout
+                android:id="@+id/about_website_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_normal_margin"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_bima_website"
+                    android:gravity="center"
+                    android:textColor="@color/bima_blue"
+                    android:textSize="16sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:background="@color/bima_blue"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_xlarge_margin"
+                android:text="@string/about_bima_give_us_call"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"/>
+
+            <LinearLayout
+                android:id="@+id/about_call_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_normal_margin"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_bima_phone_number"
+                    android:gravity="center"
+                    android:textColor="@color/bima_blue"
+                    android:textSize="16sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:background="@color/bima_blue"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_xlarge_margin"
+                android:text="@string/about_bima_connect_with_us"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_large_margin"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/about_facebook_button"
+                    android:layout_width="@dimen/generic_button_height"
+                    android:layout_height="@dimen/generic_button_height"
+                    android:src="@drawable/ic_facebook"
+                    android:contentDescription="@string/app_name"/>
+
+                <ImageView
+                    android:id="@+id/about_twitter_button"
+                    android:layout_width="@dimen/generic_button_height"
+                    android:layout_height="@dimen/generic_button_height"
+                    android:layout_marginLeft="@dimen/generic_large_margin"
+                    android:layout_marginStart="@dimen/generic_large_margin"
+                    android:src="@drawable/ic_twitter"
+                    android:contentDescription="@string/app_name"/>
+
+                <ImageView
+                    android:id="@+id/about_instagram_button"
+                    android:layout_width="@dimen/generic_button_height"
+                    android:layout_height="@dimen/generic_button_height"
+                    android:layout_marginLeft="@dimen/generic_large_margin"
+                    android:layout_marginStart="@dimen/generic_large_margin"
+                    android:src="@drawable/ic_instagram"
+                    android:contentDescription="@string/app_name"/>
+
+                <ImageView
+                    android:id="@+id/about_email_button"
+                    android:layout_width="@dimen/generic_button_height"
+                    android:layout_height="@dimen/generic_button_height"
+                    android:layout_marginLeft="@dimen/generic_large_margin"
+                    android:layout_marginStart="@dimen/generic_large_margin"
+                    android:src="@drawable/ic_email"
+                    android:contentDescription="@string/app_name"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

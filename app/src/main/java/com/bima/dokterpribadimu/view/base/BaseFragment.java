@@ -2,8 +2,13 @@ package com.bima.dokterpribadimu.view.base;
 
 
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.net.Uri;
 import android.os.Bundle;
 
+import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.view.activities.AboutActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.ProfileActivity;
@@ -76,6 +81,10 @@ public class BaseFragment extends RxFragment {
         startActivity(intent);
     }
 
+    protected void startAboutActivity() {
+        startActivity(new Intent(getActivity(), AboutActivity.class));
+    }
+
     protected void startProfileActivity() {
         startActivity(new Intent(getActivity(), ProfileActivity.class));
     }
@@ -84,5 +93,50 @@ public class BaseFragment extends RxFragment {
         Intent intent = new Intent(getActivity(), LandingActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    protected void startViewIntent(String url) {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+    }
+
+    protected void startDialIntent(String phoneNumber) {
+        startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber)));
+    }
+
+    protected void startFacebookIntent() {
+        String url = Constants.BIMA_FACEBOOK_PAGE;
+        try {
+            PackageInfo info = getActivity()
+                                .getPackageManager()
+                                .getPackageInfo(Constants.FACEBOOK_APP_ID, 0);
+            if (info.applicationInfo.enabled) {
+                url = "fb://facewebmodal/f?href=" + url;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        startViewIntent(url);
+    }
+
+    protected void startTwitterIntent() {
+        String url = Constants.BIMA_TWITTER;
+        try {
+            PackageInfo info = getActivity()
+                                    .getPackageManager()
+                                    .getPackageInfo(Constants.TWITTER_APP_ID, 0);
+            if (info.applicationInfo.enabled) {
+                url = "twitter://user?screen_name=bima_ind";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        startViewIntent(url);
+    }
+
+    protected void startMailIntent() {
+        Intent emailIntent = new Intent(
+                                    Intent.ACTION_SENDTO,
+                                    Uri.fromParts("mailto", Constants.BIMA_EMAIL, null));
+        startActivity(Intent.createChooser(emailIntent, "Send email"));
     }
 }

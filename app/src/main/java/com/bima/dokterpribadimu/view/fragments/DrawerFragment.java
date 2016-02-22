@@ -117,6 +117,10 @@ public class DrawerFragment extends BaseFragment {
                 if (onDrawerItemPressedListener != null) {
                     onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_ABOUT);
                 }
+
+                if (activeDrawer != Constants.DRAWER_TYPE_ABOUT) {
+                    startAboutActivity();
+                }
             }
         });
 

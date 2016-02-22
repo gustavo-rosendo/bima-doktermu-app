@@ -28,6 +28,14 @@
 
     <!-- about bima -->
     <string name="about_bima">About Bima</string>
+    <string name="about_bima_toolbar">About BIMA</string>
+    <string name="about_bima_info">We are the leading provider of mobile delivered health
+        services and insurances in emerging markets</string>
+    <string name="about_bima_learn_more">To learn more about BIMA visit</string>
+    <string name="about_bima_website">www.bimaindonesia.co.id</string>
+    <string name="about_bima_give_us_call">or give us a call</string>
+    <string name="about_bima_phone_number">0274&#8211;2112462</string>
+    <string name="about_bima_connect_with_us">connect with us</string>
 
     <!-- profile -->
     <string name="your_profile">Your profile</string>
@@ -68,5 +76,8 @@
     <string name="invalid_email_message">The email address entered was invalid.
         Please check again or reenter it.</string>
     <string name="invalid_password_message">Password length must be at least %d characters.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
