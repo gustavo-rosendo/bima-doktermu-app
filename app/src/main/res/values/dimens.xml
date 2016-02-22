@@ -43,8 +43,12 @@
 
     <!-- drawer -->
     <dimen name="drawer_width">320dp</dimen>
-    <dimen name="drawer_bima_icon_width">160dp</dimen>
-    <dimen name="drawer_bima_icon_height">72dp</dimen>
+    <dimen name="drawer_bima_icon_width">175dp</dimen>
+    <dimen name="drawer_bima_icon_height">84dp</dimen>
+
+    <!-- doctor on call -->
+    <dimen name="doctor_call_icon_width">165dp</dimen>
+    <dimen name="doctor_call_icon_height">165dp</dimen>
 
     <!-- profile -->
     <dimen name="profile_picture_width_height">150dp</dimen>

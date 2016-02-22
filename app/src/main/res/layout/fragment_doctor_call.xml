@@ -9,6 +9,14 @@
         android:padding="@dimen/generic_xlarge_padding"
         android:orientation="vertical">
 
+        <ImageView
+            android:id="@+id/doctor_call_icon"
+            android:layout_width="@dimen/doctor_call_icon_width"
+            android:layout_height="@dimen/doctor_call_icon_height"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_doctor"
+            android:contentDescription="@string/app_name"/>
+
         <TextView
             android:id="@+id/home_welcome_text"
             android:layout_width="wrap_content"
