@@ -52,6 +52,8 @@ dependencies {
     final BINDING_ADAPTER_VERSION = '1.1.0'
     final CRASHLYTICS_VERSION = '2.5.5'
     final FACEBOOK_SDK_VERSION = '4.10.0'
+    final PLAY_SERVICE_AUTH_VERSION = '8.3.0'
+    final CIRCLE_IMAGE_VIEW_VERSION = '2.0.0'
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -121,5 +123,10 @@ dependencies {
     /**
      * Google+ Google Sign-In
      */
-    compile 'com.google.android.gms:play-services-auth:8.3.0'
+    compile "com.google.android.gms:play-services-auth:$PLAY_SERVICE_AUTH_VERSION"
+
+    /**
+     * A circular ImageView for Android
+     */
+    compile "de.hdodenhof:circleimageview:$CIRCLE_IMAGE_VIEW_VERSION"
 }

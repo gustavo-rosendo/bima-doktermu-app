@@ -7,6 +7,7 @@
     <dimen name="generic_toolbar_height">56dp</dimen>
     <dimen name="generic_toolbar_button_height">56dp</dimen>
     <dimen name="generic_tab_indicator_height">5dp</dimen>
+    <dimen name="generic_small_button_height">24dp</dimen>
     <dimen name="generic_button_height">48dp</dimen>
     <dimen name="generic_large_button_height">64dp</dimen>
     <dimen name="generic_edit_text_height">40dp</dimen>
@@ -44,5 +45,8 @@
     <dimen name="drawer_width">320dp</dimen>
     <dimen name="drawer_bima_icon_width">160dp</dimen>
     <dimen name="drawer_bima_icon_height">72dp</dimen>
+
+    <!-- profile -->
+    <dimen name="profile_picture_width_height">150dp</dimen>
 
 </resources>

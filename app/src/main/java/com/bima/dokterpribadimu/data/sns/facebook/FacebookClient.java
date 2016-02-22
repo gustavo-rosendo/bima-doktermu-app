@@ -105,7 +105,7 @@ public class FacebookClient implements LoginClient {
                             return;
                         }
 
-                        String picture = "https://graph.facebook.com/" + fbProfile.getId() + "/picture";
+                        String picture = "https://graph.facebook.com/" + fbProfile.getId() + "/picture?type=large";
                         String email = fbProfile.getEmail() != null ? fbProfile.getEmail() : "";
 
                         UserProfile userProfile = new UserProfile(
