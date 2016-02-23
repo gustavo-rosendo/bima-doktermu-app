@@ -11,6 +11,7 @@ import com.google.android.gms.common.api.Status;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 
 import com.bima.dokterpribadimu.data.sns.LoginClient;
 import com.bima.dokterpribadimu.data.sns.LoginListener;
@@ -87,18 +88,16 @@ public class GplusClient implements LoginClient, GoogleApiClient.OnConnectionFai
             GoogleSignInAccount signInAccount = result.getSignInAccount();
 
             UserProfile userProfile = new UserProfile(
-                                                signInAccount.getId(),
-                                                signInAccount.getDisplayName(),
-                                                "",
-                                                "",
-                                                signInAccount.getEmail(),
-                                                signInAccount.getPhotoUrl().toString(),
-                                                Constants.LOGIN_TYPE_GOOGLE
-                                        );
+                    signInAccount.getId(),
+                    signInAccount.getDisplayName(),
+                    "",
+                    "",
+                    signInAccount.getEmail(),
+                    signInAccount.getPhotoUrl() != null ? signInAccount.getPhotoUrl().toString() : "",
+                    Constants.LOGIN_TYPE_GOOGLE
+            );
             loginListener.onSuccess(userProfile);
         } else {
-            Status status = result.getStatus();
-            // Signed out, show unauthenticated UI.
             loginListener.onFail();
         }
     }
