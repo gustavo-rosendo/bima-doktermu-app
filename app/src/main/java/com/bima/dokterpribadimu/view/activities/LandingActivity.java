@@ -116,6 +116,7 @@ public class LandingActivity extends BaseActivity {
                     GsonUtils.toJson(userProfile));
 
             showSuccessDialog(
+                    R.drawable.ic_dialog_success,
                     getString(R.string.dialog_success),
                     getString(R.string.dialog_sign_in_success_message),
                     getString(R.string.dialog_get_started),
@@ -134,7 +135,8 @@ public class LandingActivity extends BaseActivity {
 
         @Override
         public void onFail() {
-            showSuccessDialog(
+            showErrorDialog(
+                    R.drawable.ic_bug,
                     getString(R.string.dialog_failed),
                     getString(R.string.dialog_sign_in_failed_message),
                     getString(R.string.dialog_try_once_more),

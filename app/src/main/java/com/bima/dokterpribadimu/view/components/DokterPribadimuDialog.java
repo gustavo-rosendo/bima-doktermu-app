@@ -5,6 +5,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.view.View;
 import android.view.Window;
 
@@ -91,8 +92,19 @@ public class DokterPribadimuDialog extends Dialog {
      * Get default image resouce of the dialog
      * @return dialog image resource id
      */
-    private int getDefaultDialogImageResource() {
-        return R.drawable.ic_dialog_success;
+    private @DrawableRes int getDefaultDialogImageResource() {
+        int resId = R.drawable.ic_dialog_success;
+        switch (dialogType) {
+            case DIALOG_TYPE_ERROR:
+                resId = R.drawable.ic_bug;
+                break;
+            case DIALOG_TYPE_LATE:
+                break;
+            case DIALOG_TYPE_SUCCESS:
+                resId = R.drawable.ic_dialog_success;
+                break;
+        }
+        return resId;
     }
 
     /**
