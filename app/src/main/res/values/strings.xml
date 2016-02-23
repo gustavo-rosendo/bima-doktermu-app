@@ -67,6 +67,8 @@
     <string name="dialog_take_me_home">Take me back home</string>
     <string name="dialog_success">Success!</string>
     <string name="dialog_failed">Ooops!</string>
+    <string name="dialog_signed_in">You are signed in!</string>
+    <string name="dialog_signed_in_message">You are already signed in.\nEnjoy the awesomeness!</string>
     <string name="dialog_done">It\'s done!</string>
     <string name="dialog_late">It\'s late!</string>
     <string name="dialog_late_message">Our dedicated doctors have already gone home to take care of their families.

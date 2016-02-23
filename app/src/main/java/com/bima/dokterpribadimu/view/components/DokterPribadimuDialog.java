@@ -21,11 +21,12 @@ public class DokterPribadimuDialog extends Dialog {
     public static final int DIALOG_TYPE_ERROR = 1;
     public static final int DIALOG_TYPE_LATE = 2;
 
-    DialogDokterPribadimuBinding binding;
+    private DialogDokterPribadimuBinding binding;
 
     private OnDokterPribadimuDialogClickListener dialogClickListener;
 
     private int dialogType = DIALOG_TYPE_SUCCESS;
+    private int dialogImageResource;
     private String dialogTitle;
     private String dialogMessage;
     private String dialogButtonText;
@@ -80,31 +81,19 @@ public class DokterPribadimuDialog extends Dialog {
      */
     private void initDialogViews() {
         binding.dialogButton.setOnClickListener(clickListener);
-        //binding.dialogImage.setImageResource(getDialogImageResId()); // TODO
+        binding.dialogImage.setImageResource(dialogImageResource != 0 ? dialogImageResource :getDefaultDialogImageResource());
         binding.dialogTitle.setText(dialogTitle != null ? dialogTitle : getDefaultDialogTitle());
         binding.dialogMessage.setText(dialogMessage != null ? dialogMessage : getDefaultDialogMessage());
         binding.dialogButton.setText(dialogButtonText != null ? dialogButtonText : context.getString(R.string.ok));
     }
 
     /**
-     * Get image res ID for dialog's icon based on dialog type.
-     * @return int res ID
+     * Get default image resouce of the dialog
+     * @return dialog image resource id
      */
-    // TODO
-    /*private int getDialogImageResId() {
-        switch (dialogType) {
-            case DIALOG_TYPE_ERROR:
-                return R.drawable.ic_error_red;
-            case DIALOG_TYPE_ERROR_NO_CONNECTION:
-                return R.drawable.ic_signal_wifi_off_red;
-            case DIALOG_TYPE_LATE:
-                return R.drawable.ic_warning_amber;
-            case DIALOG_TYPE_SUCCESS:
-                return R.drawable.ic_info_green;
-            default:
-                return R.drawable.ic_error_red;
-        }
-    }*/
+    private int getDefaultDialogImageResource() {
+        return R.drawable.ic_dialog_success;
+    }
 
     /**
      * Get default dialog title based on dialog type.
@@ -169,6 +158,24 @@ public class DokterPribadimuDialog extends Dialog {
             dismiss();
         }
     };
+
+    /**
+     * Set image resource id of the dialog
+     * @param dialogImageResource type of dialog
+     * @return DokterPribadimuDialog object
+     */
+    public DokterPribadimuDialog setDialogImageResource(int dialogImageResource) {
+        this.dialogImageResource = dialogImageResource;
+        return this;
+    }
+
+    /**
+     * Get the image resource id of the dialog
+     * @return int dialog image resource id
+     */
+    public int getDialogImageResource() {
+        return dialogImageResource;
+    }
 
     /**
      * Set the type of the dialog

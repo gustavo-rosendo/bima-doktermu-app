@@ -40,8 +40,10 @@ public class BaseFragment extends RxFragment {
     }
 
     protected void showErrorDialog(
-            String title, String message, String buttonText, OnDokterPribadimuDialogClickListener clickListener) {
+            int imageResource, String title, String message,
+            String buttonText, OnDokterPribadimuDialogClickListener clickListener) {
         dialog.setDialogType(DIALOG_TYPE_ERROR)
+                .setDialogImageResource(imageResource)
                 .setDialogCancelable(true)
                 .setDialogTitle(title)
                 .setDialogMessage(message)
@@ -51,8 +53,10 @@ public class BaseFragment extends RxFragment {
     }
 
     protected void showSuccessDialog(
-            String title, String message, String buttonText, OnDokterPribadimuDialogClickListener clickListener) {
+            int imageResource, String title, String message,
+            String buttonText, OnDokterPribadimuDialogClickListener clickListener) {
         dialog.setDialogType(DIALOG_TYPE_SUCCESS)
+                .setDialogImageResource(imageResource)
                 .setDialogCancelable(false)
                 .setDialogTitle(title)
                 .setDialogMessage(message)
@@ -61,8 +65,9 @@ public class BaseFragment extends RxFragment {
                 .showDialog();
     }
 
-    protected void showLateDialog(String buttonText, OnDokterPribadimuDialogClickListener clickListener) {
+    protected void showLateDialog(int imageResource, String buttonText, OnDokterPribadimuDialogClickListener clickListener) {
         dialog.setDialogType(DIALOG_TYPE_LATE)
+                .setDialogImageResource(imageResource)
                 .setDialogCancelable(false)
                 .setDialogTitle(null)
                 .setDialogMessage(null)

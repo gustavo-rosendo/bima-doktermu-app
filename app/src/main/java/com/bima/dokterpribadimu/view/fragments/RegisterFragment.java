@@ -57,6 +57,7 @@ public class RegisterFragment extends BaseFragment {
                 if (validateRegistration(email, password)) {
                     // TODO: request sign-in
                     showSuccessDialog(
+                            R.drawable.ic_dialog_success,
                             getString(R.string.dialog_success),
                             getString(R.string.dialog_sign_in_success_message),
                             getString(R.string.dialog_get_started),

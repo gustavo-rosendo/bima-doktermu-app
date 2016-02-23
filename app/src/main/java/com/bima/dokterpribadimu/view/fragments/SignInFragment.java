@@ -57,8 +57,9 @@ public class SignInFragment extends BaseFragment {
                 if (validateSignIn(email, password)) {
                     // TODO: request sign-in
                     showSuccessDialog(
-                            getString(R.string.dialog_success),
-                            getString(R.string.dialog_sign_in_success_message),
+                            R.drawable.ic_smiley,
+                            getString(R.string.dialog_signed_in),
+                            getString(R.string.dialog_signed_in_message),
                             getString(R.string.dialog_get_started),
                             new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
                                 @Override
