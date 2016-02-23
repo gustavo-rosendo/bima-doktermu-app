@@ -56,6 +56,21 @@ public class SignInFragment extends BaseFragment {
                 String password = binding.signInPasswordField.getText().toString();
                 if (validateSignIn(email, password)) {
                     // TODO: request sign-in
+                    UserProfile userProfile = new UserProfile(
+                            "",
+                            "",
+                            "",
+                            "",
+                            email,
+                            "",
+                            Constants.LOGIN_TYPE_EMAIL
+                    );
+                    StorageUtils.putString(
+                            getActivity(),
+                            Constants.KEY_USER_PROFILE,
+                            GsonUtils.toJson(userProfile)
+                    );
+
                     showSuccessDialog(
                             R.drawable.ic_smiley,
                             getString(R.string.dialog_signed_in),
@@ -64,21 +79,6 @@ public class SignInFragment extends BaseFragment {
                             new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
                                 @Override
                                 public void onClick(DokterPribadimuDialog dialog) {
-                                    UserProfile userProfile = new UserProfile(
-                                                                        "",
-                                                                        email,
-                                                                        "",
-                                                                        "",
-                                                                        email,
-                                                                        "",
-                                                                        Constants.LOGIN_TYPE_EMAIL
-                                                                );
-                                    StorageUtils.putString(
-                                            getActivity(),
-                                            Constants.KEY_USER_PROFILE,
-                                            GsonUtils.toJson(userProfile)
-                                    );
-
                                     startDoctorCallActivityOnTop();
                                 }
                             });
