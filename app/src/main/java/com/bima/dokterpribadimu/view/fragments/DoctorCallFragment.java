@@ -35,7 +35,18 @@ public class DoctorCallFragment extends BaseFragment {
         // Inflate the layout for this fragment
         binding = FragmentDoctorCallBinding.inflate(inflater, container, false);
 
+        initViews();
+
         return binding.getRoot();
+    }
+
+    private void initViews() {
+        binding.bookCallButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startSubscriptionActivity();
+            }
+        });
     }
 
 }

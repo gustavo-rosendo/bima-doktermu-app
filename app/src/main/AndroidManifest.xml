@@ -37,7 +37,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activities.ProfileActivity" />
-        <activity android:name=".view.activities.AboutActivity"></activity>
+        <activity android:name=".view.activities.AboutActivity" />
+        <activity android:name=".view.activities.SubscriptionActivity"></activity>
     </application>
 
 </manifest>

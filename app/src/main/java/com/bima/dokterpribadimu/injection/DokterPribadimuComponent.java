@@ -7,6 +7,7 @@ import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.ProfileActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
+import com.bima.dokterpribadimu.view.activities.SubscriptionActivity;
 import com.bima.dokterpribadimu.view.fragments.AboutFragment;
 import com.bima.dokterpribadimu.view.fragments.DoctorCallFragment;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
@@ -33,6 +34,7 @@ public interface DokterPribadimuComponent {
     void inject(LandingActivity landingActivity);
     void inject(SignInActivity signInActivity);
     void inject(DoctorCallActivity doctorCallActivity);
+    void inject(SubscriptionActivity subscriptionActivity);
     void inject(ProfileActivity profileActivity);
     void inject(AboutActivity aboutActivity);
     void inject(DrawerFragment drawerFragment);

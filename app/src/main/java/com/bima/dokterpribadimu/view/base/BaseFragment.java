@@ -12,6 +12,7 @@ import com.bima.dokterpribadimu.view.activities.AboutActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.ProfileActivity;
+import com.bima.dokterpribadimu.view.activities.SubscriptionActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
@@ -84,6 +85,10 @@ public class BaseFragment extends RxFragment {
         Intent intent = new Intent(getActivity(), DoctorCallActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    protected void startSubscriptionActivity() {
+        startActivity(new Intent(getActivity(), SubscriptionActivity.class));
     }
 
     protected void startAboutActivity() {
