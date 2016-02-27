@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bima_blue">#2D66AF</color>
-    <color name="bima_blue_dark">#24518C</color>
+    <color name="bima_blue">#2D63AF</color>
+    <color name="bima_blue_dark">#224B84</color>
 
     <color name="fb_blue">#3B5998</color>
     <color name="fb_blue_dark">#2F4779</color>
@@ -19,6 +19,6 @@
     <color name="green">#4CAF50</color>
     <color name="green_dark">#3C8C40</color>
 
-    <color name="email_green">#18B892</color>
-    <color name="email_green_dark">#139374</color>
+    <color name="email_green">#18B791</color>
+    <color name="email_green_dark">#139274</color>
 </resources>

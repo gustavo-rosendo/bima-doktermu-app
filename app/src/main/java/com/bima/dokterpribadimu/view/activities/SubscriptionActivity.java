@@ -11,6 +11,7 @@ import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.ActivitySubscriptionBinding;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
+import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 
 public class SubscriptionActivity extends BaseActivity {
 
@@ -37,8 +38,19 @@ public class SubscriptionActivity extends BaseActivity {
         binding.subscriptionSubscribeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startBookCallActivity();
-                finish();
+                showSuccessDialog(
+                        R.drawable.ic_dialog_success,
+                        getString(R.string.dialog_success),
+                        getString(R.string.dialog_subscription_success_message),
+                        getString(R.string.dialog_book_first_call),
+                        new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
+                            @Override
+                            public void onClick(DokterPribadimuDialog dialog) {
+                                startBookCallActivity();
+                                finish();
+                            }
+                        }
+                );
             }
         });
 
