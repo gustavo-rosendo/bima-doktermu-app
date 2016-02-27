@@ -80,6 +80,7 @@
     <string name="dialog_get_started">Get started</string>
     <string name="dialog_try_once_more">Try once more</string>
     <string name="dialog_take_me_home">Take me back home</string>
+    <string name="dialog_book_first_call">Book your first call</string>
     <string name="dialog_success">Success!</string>
     <string name="dialog_failed">Ooops!</string>
     <string name="dialog_signed_in">You are signed in!</string>
@@ -98,6 +99,8 @@
     <string name="invalid_email_message">The email address entered was invalid.
         Please check again or reenter it.</string>
     <string name="invalid_password_message">Password length must be at least %d characters.</string>
+    <string name="dialog_subscription_success_message">That went smoothly!
+        You can now enjoy all the features of the BIMA app!</string>
     <string name="dialog_book_call_done_message">That\'s as easy as it gets! Our team is processing your request.
         Keep your phone close to you, one of our professional doctors will call you as soon as he can.</string>
 
