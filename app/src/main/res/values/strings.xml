@@ -52,6 +52,14 @@
     <string name="drawer_partners">Partners</string>
 
     <!-- subscription -->
+    <string name="subscription">Subscription</string>
+    <string name="subscription_name">Name</string>
+    <string name="subscription_phone_number">Phone number</string>
+    <string name="subscription_ktp_number">KTP number</string>
+    <string name="subscription_province">Province</string>
+    <string name="subscription_agent_number">Agent number</string>
+    <string name="subscription_agent_number_optional">Agent number (optional)</string>
+    <string name="subscription_subscribe">Subscribe</string>
     <string name="your_subscription">Your subscription</string>
     <string name="monthly_plan">Monthly plan:</string>
     <string name="subscription_enabled">Enabled</string>
@@ -83,5 +91,44 @@
     <string name="invalid_email_message">The email address entered was invalid.
         Please check again or reenter it.</string>
     <string name="invalid_password_message">Password length must be at least %d characters.</string>
+
+    <!-- province -->
+    <string-array name="province_arrays">
+        <item>Nangroe Aceh Darussalam</item>
+        <item>Bali</item>
+        <item>Banten</item>
+        <item>Bengkulu</item>
+        <item>Gorontalo</item>
+        <item>DKI Jakarta</item>
+        <item>Jambi</item>
+        <item>Jawa Barat</item>
+        <item>Jawa Tengah</item>
+        <item>Jawa Timur</item>
+        <item>Kalimantan Barat</item>
+        <item>Kalimantan Selatan</item>
+        <item>Kalimantan Tengah</item>
+        <item>Kalimantan Timur</item>
+        <item>Kalimantan Utara</item>
+        <item>Kepulauan Bangka Belitung</item>
+        <item>Kepulauan Riau</item>
+        <item>Lampung</item>
+        <item>Maluku</item>
+        <item>Maluku Utara</item>
+        <item>Nusa Tenggara Barat</item>
+        <item>Nusa Tenggara Timur</item>
+        <item>Papua</item>
+        <item>Papua Barat</item>
+        <item>Riau</item>
+        <item>Sulawesi Barat</item>
+        <item>Sulawesi Selatan</item>
+        <item>Sulawesi Tengah</item>
+        <item>Sulawesi Tenggara</item>
+        <item>Sulawesi Utara</item>
+        <item>Sumatera Barat</item>
+        <item>Sumatera Selatan</item>
+        <item>Sumatera Utara</item>
+        <item>Daerah Istimewa Yogyakarta</item>
+        <item>Select your province</item>
+    </string-array>
 
 </resources>
