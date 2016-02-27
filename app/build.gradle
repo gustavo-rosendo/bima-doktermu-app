@@ -40,7 +40,7 @@ android {
 }
 
 dependencies {
-    final SUPPORT_LIBRARY_VERSION = '23.1.1'
+    final SUPPORT_LIBRARY_VERSION = '23.2.0'
     final RETROFIT_2_VERSION = '2.0.0-beta3'
     final OKHTTP_3_VERSION = '3.0.1'
     final DAGGER_VERSION = '2.0.2'
