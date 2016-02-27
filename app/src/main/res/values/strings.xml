@@ -26,6 +26,13 @@
     <string name="doctor_on_call_info">Your one clic doctor appointment available everyday from 6am to 10pm</string>
     <string name="doctor_on_call_book_a_call">Book a call</string>
 
+    <!-- book a call -->
+    <string name="book_call_tell_us_more">Tell us more</string>
+    <string name="book_call_info">We are just one clic away to have your call booked.
+        Before we can process your booking, we have one last question</string>
+    <string name="book_call_about">What is your call about?</string>
+    <string name="book_my_call">Book my call</string>
+
     <!-- about bima -->
     <string name="about_bima">About Bima</string>
     <string name="about_bima_toolbar">About BIMA</string>
@@ -91,6 +98,8 @@
     <string name="invalid_email_message">The email address entered was invalid.
         Please check again or reenter it.</string>
     <string name="invalid_password_message">Password length must be at least %d characters.</string>
+    <string name="dialog_book_call_done_message">That\'s as easy as it gets! Our team is processing your request.
+        Keep your phone close to you, one of our professional doctors will call you as soon as he can.</string>
 
     <!-- province -->
     <string-array name="province_arrays">
@@ -129,6 +138,15 @@
         <item>Sumatera Utara</item>
         <item>Daerah Istimewa Yogyakarta</item>
         <item>Select your province</item>
+    </string-array>
+
+    <!-- call about -->
+    <string-array name="call_about_arrays">
+        <item>Injury</item>
+        <item>Sickness</item>
+        <item>Medicine question</item>
+        <item>Bug bite</item>
+        <item>Select a topic</item>
     </string-array>
 
 </resources>

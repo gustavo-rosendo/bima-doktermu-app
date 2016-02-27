@@ -34,6 +34,14 @@ public class SubscriptionActivity extends BaseActivity {
             }
         });
 
+        binding.subscriptionSubscribeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startBookCallActivity();
+                finish();
+            }
+        });
+
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item,
                 getResources().getStringArray(R.array.province_arrays)) {

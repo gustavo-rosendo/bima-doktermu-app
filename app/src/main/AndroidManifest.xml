@@ -38,7 +38,8 @@
         </activity>
         <activity android:name=".view.activities.ProfileActivity" />
         <activity android:name=".view.activities.AboutActivity" />
-        <activity android:name=".view.activities.SubscriptionActivity"></activity>
+        <activity android:name=".view.activities.SubscriptionActivity" />
+        <activity android:name=".view.activities.BookCallActivity"></activity>
     </application>
 
 </manifest>
