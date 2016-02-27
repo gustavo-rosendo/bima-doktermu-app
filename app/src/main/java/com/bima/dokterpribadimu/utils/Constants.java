@@ -5,7 +5,7 @@ package com.bima.dokterpribadimu.utils;
  */
 public class Constants {
 
-    public static final String BIMA_WEBSITE = "http://www.bimaindonesia.co.id/";
+    public static final String BIMA_WEBSITE = "https://www.bimaindonesia.co.id/";
     public static final String BIMA_FACEBOOK_PAGE = "https://www.facebook.com/Bima-Indonesia-539726116184831/";
     public static final String BIMA_TWITTER = "https://twitter.com/bima_ind";
     public static final String BIMA_EMAIL = "cs@bimaindonesia.co.id";
