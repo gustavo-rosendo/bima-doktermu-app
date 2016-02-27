@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/generic_toolbar_height"
+                android:background="@color/bima_blue"
+                app:elevation="4dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/toolbar_back_button"
+                        android:layout_width="@dimen/generic_toolbar_button_height"
+                        android:layout_height="@dimen/generic_toolbar_button_height"
+                        android:padding="@dimen/generic_toolbar_image_button_padding"
+                        android:src="@drawable/ic_arrow_back"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@string/app_name"/>
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_toRightOf="@+id/toolbar_back_button"
+                        android:layout_toEndOf="@+id/toolbar_back_button"
+                        android:text="@string/doctor_on_call"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"/>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_xxlarge_margin"
+            android:layout_marginBottom="@dimen/generic_large_margin"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/book_call_tell_us_more"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/generic_xlarge_margin"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/book_call_info"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/book_call_about"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/subscription_province_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/generic_xxlarge_margin"
+            android:layout_marginStart="@dimen/generic_xxlarge_margin"
+            android:layout_marginLeft="@dimen/generic_xxlarge_margin"
+            android:layout_marginRight="@dimen/generic_xxlarge_margin"
+            android:layout_marginEnd="@dimen/generic_xxlarge_margin"
+            android:paddingStart="-8dp"
+            android:paddingLeft="-8dp"
+            android:paddingEnd="-8dp"
+            android:paddingRight="-8dp"
+            android:layout_marginTop="@dimen/generic_normal_margin"
+            android:entries="@array/call_about_arrays"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"/>
+
+        <Button
+            android:id="@+id/book_call_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/generic_button_height"
+            android:minWidth="225dp"
+            android:layout_marginBottom="@dimen/generic_large_margin"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/book_my_call"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@drawable/rounded_green_bg_selector"/>
+
+    </LinearLayout>
+
+</layout>

@@ -3,6 +3,7 @@ package com.bima.dokterpribadimu.injection;
 import android.app.Application;
 
 import com.bima.dokterpribadimu.view.activities.AboutActivity;
+import com.bima.dokterpribadimu.view.activities.BookCallActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.ProfileActivity;
@@ -35,6 +36,7 @@ public interface DokterPribadimuComponent {
     void inject(SignInActivity signInActivity);
     void inject(DoctorCallActivity doctorCallActivity);
     void inject(SubscriptionActivity subscriptionActivity);
+    void inject(BookCallActivity bookCallActivity);
     void inject(ProfileActivity profileActivity);
     void inject(AboutActivity aboutActivity);
     void inject(DrawerFragment drawerFragment);
