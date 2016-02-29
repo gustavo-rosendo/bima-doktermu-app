@@ -22,9 +22,9 @@
     <string name="home_lets_get_started">Let\'s get started!</string>
 
     <!-- doctor on call -->
-    <string name="doctor_on_call">Doctor on call</string>
-    <string name="doctor_on_call_info">Your one clic doctor appointment available everyday from 6am to 10pm</string>
-    <string name="doctor_on_call_book_a_call">Book a call</string>
+    <string name="doctor_on_call">Dokter pribadiku</string>
+    <string name="doctor_on_call_info">Dokter pribadi siap melayani anda setiap hari mulai dari jam 6 pagi sampai 10 malam</string>
+    <string name="doctor_on_call_book_a_call">Mulai konsultasi</string>
 
     <!-- book a call -->
     <string name="book_call_tell_us_more">Tell us more</string>
