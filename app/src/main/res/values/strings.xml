@@ -9,11 +9,11 @@
     <string name="sign_in_fb">Masuk dengan Facebook</string>
     <string name="sign_in_gplus">Masuk dengan Google</string>
     <string name="sign_in_email">Masuk dengan Email</string>
-    <string name="sign_in">Sign in</string>
-    <string name="register">Register</string>
+    <string name="sign_in">Masuk</string>
+    <string name="register">Daftar</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="whats_my_password">What\'s my password?</string>
+    <string name="password">Kata sandi</string>
+    <string name="whats_my_password">Lupa kata sandi anda?</string>
 
     <!-- home -->
     <string name="home">Home</string>
