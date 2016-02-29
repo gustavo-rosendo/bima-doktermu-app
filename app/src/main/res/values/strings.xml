@@ -6,9 +6,9 @@
     <string name="facebook_app_id">1568480343444186</string>
 
     <!-- sign in -->
-    <string name="sign_in_fb">Sign in with Facebook</string>
-    <string name="sign_in_gplus">Sign in with Google+</string>
-    <string name="sign_in_email">Sign in with your Email</string>
+    <string name="sign_in_fb">Masuk dengan Facebook</string>
+    <string name="sign_in_gplus">Masuk dengan Google</string>
+    <string name="sign_in_email">Masuk dengan Email</string>
     <string name="sign_in">Sign in</string>
     <string name="register">Register</string>
     <string name="email">Email</string>
