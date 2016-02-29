@@ -27,11 +27,13 @@
     <string name="doctor_on_call_book_a_call">Mulai konsultasi</string>
 
     <!-- book a call -->
-    <string name="book_call_tell_us_more">Tell us more</string>
-    <string name="book_call_info">We are just one clic away to have your call booked.
-        Before we can process your booking, we have one last question</string>
-    <string name="book_call_about">What is your call about?</string>
-    <string name="book_my_call">Book my call</string>
+    <string name="book_call_tell_us_more">Topik konsultasi</string>
+    <string name="book_call_info">Pilih topik konsultasi sesuai keinginan anda:\n\n
+        Penyakit: Ketahui penyakit anda, penyebab, tanda-tandanya, dan langkah menghadapinya!\n\n
+        Gaya hidup sehat: konsultasikan gaya hidupmu agar menjadi lebih sehat dan bertenaga!\n\n
+        Tips: Ketahui tips seputar makanan sehat, jenis obat, dan segala informasi yang mempengaruhi kesehatanmu!</string>
+    <string name="book_call_about">Apa topik anda?</string>
+    <string name="book_my_call">Buat janji sekarang</string>
 
     <!-- about bima -->
     <string name="about_bima">About BIMA</string>
@@ -145,11 +147,10 @@
 
     <!-- call about -->
     <string-array name="call_about_arrays">
-        <item>Injury</item>
-        <item>Sickness</item>
-        <item>Medicine question</item>
-        <item>Bug bite</item>
-        <item>Select a topic</item>
+        <item>Penyakit</item>
+        <item>Gaya hidup sehat</item>
+        <item>Tips</item>
+        <item>Pilih topik</item>
     </string-array>
 
 </resources>

@@ -54,73 +54,95 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/generic_xxlarge_margin"
-            android:layout_marginBottom="@dimen/generic_large_margin"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/book_call_tell_us_more"
-            android:textColor="@android:color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/generic_xlarge_margin"
-            android:paddingLeft="@dimen/generic_large_padding"
-            android:paddingStart="@dimen/generic_large_padding"
-            android:paddingRight="@dimen/generic_large_padding"
-            android:paddingEnd="@dimen/generic_large_padding"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/book_call_info"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/generic_large_padding"
-            android:paddingStart="@dimen/generic_large_padding"
-            android:paddingRight="@dimen/generic_large_padding"
-            android:paddingEnd="@dimen/generic_large_padding"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/book_call_about"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-
-        <Spinner
-            android:id="@+id/subscription_province_spinner"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/generic_xxlarge_margin"
-            android:layout_marginStart="@dimen/generic_xxlarge_margin"
-            android:layout_marginLeft="@dimen/generic_xxlarge_margin"
-            android:layout_marginRight="@dimen/generic_xxlarge_margin"
-            android:layout_marginEnd="@dimen/generic_xxlarge_margin"
-            android:paddingStart="-8dp"
-            android:paddingLeft="-8dp"
-            android:paddingEnd="-8dp"
-            android:paddingRight="-8dp"
-            android:layout_marginTop="@dimen/generic_normal_margin"
-            android:entries="@array/call_about_arrays"/>
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/book_call_button"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/generic_button_height"
-            android:minWidth="225dp"
-            android:layout_marginBottom="@dimen/generic_large_margin"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/book_my_call"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:background="@drawable/rounded_green_bg_selector"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_xxlarge_margin"
+                    android:layout_marginBottom="@dimen/generic_large_margin"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/book_call_tell_us_more"
+                    android:textColor="@android:color/black"
+                    android:textSize="30sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/generic_xlarge_margin"
+                    android:paddingLeft="@dimen/generic_large_padding"
+                    android:paddingStart="@dimen/generic_large_padding"
+                    android:paddingRight="@dimen/generic_large_padding"
+                    android:paddingEnd="@dimen/generic_large_padding"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/book_call_info"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/generic_large_padding"
+                    android:paddingStart="@dimen/generic_large_padding"
+                    android:paddingRight="@dimen/generic_large_padding"
+                    android:paddingEnd="@dimen/generic_large_padding"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/book_call_about"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <Spinner
+                    android:id="@+id/subscription_province_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/generic_xxlarge_margin"
+                    android:layout_marginLeft="@dimen/generic_xxlarge_margin"
+                    android:layout_marginRight="@dimen/generic_xxlarge_margin"
+                    android:layout_marginEnd="@dimen/generic_xxlarge_margin"
+                    android:paddingStart="-8dp"
+                    android:paddingLeft="-8dp"
+                    android:paddingEnd="-8dp"
+                    android:paddingRight="-8dp"
+                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:entries="@array/call_about_arrays"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:layout_marginStart="@dimen/generic_xxlarge_margin"
+                    android:layout_marginLeft="@dimen/generic_xxlarge_margin"
+                    android:layout_marginRight="@dimen/generic_xxlarge_margin"
+                    android:layout_marginEnd="@dimen/generic_xxlarge_margin"
+                    android:layout_marginBottom="@dimen/generic_xxlarge_margin"
+                    android:background="@android:color/darker_gray"/>
+
+                <Button
+                    android:id="@+id/book_call_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/generic_button_height"
+                    android:minWidth="225dp"
+                    android:layout_marginBottom="@dimen/generic_large_margin"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/book_my_call"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:background="@drawable/rounded_green_bg_selector"/>
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 
