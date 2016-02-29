@@ -40,9 +40,9 @@ public class BookCallActivity extends BaseActivity {
             public void onClick(View view) {
                 showSuccessDialog(
                         R.drawable.ic_thumb_up,
-                        getString(R.string.dialog_done),
+                        getString(R.string.dialog_success),
                         getString(R.string.dialog_book_call_done_message),
-                        getString(R.string.dialog_take_me_home),
+                        getString(R.string.dialog_waiting),
                         new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
                             @Override
                             public void onClick(DokterPribadimuDialog dialog) {
