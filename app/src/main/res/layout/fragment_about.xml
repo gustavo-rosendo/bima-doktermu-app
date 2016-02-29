@@ -98,19 +98,10 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/generic_xlarge_margin"
-                android:text="@string/about_bima_connect_with_us"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"/>
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/generic_large_margin"
+                android:layout_marginTop="@dimen/generic_xlarge_margin"
                 android:orientation="horizontal"
                 android:layout_gravity="center_horizontal">
 
