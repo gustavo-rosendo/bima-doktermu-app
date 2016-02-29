@@ -6,14 +6,14 @@
     <string name="facebook_app_id">1568480343444186</string>
 
     <!-- sign in -->
-    <string name="sign_in_fb">Sign in with Facebook</string>
-    <string name="sign_in_gplus">Sign in with Google+</string>
-    <string name="sign_in_email">Sign in with your Email</string>
-    <string name="sign_in">Sign in</string>
-    <string name="register">Register</string>
+    <string name="sign_in_fb">Masuk dengan Facebook</string>
+    <string name="sign_in_gplus">Masuk dengan Google</string>
+    <string name="sign_in_email">Masuk dengan Email</string>
+    <string name="sign_in">Masuk</string>
+    <string name="register">Daftar</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="whats_my_password">What\'s my password?</string>
+    <string name="password">Kata sandi</string>
+    <string name="whats_my_password">Lupa kata sandi anda?</string>
 
     <!-- home -->
     <string name="home">Home</string>
@@ -22,87 +22,89 @@
     <string name="home_lets_get_started">Let\'s get started!</string>
 
     <!-- doctor on call -->
-    <string name="doctor_on_call">Doctor on call</string>
-    <string name="doctor_on_call_info">Your one clic doctor appointment available everyday from 6am to 10pm</string>
-    <string name="doctor_on_call_book_a_call">Book a call</string>
+    <string name="doctor_on_call">Dokter pribadiku</string>
+    <string name="doctor_on_call_info">Dokter pribadi siap melayani anda setiap hari mulai dari jam 6 pagi sampai 10 malam</string>
+    <string name="doctor_on_call_book_a_call">Mulai konsultasi</string>
 
     <!-- book a call -->
-    <string name="book_call_tell_us_more">Tell us more</string>
-    <string name="book_call_info">We are just one clic away to have your call booked.
-        Before we can process your booking, we have one last question</string>
-    <string name="book_call_about">What is your call about?</string>
-    <string name="book_my_call">Book my call</string>
+    <string name="book_call_tell_us_more">Topik konsultasi</string>
+    <string name="book_call_info">Pilih topik konsultasi sesuai keinginan anda:\n\n
+        Penyakit: Ketahui penyakit anda, penyebab, tanda-tandanya, dan langkah menghadapinya!\n\n
+        Gaya hidup sehat: konsultasikan gaya hidupmu agar menjadi lebih sehat dan bertenaga!\n\n
+        Tips: Ketahui tips seputar makanan sehat, jenis obat, dan segala informasi yang mempengaruhi kesehatanmu!</string>
+    <string name="book_call_about">Apa topik anda?</string>
+    <string name="book_my_call">Buat janji sekarang</string>
 
     <!-- about bima -->
-    <string name="about_bima">About Bima</string>
-    <string name="about_bima_toolbar">About BIMA</string>
-    <string name="about_bima_info">We are the leading provider of mobile delivered health
-        services and insurances in emerging markets</string>
-    <string name="about_bima_learn_more">To learn more about BIMA visit</string>
+    <string name="about_bima">Tentang BIMA</string>
+    <string name="about_bima_info">BIMA adalah perusahaan di bidang pelayanan kesehatan
+        dan asuransi mobile di Negara berkembang</string>
+    <string name="about_bima_learn_more">Untuk informasi lebih lanjut, kunjungi</string>
     <string name="about_bima_website">www.bimaindonesia.co.id</string>
-    <string name="about_bima_give_us_call">or give us a call</string>
+    <string name="about_bima_give_us_call">Atau hubungi kami</string>
     <string name="about_bima_phone_number">0274&#8211;2112462</string>
-    <string name="about_bima_connect_with_us">connect with us</string>
 
     <!-- profile -->
-    <string name="your_profile">Your profile</string>
-    <string name="my_profile">My profile</string>
-    <string name="profile_personal_info">My personal info</string>
-    <string name="profile_email_address">Email address</string>
-    <string name="profile_password">My password</string>
+    <string name="my_profile">Profil saya</string>
+    <string name="profile_personal_info">Info personal saya</string>
+    <string name="profile_email_address">Alamat email</string>
+    <string name="profile_password">Kata sandi saya</string>
     <string name="profile_asterisk_password">********</string>
-    <string name="profile_app_info">BIMA Mobile v%s\nCopyright &#169;BIMA - 2016</string>
+    <string name="profile_app_info">BIMA Mobile v%s\nHak Cipta &#169;BIMA - 2016</string>
 
     <!-- drawer -->
-    <string name="drawer_coming_soon">Coming soon</string>
-    <string name="drawer_news">News</string>
-    <string name="drawer_partners">Partners</string>
+    <string name="drawer_doctor_on_call">Dokter pribadimu</string>
+    <string name="drawer_about_bima">Tentang Bima</string>
+    <string name="drawer_coming_soon">Fitur yang akan datang</string>
+    <string name="drawer_news">Berita</string>
+    <string name="drawer_partners">Mitra</string>
 
     <!-- subscription -->
-    <string name="subscription">Subscription</string>
-    <string name="subscription_name">Name</string>
-    <string name="subscription_phone_number">Phone number</string>
-    <string name="subscription_ktp_number">KTP number</string>
-    <string name="subscription_province">Province</string>
-    <string name="subscription_agent_number">Agent number</string>
-    <string name="subscription_agent_number_optional">Agent number (optional)</string>
-    <string name="subscription_subscribe">Subscribe</string>
-    <string name="your_subscription">Your subscription</string>
-    <string name="monthly_plan">Monthly plan:</string>
-    <string name="subscription_enabled">Enabled</string>
-    <string name="subscription_disabled">Disabled</string>
-    <string name="manage_subscription">Manage my subscription</string>
+    <string name="subscription">Form berlangganan</string>
+    <string name="subscription_name">Nama</string>
+    <string name="subscription_phone_number">Nomor telepon</string>
+    <string name="subscription_ktp_number">Nomor KTP</string>
+    <string name="subscription_province">Provinsi</string>
+    <string name="subscription_agent_number">Nomor agent</string>
+    <string name="subscription_agent_number_optional">Nomor agent (pilihan)</string>
+    <string name="subscription_subscribe">Mulai berlangganan</string>
+    <string name="your_subscription">Rencana Langganan Saya</string>
+    <string name="monthly_plan">Rencana bulanan:</string>
+    <string name="subscription_enabled">Aktif</string>
+    <string name="subscription_disabled">Non-aktif</string>
+    <string name="manage_subscription">Pengaturan Rencana Langganan</string>
 
     <!-- sign out -->
-    <string name="sign_out">Sign out</string>
+    <string name="sign_out">Keluar</string>
 
     <!-- dialog -->
-    <string name="dialog_get_started">Get started</string>
-    <string name="dialog_try_once_more">Try once more</string>
-    <string name="dialog_take_me_home">Take me back home</string>
-    <string name="dialog_book_first_call">Book your first call</string>
-    <string name="dialog_success">Success!</string>
+    <string name="dialog_get_started">Mulai</string>
+    <string name="dialog_try_once_more">Coba lagi</string>
+    <string name="dialog_take_me_home">Kembali</string>
+    <string name="dialog_waiting">Siap menunggu</string>
+    <string name="dialog_book_first_call">Kembali</string>
+    <string name="dialog_success">Berhasil!</string>
     <string name="dialog_failed">Ooops!</string>
-    <string name="dialog_signed_in">You are signed in!</string>
-    <string name="dialog_signed_in_message">You are already signed in.\nEnjoy the awesomeness!</string>
-    <string name="dialog_done">It\'s done!</string>
-    <string name="dialog_late">It\'s late!</string>
-    <string name="dialog_late_message">Our dedicated doctors have already gone home to take care of their families.
-        They will be back for you tomorrow at 6AM. Good night!</string>
-    <string name="no_connection">No Internet Connection</string>
-    <string name="no_connection_message">Your device is currently offline.
-        Please check your network settings and try again.</string>
-    <string name="dialog_sign_in_success_message">Everything went according to plan and you are now ready to use the app!</string>
-    <string name="dialog_sign_in_failed_message">Houston we had a problem!\n
-        Let\'s give it another try or pin us an email and we\'ll get back to you as soon as possible</string>
-    <string name="dialog_sign_in_canceled_message">Sign in was canceled</string>
-    <string name="invalid_email_message">The email address entered was invalid.
-        Please check again or reenter it.</string>
-    <string name="invalid_password_message">Password length must be at least %d characters.</string>
-    <string name="dialog_subscription_success_message">That went smoothly!
-        You can now enjoy all the features of the BIMA app!</string>
-    <string name="dialog_book_call_done_message">That\'s as easy as it gets! Our team is processing your request.
-        Keep your phone close to you, one of our professional doctors will call you as soon as he can.</string>
+    <string name="dialog_signed_in">Berhasil!</string>
+    <string name="dialog_signed_in_message">Anda telah berhasil masuk.</string>
+    <string name="dialog_late">Layanan tutup!</string>
+    <string name="dialog_late_message">Dokter pribadimu sudah pulang untuk beristirahat dan bertemu keluarganya.
+        Dokter akan siap melayani besok jam 6 pagi. Sampai jumpa besok dan selamat malam!</string>
+    <string name="no_connection">Tidak terhubung dengan internet</string>
+    <string name="no_connection_message">Tidak terhubung ke internet.
+        Silakan cek koneksi anda dan coba lagi.</string>
+    <string name="dialog_sign_in_success_message">Akun anda berhasil didaftarkan dan siap untuk digunakan</string>
+    <string name="dialog_sign_in_failed_message">Kami mengalami gangguan pada sistem.
+        Mohon coba lagi atau hubungi kami</string>
+    <string name="dialog_sign_in_canceled_message">Proses dibatalkan</string>
+    <string name="invalid_email_message">Alamat email yang anda masukkan kurang benar.
+        Silakan cek atau masukkan ulang email anda.</string>
+    <string name="invalid_password_message">Kata sandi minimal %d karakter.</string>
+    <string name="dialog_subscription_success_message">Anda berhasil berlangganan dokter pribadimu.
+        Mulailah membuat janji dengan dokter anda!</string>
+    <string name="dialog_book_call_done_message">Janji dengan dokter pribadimu berhasil dibuat!
+        Dokter akan menelepon anda dalam waktu kurang dari 1 jam.
+        Pastikan handphone anda dekat nada dering terdengar.</string>
 
     <!-- province -->
     <string-array name="province_arrays">
@@ -140,16 +142,15 @@
         <item>Sumatera Selatan</item>
         <item>Sumatera Utara</item>
         <item>Daerah Istimewa Yogyakarta</item>
-        <item>Select your province</item>
+        <item>Pilih provinsi anda</item>
     </string-array>
 
     <!-- call about -->
     <string-array name="call_about_arrays">
-        <item>Injury</item>
-        <item>Sickness</item>
-        <item>Medicine question</item>
-        <item>Bug bite</item>
-        <item>Select a topic</item>
+        <item>Penyakit</item>
+        <item>Gaya hidup sehat</item>
+        <item>Tips</item>
+        <item>Pilih topik</item>
     </string-array>
 
 </resources>
