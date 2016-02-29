@@ -26,8 +26,8 @@ android {
         applicationId "com.bima.dokterpribadimu"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 2 // Major -> Millions, Minor -> Thousands, Patch -> Hundreds. E.g 1.3.72 == 1003072
-        versionName "0.0.2"
+        versionCode 3 // Major -> Millions, Minor -> Thousands, Patch -> Hundreds. E.g 1.3.72 == 1003072
+        versionName "0.0.3"
 
         buildConfigField "String", "BASE_URL", "\"http://google.com/\""
     }

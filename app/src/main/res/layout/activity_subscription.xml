@@ -151,7 +151,7 @@
                     android:layout_marginTop="@dimen/generic_normal_margin"
                     android:background="@android:color/darker_gray"/>
 
-                <android.support.v7.widget.AppCompatSpinner
+                <Spinner
                     android:id="@+id/subscription_province_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -160,8 +160,7 @@
                     android:paddingEnd="-8dp"
                     android:paddingRight="-8dp"
                     android:layout_marginTop="@dimen/generic_normal_margin"
-                    android:entries="@array/province_arrays"
-                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"/>
+                    android:entries="@array/province_arrays"/>
 
                 <TextView
                     android:layout_width="match_parent"

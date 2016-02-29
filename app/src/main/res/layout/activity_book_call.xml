@@ -93,7 +93,7 @@
             android:textSize="20sp"
             android:textStyle="bold"/>
 
-        <android.support.v7.widget.AppCompatSpinner
+        <Spinner
             android:id="@+id/subscription_province_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,8 +107,7 @@
             android:paddingEnd="-8dp"
             android:paddingRight="-8dp"
             android:layout_marginTop="@dimen/generic_normal_margin"
-            android:entries="@array/call_about_arrays"
-            style="@style/Base.Widget.AppCompat.Spinner.Underlined"/>
+            android:entries="@array/call_about_arrays"/>
 
         <Button
             android:id="@+id/book_call_button"
