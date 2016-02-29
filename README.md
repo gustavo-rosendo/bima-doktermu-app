@@ -1,11 +1,14 @@
 ##Dokter Pribadimu for Android
 
-#### Setup
+### Important notes
+This project is using [ProGuard](http://proguard.sourceforge.net/) to shrink and obfuscate the packaged code. If you're having problem while running, set `minifyEnabled false` in **app level** `build.gradle` for debug and release config
+
+### Setup
 - Android Studio
 - Use Fabric Gradle plugins for Crashlytics support.
 - Use Android API Level 23 to build. Install Android 6.0 (API 23) from Android SDK Manager.
 
-#### Libraries
+### Libraries
 - Android Support Library
 - Android DataBinding
 - [Retrofit](https://github.com/square/retrofit)
