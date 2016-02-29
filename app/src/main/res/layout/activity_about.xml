@@ -48,7 +48,7 @@
                             android:gravity="center_vertical"
                             android:layout_toRightOf="@+id/toolbar_home_button"
                             android:layout_toEndOf="@+id/toolbar_home_button"
-                            android:text="@string/about_bima_toolbar"
+                            android:text="@string/about_bima"
                             android:textColor="@android:color/white"
                             android:textSize="18sp"/>
 

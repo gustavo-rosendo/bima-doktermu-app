@@ -34,8 +34,7 @@
     <string name="book_my_call">Book my call</string>
 
     <!-- about bima -->
-    <string name="about_bima">About Bima</string>
-    <string name="about_bima_toolbar">About BIMA</string>
+    <string name="about_bima">About BIMA</string>
     <string name="about_bima_info">We are the leading provider of mobile delivered health
         services and insurances in emerging markets</string>
     <string name="about_bima_learn_more">To learn more about BIMA visit</string>
@@ -45,8 +44,7 @@
     <string name="about_bima_connect_with_us">connect with us</string>
 
     <!-- profile -->
-    <string name="your_profile">Your profile</string>
-    <string name="my_profile">My profile</string>
+    <string name="my_profile">Profil saya</string>
     <string name="profile_personal_info">My personal info</string>
     <string name="profile_email_address">Email address</string>
     <string name="profile_password">My password</string>
@@ -54,9 +52,11 @@
     <string name="profile_app_info">BIMA Mobile v%s\nCopyright &#169;BIMA - 2016</string>
 
     <!-- drawer -->
-    <string name="drawer_coming_soon">Coming soon</string>
-    <string name="drawer_news">News</string>
-    <string name="drawer_partners">Partners</string>
+    <string name="drawer_doctor_on_call">Dokter pribadimu</string>
+    <string name="drawer_about_bima">Tentang Bima</string>
+    <string name="drawer_coming_soon">Fitur yang akan datang</string>
+    <string name="drawer_news">Berita</string>
+    <string name="drawer_partners">Mitra</string>
 
     <!-- subscription -->
     <string name="subscription">Subscription</string>
@@ -74,7 +74,7 @@
     <string name="manage_subscription">Manage my subscription</string>
 
     <!-- sign out -->
-    <string name="sign_out">Sign out</string>
+    <string name="sign_out">Keluar</string>
 
     <!-- dialog -->
     <string name="dialog_get_started">Get started</string>

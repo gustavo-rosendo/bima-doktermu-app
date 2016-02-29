@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/generic_large_margin"
                 android:layout_marginStart="@dimen/generic_large_margin"
-                android:text="@string/doctor_on_call"
+                android:text="@string/drawer_doctor_on_call"
                 android:textSize="18sp"
                 android:textColor="@color/grey_dark"/>
 
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/generic_large_margin"
                 android:layout_marginStart="@dimen/generic_large_margin"
-                android:text="@string/about_bima"
+                android:text="@string/drawer_about_bima"
                 android:textSize="18sp"
                 android:textColor="@color/grey_dark"/>
 
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/generic_large_margin"
                 android:layout_marginStart="@dimen/generic_large_margin"
-                android:text="@string/your_profile"
+                android:text="@string/my_profile"
                 android:textSize="18sp"
                 android:textColor="@color/grey_dark"/>
 
