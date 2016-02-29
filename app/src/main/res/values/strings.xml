@@ -59,14 +59,14 @@
     <string name="drawer_partners">Mitra</string>
 
     <!-- subscription -->
-    <string name="subscription">Subscription</string>
-    <string name="subscription_name">Name</string>
-    <string name="subscription_phone_number">Phone number</string>
-    <string name="subscription_ktp_number">KTP number</string>
-    <string name="subscription_province">Province</string>
-    <string name="subscription_agent_number">Agent number</string>
-    <string name="subscription_agent_number_optional">Agent number (optional)</string>
-    <string name="subscription_subscribe">Subscribe</string>
+    <string name="subscription">Form berlangganan</string>
+    <string name="subscription_name">Nama</string>
+    <string name="subscription_phone_number">Nomor telepon</string>
+    <string name="subscription_ktp_number">Nomor KTP</string>
+    <string name="subscription_province">Provinsi</string>
+    <string name="subscription_agent_number">Nomor agent</string>
+    <string name="subscription_agent_number_optional">Nomor agent (pilihan)</string>
+    <string name="subscription_subscribe">Mulai berlangganan</string>
     <string name="your_subscription">Your subscription</string>
     <string name="monthly_plan">Monthly plan:</string>
     <string name="subscription_enabled">Enabled</string>
@@ -140,7 +140,7 @@
         <item>Sumatera Selatan</item>
         <item>Sumatera Utara</item>
         <item>Daerah Istimewa Yogyakarta</item>
-        <item>Select your province</item>
+        <item>Pilih provinsi anda</item>
     </string-array>
 
     <!-- call about -->

@@ -159,8 +159,13 @@
                     android:paddingLeft="-8dp"
                     android:paddingEnd="-8dp"
                     android:paddingRight="-8dp"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:layout_marginTop="@dimen/generic_large_margin"
                     android:entries="@array/province_arrays"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:background="@android:color/darker_gray"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -189,7 +194,7 @@
                     android:id="@+id/subscription_subscribe_button"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/generic_button_height"
-                    android:minWidth="150dp"
+                    android:minWidth="200dp"
                     android:layout_marginTop="@dimen/generic_xlarge_margin"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/subscription_subscribe"
