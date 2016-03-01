@@ -99,6 +99,14 @@ public class DokterPribadimuApplication extends Application {
 
             // First find out which subscription is auto renewing
             Purchase dokterPribadiKuMonthly = inventory.getPurchase(SKU_DOKTER_PRIBADIKU_MONTHLY);
+
+            //TODO : Delete this in Production. For debugging purposes only.
+            if(dokterPribadiKuMonthly != null) {
+                Log.d(TAG, "dokterPribadiKuMonthly.getSku() = " + dokterPribadiKuMonthly.getSku());
+                Log.d(TAG, "dokterPribadiKuMonthly.getItemType() = " + dokterPribadiKuMonthly.getItemType());
+                Log.d(TAG, "dokterPribadiKuMonthly.getDeveloperPayload() = " + dokterPribadiKuMonthly.getDeveloperPayload());
+            }
+
             if (dokterPribadiKuMonthly != null && dokterPribadiKuMonthly.isAutoRenewing()) {
                 mCurrentSubscriptionSku = SKU_DOKTER_PRIBADIKU_MONTHLY;
                 mAutoRenewEnabled = true;
