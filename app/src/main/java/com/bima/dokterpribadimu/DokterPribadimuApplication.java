@@ -39,7 +39,7 @@ public class DokterPribadimuApplication extends Application {
         mComponent = DokterPribadimuComponent.Initializer.init(this);
 
         //TODO : do NOT hardcode the public key! Enhance the security computing it in a different manner
-        String base64EncodedPublicKey = "";
+        String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj1oiLMNCvso09PcCv4RxGmtKOfYZLR4NrwQ/1FcuRX4vkfYvu9MEZA5eqUpS0NtTnHQGq0YfsAYeZ560bLweADhJUbo+nIIChOLPnnuWYE+HKbKz82jQN+ZCaN06FgSSAtmDz1JUTMVeZasn0LQ3XXa65WF7CozFB1VasyxumYmf3cOtVi/9z+tSxqS3TIxgPn6AMQvcupZ4v5g84vnW2mNdh5Jo55mfhhFko//+JbYIV5BZjyKuHTpPKUxyqPLCToy9D5PyDrK1sNRRQtUu5ihiDWVFbz8ddJCG46o6w9xIebmJQO+/QzkBtjwd/babg83+AHam0OsqfPRaGcAfIwIDAQAB";
 
         mHelper = new IabHelper(this, base64EncodedPublicKey);
         mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener(){
