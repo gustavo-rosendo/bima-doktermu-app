@@ -5,6 +5,11 @@ package com.bima.dokterpribadimu.utils;
  */
 public class Constants {
 
+    public enum Status {
+        SUCCESS,
+        FAILED
+    }
+
     public static final String BIMA_WEBSITE = "https://www.bimaindonesia.co.id/";
     public static final String BIMA_FACEBOOK_PAGE = "https://www.facebook.com/Bima-Indonesia-539726116184831/";
     public static final String BIMA_TWITTER = "https://twitter.com/bima_ind";
@@ -14,6 +19,7 @@ public class Constants {
     public static final String TWITTER_APP_ID = "com.twitter.android";
 
     public static final String NETWORK_IS_UNREACHABLE = "Network is unreachable";
+    public static final String UNABLE_TO_RESOLVE_HOST = "Unable to resolve host";
 
     public static final int DRAWER_TYPE_DOCTOR_ON_CALL = 0;
     public static final int DRAWER_TYPE_ABOUT = 1;

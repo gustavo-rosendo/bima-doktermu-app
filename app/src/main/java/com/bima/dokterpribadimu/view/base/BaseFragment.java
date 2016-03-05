@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.activities.AboutActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
@@ -40,6 +43,22 @@ public class BaseFragment extends RxFragment {
         dialog = null;
 
         super.onDestroy();
+    }
+
+    protected void handleError(String tag, String errorMessage) {
+        Log.e(tag, errorMessage);
+
+        if (errorMessage.contains(Constants.NETWORK_IS_UNREACHABLE)
+                || errorMessage.contains(Constants.UNABLE_TO_RESOLVE_HOST)) {
+            Toast.makeText(getActivity(), getString(R.string.no_connection_message), Toast.LENGTH_SHORT).show();
+        } else {
+            showErrorDialog(
+                    R.drawable.ic_bug,
+                    getString(R.string.dialog_failed),
+                    errorMessage,
+                    getString(R.string.dialog_try_once_more),
+                    null);
+        }
     }
 
     protected void showErrorDialog(
