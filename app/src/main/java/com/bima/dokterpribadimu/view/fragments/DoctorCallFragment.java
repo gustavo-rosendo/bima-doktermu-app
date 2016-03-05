@@ -7,13 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
+import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
+import com.bima.dokterpribadimu.data.inappbilling.BillingInitializationListener;
+import com.bima.dokterpribadimu.data.inappbilling.QueryInventoryListener;
 import com.bima.dokterpribadimu.databinding.FragmentDoctorCallBinding;
+import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
+
+import javax.inject.Inject;
 
 /**
  * A simple {@link BaseFragment} subclass.
  */
 public class DoctorCallFragment extends BaseFragment {
+
+    @Inject
+    BillingClient billingClient;
 
     private FragmentDoctorCallBinding binding;
 
@@ -40,11 +50,63 @@ public class DoctorCallFragment extends BaseFragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        initBillingClient();
+    }
+
+    @Override
+    public void onPause() {
+        billingClient.release();
+
+        super.onPause();
+    }
+
+    private void initBillingClient() {
+        billingClient.setBillingInitializationListener(new BillingInitializationListener() {
+            @Override
+            public void onSuccess() {
+                billingClient.queryInventoryAsync();
+            }
+
+            @Override
+            public void onFailed() {
+
+            }
+        });
+
+        billingClient.setQueryInventoryListener(new QueryInventoryListener() {
+            @Override
+            public void onSuccess() {
+                StorageUtils.putBoolean(
+                        getActivity(),
+                        Constants.KEY_USER_SUBSCIPTION,
+                        true);
+            }
+
+            @Override
+            public void onFailed() {
+                StorageUtils.putBoolean(
+                        getActivity(),
+                        Constants.KEY_USER_SUBSCIPTION,
+                        false);
+            }
+        });
+
+        billingClient.init(getActivity());
+    }
+
     private void initViews() {
         binding.bookCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startSubscriptionActivity();
+                if (billingClient.isSubscribedToDokterPribadiKu()) {
+                    startBookCallActivity();
+                } else {
+                    startSubscriptionActivity();
+                }
             }
         });
     }

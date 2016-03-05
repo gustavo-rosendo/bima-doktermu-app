@@ -11,19 +11,25 @@ import android.widget.TextView;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
-import com.bima.dokterpribadimu.data.inappbilling.BillingListener;
+import com.bima.dokterpribadimu.data.inappbilling.BillingInitializationListener;
+import com.bima.dokterpribadimu.data.inappbilling.QueryInventoryListener;
 import com.bima.dokterpribadimu.databinding.ActivitySubscriptionBinding;
+import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.iabutil.IabHelper;
 import com.bima.dokterpribadimu.utils.iabutil.IabResult;
 import com.bima.dokterpribadimu.utils.iabutil.Purchase;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 
+import javax.inject.Inject;
+
 public class SubscriptionActivity extends BaseActivity {
 
-    private ActivitySubscriptionBinding binding;
+    @Inject
+    BillingClient billingClient;
 
-    private BillingClient billingClient;
+    private ActivitySubscriptionBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,21 +42,14 @@ public class SubscriptionActivity extends BaseActivity {
     }
 
     private void init() {
-        initBillingClient();
         initViews();
     }
 
     private void initBillingClient() {
-        billingClient = BillingClient.getInstance();
-        billingClient.init(this, new BillingListener() {
+        billingClient.setBillingInitializationListener(new BillingInitializationListener() {
             @Override
             public void onSuccess() {
-
-            }
-
-            @Override
-            public void onCancel() {
-
+                billingClient.queryInventoryAsync();
             }
 
             @Override
@@ -58,6 +57,26 @@ public class SubscriptionActivity extends BaseActivity {
 
             }
         });
+
+        billingClient.setQueryInventoryListener(new QueryInventoryListener() {
+            @Override
+            public void onSuccess() {
+                StorageUtils.putBoolean(
+                        SubscriptionActivity.this,
+                        Constants.KEY_USER_SUBSCIPTION,
+                        true);
+            }
+
+            @Override
+            public void onFailed() {
+                StorageUtils.putBoolean(
+                        SubscriptionActivity.this,
+                        Constants.KEY_USER_SUBSCIPTION,
+                        false);
+            }
+        });
+
+        billingClient.init(this);
     }
 
     private void initViews() {
@@ -129,10 +148,17 @@ public class SubscriptionActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        BillingClient.release();
+    protected void onResume() {
+        super.onResume();
 
-        super.onDestroy();
+        initBillingClient();
+    }
+
+    @Override
+    protected void onPause() {
+        billingClient.release();
+
+        super.onPause();
     }
 
     @Override

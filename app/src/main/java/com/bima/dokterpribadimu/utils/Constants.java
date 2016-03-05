@@ -32,4 +32,5 @@ public class Constants {
     public static final String LOGIN_TYPE_GOOGLE = "google";
 
     public static final String KEY_USER_PROFILE = "user_profile";
+    public static final String KEY_USER_SUBSCIPTION = "user_subscription";
 }
