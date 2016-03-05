@@ -3,6 +3,7 @@ package com.bima.dokterpribadimu.view.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.FragmentProfileBinding;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.squareup.picasso.Picasso;
 
@@ -53,6 +55,16 @@ public class ProfileFragment extends Fragment {
         Picasso.with(getActivity())
                 .load(R.drawable.ic_profile_picture)
                 .into(binding.profilePictureImage);
+
+        boolean subscriptionActive =
+                StorageUtils.getBoolean(getActivity(), Constants.KEY_USER_SUBSCIPTION, false);
+        if (subscriptionActive) {
+            binding.profileMonthlySubscriptionText.setText(getString(R.string.subscription_enabled));
+            binding.profileMonthlySubscriptionText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+        } else {
+            binding.profileMonthlySubscriptionText.setText(getString(R.string.subscription_disabled));
+            binding.profileMonthlySubscriptionText.setTextColor(ContextCompat.getColor(getActivity(), R.color.orange));
+        }
 
         UserProfile userProfile = UserProfileUtils.getUserProfile(getActivity());
 

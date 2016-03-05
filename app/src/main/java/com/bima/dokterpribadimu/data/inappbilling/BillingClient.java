@@ -25,14 +25,13 @@ public class BillingClient implements IabBroadcastListener {
     // SKU for our subscription
     static final String SKU_DOKTER_PRIBADIKU_MONTHLY = "dokterpribadimu_monthly_subscription_00";
 
-    private static BillingClient instance;
-
     private Activity activity;
 
-    private static BillingListener billingListener;
-    private static IabBroadcastReceiver broadcastReceiver;
+    private BillingInitializationListener billingInitializationListener;
+    private QueryInventoryListener queryInventoryListener;
+    private IabBroadcastReceiver broadcastReceiver;
 
-    private static IabHelper iabHelper;
+    private IabHelper iabHelper;
 
     // Will the subscription auto-renew?
     private boolean autoRenewEnabled = false;
@@ -43,60 +42,59 @@ public class BillingClient implements IabBroadcastListener {
     // Does the user have an active subscription to the Dokter PribadiKu plan?
     private static boolean isSubscribedToDokterPribadiKu = false;
 
-    public static BillingClient getInstance() {
-        if (instance == null) {
-            instance = new BillingClient();
-        }
-        return instance;
-    }
-
-    public static void release() {
-        // very important:
+    public void release() {
         if (broadcastReceiver != null) {
-            instance.activity.unregisterReceiver(broadcastReceiver);
+            activity.unregisterReceiver(broadcastReceiver);
         }
 
-        // very important:
-        Log.d(TAG, "Destroying helper.");
         if (iabHelper != null) {
             iabHelper.dispose();
             iabHelper = null;
         }
 
-        if (instance.activity != null) {
-            instance.activity = null;
+        if (activity != null) {
+            activity = null;
         }
 
-        if (billingListener != null) {
-            billingListener = null;
+        if (billingInitializationListener != null) {
+            billingInitializationListener = null;
+        }
+
+        if (queryInventoryListener != null) {
+            queryInventoryListener = null;
         }
     }
 
-    public void init(Activity activity, BillingListener listener) {
+    public void init(Activity activity) {
         this.activity = activity;
-        billingListener = listener;
 
         iabHelper = new IabHelper(activity, BuildConfig.BILL_KEY);
         iabHelper.startSetup(new IabHelper.OnIabSetupFinishedListener(){
             public void onIabSetupFinished(IabResult result) {
                 if(!result.isSuccess()) {
                     Log.d(TAG, "Problem setting up In-App-Billing: " + result);
+                    if (billingInitializationListener != null) {
+                        billingInitializationListener.onSuccess();
+                    }
                 }
 
                 // Have we been disposed of in the meantime? If so, quit.
                 if (iabHelper == null) {
+                    if (billingInitializationListener != null) {
+                        billingInitializationListener.onFailed();
+                    }
+
                     return;
                 }
-
-                Log.d(TAG, "Success! Finished setting up In-App-Billing: " + result);
 
                 broadcastReceiver = new IabBroadcastReceiver(BillingClient.this);
                 IntentFilter broadcastFilter = new IntentFilter(IabBroadcastReceiver.ACTION);
                 BillingClient.this.activity.registerReceiver(broadcastReceiver, broadcastFilter);
 
-                // IAB is fully set up. Now, let's get an inventory of stuff we own.
-                Log.d(TAG, "Setup successful. Querying inventory.");
-                iabHelper.queryInventoryAsync(gotInventoryListener);
+                Log.d(TAG, "Success! Finished setting up In-App-Billing: " + result);
+                if (billingInitializationListener != null) {
+                    billingInitializationListener.onSuccess();
+                }
             }
         });
     }
@@ -108,14 +106,19 @@ public class BillingClient implements IabBroadcastListener {
 
             // Have we been disposed of in the meantime? If so, quit.
             if (iabHelper == null) {
+                if (queryInventoryListener != null) {
+                    queryInventoryListener.onFailed();
+                }
+
                 return;
             }
 
             // Is it a failure?
             if (result.isFailure()) {
                 Log.d(TAG, "Failed to query inventory: " + result);
-                if (billingListener != null) {
-                    billingListener.onFailed();
+
+                if (queryInventoryListener != null) {
+                    queryInventoryListener.onFailed();
                 }
 
                 return;
@@ -145,18 +148,9 @@ public class BillingClient implements IabBroadcastListener {
             Log.d(TAG, "User " + (isSubscribedToDokterPribadiKu ? "HAS" : "DOES NOT HAVE")
                     + " DokterPribadiKu subscription.");
 
-            if (isSubscribedToDokterPribadiKu) {
-                //TODO : Skip Subscription flow and directly enable Book a Call
+            if (queryInventoryListener != null) {
+                queryInventoryListener.onSuccess();
             }
-            else {
-                //TODO : Subscription flow (new or renew) should be enabled in this case
-            }
-
-            if (billingListener != null) {
-                billingListener.onSuccess();
-            }
-
-            Log.d(TAG, "Initial inventory query finished; enabling main UI.");
         }
     };
 
@@ -195,6 +189,10 @@ public class BillingClient implements IabBroadcastListener {
     public void receivedBroadcast() {
         // Received a broadcast notification that the inventory of items has changed
         Log.d(TAG, "Received broadcast notification. Querying inventory.");
+        queryInventoryAsync();
+    }
+
+    public void queryInventoryAsync() {
         iabHelper.queryInventoryAsync(gotInventoryListener);
     }
 
@@ -206,12 +204,17 @@ public class BillingClient implements IabBroadcastListener {
                 listener);
     }
 
+    public void setBillingInitializationListener(BillingInitializationListener listener) {
+        billingInitializationListener = listener;
+    }
+
+    public void setQueryInventoryListener(QueryInventoryListener listener) {
+        queryInventoryListener = listener;
+    }
+
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
         // Pass on the activity result to the helper for handling
-        if (!iabHelper.handleActivityResult(requestCode, resultCode, data)) {
-            return false;
-        }
-        return true;
+        return iabHelper.handleActivityResult(requestCode, resultCode, data);
     }
 
     public boolean isSubscribedToDokterPribadiKu() {

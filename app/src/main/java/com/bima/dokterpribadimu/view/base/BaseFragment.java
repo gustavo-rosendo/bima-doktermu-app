@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.activities.AboutActivity;
+import com.bima.dokterpribadimu.view.activities.BookCallActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.ProfileActivity;
@@ -110,6 +111,10 @@ public class BaseFragment extends RxFragment {
 
     protected void startSubscriptionActivity() {
         startActivity(new Intent(getActivity(), SubscriptionActivity.class));
+    }
+
+    protected void startBookCallActivity() {
+        startActivity(new Intent(getActivity(), BookCallActivity.class));
     }
 
     protected void startAboutActivity() {
