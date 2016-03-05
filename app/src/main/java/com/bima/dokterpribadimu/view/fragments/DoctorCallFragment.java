@@ -73,25 +73,22 @@ public class DoctorCallFragment extends BaseFragment {
 
             @Override
             public void onFailed() {
-
+                // TODO: handle this
             }
         });
 
         billingClient.setQueryInventoryListener(new QueryInventoryListener() {
             @Override
-            public void onSuccess() {
+            public void onSuccess(boolean isSubscribed) {
                 StorageUtils.putBoolean(
                         getActivity(),
                         Constants.KEY_USER_SUBSCIPTION,
-                        true);
+                        isSubscribed);
             }
 
             @Override
             public void onFailed() {
-                StorageUtils.putBoolean(
-                        getActivity(),
-                        Constants.KEY_USER_SUBSCIPTION,
-                        false);
+                // TODO: handle this
             }
         });
 

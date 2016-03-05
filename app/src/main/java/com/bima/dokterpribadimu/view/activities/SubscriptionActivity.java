@@ -54,25 +54,22 @@ public class SubscriptionActivity extends BaseActivity {
 
             @Override
             public void onFailed() {
-
+                // TODO: handle this
             }
         });
 
         billingClient.setQueryInventoryListener(new QueryInventoryListener() {
             @Override
-            public void onSuccess() {
+            public void onSuccess(boolean isSubscribed) {
                 StorageUtils.putBoolean(
                         SubscriptionActivity.this,
                         Constants.KEY_USER_SUBSCIPTION,
-                        true);
+                        isSubscribed);
             }
 
             @Override
             public void onFailed() {
-                StorageUtils.putBoolean(
-                        SubscriptionActivity.this,
-                        Constants.KEY_USER_SUBSCIPTION,
-                        false);
+                // TODO: handle this
             }
         });
 
@@ -155,10 +152,10 @@ public class SubscriptionActivity extends BaseActivity {
     }
 
     @Override
-    protected void onPause() {
+    protected void onDestroy() {
         billingClient.release();
 
-        super.onPause();
+        super.onDestroy();
     }
 
     @Override

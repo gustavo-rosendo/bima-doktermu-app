@@ -43,7 +43,7 @@ public class BillingClient implements IabBroadcastListener {
     private static boolean isSubscribedToDokterPribadiKu = false;
 
     public void release() {
-        if (broadcastReceiver != null) {
+        if (broadcastReceiver != null && activity != null) {
             activity.unregisterReceiver(broadcastReceiver);
         }
 
@@ -137,19 +137,21 @@ public class BillingClient implements IabBroadcastListener {
 
             if (dokterPribadiKuMonthly != null && dokterPribadiKuMonthly.isAutoRenewing()) {
                 currentSubscriptionSku = SKU_DOKTER_PRIBADIKU_MONTHLY;
-                autoRenewEnabled = true;
+                autoRenewEnabled = dokterPribadiKuMonthly.isAutoRenewing();
             } else {
                 currentSubscriptionSku = "";
                 autoRenewEnabled = false;
             }
 
             // The user is subscribed if the subscription exists, even if it is not auto renewing
-            isSubscribedToDokterPribadiKu = (dokterPribadiKuMonthly != null && verifyDeveloperPayload(dokterPribadiKuMonthly));
+            isSubscribedToDokterPribadiKu =
+                    dokterPribadiKuMonthly != null
+                            && verifyDeveloperPayload(dokterPribadiKuMonthly);
             Log.d(TAG, "User " + (isSubscribedToDokterPribadiKu ? "HAS" : "DOES NOT HAVE")
                     + " DokterPribadiKu subscription.");
 
             if (queryInventoryListener != null) {
-                queryInventoryListener.onSuccess();
+                queryInventoryListener.onSuccess(isSubscribedToDokterPribadiKu);
             }
         }
     };
