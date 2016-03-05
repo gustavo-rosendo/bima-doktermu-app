@@ -2,7 +2,6 @@ package com.bima.dokterpribadimu.view.base;
 
 
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,7 +15,10 @@ import com.bima.dokterpribadimu.view.activities.SubscriptionActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
-import static com.bima.dokterpribadimu.view.components.DokterPribadimuDialog.*;
+import static com.bima.dokterpribadimu.view.components.DokterPribadimuDialog.DIALOG_TYPE_ERROR;
+import static com.bima.dokterpribadimu.view.components.DokterPribadimuDialog.DIALOG_TYPE_LATE;
+import static com.bima.dokterpribadimu.view.components.DokterPribadimuDialog.DIALOG_TYPE_SUCCESS;
+import static com.bima.dokterpribadimu.view.components.DokterPribadimuDialog.OnDokterPribadimuDialogClickListener;
 
 /**
  * Created by apradanas on 2/3/16.

@@ -1,7 +1,5 @@
 package com.bima.dokterpribadimu.data.sns.facebook;
 
-import com.google.gson.Gson;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,8 +18,8 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.login.LoginManager;
 import com.facebook.ProfileTracker;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
 import org.json.JSONObject;

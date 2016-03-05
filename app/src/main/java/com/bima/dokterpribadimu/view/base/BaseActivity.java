@@ -8,15 +8,14 @@ import com.bima.dokterpribadimu.view.activities.BookCallActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
-import com.bima.dokterpribadimu.view.activities.SubscriptionActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.facebook.appevents.AppEventsLogger;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
-import static com.bima.dokterpribadimu.view.components.DokterPribadimuDialog.*;
 import static com.bima.dokterpribadimu.view.components.DokterPribadimuDialog.DIALOG_TYPE_ERROR;
 import static com.bima.dokterpribadimu.view.components.DokterPribadimuDialog.DIALOG_TYPE_LATE;
 import static com.bima.dokterpribadimu.view.components.DokterPribadimuDialog.DIALOG_TYPE_SUCCESS;
+import static com.bima.dokterpribadimu.view.components.DokterPribadimuDialog.OnDokterPribadimuDialogClickListener;
 
 /**
  * Created by apradanas on 2/3/16.

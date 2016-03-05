@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.bima.dokterpribadimu.util;
+package com.bima.dokterpribadimu.utils.iabutil;
 
 /**
  * Represents the result of an in-app billing operation.

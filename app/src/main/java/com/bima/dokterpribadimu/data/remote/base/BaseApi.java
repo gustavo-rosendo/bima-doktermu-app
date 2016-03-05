@@ -7,8 +7,8 @@ import com.google.gson.GsonBuilder;
 import android.content.Context;
 import android.util.Log;
 
-import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.BuildConfig;
+import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.NetUtils;
 

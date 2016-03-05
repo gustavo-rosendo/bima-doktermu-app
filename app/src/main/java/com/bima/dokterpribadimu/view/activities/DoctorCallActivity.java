@@ -5,15 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.ActivityDoctorCallBinding;
-import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
-import com.bima.dokterpribadimu.utils.GsonUtils;
-import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.fragments.DoctorCallFragment;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;

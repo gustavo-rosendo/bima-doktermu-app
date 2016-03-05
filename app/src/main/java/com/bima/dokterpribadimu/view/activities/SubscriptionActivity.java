@@ -1,5 +1,6 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
@@ -9,13 +10,20 @@ import android.widget.TextView;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
+import com.bima.dokterpribadimu.data.inappbilling.BillingListener;
 import com.bima.dokterpribadimu.databinding.ActivitySubscriptionBinding;
+import com.bima.dokterpribadimu.utils.iabutil.IabHelper;
+import com.bima.dokterpribadimu.utils.iabutil.IabResult;
+import com.bima.dokterpribadimu.utils.iabutil.Purchase;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 
 public class SubscriptionActivity extends BaseActivity {
 
     private ActivitySubscriptionBinding binding;
+
+    private BillingClient billingClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +32,32 @@ public class SubscriptionActivity extends BaseActivity {
 
         DokterPribadimuApplication.getComponent().inject(this);
 
+        init();
+    }
+
+    private void init() {
+        initBillingClient();
         initViews();
+    }
+
+    private void initBillingClient() {
+        billingClient = BillingClient.getInstance();
+        billingClient.init(this, new BillingListener() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onFailed() {
+
+            }
+        });
     }
 
     private void initViews() {
@@ -38,19 +71,35 @@ public class SubscriptionActivity extends BaseActivity {
         binding.subscriptionSubscribeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showSuccessDialog(
-                        R.drawable.ic_dialog_success,
-                        getString(R.string.dialog_success),
-                        getString(R.string.dialog_subscription_success_message),
-                        getString(R.string.dialog_book_first_call),
-                        new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
-                            @Override
-                            public void onClick(DokterPribadimuDialog dialog) {
-                                startBookCallActivity();
-                                finish();
+                if (!billingClient.isSubscribedToDokterPribadiKu()) {
+                    billingClient.launchSubscriptionPurchaseFlow(new IabHelper.OnIabPurchaseFinishedListener() {
+                        @Override
+                        public void onIabPurchaseFinished(IabResult result, Purchase info) {
+                            if (result.isSuccess()) {
+                                showSuccessDialog(
+                                        R.drawable.ic_dialog_success,
+                                        getString(R.string.dialog_success),
+                                        getString(R.string.dialog_subscription_success_message),
+                                        getString(R.string.dialog_book_first_call),
+                                        new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
+                                            @Override
+                                            public void onClick(DokterPribadimuDialog dialog) {
+                                                startBookCallActivity();
+                                                finish();
+                                            }
+                                        }
+                                );
+                            } else {
+                                showErrorDialog(
+                                        R.drawable.ic_bug,
+                                        getString(R.string.dialog_failed),
+                                        getString(R.string.dialog_sign_in_failed_message),
+                                        getString(R.string.dialog_try_once_more),
+                                        null);
                             }
                         }
-                );
+                    });
+                }
             }
         });
 
@@ -77,5 +126,19 @@ public class SubscriptionActivity extends BaseActivity {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.subscriptionProvinceSpinner.setAdapter(spinnerAdapter);
         binding.subscriptionProvinceSpinner.setSelection(spinnerAdapter.getCount());
+    }
+
+    @Override
+    protected void onDestroy() {
+        BillingClient.release();
+
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!billingClient.onActivityResult(requestCode, resultCode, data)) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

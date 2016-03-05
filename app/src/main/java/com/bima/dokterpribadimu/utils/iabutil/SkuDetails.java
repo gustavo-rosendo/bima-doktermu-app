@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.bima.dokterpribadimu.util;
+package com.bima.dokterpribadimu.utils.iabutil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
