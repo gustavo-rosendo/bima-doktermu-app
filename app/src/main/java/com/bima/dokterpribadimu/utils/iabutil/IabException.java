@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.bima.dokterpribadimu.util;
+package com.bima.dokterpribadimu.utils.iabutil;
 
 /**
  * Exception thrown when something went wrong with in-app billing.

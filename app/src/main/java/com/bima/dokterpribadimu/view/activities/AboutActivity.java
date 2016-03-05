@@ -1,8 +1,8 @@
 package com.bima.dokterpribadimu.view.activities;
 
 import android.databinding.DataBindingUtil;
-import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.View;
 
@@ -12,7 +12,6 @@ import com.bima.dokterpribadimu.databinding.ActivityAboutBinding;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.fragments.AboutFragment;
-import com.bima.dokterpribadimu.view.fragments.DoctorCallFragment;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
 
 public class AboutActivity extends BaseActivity {

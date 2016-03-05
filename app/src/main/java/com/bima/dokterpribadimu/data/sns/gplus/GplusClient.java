@@ -11,7 +11,6 @@ import com.google.android.gms.common.api.Status;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 
 import com.bima.dokterpribadimu.data.sns.LoginClient;
 import com.bima.dokterpribadimu.data.sns.LoginListener;

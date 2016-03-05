@@ -169,6 +169,9 @@
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
 
+# Billing
+-keep class com.android.vending.billing.**
+
 ###### ADDITIONAL OPTIONS NOT USED NORMALLY
 
 #To keep callback calls. Uncomment if using any
