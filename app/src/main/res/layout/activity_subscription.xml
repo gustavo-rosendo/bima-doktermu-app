@@ -94,6 +94,66 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/generic_large_margin"
+                    android:text="@string/subscription_gender"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:background="@android:color/darker_gray"/>
+
+                <Spinner
+                    android:id="@+id/subscription_gender_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="-8dp"
+                    android:paddingLeft="-8dp"
+                    android:paddingEnd="-8dp"
+                    android:paddingRight="-8dp"
+                    android:layout_marginTop="@dimen/generic_large_margin"
+                    android:entries="@array/gender_arrays"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:background="@android:color/darker_gray"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_large_margin"
+                    android:text="@string/subscription_dob"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:background="@android:color/darker_gray"/>
+
+                <TextView
+                    android:id="@+id/subscription_dob_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_large_margin"
+                    android:hint="@string/subscription_dob"
+                    android:textSize="18sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:layout_marginTop="4dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_large_margin"
                     android:text="@string/subscription_phone_number"
                     android:textAllCaps="true"
                     android:textColor="@android:color/black"
@@ -117,7 +177,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/generic_large_margin"
-                    android:text="@string/subscription_ktp_number"
+                    android:text="@string/subscription_email"
                     android:textAllCaps="true"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"/>
@@ -129,66 +189,12 @@
                     android:background="@android:color/darker_gray"/>
 
                 <EditText
-                    android:id="@+id/subscription_ktp_field"
+                    android:id="@+id/subscription_email_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/generic_normal_margin"
-                    android:hint="@string/subscription_ktp_number"
-                    android:inputType="number"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/generic_large_margin"
-                    android:text="@string/subscription_province"
-                    android:textAllCaps="true"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/generic_separator_height"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
-                    android:background="@android:color/darker_gray"/>
-
-                <Spinner
-                    android:id="@+id/subscription_province_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="-8dp"
-                    android:paddingLeft="-8dp"
-                    android:paddingEnd="-8dp"
-                    android:paddingRight="-8dp"
-                    android:layout_marginTop="@dimen/generic_large_margin"
-                    android:entries="@array/province_arrays"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/generic_separator_height"
-                    android:background="@android:color/darker_gray"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/generic_large_margin"
-                    android:text="@string/subscription_agent_number_optional"
-                    android:textAllCaps="true"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/generic_separator_height"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
-                    android:background="@android:color/darker_gray"/>
-
-                <EditText
-                    android:id="@+id/subscription_agent_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
-                    android:hint="@string/subscription_agent_number"
-                    android:inputType="number"/>
+                    android:hint="@string/subscription_email"
+                    android:inputType="textEmailAddress"/>
 
                 <Button
                     android:id="@+id/subscription_subscribe_button"

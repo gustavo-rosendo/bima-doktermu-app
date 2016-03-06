@@ -99,11 +99,11 @@ public class DoctorCallFragment extends BaseFragment {
         binding.bookCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (billingClient.isSubscribedToDokterPribadiKu()) {
-                    startBookCallActivity();
-                } else {
+                //if (billingClient.isSubscribedToDokterPribadiKu()) {
+                //    startBookCallActivity();
+                //} else {
                     startSubscriptionActivity();
-                }
+                //}
             }
         });
     }

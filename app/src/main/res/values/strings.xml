@@ -63,7 +63,10 @@
     <string name="subscription">Form berlangganan</string>
     <string name="subscription_name">Nama</string>
     <string name="subscription_phone_number">Nomor telepon</string>
+    <string name="subscription_email">Email</string>
     <string name="subscription_ktp_number">Nomor KTP</string>
+    <string name="subscription_gender">Jenis kelamin</string>
+    <string name="subscription_dob">Tanggal lahir</string>
     <string name="subscription_province">Provinsi</string>
     <string name="subscription_agent_number">Nomor agent</string>
     <string name="subscription_agent_number_optional">Nomor agent (pilihan)</string>
@@ -105,6 +108,11 @@
     <string name="dialog_book_call_done_message">Janji dengan dokter pribadimu berhasil dibuat!
         Dokter akan menelepon anda dalam waktu kurang dari 1 jam.
         Pastikan handphone anda dekat nada dering terdengar.</string>
+    <string name="invalid_name_message">Nama yang anda masukkan kosong atau kurang lengkap</string>
+    <string name="invalid_gender_message">Pilih jenis kelamin anda</string>
+    <string name="invalid_dob_message">Tanggal lahir anda kosong</string>
+    <string name="invalid_phone_number_message">Nomor telepon anda kosong atau tidak valid.
+        Silakan cek atau masukkan ulang nomor telepon anda.</string>
 
     <!-- province -->
     <string-array name="province_arrays">
@@ -151,6 +159,13 @@
         <item>Gaya hidup sehat</item>
         <item>Tips</item>
         <item>Pilih topik</item>
+    </string-array>
+
+    <!-- gender -->
+    <string-array name="gender_arrays">
+        <item>Laki-laki</item>
+        <item>Perempuan</item>
+        <item>Pilih jenis kelamin</item>
     </string-array>
 
 </resources>
