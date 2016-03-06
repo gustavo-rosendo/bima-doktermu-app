@@ -218,7 +218,7 @@ public class SubscriptionActivity extends BaseActivity {
     }
 
     /**
-     * Validate login email and password.
+     * Validate subscription fields.
      * @return boolean true if subscription data are valid, boolean false if otherwise
      */
     private boolean validateSubscription() {

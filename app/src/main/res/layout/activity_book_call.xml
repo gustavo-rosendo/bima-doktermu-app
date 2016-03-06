@@ -103,7 +103,7 @@
                     android:textStyle="bold"/>
 
                 <Spinner
-                    android:id="@+id/subscription_province_spinner"
+                    android:id="@+id/subscription_topic_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/generic_xxlarge_margin"

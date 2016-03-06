@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
@@ -38,18 +39,20 @@ public class BookCallActivity extends BaseActivity {
         binding.bookCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showSuccessDialog(
-                        R.drawable.ic_thumb_up,
-                        getString(R.string.dialog_success),
-                        getString(R.string.dialog_book_call_done_message),
-                        getString(R.string.dialog_waiting),
-                        new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
-                            @Override
-                            public void onClick(DokterPribadimuDialog dialog) {
-                                startDoctorCallActivityOnTop();
+                if (validateTopic()) {
+                    showSuccessDialog(
+                            R.drawable.ic_thumb_up,
+                            getString(R.string.dialog_success),
+                            getString(R.string.dialog_book_call_done_message),
+                            getString(R.string.dialog_waiting),
+                            new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
+                                @Override
+                                public void onClick(DokterPribadimuDialog dialog) {
+                                    startDoctorCallActivityOnTop();
+                                }
                             }
-                        }
-                );
+                    );
+                }
             }
         });
 
@@ -74,7 +77,26 @@ public class BookCallActivity extends BaseActivity {
             }
         };
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.subscriptionProvinceSpinner.setAdapter(spinnerAdapter);
-        binding.subscriptionProvinceSpinner.setSelection(spinnerAdapter.getCount());
+        binding.subscriptionTopicSpinner.setAdapter(spinnerAdapter);
+        binding.subscriptionTopicSpinner.setSelection(spinnerAdapter.getCount());
+    }
+
+
+    /**
+     * Validate book a call topic
+     * @return boolean true if topic are valid, boolean false if otherwise
+     */
+    private boolean validateTopic() {
+        if (binding.subscriptionTopicSpinner.getSelectedItemPosition()
+                == getResources().getStringArray(R.array.call_about_arrays).length - 1) {
+            Toast.makeText(
+                    this,
+                    getString(R.string.invalid_call_topic_message),
+                    Toast.LENGTH_SHORT
+            ).show();
+        } else {
+            return true;
+        }
+        return false;
     }
 }

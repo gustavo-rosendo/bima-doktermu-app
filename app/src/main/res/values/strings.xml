@@ -113,6 +113,7 @@
     <string name="invalid_dob_message">Tanggal lahir anda kosong</string>
     <string name="invalid_phone_number_message">Nomor telepon anda kosong atau tidak valid.
         Silakan cek atau masukkan ulang nomor telepon anda.</string>
+    <string name="invalid_call_topic_message">Pilih topik konsultasi anda</string>
 
     <!-- province -->
     <string-array name="province_arrays">
