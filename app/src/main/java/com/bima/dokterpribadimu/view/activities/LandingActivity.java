@@ -17,6 +17,7 @@ import com.bima.dokterpribadimu.data.sns.gplus.GplusClient;
 import com.bima.dokterpribadimu.databinding.ActivityLandingBinding;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.DeviceInfoUtils;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
