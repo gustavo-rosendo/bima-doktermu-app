@@ -2,7 +2,9 @@ package com.bima.dokterpribadimu.view.activities;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,11 +23,15 @@ import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.facebook.appevents.AppEventsLogger;
 
+import fr.quentinklein.slt.LocationTracker;
+import fr.quentinklein.slt.TrackerSettings;
+
 public class LandingActivity extends BaseActivity {
 
     private ActivityLandingBinding binding;
 
     private LoginClient loginClient;
+    private Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,7 @@ public class LandingActivity extends BaseActivity {
     }
 
     private void init() {
+        initLocationTracker();
         initLoginClient();
         initViews();
     }
@@ -83,6 +90,29 @@ public class LandingActivity extends BaseActivity {
                 startSignInActivity();
             }
         });
+    }
+
+    private void initLocationTracker() {
+        TrackerSettings settings =
+                new TrackerSettings()
+                        .setUseGPS(true)
+                        .setUseNetwork(true)
+                        .setUsePassive(true);
+
+        LocationTracker tracker = new LocationTracker(this, settings) {
+
+            @Override
+            public void onLocationFound(@NonNull Location location) {
+                LandingActivity.this.location = location;
+                stopListening();
+            }
+
+            @Override
+            public void onTimeout() {
+
+            }
+        };
+        tracker.startListening();
     }
 
     private void initLoginClient() {
