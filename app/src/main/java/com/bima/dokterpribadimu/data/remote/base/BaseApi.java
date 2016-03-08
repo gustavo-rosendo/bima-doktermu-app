@@ -31,7 +31,7 @@ import static okhttp3.logging.HttpLoggingInterceptor.Level;
  */
 public abstract class BaseApi<T> {
 
-    private static final String BASE_URL = BuildConfig.BASE_URL; // TODO: insert correct base url
+    private static final String BASE_URL = BuildConfig.BASE_URL;
 
     public static int MAX_IDLE_CONNECTIONS = 30;
     public static int KEEP_ALIVE_DURATION_MS = 3 * 60 * 1000;

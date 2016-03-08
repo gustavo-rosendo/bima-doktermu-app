@@ -87,7 +87,7 @@
     <string name="dialog_waiting">Siap menunggu</string>
     <string name="dialog_book_first_call">Kembali</string>
     <string name="dialog_success">Berhasil!</string>
-    <string name="dialog_failed">Ooops!</string>
+    <string name="dialog_failed">Maaf</string>
     <string name="dialog_signed_in">Berhasil!</string>
     <string name="dialog_signed_in_message">Anda telah berhasil masuk.</string>
     <string name="dialog_late">Layanan tutup!</string>

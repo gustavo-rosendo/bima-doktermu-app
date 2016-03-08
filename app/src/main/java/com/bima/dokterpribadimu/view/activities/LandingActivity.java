@@ -1,10 +1,14 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,7 +21,6 @@ import com.bima.dokterpribadimu.data.sns.gplus.GplusClient;
 import com.bima.dokterpribadimu.databinding.ActivityLandingBinding;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
-import com.bima.dokterpribadimu.utils.DeviceInfoUtils;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
@@ -28,6 +31,8 @@ import fr.quentinklein.slt.LocationTracker;
 import fr.quentinklein.slt.TrackerSettings;
 
 public class LandingActivity extends BaseActivity {
+
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     private ActivityLandingBinding binding;
 
@@ -61,7 +66,7 @@ public class LandingActivity extends BaseActivity {
     }
 
     private void init() {
-        initLocationTracker();
+        checkLocationTrackerPermission();
         initLoginClient();
         initViews();
     }
@@ -93,27 +98,13 @@ public class LandingActivity extends BaseActivity {
         });
     }
 
-    private void initLocationTracker() {
-        TrackerSettings settings =
-                new TrackerSettings()
-                        .setUseGPS(true)
-                        .setUseNetwork(true)
-                        .setUsePassive(true);
-
-        LocationTracker tracker = new LocationTracker(this, settings) {
-
-            @Override
-            public void onLocationFound(@NonNull Location location) {
-                LandingActivity.this.location = location;
-                stopListening();
-            }
-
-            @Override
-            public void onTimeout() {
-
-            }
-        };
-        tracker.startListening();
+    private void checkLocationTrackerPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestLocationPermission();
+        } else {
+            startLocationTracker();
+        }
     }
 
     private void initLoginClient() {
@@ -136,6 +127,51 @@ public class LandingActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         loginClient.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void requestLocationPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case LOCATION_PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission granted
+                    startLocationTracker();
+                }
+                break;
+        }
+    }
+
+    private void startLocationTracker() {
+        TrackerSettings settings =
+                new TrackerSettings()
+                        .setUseGPS(true)
+                        .setUseNetwork(true)
+                        .setUsePassive(true);
+
+        try {
+            LocationTracker tracker = new LocationTracker(this, settings) {
+
+                @Override
+                public void onLocationFound(@NonNull Location location) {
+                    LandingActivity.this.location = location;
+                    stopListening();
+                }
+
+                @Override
+                public void onTimeout() {
+
+                }
+            };
+            tracker.startListening();
+        } catch (SecurityException se) {
+            requestLocationPermission();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private LoginListener loginListener = new LoginListener() {

@@ -11,10 +11,19 @@
         "client_id": "android:com.bima.dokterpribadimu",
         "client_type": 1,
         "android_client_info": {
-          "package_name": "com.bima.dokterpribadimu"
+          "package_name": "com.bima.dokterpribadimu",
+          "certificate_hash": []
         }
       },
       "oauth_client": [
+        {
+          "client_id": "423310825659-3tkh7f26j2o0i5cvest147bslmvkurvt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bima.dokterpribadimu",
+            "certificate_hash": "B5B111D3B06519543686FC5B9F8A6EA953B9E2F1"
+          }
+        },
         {
           "client_id": "423310825659-uiburhie1au98d90q8f3vk5pp7omtou8.apps.googleusercontent.com",
           "client_type": 1,
