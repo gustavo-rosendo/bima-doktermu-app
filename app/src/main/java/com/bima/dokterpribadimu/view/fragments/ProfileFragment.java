@@ -71,6 +71,7 @@ public class ProfileFragment extends Fragment {
         try {
             Picasso.with(getActivity())
                     .load(userProfile.getProfilePicture())
+                    .centerCrop()
                     .fit()
                     .placeholder(R.drawable.ic_profile_picture)
                     .error(R.drawable.ic_profile_picture)
