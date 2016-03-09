@@ -64,6 +64,11 @@ public class SignInFragment extends BaseFragment {
     }
 
     private void initViews() {
+        binding.signInPasswordHint.setText(
+                String.format(
+                        getString(R.string.invalid_password_message),
+                        ValidationUtils.MINIMUM_PASSWORD_LENGTH));
+
         binding.signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

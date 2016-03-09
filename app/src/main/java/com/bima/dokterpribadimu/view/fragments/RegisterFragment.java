@@ -63,6 +63,11 @@ public class RegisterFragment extends BaseFragment {
     }
 
     private void initViews() {
+        binding.registerPasswordHint.setText(
+                String.format(
+                        getString(R.string.invalid_password_message),
+                        ValidationUtils.MINIMUM_PASSWORD_LENGTH));
+
         binding.registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
