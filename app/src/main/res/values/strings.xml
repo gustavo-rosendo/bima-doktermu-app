@@ -121,6 +121,9 @@
         Silakan cek atau masukkan ulang nomor telepon anda.</string>
     <string name="invalid_call_topic_message">Pilih topik konsultasi anda</string>
 
+    <!-- permission -->
+    <string name="rationale_location">Dokter Pribadimu perlu mengakses GPS anda untuk mengaktifkan semua fitur aplikasi.</string>
+
     <!-- province -->
     <string-array name="province_arrays">
         <item>Nangroe Aceh Darussalam</item>

@@ -34,15 +34,15 @@ public class UserApi extends BaseApi<UserService> {
      * UserApi implementation to login
      * @return Observable<BaseResponse<Token>>
      */
-    public Observable<BaseResponse<Token>> login(
+    public Observable<BaseResponse> login(
             final String email, final String password, final String loginType, final String accessToken) {
-        return Observable.create(new Observable.OnSubscribe<BaseResponse<Token>>() {
+        return Observable.create(new Observable.OnSubscribe<BaseResponse>() {
             @Override
-            public void call(final Subscriber<? super BaseResponse<Token>> subscriber) {
+            public void call(final Subscriber<? super BaseResponse> subscriber) {
                 try {
                     Response response = userService.login(email, password, loginType, accessToken).execute();
                     if (response.isSuccess()) {
-                        subscriber.onNext((BaseResponse<Token>) response.body());
+                        subscriber.onNext((BaseResponse) response.body());
                         subscriber.onCompleted();
                     } else {
                         BaseResponse error = GsonUtils.fromJson(
@@ -62,11 +62,11 @@ public class UserApi extends BaseApi<UserService> {
      * UserApi implementation to register
      * @return Observable<BaseResponse<Token>>
      */
-    public Observable<BaseResponse<Token>> register(
+    public Observable<BaseResponse> register(
             final UserProfile userProfile, final String password) {
-        return Observable.create(new Observable.OnSubscribe<BaseResponse<Token>>() {
+        return Observable.create(new Observable.OnSubscribe<BaseResponse>() {
             @Override
-            public void call(final Subscriber<? super BaseResponse<Token>> subscriber) {
+            public void call(final Subscriber<? super BaseResponse> subscriber) {
                 try {
                     Response response = userService.register(
                             userProfile.getEmail(), password, userProfile.getLoginType(),
@@ -75,7 +75,7 @@ public class UserApi extends BaseApi<UserService> {
                             userProfile.getRegisterLat(), userProfile.getRegisterLong(),
                             userProfile.getAccessToken()).execute();
                     if (response.isSuccess()) {
-                        subscriber.onNext((BaseResponse<Token>) response.body());
+                        subscriber.onNext((BaseResponse) response.body());
                         subscriber.onCompleted();
                     } else {
                         BaseResponse error = GsonUtils.fromJson(

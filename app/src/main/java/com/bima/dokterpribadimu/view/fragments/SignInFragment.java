@@ -116,8 +116,8 @@ public class SignInFragment extends BaseFragment {
         userApi.login(email, password, Constants.LOGIN_TYPE_EMAIL, accessToken)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .compose(this.<BaseResponse<Token>>bindToLifecycle())
-                .subscribe(new Subscriber<BaseResponse<Token>>() {
+                .compose(this.<BaseResponse>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse>() {
 
                     @Override
                     public void onStart() {
@@ -133,12 +133,8 @@ public class SignInFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onNext(BaseResponse<Token> signInResponse) {
+                    public void onNext(BaseResponse signInResponse) {
                         if (signInResponse.getStatus() == Status.SUCCESS) {
-                            if (signInResponse.getData() != null
-                                    && signInResponse.getData().getToken() != null) {
-                                Token.saveAccessToken(getActivity(), signInResponse.getData().getToken());
-                            }
 
                             UserProfile userProfile = new UserProfile(
                                                                 "",

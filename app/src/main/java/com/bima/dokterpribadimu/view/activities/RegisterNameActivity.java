@@ -1,11 +1,13 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
-import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
@@ -23,11 +25,18 @@ import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 
 import javax.inject.Inject;
 
+import fr.quentinklein.slt.LocationTracker;
+import fr.quentinklein.slt.ProviderError;
+import fr.quentinklein.slt.TrackerSettings;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class RegisterNameActivity extends BaseActivity {
+
+    private static final int RC_LOCATION_PERMISSION = 1;
 
     private static final String TAG = RegisterNameActivity.class.getSimpleName();
     private static final String USER_PROFILE = "user_profile";
@@ -40,6 +49,7 @@ public class RegisterNameActivity extends BaseActivity {
 
     private UserProfile userProfile;
     private String password;
+    private Location location;
 
     public static Intent create(Context context, UserProfile userProfile, String password) {
         Intent intent = new Intent(context, RegisterNameActivity.class);
@@ -62,6 +72,7 @@ public class RegisterNameActivity extends BaseActivity {
         userProfile = GsonUtils.fromJson(getIntent().getStringExtra(USER_PROFILE), UserProfile.class);
         password = getIntent().getStringExtra(PASSWORD);
 
+        initLocation();
         initViews();
     }
 
@@ -78,11 +89,55 @@ public class RegisterNameActivity extends BaseActivity {
                         userProfile.setLastName(names[names.length - 1]);
                     }
                     userProfile.setReferral(binding.registerAgentField.getText().toString());
+                    if (location != null) {
+                        userProfile.setRegisterLat(location.getLatitude());
+                        userProfile.setRegisterLong(location.getLongitude());
+                    }
 
                     register(password);
                 }
             }
         });
+    }
+
+    @AfterPermissionGranted(RC_LOCATION_PERMISSION)
+    public void initLocation() {
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            startLocationTracker();
+        } else {
+            // Ask for one permission
+            EasyPermissions.requestPermissions(this, getString(R.string.rationale_location),
+                    RC_LOCATION_PERMISSION, Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+    }
+
+    private void startLocationTracker() {
+        TrackerSettings settings =
+                new TrackerSettings()
+                        .setUseGPS(true)
+                        .setUseNetwork(true)
+                        .setUsePassive(true);
+
+        try {
+            LocationTracker tracker = new LocationTracker(this, settings) {
+
+                @Override
+                public void onLocationFound(@NonNull Location location) {
+                    RegisterNameActivity.this.location = location;
+                    stopListening();
+                }
+
+                @Override
+                public void onTimeout() {
+                    startLocationTracker();
+                }
+            };
+            tracker.startListening();
+        } catch (SecurityException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -93,8 +148,8 @@ public class RegisterNameActivity extends BaseActivity {
         userApi.register(userProfile, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .compose(this.<BaseResponse<Token>>bindToLifecycle())
-                .subscribe(new Subscriber<BaseResponse<Token>>() {
+                .compose(this.<BaseResponse>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse>() {
 
                     @Override
                     public void onStart() {
@@ -110,7 +165,7 @@ public class RegisterNameActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onNext(BaseResponse<Token> registerResponse) {
+                    public void onNext(BaseResponse registerResponse) {
                         if (registerResponse.getStatus() == Constants.Status.SUCCESS) {
                             StorageUtils.putString(
                                     RegisterNameActivity.this,

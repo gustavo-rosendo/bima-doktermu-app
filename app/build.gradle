@@ -77,6 +77,7 @@ dependencies {
     final PLAY_SERVICE_AUTH_VERSION = '8.3.0'
     final CIRCLE_IMAGE_VIEW_VERSION = '2.0.0'
     final LOCATION_TRACKER_VERSION = '3.2'
+    final EASY_PERMISSION_VERSION = '0.1.5'
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -157,4 +158,9 @@ dependencies {
      * Android helper that tracks user location
      */
     compile "com.github.quentin7b:android-location-tracker:$LOCATION_TRACKER_VERSION"
+
+    /**
+     * Simplify Android M system permissions
+     */
+    compile "pub.devrel:easypermissions:$EASY_PERMISSION_VERSION"
 }

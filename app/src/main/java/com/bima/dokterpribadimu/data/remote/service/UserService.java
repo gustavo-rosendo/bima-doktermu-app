@@ -15,7 +15,7 @@ public interface UserService {
 
     @FormUrlEncoded
     @POST("/developer/v1/user/login")
-    Call<BaseResponse<Token>> login(
+    Call<BaseResponse> login(
             @Field("email") String email,
             @Field("password") String password,
             @Field("login_type") String loginType,
@@ -24,7 +24,7 @@ public interface UserService {
 
     @FormUrlEncoded
     @POST("/developer/v1/user/register")
-    Call<BaseResponse<Token>> register(
+    Call<BaseResponse> register(
             @Field("email") String email,
             @Field("password") String password,
             @Field("login_type") String loginType,
