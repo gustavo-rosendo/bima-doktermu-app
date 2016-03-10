@@ -22,13 +22,14 @@
     <string name="home_lets_get_started">Let\'s get started!</string>
 
     <!-- doctor on call -->
-    <string name="doctor_on_call">Dokter pribadiku</string>
-    <string name="doctor_on_call_info">Dokter pribadi siap melayani anda setiap hari mulai dari jam 6 pagi sampai 10 malam</string>
+    <string name="doctor_on_call">Dokter Pribadimu</string>
+    <string name="doctor_on_call_info">Mulai konsultasi untuk memilih topik konsultasi.
+        Dokter akan menelponmu dalam waktu kurang dari 1 jam setelah membuat janji.</string>
     <string name="doctor_on_call_book_a_call">Mulai konsultasi</string>
 
     <!-- book a call -->
     <string name="book_call_tell_us_more">Topik konsultasi</string>
-    <string name="book_call_info">Pilih topik konsultasi sesuai keinginan anda:\n\n
+    <string name="book_call_info">
         Penyakit: Ketahui penyakit anda, penyebab, tanda-tandanya, dan langkah menghadapinya!\n\n
         Gaya hidup sehat: konsultasikan gaya hidupmu agar menjadi lebih sehat dan bertenaga!\n\n
         Tips: Ketahui tips seputar makanan sehat, jenis obat, dan segala informasi yang mempengaruhi kesehatanmu!</string>
@@ -105,9 +106,8 @@
     <string name="invalid_password_message">Kata sandi minimal %d karakter.</string>
     <string name="dialog_subscription_success_message">Anda berhasil berlangganan dokter pribadimu.
         Mulailah membuat janji dengan dokter anda!</string>
-    <string name="dialog_book_call_done_message">Janji dengan dokter pribadimu berhasil dibuat!
-        Dokter akan menelepon anda dalam waktu kurang dari 1 jam.
-        Pastikan handphone anda dekat nada dering terdengar.</string>
+    <string name="dialog_book_call_done_message">Dalam waktu 1 jam kedepan dokter akan menghubungimu.
+        Mohon tunggu dan pastikan <i>smartphone</i> anda berdering!</string>
     <string name="invalid_name_message">Nama yang anda masukkan kosong atau kurang lengkap</string>
     <string name="invalid_gender_message">Pilih jenis kelamin anda</string>
     <string name="invalid_dob_message">Tanggal lahir anda kosong</string>
