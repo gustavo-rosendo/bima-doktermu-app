@@ -10,6 +10,7 @@ import com.bima.dokterpribadimu.model.FacebookProfile;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.GsonUtils;
+import com.bima.dokterpribadimu.utils.TokenUtils;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -113,7 +114,13 @@ public class FacebookClient implements LoginClient {
                                                             fbProfile.getLastName(),
                                                             email,
                                                             picture,
-                                                            Constants.LOGIN_TYPE_FACEBOOK
+                                                            "",
+                                                            "",
+                                                            Constants.LOGIN_TYPE_FACEBOOK,
+                                                            0.0,
+                                                            0.0,
+                                                            TokenUtils.generateToken(
+                                                                    fbProfile.getEmail() + System.currentTimeMillis())
                                                     );
 
                         loginListener.onSuccess(userProfile);

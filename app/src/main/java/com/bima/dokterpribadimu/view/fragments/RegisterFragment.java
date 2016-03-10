@@ -17,7 +17,9 @@ import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
+import com.bima.dokterpribadimu.utils.TokenUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
+import com.bima.dokterpribadimu.view.activities.RegisterNameActivity;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 
@@ -74,7 +76,21 @@ public class RegisterFragment extends BaseFragment {
                 final String email = binding.registerEmailField.getText().toString();
                 String password = binding.registerPasswordField.getText().toString();
                 if (validateRegistration(email, password)) {
-                    register(email, password);
+                    UserProfile userProfile = new UserProfile(
+                            "",
+                            "",
+                            "",
+                            "",
+                            email,
+                            "",
+                            "",
+                            "",
+                            Constants.LOGIN_TYPE_EMAIL,
+                            0.0,
+                            0.0,
+                            TokenUtils.generateToken(email + System.currentTimeMillis())
+                    );
+                    startActivity(RegisterNameActivity.create(getActivity(), userProfile, password));
                 }
             }
         });
@@ -103,72 +119,6 @@ public class RegisterFragment extends BaseFragment {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Do user register.
-     * @param email user's email
-     * @param password user's password
-     */
-    private void register(final String email, String password) {
-        userApi.register(email, password, Constants.LOGIN_TYPE_EMAIL)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(this.<BaseResponse<Token>>bindToLifecycle())
-                .subscribe(new Subscriber<BaseResponse<Token>>() {
-
-                    @Override
-                    public void onStart() {
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        handleError(TAG, e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(BaseResponse<Token> registerResponse) {
-                        if (registerResponse.getStatus() == Constants.Status.SUCCESS) {
-                            if (registerResponse.getData() != null
-                                    && registerResponse.getData().getToken() != null) {
-                                Token.saveAccessToken(getActivity(), registerResponse.getData().getToken());
-                            }
-
-                            UserProfile userProfile = new UserProfile(
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    email,
-                                    "",
-                                    Constants.LOGIN_TYPE_EMAIL
-                            );
-                            StorageUtils.putString(
-                                    getActivity(),
-                                    Constants.KEY_USER_PROFILE,
-                                    GsonUtils.toJson(userProfile)
-                            );
-
-                            showSuccessDialog(
-                                    R.drawable.ic_smiley,
-                                    getString(R.string.dialog_signed_in),
-                                    getString(R.string.dialog_signed_in_message),
-                                    getString(R.string.dialog_get_started),
-                                    new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
-                                        @Override
-                                        public void onClick(DokterPribadimuDialog dialog) {
-                                            startDoctorCallActivityOnTop();
-                                        }
-                                    });
-                        } else {
-                            handleError(TAG, registerResponse.getMessage());
-                        }
-                    }
-                });
     }
 
 }

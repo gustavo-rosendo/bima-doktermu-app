@@ -4,6 +4,7 @@ import com.bima.dokterpribadimu.data.remote.base.BaseApi;
 import com.bima.dokterpribadimu.data.remote.service.UserService;
 import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.Token;
+import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 
 import java.io.IOException;
@@ -33,12 +34,13 @@ public class UserApi extends BaseApi<UserService> {
      * UserApi implementation to login
      * @return Observable<BaseResponse<Token>>
      */
-    public Observable<BaseResponse<Token>> login(final String email, final String password, final String loginType) {
+    public Observable<BaseResponse<Token>> login(
+            final String email, final String password, final String loginType, final String accessToken) {
         return Observable.create(new Observable.OnSubscribe<BaseResponse<Token>>() {
             @Override
             public void call(final Subscriber<? super BaseResponse<Token>> subscriber) {
                 try {
-                    Response response = userService.login(email, password, loginType).execute();
+                    Response response = userService.login(email, password, loginType, accessToken).execute();
                     if (response.isSuccess()) {
                         subscriber.onNext((BaseResponse<Token>) response.body());
                         subscriber.onCompleted();
@@ -60,12 +62,18 @@ public class UserApi extends BaseApi<UserService> {
      * UserApi implementation to register
      * @return Observable<BaseResponse<Token>>
      */
-    public Observable<BaseResponse<Token>> register(final String email, final String password, final String loginType) {
+    public Observable<BaseResponse<Token>> register(
+            final UserProfile userProfile, final String password) {
         return Observable.create(new Observable.OnSubscribe<BaseResponse<Token>>() {
             @Override
             public void call(final Subscriber<? super BaseResponse<Token>> subscriber) {
                 try {
-                    Response response = userService.register(email, password, loginType).execute();
+                    Response response = userService.register(
+                            userProfile.getEmail(), password, userProfile.getLoginType(),
+                            userProfile.getFirstName(), userProfile.getLastName(), userProfile.getName(),
+                            userProfile.getPicture(), userProfile.getMsisdn(), userProfile.getReferral(),
+                            userProfile.getRegisterLat(), userProfile.getRegisterLong(),
+                            userProfile.getAccessToken()).execute();
                     if (response.isSuccess()) {
                         subscriber.onNext((BaseResponse<Token>) response.body());
                         subscriber.onCompleted();

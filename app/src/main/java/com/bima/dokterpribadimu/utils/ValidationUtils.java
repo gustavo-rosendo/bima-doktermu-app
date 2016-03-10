@@ -50,7 +50,7 @@ public class ValidationUtils {
     /**
      * Validate name
      * @param name user's name
-     * @return true if phoneNumber is not empty & valid, false if otherwise
+     * @return true if name is not empty & valid, false if otherwise
      */
     public static boolean isValidName(CharSequence name) {
         Pattern p = Pattern.compile(getMinimumLengthRegex(MINIMUM_NAME_LENGTH));

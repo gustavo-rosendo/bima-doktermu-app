@@ -16,6 +16,7 @@ import com.bima.dokterpribadimu.data.sns.LoginClient;
 import com.bima.dokterpribadimu.data.sns.LoginListener;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.TokenUtils;
 
 /**
  * Created by apradanas on 2/12/16.
@@ -93,7 +94,12 @@ public class GplusClient implements LoginClient, GoogleApiClient.OnConnectionFai
                     "",
                     signInAccount.getEmail(),
                     signInAccount.getPhotoUrl() != null ? signInAccount.getPhotoUrl().toString() : "",
-                    Constants.LOGIN_TYPE_GOOGLE
+                    "",
+                    "",
+                    Constants.LOGIN_TYPE_GOOGLE,
+                    0.0,
+                    0.0,
+                    TokenUtils.generateToken(signInAccount.getEmail() + System.currentTimeMillis())
             );
             loginListener.onSuccess(userProfile);
         } else {

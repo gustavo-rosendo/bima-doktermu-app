@@ -18,6 +18,7 @@ import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.Constants.Status;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
+import com.bima.dokterpribadimu.utils.TokenUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
@@ -75,7 +76,7 @@ public class SignInFragment extends BaseFragment {
                 final String email = binding.signInEmailField.getText().toString();
                 String password = binding.signInPasswordField.getText().toString();
                 if (validateSignIn(email, password)) {
-                    login(email, password);
+                    login(email, password, TokenUtils.generateToken(email + System.currentTimeMillis()));
                 }
             }
         });
@@ -111,8 +112,8 @@ public class SignInFragment extends BaseFragment {
      * @param email user's email
      * @param password user's password
      */
-    private void login(final String email, String password) {
-        userApi.login(email, password, Constants.LOGIN_TYPE_EMAIL)
+    private void login(final String email, String password, final String accessToken) {
+        userApi.login(email, password, Constants.LOGIN_TYPE_EMAIL, accessToken)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(this.<BaseResponse<Token>>bindToLifecycle())
@@ -146,7 +147,12 @@ public class SignInFragment extends BaseFragment {
                                                                 "",
                                                                 email,
                                                                 "",
-                                                                Constants.LOGIN_TYPE_EMAIL
+                                                                "",
+                                                                "",
+                                                                Constants.LOGIN_TYPE_EMAIL,
+                                                                0.0,
+                                                                0.0,
+                                                                accessToken
                                                             );
                             StorageUtils.putString(
                                     getActivity(),

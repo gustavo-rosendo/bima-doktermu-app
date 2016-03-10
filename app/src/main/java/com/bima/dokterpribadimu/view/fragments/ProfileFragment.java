@@ -70,7 +70,7 @@ public class ProfileFragment extends Fragment {
 
         try {
             Picasso.with(getActivity())
-                    .load(userProfile.getProfilePicture())
+                    .load(userProfile.getPicture())
                     .centerCrop()
                     .fit()
                     .placeholder(R.drawable.ic_profile_picture)

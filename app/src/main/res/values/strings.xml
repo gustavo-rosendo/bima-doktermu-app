@@ -14,6 +14,12 @@
     <string name="email">Email</string>
     <string name="password">Kata sandi</string>
     <string name="whats_my_password">Lupa kata sandi anda?</string>
+    <string name="full_name">Nama lengkap</string>
+    <string name="full_name_hint">Nama lengkap anda</string>
+    <string name="referral_message">Apabila anda tidak mendapat referensi, mohon mengosongkan kolom dibawah.
+        Namun apabila anda direferensikan oleh agen atau mitra kerja BIMA, mohon isi nomor referensi pada kolom yang tertera.</string>
+    <string name="agent_number">Nomor Referensi</string>
+    <string name="validate">Kirim</string>
 
     <!-- home -->
     <string name="home">Home</string>
