@@ -88,9 +88,8 @@ public class BaseFragment extends RxFragment {
                 .showDialog();
     }
 
-    protected void showLateDialog(int imageResource, String buttonText, OnDokterPribadimuDialogClickListener clickListener) {
+    protected void showLateDialog(String buttonText, OnDokterPribadimuDialogClickListener clickListener) {
         dialog.setDialogType(DIALOG_TYPE_LATE)
-                .setDialogImageResource(imageResource)
                 .setDialogCancelable(false)
                 .setDialogTitle(null)
                 .setDialogMessage(null)

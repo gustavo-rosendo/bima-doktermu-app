@@ -99,6 +99,7 @@ public class DokterPribadimuDialog extends Dialog {
                 resId = R.drawable.ic_bug;
                 break;
             case DIALOG_TYPE_LATE:
+                resId = R.drawable.ic_night;
                 break;
             case DIALOG_TYPE_SUCCESS:
                 resId = R.drawable.ic_dialog_success;

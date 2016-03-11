@@ -7,13 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
+import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
 import com.bima.dokterpribadimu.data.inappbilling.BillingInitializationListener;
 import com.bima.dokterpribadimu.data.inappbilling.QueryInventoryListener;
 import com.bima.dokterpribadimu.databinding.FragmentDoctorCallBinding;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.StorageUtils;
+import com.bima.dokterpribadimu.utils.TimeUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
+
+import java.util.Calendar;
 
 import javax.inject.Inject;
 
@@ -21,6 +25,9 @@ import javax.inject.Inject;
  * A simple {@link BaseFragment} subclass.
  */
 public class DoctorCallFragment extends BaseFragment {
+
+    private static final int NIGHT_HOUR_LIMIT = 10;
+    private static final int MORNING_HOUR_LIMIT = 6;
 
     @Inject
     BillingClient billingClient;
@@ -99,10 +106,17 @@ public class DoctorCallFragment extends BaseFragment {
         binding.bookCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (billingClient.isSubscribedToDokterPribadiKu()) {
-                    startBookCallActivity();
+                int hour = TimeUtils.getCurrentTimeHour();
+                int ampm = TimeUtils.getCurrentTimeAmPm();
+                if ((ampm == Calendar.PM && hour >= NIGHT_HOUR_LIMIT) ||
+                        (ampm == Calendar.AM && hour < MORNING_HOUR_LIMIT)) {
+                    showLateDialog(getString(R.string.dialog_take_me_home), null);
                 } else {
-                    startSubscriptionActivity();
+                    if (billingClient.isSubscribedToDokterPribadiKu()) {
+                        startBookCallActivity();
+                    } else {
+                        startSubscriptionActivity();
+                    }
                 }
             }
         });
