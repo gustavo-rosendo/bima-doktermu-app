@@ -2,6 +2,8 @@ package com.bima.dokterpribadimu.injection;
 
 import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
 import com.bima.dokterpribadimu.data.remote.api.BookingApi;
+import com.bima.dokterpribadimu.data.remote.api.CustomerApi;
+import com.bima.dokterpribadimu.data.remote.api.SubscriptionApi;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
 
 import javax.inject.Singleton;
@@ -25,6 +27,18 @@ public final class DataModule {
     @Singleton
     BookingApi provideBookingService() {
         return new BookingApi();
+    }
+
+    @Provides
+    @Singleton
+    CustomerApi provideCustomerService() {
+        return new CustomerApi();
+    }
+
+    @Provides
+    @Singleton
+    SubscriptionApi provideSubscriptionService() {
+        return new SubscriptionApi();
     }
 
     @Provides

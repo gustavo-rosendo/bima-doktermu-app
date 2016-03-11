@@ -14,6 +14,7 @@ public class Constants {
     public static final String BIMA_FACEBOOK_PAGE = "https://www.facebook.com/Bima-Indonesia-539726116184831/";
     public static final String BIMA_TWITTER = "https://twitter.com/bima_ind";
     public static final String BIMA_EMAIL = "cs@bimaindonesia.co.id";
+    public static final String GOOGLE_PLAY_MANAGE_SUBSCRIPTION = "https://play.google.com/store/account";
 
     public static final String FACEBOOK_APP_ID = "com.facebook.katana";
     public static final String TWITTER_APP_ID = "com.twitter.android";
