@@ -10,11 +10,36 @@ import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.data.remote.api.BookingApi;
 import com.bima.dokterpribadimu.databinding.ActivityBookCallBinding;
+import com.bima.dokterpribadimu.model.BaseResponse;
+import com.bima.dokterpribadimu.model.UserProfile;
+import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.GsonUtils;
+import com.bima.dokterpribadimu.utils.StorageUtils;
+import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 
+import javax.inject.Inject;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
 public class BookCallActivity extends BaseActivity {
+
+    private static final String SICKNESS_STRING = "Penyakit";
+    private static final String HEALTHY_LIFE_STRING = "Gaya hidup sehat";
+    private static final String TIPS_STRING = "Tips";
+    private static final String SICKNESS = "sickness";
+    private static final String HEALTHY_LIFE = "healthy_life";
+    private static final String TIPS = "tips";
+
+    private static final String TAG = BookCallActivity.class.getSimpleName();
+
+    @Inject
+    BookingApi bookingApi;
 
     private ActivityBookCallBinding binding;
 
@@ -40,18 +65,16 @@ public class BookCallActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (validateTopic()) {
-                    showSuccessDialog(
-                            R.drawable.ic_thumb_up,
-                            getString(R.string.dialog_success),
-                            getString(R.string.dialog_book_call_done_message),
-                            getString(R.string.dialog_waiting),
-                            new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
-                                @Override
-                                public void onClick(DokterPribadimuDialog dialog) {
-                                    startDoctorCallActivityOnTop();
-                                }
-                            }
-                    );
+                    final String topicString = binding.subscriptionTopicSpinner.getSelectedItem().toString();
+                    String topic;
+                    if (topicString.equalsIgnoreCase(SICKNESS_STRING)) {
+                        topic = SICKNESS;
+                    } else if (topicString.equalsIgnoreCase(HEALTHY_LIFE_STRING)) {
+                        topic = HEALTHY_LIFE;
+                    } else {
+                        topic = TIPS;
+                    }
+                    bookCall(topic, UserProfileUtils.getUserProfile(BookCallActivity.this).getAccessToken());
                 }
             }
         });
@@ -98,5 +121,52 @@ public class BookCallActivity extends BaseActivity {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Do book a call.
+     * @param callTopic user's email
+     * @param accessToken user's access token
+     */
+    private void bookCall(final String callTopic, final String accessToken) {
+        bookingApi.bookCall(callTopic, accessToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse>() {
+
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse response) {
+                        if (response.getStatus() == Constants.Status.SUCCESS) {
+                            showSuccessDialog(
+                                    R.drawable.ic_thumb_up,
+                                    getString(R.string.dialog_success),
+                                    getString(R.string.dialog_book_call_done_message),
+                                    getString(R.string.dialog_waiting),
+                                    new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
+                                        @Override
+                                        public void onClick(DokterPribadimuDialog dialog) {
+                                            startDoctorCallActivityOnTop();
+                                        }
+                                    }
+                            );
+                        } else {
+                            handleError(TAG, response.getMessage());
+                        }
+                    }
+                });
     }
 }
