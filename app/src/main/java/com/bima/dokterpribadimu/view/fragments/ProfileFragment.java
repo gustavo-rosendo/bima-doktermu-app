@@ -11,21 +11,40 @@ import android.view.ViewGroup;
 import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.data.remote.api.UserApi;
 import com.bima.dokterpribadimu.databinding.FragmentProfileBinding;
+import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
+import com.bima.dokterpribadimu.view.base.BaseFragment;
+import com.bima.dokterpribadimu.view.components.ChangePasswordDialog;
+import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.squareup.picasso.Picasso;
+
+import javax.inject.Inject;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends BaseFragment {
+
+    private static final String TAG = ProfileFragment.class.getSimpleName();
 
     private static final String EMAIL_FILTER_REGEX = "(?<=.{2}).(?=[^@]*?.@)";
 
+    @Inject
+    UserApi userApi;
+
     private FragmentProfileBinding binding;
+
+    private ChangePasswordDialog dialog;
 
     public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();
@@ -46,6 +65,8 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
 
         initViews();
+
+        dialog = new ChangePasswordDialog(getActivity());
 
         return binding.getRoot();
     }
@@ -88,9 +109,61 @@ public class ProfileFragment extends Fragment {
         if (userProfile.getLoginType().equals(Constants.LOGIN_TYPE_EMAIL)) {
             binding.profileEmailAddressText.setText(
                     userProfile.getEmail().replaceAll(EMAIL_FILTER_REGEX, "*"));
+
+            binding.profileEditPasswordButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.setListener(new ChangePasswordDialog.OnChangePasswordDialogClickListener() {
+                        @Override
+                        public void onClick(ChangePasswordDialog dialog, String oldPassword, String newPassword) {
+                            changePassword(
+                                    oldPassword,
+                                    newPassword,
+                                    UserProfileUtils.getUserProfile(getActivity()).getAccessToken());
+                        }
+                    }).showDialog();
+                }
+            });
         } else {
             binding.profilePersonalInfoLayout.setVisibility(View.GONE);
         }
+    }
+
+    /**
+     * Do change password.
+     * @param oldPassword user's email
+     * @param newPassword user's password
+     * @param accessToken user's access token
+     */
+    private void changePassword(final String oldPassword, String newPassword, final String accessToken) {
+        userApi.changePassword(oldPassword, newPassword, accessToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse>() {
+
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse response) {
+                        if (response.getStatus() == Constants.Status.SUCCESS) {
+                            dialog.dismiss();
+                        } else {
+                            handleError(TAG, response.getMessage());
+                        }
+                    }
+                });
     }
 
 }

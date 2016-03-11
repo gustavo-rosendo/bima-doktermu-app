@@ -120,6 +120,10 @@
     <string name="invalid_phone_number_message">Nomor telepon anda kosong atau tidak valid.
         Silakan cek atau masukkan ulang nomor telepon anda.</string>
     <string name="invalid_call_topic_message">Pilih topik konsultasi anda</string>
+    <string name="dialog_change_password">Ubah kata sandi</string>
+    <string name="dialog_old_password">Kata sandi lama</string>
+    <string name="dialog_new_password">Kata sandi baru</string>
+    <string name="dialog_validate">Validasi</string>
 
     <!-- permission -->
     <string name="rationale_location">Dokter Pribadimu perlu mengakses GPS anda untuk mengaktifkan semua fitur aplikasi.</string>
