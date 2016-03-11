@@ -14,7 +14,6 @@ import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
 import com.bima.dokterpribadimu.databinding.ActivityRegisterNameBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
-import com.bima.dokterpribadimu.model.Token;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.GsonUtils;
@@ -26,7 +25,6 @@ import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import javax.inject.Inject;
 
 import fr.quentinklein.slt.LocationTracker;
-import fr.quentinklein.slt.ProviderError;
 import fr.quentinklein.slt.TrackerSettings;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -77,6 +75,8 @@ public class RegisterNameActivity extends BaseActivity {
     }
 
     private void initViews() {
+        binding.registerNameField.setText(userProfile.getName());
+
         binding.registerValidateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

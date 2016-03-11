@@ -126,7 +126,7 @@ public class LandingActivity extends BaseActivity {
     private LoginListener loginListener = new LoginListener() {
         @Override
         public void onSuccess(UserProfile userProfile) {
-            login(userProfile);
+            login(userProfile, TokenUtils.generateToken(userProfile.getId() + userProfile.getLoginType()));
         }
 
         @Override
@@ -158,10 +158,10 @@ public class LandingActivity extends BaseActivity {
      * Do user login.
      * @param userProfile UserProfile object from SNS login
      */
-    private void login(final UserProfile userProfile) {
+    private void login(final UserProfile userProfile, final String password) {
         userApi.login(
                     userProfile.getEmail(),
-                    TokenUtils.generateToken(userProfile.getId() + userProfile.getLoginType()),
+                    password,
                     userProfile.getLoginType(),
                     userProfile.getAccessToken())
                 .subscribeOn(Schedulers.io())
@@ -203,8 +203,11 @@ public class LandingActivity extends BaseActivity {
                                         }
                                     });
                         } else {
-                            // TODO: go to RegisterNameActivity if email is not registered
-                            handleError(TAG, signInResponse.getMessage());
+                            if (signInResponse.getMessage().contains(Constants.EMAIL_IS_NOT_REGISTERED)) {
+                                startActivity(RegisterNameActivity.create(LandingActivity.this, userProfile, password));
+                            } else {
+                                handleError(TAG, signInResponse.getMessage());
+                            }
                         }
                     }
                 });
