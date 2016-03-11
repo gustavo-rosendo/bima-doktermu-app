@@ -127,6 +127,13 @@ public class ProfileFragment extends BaseFragment {
         } else {
             binding.profilePersonalInfoLayout.setVisibility(View.GONE);
         }
+
+        binding.profileManageSubscriptionText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startViewIntent(Constants.GOOGLE_PLAY_MANAGE_SUBSCRIPTION);
+            }
+        });
     }
 
     /**
