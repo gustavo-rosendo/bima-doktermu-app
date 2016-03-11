@@ -189,6 +189,7 @@
                         </LinearLayout>
 
                         <ImageView
+                            android:id="@+id/profile_edit_password_button"
                             android:layout_width="@dimen/generic_small_button_height"
                             android:layout_height="@dimen/generic_small_button_height"
                             android:src="@drawable/ic_edit"

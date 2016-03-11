@@ -38,4 +38,12 @@ public interface UserService {
             @Field("registration_long") Double registrationLong,
             @Field("access_token") String accessToken
     );
+
+    @FormUrlEncoded
+    @POST("/developer/v1/user/password")
+    Call<BaseResponse> changePassword(
+            @Field("old_password") String oldPassword,
+            @Field("new_password") String newPassword,
+            @Field("access_token") String accessToken
+    );
 }

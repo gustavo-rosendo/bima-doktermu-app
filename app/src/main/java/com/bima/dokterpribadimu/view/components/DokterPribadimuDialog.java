@@ -82,7 +82,7 @@ public class DokterPribadimuDialog extends Dialog {
      */
     private void initDialogViews() {
         binding.dialogButton.setOnClickListener(clickListener);
-        binding.dialogImage.setImageResource(dialogImageResource != 0 ? dialogImageResource :getDefaultDialogImageResource());
+        binding.dialogImage.setImageResource(dialogImageResource != 0 ? dialogImageResource : getDefaultDialogImageResource());
         binding.dialogTitle.setText(dialogTitle != null ? dialogTitle : getDefaultDialogTitle());
         binding.dialogMessage.setText(dialogMessage != null ? dialogMessage : getDefaultDialogMessage());
         binding.dialogButton.setText(dialogButtonText != null ? dialogButtonText : context.getString(R.string.ok));
