@@ -201,7 +201,8 @@ public class LandingActivity extends BaseActivity {
                                         }
                                     });
                         } else {
-                            if (signInResponse.getMessage().contains(Constants.EMAIL_IS_NOT_REGISTERED)) {
+                            if (signInResponse.getMessage().contains(Constants.EMAIL_IS_NOT_REGISTERED) ||
+                                    signInResponse.getMessage().equalsIgnoreCase(Constants.EMAIL_IS_NOT_REGISTERED)) {
                                 startActivity(RegisterNameActivity.create(LandingActivity.this, userProfile, password));
                             } else {
                                 handleError(TAG, signInResponse.getMessage());

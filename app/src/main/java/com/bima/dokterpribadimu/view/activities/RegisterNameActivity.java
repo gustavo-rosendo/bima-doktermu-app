@@ -8,6 +8,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
@@ -95,6 +96,12 @@ public class RegisterNameActivity extends BaseActivity {
                     }
 
                     register(password);
+                } else {
+                    Toast.makeText(
+                            RegisterNameActivity.this,
+                            getString(R.string.invalid_name_message),
+                            Toast.LENGTH_SHORT
+                    ).show();
                 }
             }
         });
