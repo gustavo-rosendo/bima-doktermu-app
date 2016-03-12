@@ -3,7 +3,6 @@ package com.bima.dokterpribadimu.data.remote.api;
 import com.bima.dokterpribadimu.data.remote.base.BaseApi;
 import com.bima.dokterpribadimu.data.remote.service.UserService;
 import com.bima.dokterpribadimu.model.BaseResponse;
-import com.bima.dokterpribadimu.model.Token;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 
@@ -42,14 +41,18 @@ public class UserApi extends BaseApi<UserService> {
                 try {
                     Response response;
                     if(userProfile != null) {
-                        response = userService.login(email, password, loginType, accessToken,
+                        response = userService.login(email, password, loginType,
                                 userProfile.getFirstName(), userProfile.getLastName(), userProfile.getName(),
                                 userProfile.getPicture(), userProfile.getMsisdn(), userProfile.getReferral(),
-                                userProfile.getRegisterLat(), userProfile.getRegisterLong()).execute();
+                                userProfile.getRegisterLat(), userProfile.getRegisterLong(),
+                                userProfile.getDeviceType(), userProfile.getDeviceImei(),
+                                userProfile.getDeviceSoftware(), userProfile.getDeviceOperator(),
+                                accessToken).execute();
                     }
                     else {
-                        response = userService.login(email, password, loginType, accessToken,
-                                null, null, null, null, null, null, null, null).execute();
+                        response = userService.login(email, password, loginType,
+                                null, null, null, null, null, null, null, null,
+                                null, null, null, null, accessToken).execute();
                     }
                     if (response.isSuccess()) {
                         subscriber.onNext((BaseResponse) response.body());
@@ -83,6 +86,8 @@ public class UserApi extends BaseApi<UserService> {
                             userProfile.getFirstName(), userProfile.getLastName(), userProfile.getName(),
                             userProfile.getPicture(), userProfile.getMsisdn(), userProfile.getReferral(),
                             userProfile.getRegisterLat(), userProfile.getRegisterLong(),
+                            userProfile.getDeviceType(), userProfile.getDeviceImei(),
+                            userProfile.getDeviceSoftware(), userProfile.getDeviceOperator(),
                             userProfile.getAccessToken()).execute();
                     if (response.isSuccess()) {
                         subscriber.onNext((BaseResponse) response.body());

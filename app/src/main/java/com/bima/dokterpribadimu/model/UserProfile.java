@@ -16,6 +16,10 @@ public class UserProfile {
     private String loginType;
     private Double registerLat;
     private Double registerLong;
+    private String deviceType;
+    private String deviceImei;
+    private String deviceSoftware;
+    private String deviceOperator;
     private String accessToken;
 
     public UserProfile(
@@ -33,6 +37,30 @@ public class UserProfile {
         this.loginType = loginType;
         this.registerLat = registerLat;
         this.registerLong = registerLong;
+        this.accessToken = accessToken;
+    }
+
+    // constructor with device info
+    public UserProfile(
+            String id, String name, String firstName, String lastName, String email,
+            String picture, String msisdn, String referral, String loginType,
+            Double registerLat, Double registerLong, String deviceType, String deviceImei,
+            String deviceSoftware, String deviceOperator, String accessToken) {
+        this.id = id;
+        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.picture = picture;
+        this.msisdn = msisdn;
+        this.referral = referral;
+        this.loginType = loginType;
+        this.registerLat = registerLat;
+        this.registerLong = registerLong;
+        this.deviceType = deviceType;
+        this.deviceImei = deviceImei;
+        this.deviceSoftware = deviceSoftware;
+        this.deviceOperator = deviceOperator;
         this.accessToken = accessToken;
     }
 
@@ -122,6 +150,38 @@ public class UserProfile {
 
     public void setRegisterLong(Double registerLong) {
         this.registerLong = registerLong;
+    }
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
+    public String getDeviceImei() {
+        return deviceImei;
+    }
+
+    public void setDeviceImei(String deviceImei) {
+        this.deviceImei = deviceImei;
+    }
+
+    public String getDeviceSoftware() {
+        return deviceSoftware;
+    }
+
+    public void setDeviceSoftware(String deviceSoftware) {
+        this.deviceSoftware = deviceSoftware;
+    }
+
+    public String getDeviceOperator() {
+        return deviceOperator;
+    }
+
+    public void setDeviceOperator(String deviceOperator) {
+        this.deviceOperator = deviceOperator;
     }
 
     public String getAccessToken() {
