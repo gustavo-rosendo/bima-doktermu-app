@@ -124,7 +124,7 @@ public class LandingActivity extends BaseActivity {
     private LoginListener loginListener = new LoginListener() {
         @Override
         public void onSuccess(UserProfile userProfile) {
-            login(userProfile, TokenUtils.generateToken(userProfile.getId() + userProfile.getLoginType()));
+            login(userProfile, "");
         }
 
         @Override

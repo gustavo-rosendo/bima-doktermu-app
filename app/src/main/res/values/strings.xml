@@ -13,6 +13,7 @@
     <string name="register">Daftar</string>
     <string name="email">Email</string>
     <string name="password">Kata sandi</string>
+    <string name="password_bima_hint">Kata sandi Dokter Pribadimu</string>
     <string name="whats_my_password">Lupa kata sandi anda?</string>
     <string name="full_name">Nama lengkap</string>
     <string name="full_name_hint">Nama lengkap anda</string>
