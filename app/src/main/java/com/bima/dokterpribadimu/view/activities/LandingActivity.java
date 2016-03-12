@@ -161,7 +161,8 @@ public class LandingActivity extends BaseActivity {
                     userProfile.getEmail(),
                     password,
                     userProfile.getLoginType(),
-                    userProfile.getAccessToken())
+                    userProfile.getAccessToken(),
+                    userProfile)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(this.<BaseResponse>bindToLifecycle())

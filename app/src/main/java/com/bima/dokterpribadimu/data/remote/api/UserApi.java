@@ -35,12 +35,22 @@ public class UserApi extends BaseApi<UserService> {
      * @return Observable<BaseResponse>
      */
     public Observable<BaseResponse> login(
-            final String email, final String password, final String loginType, final String accessToken) {
+            final String email, final String password, final String loginType, final String accessToken, final UserProfile userProfile) {
         return Observable.create(new Observable.OnSubscribe<BaseResponse>() {
             @Override
             public void call(final Subscriber<? super BaseResponse> subscriber) {
                 try {
-                    Response response = userService.login(email, password, loginType, accessToken).execute();
+                    Response response;
+                    if(userProfile != null) {
+                        response = userService.login(email, password, loginType, accessToken,
+                                userProfile.getFirstName(), userProfile.getLastName(), userProfile.getName(),
+                                userProfile.getPicture(), userProfile.getMsisdn(), userProfile.getReferral(),
+                                userProfile.getRegisterLat(), userProfile.getRegisterLong()).execute();
+                    }
+                    else {
+                        response = userService.login(email, password, loginType, accessToken,
+                                null, null, null, null, null, null, null, null).execute();
+                    }
                     if (response.isSuccess()) {
                         subscriber.onNext((BaseResponse) response.body());
                         subscriber.onCompleted();

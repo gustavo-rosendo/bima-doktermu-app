@@ -113,7 +113,7 @@ public class SignInFragment extends BaseFragment {
      * @param password user's password
      */
     private void login(final String email, String password, final String accessToken) {
-        userApi.login(email, password, Constants.LOGIN_TYPE_EMAIL, accessToken)
+        userApi.login(email, password, Constants.LOGIN_TYPE_EMAIL, accessToken, null)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(this.<BaseResponse>bindToLifecycle())

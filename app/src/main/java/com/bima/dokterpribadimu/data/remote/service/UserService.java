@@ -19,7 +19,15 @@ public interface UserService {
             @Field("email") String email,
             @Field("password") String password,
             @Field("login_type") String loginType,
-            @Field("access_token") String accessToken
+            @Field("access_token") String accessToken,
+            @Field("first_name") String firstName,
+            @Field("last_name") String lastName,
+            @Field("name") String name,
+            @Field("picture") String picture,
+            @Field("msisdn") String msisdn,
+            @Field("referral") String referral,
+            @Field("registration_lat") Double registrationLat,
+            @Field("registration_long") Double registrationLong
     );
 
     @FormUrlEncoded

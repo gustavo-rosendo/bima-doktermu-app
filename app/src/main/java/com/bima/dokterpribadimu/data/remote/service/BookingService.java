@@ -17,5 +17,7 @@ public interface BookingService {
     Call<BaseResponse> bookCall(
             @Field("call_topic") String callTopic,
             @Field("access_token") String accessToken
+//            @Field("request_lat") Double requestLat,
+//            @Field("request_long") Double requestLong
     );
 }
