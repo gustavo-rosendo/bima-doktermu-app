@@ -1,7 +1,6 @@
 package com.bima.dokterpribadimu.data.remote.service;
 
 import com.bima.dokterpribadimu.model.BaseResponse;
-import com.bima.dokterpribadimu.model.Token;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -19,7 +18,6 @@ public interface UserService {
             @Field("email") String email,
             @Field("password") String password,
             @Field("login_type") String loginType,
-            @Field("access_token") String accessToken,
             @Field("first_name") String firstName,
             @Field("last_name") String lastName,
             @Field("name") String name,
@@ -27,7 +25,12 @@ public interface UserService {
             @Field("msisdn") String msisdn,
             @Field("referral") String referral,
             @Field("registration_lat") Double registrationLat,
-            @Field("registration_long") Double registrationLong
+            @Field("registration_long") Double registrationLong,
+            @Field("device_type") String deviceType,
+            @Field("device_imei") String deviceImei,
+            @Field("device_software") String deviceSoftware,
+            @Field("device_operator") String deviceOperator,
+            @Field("access_token") String accessToken
     );
 
     @FormUrlEncoded
@@ -44,6 +47,10 @@ public interface UserService {
             @Field("referral") String referral,
             @Field("registration_lat") Double registrationLat,
             @Field("registration_long") Double registrationLong,
+            @Field("device_type") String deviceType,
+            @Field("device_imei") String deviceImei,
+            @Field("device_software") String deviceSoftware,
+            @Field("device_operator") String deviceOperator,
             @Field("access_token") String accessToken
     );
 

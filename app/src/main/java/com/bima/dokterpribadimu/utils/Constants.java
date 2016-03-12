@@ -36,4 +36,7 @@ public class Constants {
     public static final String KEY_USER_PROFILE = "user_profile";
     public static final String KEY_USER_SUBSCIPTION = "user_subscription";
     public static final String KEY_BOOK_CALL_TIME_MILLIS = "book_call_time_millis";
+
+    public static final String DEVICE_TYPE_FORMAT = "%s %s";
+    public static final String DEVICE_SOFTWARE_FORMAT = "Android %s";
 }

@@ -1,6 +1,7 @@
 package com.bima.dokterpribadimu.view.fragments;
 
 
+import android.Manifest;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,28 +12,28 @@ import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
 import com.bima.dokterpribadimu.databinding.FragmentRegisterBinding;
-import com.bima.dokterpribadimu.model.BaseResponse;
-import com.bima.dokterpribadimu.model.Token;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
-import com.bima.dokterpribadimu.utils.GsonUtils;
-import com.bima.dokterpribadimu.utils.StorageUtils;
+import com.bima.dokterpribadimu.utils.DeviceInfoUtils;
 import com.bima.dokterpribadimu.utils.TokenUtils;
+import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 import com.bima.dokterpribadimu.view.activities.RegisterNameActivity;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
-import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * A simple {@link BaseFragment} subclass.
  */
-public class RegisterFragment extends BaseFragment {
+public class RegisterFragment extends BaseFragment implements EasyPermissions.PermissionCallbacks {
+
+    private static final int RC_PHONE_STATE_PERMISSION = 0;
 
     private static final String TAG = RegisterFragment.class.getSimpleName();
 
@@ -40,6 +41,8 @@ public class RegisterFragment extends BaseFragment {
     UserApi userApi;
 
     private FragmentRegisterBinding binding;
+
+    private DeviceInfoUtils deviceInfoUtils;
 
     public static RegisterFragment newInstance() {
         RegisterFragment fragment = new RegisterFragment();
@@ -59,9 +62,21 @@ public class RegisterFragment extends BaseFragment {
         // Inflate the layout for this fragment
         binding = FragmentRegisterBinding.inflate(inflater, container, false);
 
+        initDeviceInfo();
         initViews();
 
         return binding.getRoot();
+    }
+
+    @AfterPermissionGranted(RC_PHONE_STATE_PERMISSION)
+    public void initDeviceInfo() {
+        if (EasyPermissions.hasPermissions(getActivity(), Manifest.permission.READ_PHONE_STATE)) {
+            deviceInfoUtils = DeviceInfoUtils.getInstance(getActivity());
+        } else {
+            // Ask for one permission
+            EasyPermissions.requestPermissions(this, getString(R.string.rationale_location),
+                    RC_PHONE_STATE_PERMISSION, Manifest.permission.READ_PHONE_STATE);
+        }
     }
 
     private void initViews() {
@@ -90,6 +105,18 @@ public class RegisterFragment extends BaseFragment {
                             0.0,
                             TokenUtils.generateToken(email + System.currentTimeMillis())
                     );
+
+                    if (deviceInfoUtils != null) {
+                        userProfile.setDeviceType(
+                                String.format(
+                                        Constants.DEVICE_TYPE_FORMAT,
+                                        deviceInfoUtils.getBrand(),
+                                        deviceInfoUtils.getProduct()));
+                        userProfile.setDeviceImei(deviceInfoUtils.getDeviceId());
+                        userProfile.setDeviceOperator(deviceInfoUtils.getSimOperatorName());
+                        userProfile.setDeviceSoftware(String.format(Constants.DEVICE_SOFTWARE_FORMAT, deviceInfoUtils.getRelease()));
+                    }
+
                     startActivity(RegisterNameActivity.create(getActivity(), userProfile, password));
                 }
             }
@@ -121,4 +148,21 @@ public class RegisterFragment extends BaseFragment {
         return false;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+
+    }
 }

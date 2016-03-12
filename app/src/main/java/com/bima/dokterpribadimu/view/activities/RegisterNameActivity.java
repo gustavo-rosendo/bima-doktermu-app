@@ -23,6 +23,8 @@ import com.bima.dokterpribadimu.utils.ValidationUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import fr.quentinklein.slt.LocationTracker;
@@ -33,7 +35,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class RegisterNameActivity extends BaseActivity {
+public class RegisterNameActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
 
     private static final int RC_LOCATION_PERMISSION = 1;
 
@@ -238,5 +240,23 @@ public class RegisterNameActivity extends BaseActivity {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+
     }
 }
