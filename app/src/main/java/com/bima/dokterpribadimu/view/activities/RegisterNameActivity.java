@@ -76,14 +76,27 @@ public class RegisterNameActivity extends BaseActivity {
     }
 
     private void initViews() {
+        if (!userProfile.getLoginType().equalsIgnoreCase(Constants.LOGIN_TYPE_EMAIL)) {
+            binding.registerPasswordLayout.setVisibility(View.VISIBLE);
+
+            binding.registerPasswordHint.setText(
+                    String.format(
+                            getString(R.string.invalid_password_message),
+                            ValidationUtils.MINIMUM_PASSWORD_LENGTH));
+        }
+
         binding.registerNameField.setText(userProfile.getName());
 
         binding.registerValidateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!userProfile.getLoginType().equalsIgnoreCase(Constants.LOGIN_TYPE_EMAIL)) {
+                    password = binding.registerPasswordField.getText().toString();
+                }
+
                 String name = binding.registerNameField.getText().toString();
                 String[] names = name.split(" ");
-                if (ValidationUtils.isValidName(binding.registerNameField.getText().toString())) {
+                if (validateRegistration(name, password)) {
                     userProfile.setName(name);
                     if (names.length > 0) {
                         userProfile.setFirstName(names[0]);
@@ -96,12 +109,6 @@ public class RegisterNameActivity extends BaseActivity {
                     }
 
                     register(password);
-                } else {
-                    Toast.makeText(
-                            RegisterNameActivity.this,
-                            getString(R.string.invalid_name_message),
-                            Toast.LENGTH_SHORT
-                    ).show();
                 }
             }
         });
@@ -196,5 +203,30 @@ public class RegisterNameActivity extends BaseActivity {
                         }
                     }
                 });
+    }
+
+    /**
+     * Validate registration name and password.
+     * @param name user's name
+     * @param password user's password
+     * @return boolean true if name and password are valid, boolean false if otherwise
+     */
+    private boolean validateRegistration(String name, String password) {
+        if (!ValidationUtils.isValidName(name)) {
+            Toast.makeText(
+                    this,
+                    getString(R.string.invalid_name_message),
+                    Toast.LENGTH_SHORT
+            ).show();
+        } else if (!ValidationUtils.isValidPassword(password)) {
+            Toast.makeText(
+                    this,
+                    String.format(getString(R.string.invalid_password_message), ValidationUtils.MINIMUM_PASSWORD_LENGTH),
+                    Toast.LENGTH_SHORT
+            ).show();
+        } else {
+            return true;
+        }
+        return false;
     }
 }

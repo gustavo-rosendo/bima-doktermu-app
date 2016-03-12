@@ -80,6 +80,45 @@
                     android:hint="@string/full_name_hint"
                     android:inputType="textPersonName"/>
 
+                <LinearLayout
+                    android:id="@+id/register_password_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_large_margin"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/password"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/generic_separator_height"
+                        android:layout_marginTop="@dimen/generic_normal_margin"
+                        android:background="@android:color/darker_gray"/>
+
+                    <EditText
+                        android:id="@+id/register_password_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_normal_margin"
+                        android:hint="@string/password_bima_hint"
+                        android:inputType="textPassword"/>
+
+                    <TextView
+                        android:id="@+id/register_password_hint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-4dp"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -116,6 +155,7 @@
                     android:layout_height="@dimen/generic_button_height"
                     android:minWidth="150dp"
                     android:layout_marginTop="@dimen/generic_xlarge_margin"
+                    android:layout_marginBottom="@dimen/generic_xlarge_margin"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/validate"
                     android:textAllCaps="false"
