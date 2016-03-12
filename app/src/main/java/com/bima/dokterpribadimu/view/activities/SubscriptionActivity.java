@@ -1,9 +1,12 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,10 +21,15 @@ import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
 import com.bima.dokterpribadimu.data.inappbilling.BillingInitializationListener;
 import com.bima.dokterpribadimu.data.inappbilling.QueryInventoryListener;
+import com.bima.dokterpribadimu.data.remote.api.SubscriptionApi;
 import com.bima.dokterpribadimu.databinding.ActivitySubscriptionBinding;
+import com.bima.dokterpribadimu.model.BaseResponse;
+import com.bima.dokterpribadimu.model.Subscription;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
+import com.bima.dokterpribadimu.utils.TimeUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 import com.bima.dokterpribadimu.utils.iabutil.IabHelper;
@@ -31,11 +39,23 @@ import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.inject.Inject;
 
-public class SubscriptionActivity extends BaseActivity {
+import fr.quentinklein.slt.LocationTracker;
+import fr.quentinklein.slt.TrackerSettings;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
+public class SubscriptionActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
+
+    private static final String TAG = SubscriptionActivity.class.getSimpleName();
+
+    private static final int RC_LOCATION_PERMISSION = 1;
     private static final String DOB_FORMAT = "%d %s %d";
 
     private static final int MONTH_INT_JAN = 0;
@@ -66,7 +86,13 @@ public class SubscriptionActivity extends BaseActivity {
     @Inject
     BillingClient billingClient;
 
+    @Inject
+    SubscriptionApi subscriptionApi;
+
     private ActivitySubscriptionBinding binding;
+
+    private Location location;
+    private LocationTracker locationTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +105,7 @@ public class SubscriptionActivity extends BaseActivity {
     }
 
     private void init() {
+        initLocation();
         initViews();
     }
 
@@ -130,19 +157,27 @@ public class SubscriptionActivity extends BaseActivity {
                             @Override
                             public void onIabPurchaseFinished(IabResult result, Purchase info) {
                                 if (result.isSuccess()) {
-                                    showSuccessDialog(
-                                            R.drawable.ic_dialog_success,
-                                            getString(R.string.dialog_success),
-                                            getString(R.string.dialog_subscription_success_message),
-                                            getString(R.string.dialog_book_first_call),
-                                            new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
-                                                @Override
-                                                public void onClick(DokterPribadimuDialog dialog) {
-                                                    startBookCallActivity();
-                                                    finish();
-                                                }
-                                            }
-                                    );
+                                    Subscription subscription = new Subscription();
+                                    subscription.setAccessToken(
+                                            UserProfileUtils.getUserProfile(SubscriptionActivity.this).getAccessToken());
+                                    subscription.setSubscriptionType(Constants.SUBSCRIPTION_TYPE_NEW);
+                                    subscription.setSubscriptionToken(info.getToken());
+                                    subscription.setName(binding.subscriptionNameField.getText().toString());
+                                    subscription.setOrderDate(TimeUtils.getSubscriptionOrderDate());
+                                    subscription.setOrderId(info.getOrderId());
+                                    subscription.setPhoneNumber(binding.subscriptionPhoneField.getText().toString());
+                                    subscription.setProductName(billingClient.getProductName(info.getSku()));
+                                    subscription.setPrice(billingClient.getProductPrice(info.getSku()));
+
+                                    if (location != null) {
+                                        subscription.setSubscriptionLat(location.getLatitude());
+                                        subscription.setSubscriptionLong(location.getLongitude());
+                                    } else {
+                                        subscription.setSubscriptionLat(0.0);
+                                        subscription.setSubscriptionLong(0.0);
+                                    }
+
+                                    registerSubscription(subscription);
                                 } else {
                                     showErrorDialog(
                                             R.drawable.ic_bug,
@@ -196,6 +231,46 @@ public class SubscriptionActivity extends BaseActivity {
         });
     }
 
+    @AfterPermissionGranted(RC_LOCATION_PERMISSION)
+    public void initLocation() {
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            startLocationTracker();
+        } else {
+            // Ask for one permission
+            EasyPermissions.requestPermissions(this, getString(R.string.rationale_location),
+                    RC_LOCATION_PERMISSION, Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+    }
+
+    private void startLocationTracker() {
+        TrackerSettings settings =
+                new TrackerSettings()
+                        .setUseGPS(true)
+                        .setUseNetwork(true)
+                        .setUsePassive(true);
+
+        try {
+            locationTracker = new LocationTracker(this, settings) {
+
+                @Override
+                public void onLocationFound(@NonNull Location location) {
+                    SubscriptionActivity.this.location = location;
+                    stopListening();
+                }
+
+                @Override
+                public void onTimeout() {
+                    startLocationTracker();
+                }
+            };
+            locationTracker.startListening();
+        } catch (SecurityException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -206,6 +281,10 @@ public class SubscriptionActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         billingClient.release();
+
+        if (locationTracker != null) {
+            locationTracker.stopListening();
+        }
 
         super.onDestroy();
     }
@@ -305,5 +384,70 @@ public class SubscriptionActivity extends BaseActivity {
             default:
                 return MONTH_STRING_JAN;
         }
+    }
+
+    /**
+     * Do user login.
+     * @param subscription user's subscription data
+     */
+    private void registerSubscription(final Subscription subscription) {
+        subscriptionApi.registerSubscription(subscription)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse>() {
+
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse response) {
+                        if (response.getStatus() == Constants.Status.SUCCESS) {
+                            showSuccessDialog(
+                                    R.drawable.ic_dialog_success,
+                                    getString(R.string.dialog_success),
+                                    getString(R.string.dialog_subscription_success_message),
+                                    getString(R.string.dialog_book_first_call),
+                                    new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
+                                        @Override
+                                        public void onClick(DokterPribadimuDialog dialog) {
+                                            startBookCallActivity();
+                                            finish();
+                                        }
+                                    }
+                            );
+                        } else {
+                            handleError(TAG, response.getMessage());
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+
     }
 }
