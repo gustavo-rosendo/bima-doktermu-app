@@ -1,40 +1,45 @@
 package com.bima.dokterpribadimu.view.activities;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
-import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.data.remote.api.UserApi;
 import com.bima.dokterpribadimu.data.sns.LoginClient;
 import com.bima.dokterpribadimu.data.sns.LoginListener;
 import com.bima.dokterpribadimu.data.sns.facebook.FacebookClient;
 import com.bima.dokterpribadimu.data.sns.gplus.GplusClient;
 import com.bima.dokterpribadimu.databinding.ActivityLandingBinding;
+import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
+import com.bima.dokterpribadimu.utils.TokenUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.facebook.appevents.AppEventsLogger;
 
+import javax.inject.Inject;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
 public class LandingActivity extends BaseActivity {
 
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private static final String TAG = LandingActivity.class.getSimpleName();
+
+    @Inject
+    UserApi userApi;
 
     private ActivityLandingBinding binding;
 
     private LoginClient loginClient;
-    private Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,22 +124,7 @@ public class LandingActivity extends BaseActivity {
     private LoginListener loginListener = new LoginListener() {
         @Override
         public void onSuccess(UserProfile userProfile) {
-            StorageUtils.putString(
-                    LandingActivity.this,
-                    Constants.KEY_USER_PROFILE,
-                    GsonUtils.toJson(userProfile));
-
-            showSuccessDialog(
-                    R.drawable.ic_dialog_success,
-                    getString(R.string.dialog_success),
-                    getString(R.string.dialog_sign_in_success_message),
-                    getString(R.string.dialog_get_started),
-                    new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
-                        @Override
-                        public void onClick(DokterPribadimuDialog dialog) {
-                            startDoctorCallActivityOnTop();
-                        }
-                    });
+            login(userProfile, TokenUtils.generateToken(userProfile.getId() + userProfile.getLoginType()));
         }
 
         @Override
@@ -161,4 +151,64 @@ public class LandingActivity extends BaseActivity {
             ).show();
         }
     };
+
+    /**
+     * Do user login.
+     * @param userProfile UserProfile object from SNS login
+     */
+    private void login(final UserProfile userProfile, final String password) {
+        userApi.login(
+                    userProfile.getEmail(),
+                    password,
+                    userProfile.getLoginType(),
+                    userProfile.getAccessToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse>() {
+
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse signInResponse) {
+                        if (signInResponse.getStatus() == Constants.Status.SUCCESS) {
+                            StorageUtils.putString(
+                                    LandingActivity.this,
+                                    Constants.KEY_USER_PROFILE,
+                                    GsonUtils.toJson(userProfile)
+                            );
+
+                            showSuccessDialog(
+                                    R.drawable.ic_smiley,
+                                    getString(R.string.dialog_signed_in),
+                                    getString(R.string.dialog_signed_in_message),
+                                    getString(R.string.dialog_get_started),
+                                    new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
+                                        @Override
+                                        public void onClick(DokterPribadimuDialog dialog) {
+                                            startDoctorCallActivityOnTop();
+                                        }
+                                    });
+                        } else {
+                            if (signInResponse.getMessage().contains(Constants.EMAIL_IS_NOT_REGISTERED) ||
+                                    signInResponse.getMessage().equalsIgnoreCase(Constants.EMAIL_IS_NOT_REGISTERED)) {
+                                startActivity(RegisterNameActivity.create(LandingActivity.this, userProfile, password));
+                            } else {
+                                handleError(TAG, signInResponse.getMessage());
+                            }
+                        }
+                    }
+                });
+    }
 }
