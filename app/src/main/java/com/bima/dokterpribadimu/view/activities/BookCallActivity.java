@@ -1,6 +1,8 @@
 package com.bima.dokterpribadimu.view.activities;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
+import com.bima.dokterpribadimu.utils.TimeUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
@@ -61,10 +64,12 @@ public class BookCallActivity extends BaseActivity {
             }
         });
 
+        validateBookTimeLimit(); //Gray-out the button if a call was booked in less than the minimum interval
+
         binding.bookCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (validateTopic()) {
+                if (validateTopic() && validateBookTimeLimit()) {
                     final String topicString = binding.subscriptionTopicSpinner.getSelectedItem().toString();
                     String topic;
                     if (topicString.equalsIgnoreCase(SICKNESS_STRING)) {
@@ -124,6 +129,30 @@ public class BookCallActivity extends BaseActivity {
     }
 
     /**
+     * Check if the minimum time between calls has already passed
+     * @return boolean true if user can already book another call, boolean false if otherwise
+     */
+    private boolean validateBookTimeLimit() {
+        double lastBookedCallTimeMillis = StorageUtils.getDouble(
+                BookCallActivity.this,
+                Constants.KEY_BOOK_CALL_TIME_MILLIS,
+                -TimeUtils.ONE_HOUR_MS); //for the first time this is accessed
+
+        if(!TimeUtils.hasOneHourPassed(lastBookedCallTimeMillis)) {
+            binding.bookCallButton.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            Toast.makeText(
+                    this,
+                    getString(R.string.time_limit_to_book_call),
+                    Toast.LENGTH_SHORT
+            ).show();
+        } else {
+            binding.bookCallButton.getBackground().setColorFilter(null);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Do book a call.
      * @param callTopic user's email
      * @param accessToken user's access token
@@ -145,12 +174,21 @@ public class BookCallActivity extends BaseActivity {
 
                     @Override
                     public void onError(Throwable e) {
+                        StorageUtils.putDouble(
+                                BookCallActivity.this,
+                                Constants.KEY_BOOK_CALL_TIME_MILLIS,
+                                -TimeUtils.ONE_HOUR_MS); //ensure that the button will be active
                         handleError(TAG, e.getMessage());
                     }
 
                     @Override
                     public void onNext(BaseResponse response) {
                         if (response.getStatus() == Constants.Status.SUCCESS) {
+                            StorageUtils.putDouble(
+                                    BookCallActivity.this,
+                                    Constants.KEY_BOOK_CALL_TIME_MILLIS,
+                                    TimeUtils.getElapsedTimeMillis());
+
                             showSuccessDialog(
                                     R.drawable.ic_thumb_up,
                                     getString(R.string.dialog_success),
@@ -164,6 +202,10 @@ public class BookCallActivity extends BaseActivity {
                                     }
                             );
                         } else {
+                            StorageUtils.putDouble(
+                                    BookCallActivity.this,
+                                    Constants.KEY_BOOK_CALL_TIME_MILLIS,
+                                    -TimeUtils.ONE_HOUR_MS); //ensure that the button will be active
                             handleError(TAG, response.getMessage());
                         }
                     }

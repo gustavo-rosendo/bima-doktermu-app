@@ -124,6 +124,7 @@
     <string name="dialog_old_password">Kata sandi lama</string>
     <string name="dialog_new_password">Kata sandi baru</string>
     <string name="dialog_validate">Validasi</string>
+    <string name="time_limit_to_book_call">Anda dapat membuat maksimal 1 janji per jam dengan dokter anda</string>
 
     <!-- permission -->
     <string name="rationale_location">Dokter Pribadimu perlu mengakses GPS anda untuk mengaktifkan semua fitur aplikasi.</string>
