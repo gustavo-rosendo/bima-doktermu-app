@@ -49,6 +49,7 @@ public class RegisterNameActivity extends BaseActivity {
     private UserProfile userProfile;
     private String password;
     private Location location;
+    private LocationTracker locationTracker;
 
     public static Intent create(Context context, UserProfile userProfile, String password) {
         Intent intent = new Intent(context, RegisterNameActivity.class);
@@ -65,6 +66,15 @@ public class RegisterNameActivity extends BaseActivity {
         DokterPribadimuApplication.getComponent().inject(this);
 
         init();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (locationTracker != null) {
+            locationTracker.stopListening();
+        }
+
+        super.onDestroy();
     }
 
     private void init() {
@@ -133,7 +143,7 @@ public class RegisterNameActivity extends BaseActivity {
                         .setUsePassive(true);
 
         try {
-            LocationTracker tracker = new LocationTracker(this, settings) {
+            locationTracker = new LocationTracker(this, settings) {
 
                 @Override
                 public void onLocationFound(@NonNull Location location) {
@@ -146,7 +156,7 @@ public class RegisterNameActivity extends BaseActivity {
                     startLocationTracker();
                 }
             };
-            tracker.startListening();
+            locationTracker.startListening();
         } catch (SecurityException se) {
             se.printStackTrace();
         } catch (Exception e) {
