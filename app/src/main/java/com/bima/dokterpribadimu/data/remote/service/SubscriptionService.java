@@ -22,14 +22,12 @@ public interface SubscriptionService {
             @Field("subscription_token") String subscriptionToken,
             @Field("subscription_start") String subscriptionStart,
             @Field("subscription_end") String subscriptionEnd,
-            @Field("subscription_status") String subscriptionStatus,
             @Field("name") String name,
             @Field("order_date") String orderDate,
             @Field("order_id") String orderId,
             @Field("payment_method") String paymentMethod,
             @Field("phone_number") String phoneNumber,
             @Field("product_name") String productName,
-            @Field("type") String type,
             @Field("price") String price,
             @Field("access_token") String accessToken
     );

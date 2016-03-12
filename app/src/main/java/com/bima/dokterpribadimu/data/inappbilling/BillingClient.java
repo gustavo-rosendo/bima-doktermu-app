@@ -33,6 +33,8 @@ public class BillingClient implements IabBroadcastListener {
 
     private IabHelper iabHelper;
 
+    private Inventory inventory;
+
     // Will the subscription auto-renew?
     private boolean autoRenewEnabled = false;
 
@@ -124,6 +126,8 @@ public class BillingClient implements IabBroadcastListener {
                 return;
             }
 
+            BillingClient.this.inventory = inventory;
+
             Log.d(TAG, "Query inventory was successful.");
 
             /*
@@ -196,6 +200,21 @@ public class BillingClient implements IabBroadcastListener {
 
     public void queryInventoryAsync() {
         iabHelper.queryInventoryAsync(gotInventoryListener);
+    }
+
+    public String getProductPrice(String sku) {
+        if (inventory != null) {
+            return inventory.getSkuDetails(sku).getPrice();
+        }
+        return "";
+    }
+
+    public String getProductName(String sku) {
+        if (inventory != null) {
+            inventory.getSkuDetails(sku).getType();
+            return inventory.getSkuDetails(sku).getTitle();
+        }
+        return "";
     }
 
     public void launchSubscriptionPurchaseFlow(OnIabPurchaseFinishedListener listener) {

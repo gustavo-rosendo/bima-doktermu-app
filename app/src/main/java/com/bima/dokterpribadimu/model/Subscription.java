@@ -11,22 +11,24 @@ public class Subscription {
     private String subscriptionToken;
     private String subscriptionStart;
     private String subscriptionEnd;
-    private String subscriptionStatus;
     private String name;
     private String orderDate;
     private String orderId;
     private String paymentMethod;
     private String phoneNumber;
     private String productName;
-    private String type;
     private String price;
     private String accessToken;
+
+    public Subscription() {
+
+    }
 
     public Subscription(
             String subscriptionType, Double subscriptionLat, Double subscriptionLong,
             String subscriptionToken, String subscriptionStart, String subscriptionEnd,
-            String subscriptionStatus, String name, String orderDate, String orderId,
-            String paymentMethod, String phoneNumber, String productName, String type,
+            String name, String orderDate, String orderId,
+            String paymentMethod, String phoneNumber, String productName,
             String price, String accessToken) {
         this.subscriptionType = subscriptionType;
         this.subscriptionLat = subscriptionLat;
@@ -34,14 +36,12 @@ public class Subscription {
         this.subscriptionToken = subscriptionToken;
         this.subscriptionStart = subscriptionStart;
         this.subscriptionEnd = subscriptionEnd;
-        this.subscriptionStatus = subscriptionStatus;
         this.name = name;
         this.orderDate = orderDate;
         this.orderId = orderId;
         this.paymentMethod = paymentMethod;
         this.phoneNumber = phoneNumber;
         this.productName = productName;
-        this.type = type;
         this.price = price;
         this.accessToken = accessToken;
     }
@@ -94,14 +94,6 @@ public class Subscription {
         this.subscriptionEnd = subscriptionEnd;
     }
 
-    public String getSubscriptionStatus() {
-        return subscriptionStatus;
-    }
-
-    public void setSubscriptionStatus(String subscriptionStatus) {
-        this.subscriptionStatus = subscriptionStatus;
-    }
-
     public String getName() {
         return name;
     }
@@ -148,14 +140,6 @@ public class Subscription {
 
     public void setProductName(String productName) {
         this.productName = productName;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getPrice() {

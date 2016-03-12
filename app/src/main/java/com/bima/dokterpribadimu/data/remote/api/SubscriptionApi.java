@@ -45,14 +45,12 @@ public class SubscriptionApi extends BaseApi<SubscriptionService> {
                             subscription.getSubscriptionToken(),
                             subscription.getSubscriptionStart(),
                             subscription.getSubscriptionEnd(),
-                            subscription.getSubscriptionStatus(),
                             subscription.getName(),
                             subscription.getOrderDate(),
                             subscription.getOrderId(),
                             subscription.getPaymentMethod(),
                             subscription.getPhoneNumber(),
                             subscription.getProductName(),
-                            subscription.getType(),
                             subscription.getPrice(),
                             subscription.getAccessToken()
                     ).execute();
