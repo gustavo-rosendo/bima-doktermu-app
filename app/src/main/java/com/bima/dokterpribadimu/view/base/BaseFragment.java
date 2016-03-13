@@ -47,6 +47,10 @@ public class BaseFragment extends RxFragment {
     }
 
     protected void handleError(String tag, String errorMessage) {
+        if (errorMessage == null) {
+            errorMessage = getString(R.string.dialog_sign_in_failed_message);
+        }
+
         Log.e(tag, errorMessage);
 
         if (errorMessage.contains(Constants.NETWORK_IS_UNREACHABLE)

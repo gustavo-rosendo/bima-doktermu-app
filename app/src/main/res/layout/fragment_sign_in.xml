@@ -82,13 +82,15 @@
                 android:textSize="16sp"
                 android:background="@drawable/rounded_bima_blue_bg_selector"/>
 
+            <!-- TODO: enable this feature once its ready -->
             <LinearLayout
                 android:id="@+id/sign_in_whats_my_password_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/generic_large_margin"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"

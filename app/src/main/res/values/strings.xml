@@ -98,6 +98,7 @@
     <string name="dialog_failed">Maaf</string>
     <string name="dialog_signed_in">Berhasil!</string>
     <string name="dialog_signed_in_message">Anda telah berhasil masuk.</string>
+    <string name="dialog_password_changed_message">Kata sandi anda telah berhasil diubah</string>
     <string name="dialog_late">Layanan tutup!</string>
     <string name="dialog_late_message">Dokter pribadimu sudah pulang untuk beristirahat dan bertemu keluarganya.
         Dokter akan siap melayani besok jam 6 pagi. Sampai jumpa besok dan selamat malam!</string>
