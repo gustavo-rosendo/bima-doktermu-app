@@ -141,7 +141,7 @@ public class BookCallActivity extends BaseActivity {
             Toast.makeText(
                     this,
                     getString(R.string.time_limit_to_book_call),
-                    Toast.LENGTH_SHORT
+                    Toast.LENGTH_LONG
             ).show();
         } else {
             binding.bookCallButton.getBackground().setColorFilter(null);

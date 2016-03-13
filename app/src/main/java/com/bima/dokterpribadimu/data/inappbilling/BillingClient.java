@@ -13,6 +13,7 @@ import com.bima.dokterpribadimu.utils.iabutil.IabHelper.OnIabPurchaseFinishedLis
 import com.bima.dokterpribadimu.utils.iabutil.IabResult;
 import com.bima.dokterpribadimu.utils.iabutil.Inventory;
 import com.bima.dokterpribadimu.utils.iabutil.Purchase;
+import com.bima.dokterpribadimu.utils.iabutil.SkuDetails;
 
 /**
  * Created by apradanas on 3/2/16.
@@ -203,15 +204,22 @@ public class BillingClient implements IabBroadcastListener {
     }
 
     public String getProductPrice(String sku) {
-        if (inventory != null) {
+        SkuDetails skuDetails = null;
+        if(sku != null) {
+            skuDetails = inventory.getSkuDetails(sku);
+        }
+        if (inventory != null && skuDetails != null) {
             return inventory.getSkuDetails(sku).getPrice();
         }
         return "";
     }
 
     public String getProductName(String sku) {
-        if (inventory != null) {
-            inventory.getSkuDetails(sku).getType();
+        SkuDetails skuDetails = null;
+        if(sku != null) {
+            skuDetails = inventory.getSkuDetails(sku);
+        }
+        if (inventory != null && skuDetails != null) {
             return inventory.getSkuDetails(sku).getTitle();
         }
         return "";
