@@ -20,6 +20,7 @@ import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 import com.bima.dokterpribadimu.view.components.ChangePasswordDialog;
+import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -63,8 +64,6 @@ public class ProfileFragment extends BaseFragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
 
         initViews();
-
-        dialog = new ChangePasswordDialog(getActivity());
 
         return binding.getRoot();
     }
@@ -111,6 +110,10 @@ public class ProfileFragment extends BaseFragment {
             binding.profileEditPasswordButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (dialog == null) {
+                        dialog = new ChangePasswordDialog(getActivity());
+                    }
+
                     dialog.setListener(new ChangePasswordDialog.OnChangePasswordDialogClickListener() {
                         @Override
                         public void onClick(ChangePasswordDialog dialog, String oldPassword, String newPassword) {
@@ -164,6 +167,14 @@ public class ProfileFragment extends BaseFragment {
                     public void onNext(BaseResponse response) {
                         if (response.getStatus() == Constants.Status.SUCCESS) {
                             dialog.dismiss();
+                            dialog = null;
+
+                            showSuccessDialog(
+                                    R.drawable.ic_smiley,
+                                    getString(R.string.dialog_signed_in),
+                                    getString(R.string.dialog_password_changed_message),
+                                    getString(R.string.dialog_get_started),
+                                    null);
                         } else {
                             handleError(TAG, response.getMessage());
                         }
