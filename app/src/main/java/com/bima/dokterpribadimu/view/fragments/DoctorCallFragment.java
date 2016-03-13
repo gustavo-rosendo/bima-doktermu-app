@@ -112,11 +112,11 @@ public class DoctorCallFragment extends BaseFragment {
                         (ampm == Calendar.AM && hour < MORNING_HOUR_LIMIT)) {
                     showLateDialog(getString(R.string.dialog_take_me_home), null);
                 } else {
-                    //if (billingClient.isSubscribedToDokterPribadiKu()) {
-                    //    startBookCallActivity();
-                    //} else {
+                    if (billingClient.isSubscribedToDokterPribadiKu()) {
+                        startBookCallActivity();
+                    } else {
                         startSubscriptionActivity();
-                   // }
+                    }
                 }
             }
         });
