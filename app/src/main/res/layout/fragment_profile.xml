@@ -150,11 +150,18 @@
 
                         </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="@dimen/generic_small_button_height"
-                            android:layout_height="@dimen/generic_small_button_height"
-                            android:src="@drawable/ic_edit_disabled"
-                            android:contentDescription="@string/app_name"/>
+                        <RelativeLayout
+                            android:layout_width="@dimen/generic_button_height"
+                            android:layout_height="@dimen/generic_button_height">
+
+                            <ImageView
+                                android:layout_width="@dimen/generic_small_button_height"
+                                android:layout_height="@dimen/generic_small_button_height"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_edit_disabled"
+                                android:contentDescription="@string/app_name"/>
+
+                        </RelativeLayout>
 
                     </LinearLayout>
 
@@ -188,12 +195,19 @@
 
                         </LinearLayout>
 
-                        <ImageView
+                        <RelativeLayout
                             android:id="@+id/profile_edit_password_button"
-                            android:layout_width="@dimen/generic_small_button_height"
-                            android:layout_height="@dimen/generic_small_button_height"
-                            android:src="@drawable/ic_edit"
-                            android:contentDescription="@string/app_name"/>
+                            android:layout_width="@dimen/generic_button_height"
+                            android:layout_height="@dimen/generic_button_height">
+
+                            <ImageView
+                                android:layout_width="@dimen/generic_small_button_height"
+                                android:layout_height="@dimen/generic_small_button_height"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_edit"
+                                android:contentDescription="@string/app_name"/>
+
+                        </RelativeLayout>
 
                     </LinearLayout>
 
