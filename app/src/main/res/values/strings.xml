@@ -13,7 +13,7 @@
     <string name="register">Daftar</string>
     <string name="email">Email</string>
     <string name="password">Kata sandi</string>
-    <string name="password_bima_hint">Kata sandi Dokter Pribadimu</string>
+    <string name="password_bima_hint">Kata sandi Doktermu</string>
     <string name="whats_my_password">Lupa kata sandi anda?</string>
     <string name="full_name">Nama lengkap</string>
     <string name="full_name_hint">Nama lengkap anda</string>
@@ -29,7 +29,7 @@
     <string name="home_lets_get_started">Let\'s get started!</string>
 
     <!-- doctor on call -->
-    <string name="doctor_on_call">Dokter Pribadimu</string>
+    <string name="doctor_on_call">Doktermu</string>
     <string name="doctor_on_call_info">Mulai konsultasi untuk memilih topik konsultasi.
         Dokter akan menelponmu dalam waktu kurang dari 1 jam setelah membuat janji.</string>
     <string name="doctor_on_call_book_a_call">Mulai konsultasi</string>
@@ -61,7 +61,7 @@
     <string name="profile_app_info">BIMA Mobile v%s\nHak Cipta &#169;BIMA - 2016</string>
 
     <!-- drawer -->
-    <string name="drawer_doctor_on_call">Dokter pribadimu</string>
+    <string name="drawer_doctor_on_call">Doktermu</string>
     <string name="drawer_about_bima">Tentang Bima</string>
     <string name="drawer_coming_soon">Fitur yang akan datang</string>
     <string name="drawer_news">Berita</string>
@@ -100,7 +100,7 @@
     <string name="dialog_signed_in_message">Anda telah berhasil masuk.</string>
     <string name="dialog_password_changed_message">Kata sandi anda telah berhasil diubah</string>
     <string name="dialog_late">Layanan tutup!</string>
-    <string name="dialog_late_message">Dokter pribadimu sudah pulang untuk beristirahat dan bertemu keluarganya.
+    <string name="dialog_late_message">Doktermu sudah pulang untuk beristirahat dan bertemu keluarganya.
         Dokter akan siap melayani besok jam 6 pagi. Sampai jumpa besok dan selamat malam!</string>
     <string name="no_connection">Tidak terhubung dengan internet</string>
     <string name="no_connection_message">Tidak terhubung ke internet.
@@ -112,7 +112,7 @@
     <string name="invalid_email_message">Alamat email yang anda masukkan kurang benar.
         Silakan cek atau masukkan ulang email anda.</string>
     <string name="invalid_password_message">Kata sandi minimal %d karakter.</string>
-    <string name="dialog_subscription_success_message">Anda berhasil berlangganan dokter pribadimu.
+    <string name="dialog_subscription_success_message">Anda berhasil berlangganan Doktermu.
         Mulailah membuat janji dengan dokter anda!</string>
     <string name="dialog_book_call_done_message">Dalam waktu 1 jam kedepan dokter akan menghubungimu.
         Mohon tunggu dan pastikan <i>smartphone</i> anda berdering!</string>
@@ -129,8 +129,8 @@
     <string name="time_limit_to_book_call">Anda dapat membuat maksimal 1 janji per jam dengan dokter anda</string>
 
     <!-- permission -->
-    <string name="rationale_location">Dokter Pribadimu perlu mengakses GPS anda untuk mengaktifkan semua fitur aplikasi.</string>
-    <string name="rationale_phone">Dokter Pribadimu perlu mengakses informasi anda untuk mengaktifkan semua fitur aplikasi.</string>
+    <string name="rationale_location">Doktermu perlu mengakses GPS anda untuk mengaktifkan semua fitur aplikasi.</string>
+    <string name="rationale_phone">Doktermu perlu mengakses informasi anda untuk mengaktifkan semua fitur aplikasi.</string>
 
     <!-- province -->
     <string-array name="province_arrays">
