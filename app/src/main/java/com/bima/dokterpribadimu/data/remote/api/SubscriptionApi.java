@@ -52,6 +52,11 @@ public class SubscriptionApi extends BaseApi<SubscriptionService> {
                             subscription.getPhoneNumber(),
                             subscription.getProductName(),
                             subscription.getPrice(),
+                            subscription.getDateOfBirth(),
+                            subscription.getGender(),
+                            subscription.getDateOfPurchase(),
+                            subscription.getPolicyActiveDate(),
+                            subscription.getPolicyExpiryDate(),
                             subscription.getAccessToken()
                     ).execute();
                     if (response.isSuccess()) {

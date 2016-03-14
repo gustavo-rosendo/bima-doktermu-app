@@ -151,6 +151,7 @@ public class LandingActivity extends BaseActivity implements EasyPermissions.Per
                                 deviceInfoUtils.getBrand(),
                                 deviceInfoUtils.getProduct()));
                 userProfile.setDeviceImei(deviceInfoUtils.getDeviceId());
+                userProfile.setMsisdn(deviceInfoUtils.getMsisdnPhoneNumber());
                 userProfile.setDeviceOperator(deviceInfoUtils.getSimOperatorName());
                 userProfile.setDeviceSoftware(String.format(Constants.DEVICE_SOFTWARE_FORMAT, deviceInfoUtils.getRelease()));
             }

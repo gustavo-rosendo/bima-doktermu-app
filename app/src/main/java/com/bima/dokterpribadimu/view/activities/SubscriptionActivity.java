@@ -170,6 +170,23 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                                     subscription.setPhoneNumber(binding.subscriptionPhoneField.getText().toString());
                                     subscription.setProductName(billingClient.getProductName(info.getSku()));
                                     subscription.setPrice(billingClient.getProductPrice(info.getSku()));
+                                    subscription.setDateOfBirth(binding.subscriptionDobField.getText().toString());
+
+                                    String genderField = binding.subscriptionGenderSpinner.toString();
+                                    if (genderField != null) {
+                                        if (genderField.contains("Laki") || genderField.contains("laki") || genderField.contains("Male")) {
+                                            genderField = "Male";
+                                        } else if (genderField.contains("Perempuan") || genderField.contains("perempuan") || genderField.contains("Female")) {
+                                            genderField = "Female";
+                                        } else {
+                                            genderField = ""; //don't save anything, better than saving the wrong gender :P
+                                        }
+                                    }
+                                    subscription.setGender(genderField);
+
+                                    subscription.setDateOfPurchase(subscription.getOrderDate());
+                                    subscription.setPolicyActiveDate(subscription.getSubscriptionStart());
+                                    subscription.setPolicyExpiryDate(subscription.getSubscriptionEnd());
 
                                     if (location != null) {
                                         subscription.setSubscriptionLat(location.getLatitude());
