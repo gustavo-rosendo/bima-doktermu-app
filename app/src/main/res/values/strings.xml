@@ -117,6 +117,7 @@
     <string name="dialog_book_call_done_message">Dalam waktu 1 jam kedepan dokter akan menghubungimu.
         Mohon tunggu dan pastikan <i>smartphone</i> anda berdering!</string>
     <string name="invalid_name_message">Nama yang anda masukkan kosong atau kurang lengkap</string>
+    <string name="invalid_referral_message">Nomor referensi agen yang anda masukkan harus berupa 4 digit</string>
     <string name="invalid_gender_message">Pilih jenis kelamin anda</string>
     <string name="invalid_dob_message">Tanggal lahir anda kosong</string>
     <string name="invalid_phone_number_message">Nomor telepon anda kosong atau tidak valid.

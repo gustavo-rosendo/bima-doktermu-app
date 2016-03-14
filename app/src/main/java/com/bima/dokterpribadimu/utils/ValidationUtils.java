@@ -12,6 +12,7 @@ public class ValidationUtils {
 
     public static final int MINIMUM_PASSWORD_LENGTH = 4;
     public static final int MINIMUM_NAME_LENGTH = 3;
+    public static final int REFFERAL_LENGTH = 4;
 
     public static final String PHONE_NUMBER_REGEX = "^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$";
 
@@ -33,6 +34,16 @@ public class ValidationUtils {
     public static boolean isValidPassword(CharSequence password) {
         return !TextUtils.isEmpty(password)
                 && password.length() >= MINIMUM_PASSWORD_LENGTH;
+    }
+
+    /**
+     * Validate password
+     * @param refferal user's password
+     * @return true if password is not empty & more than MINIMUM_PASSWORD_LENGTH, false if otherwise
+     */
+    public static boolean isValidRefferal(CharSequence refferal) {
+        return TextUtils.isEmpty(refferal)
+                || (!TextUtils.isEmpty(refferal) && refferal.length() == REFFERAL_LENGTH);
     }
 
     /**
