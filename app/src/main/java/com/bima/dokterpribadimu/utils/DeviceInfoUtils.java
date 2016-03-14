@@ -27,12 +27,22 @@ public class DeviceInfoUtils {
     private Integer simMnc;
     private Integer simMcc;
     private String simOperatorName;
+    private String msisdnPhoneNumber;
 
     protected DeviceInfoUtils(Context context) {
         telephonyManager = (TelephonyManager) context
                 .getSystemService(Context.TELEPHONY_SERVICE);
 
         deviceId = telephonyManager.getDeviceId();
+        if(telephonyManager.getLine1Number() != null) {
+            msisdnPhoneNumber = telephonyManager.getLine1Number();
+        }
+        else if(telephonyManager.getVoiceMailNumber() != null) {
+            msisdnPhoneNumber = telephonyManager.getVoiceMailNumber();
+        }
+        else {
+            msisdnPhoneNumber = "000000000000";
+        }
         board = Build.BOARD;
         brand = Build.BRAND;
         device = Build.DEVICE;
@@ -185,5 +195,16 @@ public class DeviceInfoUtils {
     public String getSimOperatorName() {
         return simOperatorName;
     }
+
+
+    /**
+     * Returns the phone number string for line 1, for example, the MSISDN
+     * for a GSM phone. Return string 000000000000 if it is unavailable.
+     * @return phone number string
+     */
+    public String getMsisdnPhoneNumber() {
+        return msisdnPhoneNumber;
+    }
+
 
 }

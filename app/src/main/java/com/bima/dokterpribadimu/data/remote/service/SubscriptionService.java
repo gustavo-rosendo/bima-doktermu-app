@@ -29,6 +29,11 @@ public interface SubscriptionService {
             @Field("phone_number") String phoneNumber,
             @Field("product_name") String productName,
             @Field("price") String price,
+            @Field("dob") String dateOfBirth,
+            @Field("gender") String gender,
+            @Field("date_of_purchase") String dateOfPurchase,
+            @Field("policy_active_date") String policyActiveDate,
+            @Field("policy_expiry_date") String policyExpiryDate,
             @Field("access_token") String accessToken
     );
 

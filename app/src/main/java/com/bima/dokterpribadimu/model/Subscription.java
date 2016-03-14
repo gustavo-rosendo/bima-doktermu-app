@@ -18,6 +18,11 @@ public class Subscription {
     private String phoneNumber;
     private String productName;
     private String price;
+    private String dateOfBirth;
+    private String gender;
+    private String dateOfPurchase;
+    private String policyActiveDate;
+    private String policyExpiryDate;
     private String accessToken;
 
     public Subscription() {
@@ -29,7 +34,8 @@ public class Subscription {
             String subscriptionToken, String subscriptionStart, String subscriptionEnd,
             String name, String orderDate, String orderId,
             String paymentMethod, String phoneNumber, String productName,
-            String price, String accessToken) {
+            String price, String dateOfBirth, String gender, String dateOfPurchase,
+            String policyActiveDate, String policyExpiryDate, String accessToken) {
         this.subscriptionType = subscriptionType;
         this.subscriptionLat = subscriptionLat;
         this.subscriptionLong = subscriptionLong;
@@ -43,6 +49,11 @@ public class Subscription {
         this.phoneNumber = phoneNumber;
         this.productName = productName;
         this.price = price;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.dateOfPurchase = dateOfPurchase;
+        this.policyActiveDate = policyActiveDate;
+        this.policyExpiryDate = policyExpiryDate;
         this.accessToken = accessToken;
     }
 
@@ -148,6 +159,36 @@ public class Subscription {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getDateOfBirth() { return dateOfBirth; }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getGender() { return gender; }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getDateOfPurchase() { return dateOfPurchase; }
+
+    public void setDateOfPurchase(String dateOfPurchase) {
+        this.dateOfPurchase = dateOfPurchase;
+    }
+
+    public String getPolicyActiveDate() { return policyActiveDate; }
+
+    public void setPolicyActiveDate(String policyActiveDate) {
+        this.policyActiveDate = policyActiveDate;
+    }
+
+    public String getPolicyExpiryDate() { return policyExpiryDate; }
+
+    public void setPolicyExpiryDate(String policyExpiryDate) {
+        this.policyExpiryDate = policyExpiryDate;
     }
 
     public String getAccessToken() {
