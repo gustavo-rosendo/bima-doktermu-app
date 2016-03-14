@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/generic_normal_margin"
                     android:hint="@string/agent_number"
-                    android:inputType="text"/>
+                    android:inputType="numberSigned"/>
 
                 <Button
                     android:id="@+id/register_validate_button"

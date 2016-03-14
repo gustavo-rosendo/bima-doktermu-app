@@ -106,15 +106,16 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
                     password = binding.registerPasswordField.getText().toString();
                 }
 
+                String referral = binding.registerAgentField.getText().toString();
                 String name = binding.registerNameField.getText().toString();
                 String[] names = name.split(" ");
-                if (validateRegistration(name, password)) {
+                if (validateRegistration(name, password, referral)) {
                     userProfile.setName(name);
                     if (names.length > 0) {
                         userProfile.setFirstName(names[0]);
                         userProfile.setLastName(names[names.length - 1]);
                     }
-                    userProfile.setReferral(binding.registerAgentField.getText().toString());
+                    userProfile.setReferral(referral);
                     if (location != null) {
                         userProfile.setRegisterLat(location.getLatitude());
                         userProfile.setRegisterLong(location.getLongitude());
@@ -221,9 +222,10 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
      * Validate registration name and password.
      * @param name user's name
      * @param password user's password
+     * @param referral user's referral number
      * @return boolean true if name and password are valid, boolean false if otherwise
      */
-    private boolean validateRegistration(String name, String password) {
+    private boolean validateRegistration(String name, String password, String referral) {
         if (!ValidationUtils.isValidName(name)) {
             Toast.makeText(
                     this,
@@ -234,6 +236,12 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
             Toast.makeText(
                     this,
                     String.format(getString(R.string.invalid_password_message), ValidationUtils.MINIMUM_PASSWORD_LENGTH),
+                    Toast.LENGTH_SHORT
+            ).show();
+        } else if (!ValidationUtils.isValidRefferal(referral)) {
+            Toast.makeText(
+                    this,
+                    getString(R.string.invalid_referral_message),
                     Toast.LENGTH_SHORT
             ).show();
         } else {
