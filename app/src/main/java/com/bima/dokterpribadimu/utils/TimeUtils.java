@@ -12,7 +12,7 @@ public class TimeUtils {
 
     public static final double ONE_HOUR_MS = 60 * 60 * 1000; // 1 hour in milliseconds
 
-    private static final String SUBSCRIPTION_ORDER_DATE_FORMAT = "dd MMMM yyyy";
+    private static final String SUBSCRIPTION_ORDER_DATE_FORMAT = "yyyy-MM-dd";
 
     public static int getCurrentTimeHour() {
         Calendar calendar = Calendar.getInstance();
@@ -27,6 +27,20 @@ public class TimeUtils {
     public static String getSubscriptionOrderDate() {
         SimpleDateFormat sdf = new SimpleDateFormat(SUBSCRIPTION_ORDER_DATE_FORMAT, new Locale("id", "ID"));
         return sdf.format(new Date());
+    }
+
+    public static String getSubscriptionStartDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat(SUBSCRIPTION_ORDER_DATE_FORMAT, new Locale("id", "ID"));
+        return sdf.format(new Date());
+    }
+
+    public static String getSubscriptionEndDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat(SUBSCRIPTION_ORDER_DATE_FORMAT, new Locale("id", "ID"));
+        Date dateToday = new Date();
+        Calendar calendar = Calendar.getInstance(new Locale("id", "ID"));
+        calendar.setTimeInMillis(dateToday.getTime());
+        calendar.add(Calendar.MONTH, 1);
+        return sdf.format(calendar.getTime());
     }
 
     public static double getElapsedTimeMillis() {

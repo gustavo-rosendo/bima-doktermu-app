@@ -164,6 +164,8 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                                     subscription.setSubscriptionToken(info.getToken());
                                     subscription.setName(binding.subscriptionNameField.getText().toString());
                                     subscription.setOrderDate(TimeUtils.getSubscriptionOrderDate());
+                                    subscription.setSubscriptionStart(TimeUtils.getSubscriptionStartDate());
+                                    subscription.setSubscriptionEnd(TimeUtils.getSubscriptionEndDate());
                                     subscription.setOrderId(info.getOrderId());
                                     subscription.setPhoneNumber(binding.subscriptionPhoneField.getText().toString());
                                     subscription.setProductName(billingClient.getProductName(info.getSku()));
