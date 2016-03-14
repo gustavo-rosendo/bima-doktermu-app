@@ -24,7 +24,7 @@ public class BillingClient implements IabBroadcastListener {
     private static final int RC_REQUEST = 10001;
 
     // SKU for our subscription
-    static final String SKU_DOKTER_PRIBADIKU_MONTHLY = "dokterpribadimu_monthly_subscription_01";
+    public static final String SKU_DOKTER_PRIBADIKU_MONTHLY = "dokterpribadimu_monthly_subscription_01";
 
     private Activity activity;
 

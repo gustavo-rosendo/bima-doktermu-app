@@ -51,6 +51,8 @@ public interface UserService {
             @Field("device_imei") String deviceImei,
             @Field("device_software") String deviceSoftware,
             @Field("device_operator") String deviceOperator,
+            @Field("product") String product,
+            @Field("policy") String policy,
             @Field("access_token") String accessToken
     );
 
