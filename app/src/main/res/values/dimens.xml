@@ -59,4 +59,7 @@
     <dimen name="about_bima_icon_width">200dp</dimen>
     <dimen name="about_bima_icon_height">100dp</dimen>
 
+    <!-- dialog -->
+    <dimen name="dialog_min_width">300dp</dimen>
+
 </resources>
