@@ -88,6 +88,7 @@ public class UserApi extends BaseApi<UserService> {
                             userProfile.getRegisterLat(), userProfile.getRegisterLong(),
                             userProfile.getDeviceType(), userProfile.getDeviceImei(),
                             userProfile.getDeviceSoftware(), userProfile.getDeviceOperator(),
+                            userProfile.getProduct(), userProfile.getPolicy(),
                             userProfile.getAccessToken()).execute();
                     if (response.isSuccess()) {
                         subscriber.onNext((BaseResponse) response.body());

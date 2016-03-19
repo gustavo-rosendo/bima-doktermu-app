@@ -20,6 +20,8 @@ public class UserProfile {
     private String deviceImei;
     private String deviceSoftware;
     private String deviceOperator;
+    private final String product    = "DS"; //Always the same, according to Connor (BIMA)
+    private final String policy     = "App Basic"; //Always the same, according to Connor (BIMA)
     private String accessToken;
 
     public UserProfile(
@@ -150,6 +152,14 @@ public class UserProfile {
 
     public void setRegisterLong(Double registerLong) {
         this.registerLong = registerLong;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public String getPolicy() {
+        return policy;
     }
 
     public String getDeviceType() {

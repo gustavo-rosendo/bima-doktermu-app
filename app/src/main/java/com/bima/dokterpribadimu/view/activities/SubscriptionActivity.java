@@ -27,8 +27,8 @@ import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.Subscription;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
-import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
+import com.bima.dokterpribadimu.utils.SubscriptionUtils;
 import com.bima.dokterpribadimu.utils.TimeUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
@@ -89,10 +89,13 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
     @Inject
     SubscriptionApi subscriptionApi;
 
+    private Subscription subscription;
+
     private ActivitySubscriptionBinding binding;
 
     private Location location;
     private LocationTracker locationTracker;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +132,13 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                         SubscriptionActivity.this,
                         Constants.KEY_USER_SUBSCIPTION,
                         isSubscribed);
+
+                if(isSubscribed && subscription != null) {
+                    subscription.setProductName(billingClient.getProductName(BillingClient.SKU_DOKTER_PRIBADIKU_MONTHLY));
+                    subscription.setPrice(billingClient.getProductPrice(BillingClient.SKU_DOKTER_PRIBADIKU_MONTHLY));
+
+                    registerSubscription(subscription);
+                }
             }
 
             @Override
@@ -157,7 +167,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                             @Override
                             public void onIabPurchaseFinished(IabResult result, Purchase info) {
                                 if (result.isSuccess()) {
-                                    Subscription subscription = new Subscription();
+                                    subscription = new Subscription();
                                     subscription.setAccessToken(
                                             UserProfileUtils.getUserProfile(SubscriptionActivity.this).getAccessToken());
                                     subscription.setSubscriptionType(Constants.SUBSCRIPTION_TYPE_NEW);
@@ -170,9 +180,12 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                                     subscription.setPhoneNumber(binding.subscriptionPhoneField.getText().toString());
                                     subscription.setProductName(billingClient.getProductName(info.getSku()));
                                     subscription.setPrice(billingClient.getProductPrice(info.getSku()));
-                                    subscription.setDateOfBirth(binding.subscriptionDobField.getText().toString());
+                                    subscription.setDateOfBirth(
+                                            SubscriptionUtils
+                                                    .formatDateOfBirth(binding.subscriptionDobField.getText().toString())
+                                            );
 
-                                    String genderField = binding.subscriptionGenderSpinner.toString();
+                                    String genderField = binding.subscriptionGenderSpinner.getSelectedItem().toString();
                                     if (genderField != null) {
                                         if (genderField.contains("Laki") || genderField.contains("laki") || genderField.contains("Male")) {
                                             genderField = "Male";
@@ -195,8 +208,6 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                                         subscription.setSubscriptionLat(0.0);
                                         subscription.setSubscriptionLong(0.0);
                                     }
-
-                                    registerSubscription(subscription);
                                 } else {
                                     showErrorDialog(
                                             R.drawable.ic_bug,
