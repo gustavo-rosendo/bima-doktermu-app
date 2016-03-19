@@ -13,6 +13,7 @@ import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
+import com.bima.dokterpribadimu.view.components.DokterPribadimuProgressDialog;
 import com.facebook.appevents.AppEventsLogger;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -27,6 +28,7 @@ import static com.bima.dokterpribadimu.view.components.DokterPribadimuDialog.OnD
 public class BaseActivity extends RxAppCompatActivity {
 
     DokterPribadimuDialog dialog;
+    DokterPribadimuProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class BaseActivity extends RxAppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         dialog = new DokterPribadimuDialog(this);
+        progressDialog = new DokterPribadimuProgressDialog(this);
     }
 
     @Override
@@ -49,6 +52,8 @@ public class BaseActivity extends RxAppCompatActivity {
     protected void onDestroy() {
         dialog.setClickListener(null);
         dialog = null;
+
+        progressDialog = null;
 
         super.onDestroy();
     }
@@ -108,6 +113,18 @@ public class BaseActivity extends RxAppCompatActivity {
                 .setDialogButtonText(buttonText)
                 .setClickListener(clickListener)
                 .showDialog();
+    }
+
+    protected void showProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.show();
+        }
+    }
+
+    protected void dismissProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     protected void startLandingActivity() {

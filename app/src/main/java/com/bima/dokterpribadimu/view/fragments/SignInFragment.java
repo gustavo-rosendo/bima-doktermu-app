@@ -119,6 +119,7 @@ public class SignInFragment extends BaseFragment {
 
                     @Override
                     public void onStart() {
+                        showProgressDialog();
                     }
 
                     @Override
@@ -127,11 +128,15 @@ public class SignInFragment extends BaseFragment {
 
                     @Override
                     public void onError(Throwable e) {
+                        dismissProgressDialog();
+
                         handleError(TAG, e.getMessage());
                     }
 
                     @Override
                     public void onNext(BaseResponse signInResponse) {
+                        dismissProgressDialog();
+
                         if (signInResponse.getStatus() == Status.SUCCESS) {
 
                             UserProfile userProfile = new UserProfile(
