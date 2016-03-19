@@ -1,0 +1,35 @@
+<resources>
+
+    <!-- generic -->
+    <dimen name="generic_button_height">48dp</dimen>
+    <dimen name="generic_normal_margin">6dp</dimen>
+    <dimen name="generic_small_margin">2dp</dimen>
+    <dimen name="generic_large_margin">12dp</dimen>
+    <dimen name="generic_xlarge_margin">20dp</dimen>
+    <dimen name="generic_xxlarge_margin">28dp</dimen>
+    <dimen name="generic_normal_padding">4dp</dimen>
+    <dimen name="generic_small_padding">2dp</dimen>
+    <dimen name="generic_large_padding">12dp</dimen>
+    <dimen name="generic_xlarge_padding">20dp</dimen>
+    <dimen name="generic_xxlarge_padding">28dp</dimen>
+    <dimen name="generic_normal_corner_radius">20dp</dimen>
+    <dimen name="generic_xsmall_corner_radius">4dp</dimen>
+    <dimen name="generic_small_corner_radius">8dp</dimen>
+    <dimen name="generic_large_corner_radius">24dp</dimen>
+
+    <!-- landing -->
+    <dimen name="landing_bima_icon_width">125dp</dimen>
+    <dimen name="landing_bima_icon_height">125dp</dimen>
+    <dimen name="landing_bima_text_width">125dp</dimen>
+    <dimen name="landing_bima_text_height">75dp</dimen>
+
+    <!-- drawer -->
+    <dimen name="drawer_width">260dp</dimen>
+
+    <!-- doctor on call -->
+    <dimen name="doctor_call_icon_width">100dp</dimen>
+    <dimen name="doctor_call_icon_height">100dp</dimen>
+    <dimen name="doctor_call_title_text_size">30sp</dimen>
+    <dimen name="doctor_call_info_text_size">20sp</dimen>
+
+</resources>

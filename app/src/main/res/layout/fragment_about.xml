@@ -11,16 +11,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="@dimen/generic_xlarge_margin"
-            android:layout_marginStart="@dimen/generic_xlarge_margin"
-            android:layout_marginRight="@dimen/generic_xlarge_margin"
-            android:layout_marginEnd="@dimen/generic_xlarge_margin">
+            android:padding="@dimen/generic_xlarge_margin">
 
             <ImageView
                 android:id="@+id/drawer_bima_image"
                 android:layout_width="@dimen/about_bima_icon_width"
                 android:layout_height="@dimen/about_bima_icon_height"
-                android:layout_marginTop="@dimen/generic_large_margin"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/bima_drawer_logo"
                 android:contentDescription="@string/app_name"/>
