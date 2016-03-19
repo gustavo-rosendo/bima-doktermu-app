@@ -1,0 +1,15 @@
+<resources>
+
+    <!-- generic -->
+    <dimen name="generic_button_height">48dp</dimen>
+
+    <!-- landing -->
+    <dimen name="landing_bima_icon_width">125dp</dimen>
+    <dimen name="landing_bima_icon_height">125dp</dimen>
+    <dimen name="landing_bima_text_width">125dp</dimen>
+    <dimen name="landing_bima_text_height">75dp</dimen>
+
+    <!-- drawer -->
+    <dimen name="drawer_width">260dp</dimen>
+
+</resources>
