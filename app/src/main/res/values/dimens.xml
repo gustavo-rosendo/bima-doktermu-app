@@ -48,6 +48,9 @@
     <dimen name="landing_bima_text_width">150dp</dimen>
     <dimen name="landing_bima_text_height">90dp</dimen>
 
+    <!-- register -->
+    <dimen name="register_validation_min_button_width">150dp</dimen>
+
     <!-- drawer -->
     <dimen name="drawer_width">320dp</dimen>
     <dimen name="drawer_bima_icon_width">175dp</dimen>

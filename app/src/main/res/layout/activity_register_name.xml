@@ -58,49 +58,28 @@
                 android:paddingEnd="@dimen/generic_large_padding"
                 android:orientation="vertical">
 
-                <TextView
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/register_name_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/full_name"
-                    android:textAllCaps="true"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"/>
+                    android:layout_height="wrap_content">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/generic_separator_height"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
-                    android:background="@android:color/darker_gray"/>
+                    <EditText
+                        android:id="@+id/register_name_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_normal_margin"
+                        android:hint="@string/full_name_hint"
+                        android:textSize="@dimen/generic_subheading_text_size"
+                        android:inputType="textPersonName"/>
 
-                <EditText
-                    android:id="@+id/register_name_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
-                    android:hint="@string/full_name_hint"
-                    android:inputType="textPersonName"/>
+                </android.support.design.widget.TextInputLayout>
 
-                <LinearLayout
-                    android:id="@+id/register_password_layout"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/register_password_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/generic_large_margin"
-                    android:orientation="vertical"
                     android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/password"
-                        android:textAllCaps="true"
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/generic_separator_height"
-                        android:layout_marginTop="@dimen/generic_normal_margin"
-                        android:background="@android:color/darker_gray"/>
 
                     <EditText
                         android:id="@+id/register_password_field"
@@ -108,59 +87,47 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/generic_normal_margin"
                         android:hint="@string/password_bima_hint"
+                        android:textSize="@dimen/generic_subheading_text_size"
                         android:inputType="textPassword"/>
 
-                    <TextView
-                        android:id="@+id/register_password_hint"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-4dp"
-                        android:textSize="12sp"/>
-
-                </LinearLayout>
+                </android.support.design.widget.TextInputLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/generic_xlarge_margin"
                     android:text="@string/referral_message"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/generic_subheading_text_size"/>
 
-                <TextView
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/register_agent_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/generic_large_margin"
-                    android:text="@string/agent_number"
-                    android:textAllCaps="true"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"/>
+                    android:layout_marginTop="@dimen/generic_large_margin">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/generic_separator_height"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
-                    android:background="@android:color/darker_gray"/>
+                    <EditText
+                        android:id="@+id/register_agent_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_normal_margin"
+                        android:hint="@string/agent_number"
+                        android:textSize="@dimen/generic_subheading_text_size"
+                        android:inputType="numberSigned"/>
 
-                <EditText
-                    android:id="@+id/register_agent_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
-                    android:hint="@string/agent_number"
-                    android:inputType="numberSigned"/>
+                </android.support.design.widget.TextInputLayout>
 
                 <Button
                     android:id="@+id/register_validate_button"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/generic_button_height"
-                    android:minWidth="150dp"
+                    android:minWidth="@dimen/register_validation_min_button_width"
                     android:layout_marginTop="@dimen/generic_xlarge_margin"
                     android:layout_marginBottom="@dimen/generic_xlarge_margin"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/validate"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/generic_button_text_size"
                     android:background="@drawable/rounded_bima_blue_bg_selector"/>
 
             </LinearLayout>

@@ -89,12 +89,7 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
 
     private void initViews() {
         if (!userProfile.getLoginType().equalsIgnoreCase(Constants.LOGIN_TYPE_EMAIL)) {
-            binding.registerPasswordLayout.setVisibility(View.VISIBLE);
-
-            binding.registerPasswordHint.setText(
-                    String.format(
-                            getString(R.string.invalid_password_message),
-                            ValidationUtils.MINIMUM_PASSWORD_LENGTH));
+            binding.registerPasswordContainer.setVisibility(View.VISIBLE);
         }
 
         binding.registerNameField.setText(userProfile.getName());
@@ -232,27 +227,29 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
      */
     private boolean validateRegistration(String name, String password, String referral) {
         if (!ValidationUtils.isValidName(name)) {
-            Toast.makeText(
-                    this,
-                    getString(R.string.invalid_name_message),
-                    Toast.LENGTH_SHORT
-            ).show();
-        } else if (!ValidationUtils.isValidPassword(password)) {
-            Toast.makeText(
-                    this,
-                    String.format(getString(R.string.invalid_password_message), ValidationUtils.MINIMUM_PASSWORD_LENGTH),
-                    Toast.LENGTH_SHORT
-            ).show();
-        } else if (!ValidationUtils.isValidRefferal(referral)) {
-            Toast.makeText(
-                    this,
-                    getString(R.string.invalid_referral_message),
-                    Toast.LENGTH_SHORT
-            ).show();
+            binding.registerNameContainer.setError(getString(R.string.invalid_name_message));
         } else {
-            return true;
+            binding.registerNameContainer.setError(null);
         }
-        return false;
+
+        if (!ValidationUtils.isValidPassword(password)) {
+            binding.registerPasswordContainer.setError(
+                    String.format(
+                            getString(R.string.invalid_password_message),
+                            ValidationUtils.MINIMUM_PASSWORD_LENGTH));
+        } else {
+            binding.registerPasswordContainer.setError(null);
+        }
+
+        if (!ValidationUtils.isValidRefferal(referral)) {
+            binding.registerAgentContainer.setError(getString(R.string.invalid_referral_message));
+        } else {
+            binding.registerAgentContainer.setError(null);
+        }
+        
+        return ValidationUtils.isValidName(name)
+                && ValidationUtils.isValidPassword(password)
+                && ValidationUtils.isValidRefferal(referral);
     }
 
     @Override
