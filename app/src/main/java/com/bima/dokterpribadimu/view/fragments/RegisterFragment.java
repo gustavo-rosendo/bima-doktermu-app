@@ -80,11 +80,6 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
     }
 
     private void initViews() {
-        binding.registerPasswordHint.setText(
-                String.format(
-                        getString(R.string.invalid_password_message),
-                        ValidationUtils.MINIMUM_PASSWORD_LENGTH));
-
         binding.registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,21 +127,21 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
      */
     private boolean validateRegistration(String email, String password) {
         if (!ValidationUtils.isValidEmail(email)) {
-            Toast.makeText(
-                    getActivity(),
-                    getString(R.string.invalid_email_message),
-                    Toast.LENGTH_SHORT
-            ).show();
-        } else if (!ValidationUtils.isValidPassword(password)) {
-            Toast.makeText(
-                    getActivity(),
-                    String.format(getString(R.string.invalid_password_message), ValidationUtils.MINIMUM_PASSWORD_LENGTH),
-                    Toast.LENGTH_SHORT
-            ).show();
+            binding.registerEmailContainer.setError(getString(R.string.invalid_email_message));
         } else {
-            return true;
+            binding.registerEmailContainer.setError(null);
         }
-        return false;
+
+        if (!ValidationUtils.isValidPassword(password)) {
+            binding.registerPasswordContainer.setError(
+                    String.format(
+                            getString(R.string.invalid_password_message),
+                            ValidationUtils.MINIMUM_PASSWORD_LENGTH));
+        } else {
+            binding.registerPasswordContainer.setError(null);
+        }
+
+        return ValidationUtils.isValidEmail(email) && ValidationUtils.isValidPassword(password);
     }
 
     @Override
