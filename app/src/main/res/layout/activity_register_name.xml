@@ -36,7 +36,7 @@
                         android:layout_marginStart="@dimen/generic_large_margin"
                         android:text="@string/register"
                         android:textColor="@android:color/white"
-                        android:textSize="18sp"/>
+                        android:textSize="@dimen/generic_title_text_size"/>
 
                 </RelativeLayout>
 
