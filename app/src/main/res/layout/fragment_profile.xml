@@ -224,6 +224,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/generic_xlarge_margin"
+                    android:layout_marginBottom="@dimen/generic_xlarge_margin"
                     android:layout_marginLeft="@dimen/generic_large_margin"
                     android:layout_marginStart="@dimen/generic_large_margin"
                     android:layout_marginRight="@dimen/generic_large_margin"
