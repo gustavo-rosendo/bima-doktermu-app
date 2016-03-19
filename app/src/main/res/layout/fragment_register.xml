@@ -28,6 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
+                    android:textSize="@dimen/generic_subheading_text_size"
                     android:inputType="textEmailAddress"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -44,6 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/generic_normal_margin"
                     android:hint="@string/password"
+                    android:textSize="@dimen/generic_subheading_text_size"
                     android:inputType="textPassword"/>
 
             </android.support.design.widget.TextInputLayout>
