@@ -29,6 +29,13 @@
     <dimen name="generic_image_button_padding">12dp</dimen>
     <dimen name="generic_separator_height">1dp</dimen>
 
+    <!-- generic text -->
+    <dimen name="generic_headline_text_size">24sp</dimen>
+    <dimen name="generic_title_text_size">20sp</dimen>
+    <dimen name="generic_subheading_text_size">16sp</dimen>
+    <dimen name="generic_body_text_size">14sp</dimen>
+    <dimen name="generic_button_text_size">14sp</dimen>
+
     <!-- loading -->
     <dimen name="loading_bima_icon_width">155dp</dimen>
     <dimen name="loading_bima_icon_height">155dp</dimen>

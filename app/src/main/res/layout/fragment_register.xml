@@ -18,57 +18,35 @@
             android:paddingRight="@dimen/generic_large_padding"
             android:paddingEnd="@dimen/generic_large_padding">
 
-            <TextView
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/register_email_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/register_email_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/register_password_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/email"
-                android:textAllCaps="true"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"/>
+                android:layout_marginTop="@dimen/generic_large_margin">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/generic_separator_height"
-                android:layout_marginTop="@dimen/generic_normal_margin"
-                android:background="@android:color/darker_gray"/>
+                <EditText
+                    android:id="@+id/register_password_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"/>
 
-            <EditText
-                android:id="@+id/register_email_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/generic_normal_margin"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/generic_large_margin"
-                android:text="@string/password"
-                android:textAllCaps="true"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/generic_separator_height"
-                android:layout_marginTop="@dimen/generic_normal_margin"
-                android:background="@android:color/darker_gray"/>
-
-            <EditText
-                android:id="@+id/register_password_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/generic_normal_margin"
-                android:hint="@string/password"
-                android:inputType="textPassword"/>
-
-            <TextView
-                android:id="@+id/register_password_hint"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-4dp"
-                android:textSize="12sp"/>
+            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/register_button"
@@ -80,7 +58,7 @@
                 android:text="@string/register"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
+                android:textSize="@dimen/generic_button_text_size"
                 android:background="@drawable/rounded_green_bg_selector"/>
 
         </LinearLayout>

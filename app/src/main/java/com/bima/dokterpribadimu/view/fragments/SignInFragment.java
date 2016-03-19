@@ -63,11 +63,6 @@ public class SignInFragment extends BaseFragment {
     }
 
     private void initViews() {
-        binding.signInPasswordHint.setText(
-                String.format(
-                        getString(R.string.invalid_password_message),
-                        ValidationUtils.MINIMUM_PASSWORD_LENGTH));
-
         binding.signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,21 +83,21 @@ public class SignInFragment extends BaseFragment {
      */
     private boolean validateSignIn(String email, String password) {
         if (!ValidationUtils.isValidEmail(email)) {
-            Toast.makeText(
-                    getActivity(),
-                    getString(R.string.invalid_email_message),
-                    Toast.LENGTH_SHORT
-            ).show();
-        } else if (!ValidationUtils.isValidPassword(password)) {
-            Toast.makeText(
-                    getActivity(),
-                    String.format(getString(R.string.invalid_password_message), ValidationUtils.MINIMUM_PASSWORD_LENGTH),
-                    Toast.LENGTH_SHORT
-            ).show();
+            binding.signInEmailContainer.setError(getString(R.string.invalid_email_message));
         } else {
-            return true;
+            binding.signInEmailContainer.setError(null);
         }
-        return false;
+
+        if (!ValidationUtils.isValidPassword(password)) {
+            binding.signInPasswordContainer.setError(
+                    String.format(
+                            getString(R.string.invalid_password_message),
+                            ValidationUtils.MINIMUM_PASSWORD_LENGTH));
+        } else {
+            binding.signInPasswordContainer.setError(null);
+        }
+
+        return ValidationUtils.isValidEmail(email) && ValidationUtils.isValidPassword(password);
     }
 
     /**
