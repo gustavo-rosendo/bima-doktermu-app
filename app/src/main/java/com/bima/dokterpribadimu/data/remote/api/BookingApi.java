@@ -39,7 +39,7 @@ public class BookingApi extends BaseApi<BookingService> {
             public void call(final Subscriber<? super BaseResponse> subscriber) {
                 try {
                     Response response = bookingService.bookCall(callTopic, accessToken).execute();
-                    if (response.isSuccess()) {
+                    if (response.isSuccessful()) {
                         subscriber.onNext((BaseResponse) response.body());
                         subscriber.onCompleted();
                     } else {

@@ -58,7 +58,7 @@ public class CustomerApi extends BaseApi<CustomerService> {
                                                 customer.getDeviceOperator(),
                                                 customer.getAccessToken()
                                         ).execute();
-                    if (response.isSuccess()) {
+                    if (response.isSuccessful()) {
                         subscriber.onNext((BaseResponse) response.body());
                         subscriber.onCompleted();
                     } else {

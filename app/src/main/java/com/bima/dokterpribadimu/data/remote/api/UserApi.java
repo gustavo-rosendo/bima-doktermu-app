@@ -54,7 +54,7 @@ public class UserApi extends BaseApi<UserService> {
                                 null, null, null, null, null, null, null, null,
                                 null, null, null, null, accessToken).execute();
                     }
-                    if (response.isSuccess()) {
+                    if (response.isSuccessful()) {
                         subscriber.onNext((BaseResponse) response.body());
                         subscriber.onCompleted();
                     } else {
@@ -90,7 +90,7 @@ public class UserApi extends BaseApi<UserService> {
                             userProfile.getDeviceSoftware(), userProfile.getDeviceOperator(),
                             userProfile.getProduct(), userProfile.getPolicy(),
                             userProfile.getAccessToken()).execute();
-                    if (response.isSuccess()) {
+                    if (response.isSuccessful()) {
                         subscriber.onNext((BaseResponse) response.body());
                         subscriber.onCompleted();
                     } else {
@@ -118,7 +118,7 @@ public class UserApi extends BaseApi<UserService> {
             public void call(final Subscriber<? super BaseResponse> subscriber) {
                 try {
                     Response response = userService.changePassword(oldPassword, newPasword, accessToken).execute();
-                    if (response.isSuccess()) {
+                    if (response.isSuccessful()) {
                         subscriber.onNext((BaseResponse) response.body());
                         subscriber.onCompleted();
                     } else {

@@ -59,7 +59,7 @@ public class SubscriptionApi extends BaseApi<SubscriptionService> {
                             subscription.getPolicyExpiryDate(),
                             subscription.getAccessToken()
                     ).execute();
-                    if (response.isSuccess()) {
+                    if (response.isSuccessful()) {
                         subscriber.onNext((BaseResponse) response.body());
                         subscriber.onCompleted();
                     } else {
@@ -86,7 +86,7 @@ public class SubscriptionApi extends BaseApi<SubscriptionService> {
             public void call(final Subscriber<? super BaseResponse> subscriber) {
                 try {
                     Response response = subscriptionService.setSubscriptionExpired(accessToken).execute();
-                    if (response.isSuccess()) {
+                    if (response.isSuccessful()) {
                         subscriber.onNext((BaseResponse) response.body());
                         subscriber.onCompleted();
                     } else {
@@ -113,7 +113,7 @@ public class SubscriptionApi extends BaseApi<SubscriptionService> {
             public void call(final Subscriber<? super BaseResponse> subscriber) {
                 try {
                     Response response = subscriptionService.setSubscriptionStopped(subscriptionEnd, accessToken).execute();
-                    if (response.isSuccess()) {
+                    if (response.isSuccessful()) {
                         subscriber.onNext((BaseResponse) response.body());
                         subscriber.onCompleted();
                     } else {
