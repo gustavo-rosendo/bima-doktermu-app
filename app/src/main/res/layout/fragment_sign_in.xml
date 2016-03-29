@@ -62,15 +62,13 @@
                 android:textSize="@dimen/generic_button_text_size"
                 android:background="@drawable/rounded_bima_blue_bg_selector"/>
 
-            <!-- TODO: enable this feature once its ready -->
             <LinearLayout
                 android:id="@+id/sign_in_whats_my_password_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/generic_large_margin"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -78,7 +76,7 @@
                     android:text="@string/whats_my_password"
                     android:textAllCaps="true"
                     android:textColor="@color/bima_blue"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/generic_subheading_text_size"/>
 
                 <View
                     android:layout_width="match_parent"

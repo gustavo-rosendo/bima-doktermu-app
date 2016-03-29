@@ -20,6 +20,7 @@ import com.bima.dokterpribadimu.utils.TokenUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
+import com.bima.dokterpribadimu.view.components.ForgotPasswordDialog;
 
 import javax.inject.Inject;
 
@@ -38,6 +39,8 @@ public class SignInFragment extends BaseFragment {
     UserApi userApi;
 
     private FragmentSignInBinding binding;
+
+    private ForgotPasswordDialog forgotPasswordDialog;
 
     public static SignInFragment newInstance() {
         SignInFragment fragment = new SignInFragment();
@@ -73,6 +76,31 @@ public class SignInFragment extends BaseFragment {
                 }
             }
         });
+
+        binding.signInWhatsMyPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (forgotPasswordDialog == null) {
+                    forgotPasswordDialog = new ForgotPasswordDialog(getActivity());
+                }
+
+                forgotPasswordDialog.setListener(new ForgotPasswordDialog.OnForgotPasswordDialogClickListener() {
+                    @Override
+                    public void onClick(ForgotPasswordDialog dialog, String email) {
+                        // TODO: do request
+                        dismissForgotPasswordDialog();
+                    }
+                });
+
+                forgotPasswordDialog.showDialog();
+            }
+        });
+    }
+
+    private void dismissForgotPasswordDialog() {
+        forgotPasswordDialog.dismiss();
+        forgotPasswordDialog.clearReference();
+        forgotPasswordDialog = null;
     }
 
     /**

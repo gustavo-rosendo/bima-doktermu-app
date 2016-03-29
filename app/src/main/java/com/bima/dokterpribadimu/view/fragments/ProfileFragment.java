@@ -20,7 +20,6 @@ import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 import com.bima.dokterpribadimu.view.components.ChangePasswordDialog;
-import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;

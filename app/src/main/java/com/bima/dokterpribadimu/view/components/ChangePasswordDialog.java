@@ -57,7 +57,7 @@ public class ChangePasswordDialog extends Dialog {
      * Initialize dialog. Set NO TITLE, set dialog background transparent, and set dialog's content view.
      */
     private void init() {
-        //requestFeature() must be called before adding content
+        // requestFeature() must be called before adding content
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
