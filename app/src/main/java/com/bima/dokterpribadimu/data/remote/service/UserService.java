@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 public interface UserService {
 
     @FormUrlEncoded
-    @POST("/developer/v1/user/login")
+    @POST("/v1/user/login")
     Call<BaseResponse> login(
             @Field("email") String email,
             @Field("password") String password,
@@ -34,7 +34,7 @@ public interface UserService {
     );
 
     @FormUrlEncoded
-    @POST("/developer/v1/user/register")
+    @POST("/v1/user/register")
     Call<BaseResponse> register(
             @Field("email") String email,
             @Field("password") String password,
@@ -57,7 +57,18 @@ public interface UserService {
     );
 
     @FormUrlEncoded
-    @POST("/developer/v1/user/password")
+    @POST("/v1/user/update")
+    Call<BaseResponse> update(
+            @Field("name") String name,
+            @Field("phone_number") String msisdn,
+            @Field("dob") String dob,
+            @Field("gender") String gender,
+            @Field("email") String email,
+            @Field("access_token") String accessToken
+    );
+
+    @FormUrlEncoded
+    @POST("/v1/user/password")
     Call<BaseResponse> changePassword(
             @Field("old_password") String oldPassword,
             @Field("new_password") String newPassword,

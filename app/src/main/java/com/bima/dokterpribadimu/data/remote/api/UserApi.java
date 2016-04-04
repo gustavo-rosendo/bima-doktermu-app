@@ -108,6 +108,37 @@ public class UserApi extends BaseApi<UserService> {
     }
 
     /**
+     * UserApi implementation to register
+     * @return Observable<BaseResponse>
+     */
+    public Observable<BaseResponse> update(
+            final UserProfile userProfile) {
+        return Observable.create(new Observable.OnSubscribe<BaseResponse>() {
+            @Override
+            public void call(final Subscriber<? super BaseResponse> subscriber) {
+                try {
+                    Response response = userService.update(
+                            userProfile.getName(), userProfile.getMsisdn(),
+                            userProfile.getDateOfBirth(), userProfile.getGender(),
+                            userProfile.getEmail(), userProfile.getAccessToken()).execute();
+                    if (response.isSuccess()) {
+                        subscriber.onNext((BaseResponse) response.body());
+                        subscriber.onCompleted();
+                    } else {
+                        BaseResponse error = GsonUtils.fromJson(
+                                response.errorBody().string(),
+                                BaseResponse.class);
+                        subscriber.onError(new Exception(error.getMessage()));
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    subscriber.onError(e);
+                }
+            }
+        });
+    }
+
+    /**
      * UserApi implementation to change password
      * @return Observable<BaseResponse>
      */

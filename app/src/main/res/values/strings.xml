@@ -108,6 +108,7 @@
     <string name="dialog_sign_in_success_message">Akun anda berhasil didaftarkan dan siap untuk digunakan</string>
     <string name="dialog_sign_in_failed_message">Kami mengalami gangguan pada sistem.
         Mohon coba lagi atau hubungi kami</string>
+    <string name="dialog_google_play_failed_message">Proses dibatalkan oleh Google Play: </string>
     <string name="dialog_sign_in_canceled_message">Proses dibatalkan</string>
     <string name="invalid_email_message">Alamat email yang anda masukkan kurang benar.
         Silakan cek atau masukkan ulang email anda.</string>

@@ -12,6 +12,8 @@ public class UserProfile {
     private String email;
     private String picture;
     private String msisdn;
+    private String dateOfBirth;
+    private String gender;
     private String referral;
     private String loginType;
     private Double registerLat;
@@ -121,6 +123,14 @@ public class UserProfile {
     public void setMsisdn(String msisdn) {
         this.msisdn = msisdn;
     }
+
+    public String getDateOfBirth() { return dateOfBirth; }
+
+    public void setDateOfBirth(String dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+
+    public String getGender() { return gender; }
+
+    public void setGender(String gender) { this.gender = gender; }
 
     public String getReferral() {
         return referral;

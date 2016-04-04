@@ -69,4 +69,18 @@ public class SubscriptionUtils {
         return finalDateOfBirth;
     }
 
+    public static String getChosenGender(String genderField) {
+        String genderFormatted = "";
+        if (genderField != null) {
+            if (genderField.contains("Laki") || genderField.contains("laki") || genderField.contains("Male")) {
+                genderFormatted = "Male";
+            } else if (genderField.contains("Perempuan") || genderField.contains("perempuan") || genderField.contains("Female")) {
+                genderFormatted = "Female";
+            } else {
+                genderFormatted = ""; //don't save anything, better than saving the wrong gender :P
+            }
+        }
+        return genderFormatted;
+    }
+
 }
