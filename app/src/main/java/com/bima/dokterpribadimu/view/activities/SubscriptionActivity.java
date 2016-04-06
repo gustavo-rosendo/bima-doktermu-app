@@ -511,6 +511,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
 
                     @Override
                     public void onStart() {
+                        showProgressDialog();
                     }
 
                     @Override
@@ -519,11 +520,15 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
 
                     @Override
                     public void onError(Throwable e) {
+                        dismissProgressDialog();
+
                         handleError(TAG, e.getMessage());
                     }
 
                     @Override
                     public void onNext(BaseResponse response) {
+                        dismissProgressDialog();
+
                         if (response.getStatus() == Constants.Status.SUCCESS) {
                             isRegisterSubscriptionDone = true;
                             //now query Google to update the product_name and the price

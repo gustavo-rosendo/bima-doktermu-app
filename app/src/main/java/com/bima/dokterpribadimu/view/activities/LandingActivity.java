@@ -202,6 +202,7 @@ public class LandingActivity extends BaseActivity implements EasyPermissions.Per
 
                     @Override
                     public void onStart() {
+                        showProgressDialog();
                     }
 
                     @Override
@@ -210,11 +211,14 @@ public class LandingActivity extends BaseActivity implements EasyPermissions.Per
 
                     @Override
                     public void onError(Throwable e) {
+                        dismissProgressDialog();
                         handleError(TAG, e.getMessage());
                     }
 
                     @Override
                     public void onNext(BaseResponse signInResponse) {
+                        dismissProgressDialog();
+
                         if (signInResponse.getStatus() == Constants.Status.SUCCESS) {
                             StorageUtils.putString(
                                     LandingActivity.this,

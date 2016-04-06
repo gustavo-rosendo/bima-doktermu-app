@@ -164,6 +164,7 @@ public class BookCallActivity extends BaseActivity {
 
                     @Override
                     public void onStart() {
+                        showProgressDialog();
                     }
 
                     @Override
@@ -172,6 +173,8 @@ public class BookCallActivity extends BaseActivity {
 
                     @Override
                     public void onError(Throwable e) {
+                        dismissProgressDialog();
+
                         StorageUtils.putDouble(
                                 BookCallActivity.this,
                                 Constants.KEY_BOOK_CALL_TIME_MILLIS,
@@ -181,6 +184,8 @@ public class BookCallActivity extends BaseActivity {
 
                     @Override
                     public void onNext(BaseResponse response) {
+                        dismissProgressDialog();
+
                         if (response.getStatus() == Constants.Status.SUCCESS) {
                             StorageUtils.putDouble(
                                     BookCallActivity.this,

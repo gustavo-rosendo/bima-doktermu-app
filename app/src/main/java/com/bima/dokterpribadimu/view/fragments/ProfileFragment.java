@@ -152,6 +152,7 @@ public class ProfileFragment extends BaseFragment {
 
                     @Override
                     public void onStart() {
+                        showProgressDialog();
                     }
 
                     @Override
@@ -160,11 +161,15 @@ public class ProfileFragment extends BaseFragment {
 
                     @Override
                     public void onError(Throwable e) {
+                        dismissProgressDialog();
+
                         handleError(TAG, e.getMessage());
                     }
 
                     @Override
                     public void onNext(BaseResponse response) {
+                        dismissProgressDialog();
+
                         if (response.getStatus() == Constants.Status.SUCCESS) {
                             dialog.dismiss();
                             dialog = null;

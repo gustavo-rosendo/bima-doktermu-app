@@ -47,7 +47,11 @@ public class BillingClient implements IabBroadcastListener {
 
     public void release() {
         if (broadcastReceiver != null && activity != null) {
-            activity.unregisterReceiver(broadcastReceiver);
+            try {
+                activity.unregisterReceiver(broadcastReceiver);
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
         }
 
         if (iabHelper != null) {

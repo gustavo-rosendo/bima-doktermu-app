@@ -1,16 +1,7 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- generic -->
-    <dimen name="generic_toolbar_height">56dp</dimen>
-    <dimen name="generic_toolbar_button_height">56dp</dimen>
-    <dimen name="generic_tab_indicator_height">5dp</dimen>
-    <dimen name="generic_small_button_height">24dp</dimen>
     <dimen name="generic_button_height">48dp</dimen>
-    <dimen name="generic_large_button_height">64dp</dimen>
-    <dimen name="generic_edit_text_height">40dp</dimen>
     <dimen name="generic_normal_margin">8dp</dimen>
     <dimen name="generic_small_margin">4dp</dimen>
     <dimen name="generic_large_margin">16dp</dimen>
@@ -25,15 +16,6 @@
     <dimen name="generic_xsmall_corner_radius">4dp</dimen>
     <dimen name="generic_small_corner_radius">8dp</dimen>
     <dimen name="generic_large_corner_radius">24dp</dimen>
-    <dimen name="generic_toolbar_image_button_padding">16dp</dimen>
-    <dimen name="generic_image_button_padding">12dp</dimen>
-    <dimen name="generic_separator_height">1dp</dimen>
-
-    <!-- loading -->
-    <dimen name="loading_bima_icon_width">155dp</dimen>
-    <dimen name="loading_bima_icon_height">155dp</dimen>
-    <dimen name="loading_bima_text_width">155dp</dimen>
-    <dimen name="loading_bima_text_height">90dp</dimen>
 
     <!-- landing -->
     <dimen name="landing_bima_icon_width">150dp</dimen>
@@ -43,23 +25,11 @@
 
     <!-- drawer -->
     <dimen name="drawer_width">320dp</dimen>
-    <dimen name="drawer_bima_icon_width">175dp</dimen>
-    <dimen name="drawer_bima_icon_height">84dp</dimen>
 
     <!-- doctor on call -->
     <dimen name="doctor_call_icon_width">165dp</dimen>
     <dimen name="doctor_call_icon_height">165dp</dimen>
     <dimen name="doctor_call_title_text_size">30sp</dimen>
     <dimen name="doctor_call_info_text_size">20sp</dimen>
-
-    <!-- profile -->
-    <dimen name="profile_picture_width_height">150dp</dimen>
-
-    <!-- about -->
-    <dimen name="about_bima_icon_width">200dp</dimen>
-    <dimen name="about_bima_icon_height">100dp</dimen>
-
-    <!-- dialog -->
-    <dimen name="dialog_min_width">300dp</dimen>
 
 </resources>

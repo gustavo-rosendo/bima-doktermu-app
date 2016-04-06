@@ -17,6 +17,7 @@ import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.ProfileActivity;
 import com.bima.dokterpribadimu.view.activities.SubscriptionActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
+import com.bima.dokterpribadimu.view.components.DokterPribadimuProgressDialog;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
 import static com.bima.dokterpribadimu.view.components.DokterPribadimuDialog.DIALOG_TYPE_ERROR;
@@ -30,18 +31,22 @@ import static com.bima.dokterpribadimu.view.components.DokterPribadimuDialog.OnD
 public class BaseFragment extends RxFragment {
 
     DokterPribadimuDialog dialog;
+    DokterPribadimuProgressDialog progressDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         dialog = new DokterPribadimuDialog(getActivity());
+        progressDialog = new DokterPribadimuProgressDialog(getActivity());
     }
 
     @Override
     public void onDestroy() {
         dialog.setClickListener(null);
         dialog = null;
+
+        progressDialog = null;
 
         super.onDestroy();
     }
@@ -100,6 +105,18 @@ public class BaseFragment extends RxFragment {
                 .setDialogButtonText(buttonText)
                 .setClickListener(clickListener)
                 .showDialog();
+    }
+
+    protected void showProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.show();
+        }
+    }
+
+    protected void dismissProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     protected void startDoctorCallActivity() {

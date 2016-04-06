@@ -89,6 +89,7 @@
     <string name="sign_out">Keluar</string>
 
     <!-- dialog -->
+    <string name="dialog_processing">Sedang memproses. Mohon tunggu.</string>
     <string name="dialog_get_started">Mulai</string>
     <string name="dialog_try_once_more">Coba lagi</string>
     <string name="dialog_take_me_home">Kembali</string>

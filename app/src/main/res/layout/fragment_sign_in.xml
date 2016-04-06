@@ -12,6 +12,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="@dimen/generic_large_padding"
+            android:paddingBottom="@dimen/generic_xlarge_padding"
             android:paddingLeft="@dimen/generic_xlarge_padding"
             android:paddingStart="@dimen/generic_xlarge_padding"
             android:paddingRight="@dimen/generic_large_padding"

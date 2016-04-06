@@ -180,6 +180,7 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
 
                     @Override
                     public void onStart() {
+                        showProgressDialog();
                     }
 
                     @Override
@@ -188,11 +189,15 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
 
                     @Override
                     public void onError(Throwable e) {
+                        dismissProgressDialog();
+
                         handleError(TAG, e.getMessage());
                     }
 
                     @Override
                     public void onNext(BaseResponse registerResponse) {
+                        dismissProgressDialog();
+
                         if (registerResponse.getStatus() == Constants.Status.SUCCESS) {
                             StorageUtils.putString(
                                     RegisterNameActivity.this,
