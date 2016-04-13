@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +23,8 @@ import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.List;
 
@@ -53,6 +56,8 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
     private Location location;
     private LocationTracker locationTracker;
 
+    private Tracker mTracker;
+
     public static Intent create(Context context, UserProfile userProfile, String password) {
         Intent intent = new Intent(context, RegisterNameActivity.class);
         intent.putExtra(USER_PROFILE, GsonUtils.toJson(userProfile));
@@ -67,7 +72,19 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
 
         DokterPribadimuApplication.getComponent().inject(this);
 
+        // Obtain the shared Tracker instance.
+        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+
         init();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.d(TAG, "Setting screen name: " + TAG);
+        mTracker.setScreenName("Image~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

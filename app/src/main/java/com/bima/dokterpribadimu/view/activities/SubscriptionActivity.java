@@ -39,6 +39,8 @@ import com.bima.dokterpribadimu.utils.iabutil.IabResult;
 import com.bima.dokterpribadimu.utils.iabutil.Purchase;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.Calendar;
 import java.util.List;
@@ -103,6 +105,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
     private Location location;
     private LocationTracker locationTracker;
 
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +113,9 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
         binding = DataBindingUtil.setContentView(this, R.layout.activity_subscription);
 
         DokterPribadimuApplication.getComponent().inject(this);
+
+        // Obtain the shared Tracker instance.
+        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
 
         init();
     }
@@ -299,6 +305,10 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
     @Override
     protected void onResume() {
         super.onResume();
+
+        Log.d(TAG, "Setting screen name: " + TAG);
+        mTracker.setScreenName("Image~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
         initBillingClient();
     }
