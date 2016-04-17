@@ -23,6 +23,7 @@ import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
+import com.google.ads.conversiontracking.AdWordsConversionReporter;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -221,6 +222,11 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
                                     Constants.KEY_USER_PROFILE,
                                     GsonUtils.toJson(userProfile)
                             );
+
+                            //Doktermu AdMobs Tracking - Registration
+                            //Google Android in-app conversion tracking snippet for successful Registration
+                            AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
+                                    "926691219", "bo6bCMjIu2UQk9_wuQM", "1.00", true);
 
                             showSuccessDialog(
                                     R.drawable.ic_smiley,

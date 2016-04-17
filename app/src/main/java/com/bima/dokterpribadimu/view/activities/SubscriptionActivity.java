@@ -39,6 +39,7 @@ import com.bima.dokterpribadimu.utils.iabutil.IabResult;
 import com.bima.dokterpribadimu.utils.iabutil.Purchase;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
+import com.google.ads.conversiontracking.AdWordsConversionReporter;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -456,6 +457,11 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                         subscription.setPolicyExpiryDate(subscription.getSubscriptionEnd());
                         subscription.setAccessToken(
                                 UserProfileUtils.getUserProfile(SubscriptionActivity.this).getAccessToken());
+
+                        //Doktermu Tracking - Subscription
+                        //Google Android in-app conversion tracking snippet for successful Subscription
+                        AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
+                                "926691219", "yAbrCLeyyGUQk9_wuQM", "1.00", true);
 
                         registerSubscription(subscription);
 
