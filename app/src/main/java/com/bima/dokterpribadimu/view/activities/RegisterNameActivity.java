@@ -228,6 +228,14 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
                             AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
                                     "926691219", "bo6bCMjIu2UQk9_wuQM", "1.00", true);
 
+                            //Google Analytics to track number of registrations (all: from AdMobs + others)
+                            mTracker.send(new HitBuilders.EventBuilder()
+                                    .setCategory("Growth")
+                                    .setAction("Registration")
+                                    .setLabel(userProfile.getLoginType())
+                                    .setValue(1)
+                                    .build());
+
                             showSuccessDialog(
                                     R.drawable.ic_smiley,
                                     getString(R.string.dialog_signed_in),

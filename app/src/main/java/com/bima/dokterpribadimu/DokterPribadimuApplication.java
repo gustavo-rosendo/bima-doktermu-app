@@ -40,6 +40,8 @@ public class DokterPribadimuApplication extends Application {
             // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
             mTracker = analytics.newTracker(R.xml.global_tracker);
         }
+        //Enable Advertising Features
+        mTracker.enableAdvertisingIdCollection(true);
         return mTracker;
     }
     

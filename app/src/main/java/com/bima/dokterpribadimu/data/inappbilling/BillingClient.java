@@ -218,6 +218,17 @@ public class BillingClient implements IabBroadcastListener {
         return "";
     }
 
+    public long getPriceAmountMicros(String sku) {
+        SkuDetails skuDetails = null;
+        if(sku != null) {
+            skuDetails = inventory.getSkuDetails(sku);
+        }
+        if (inventory != null && skuDetails != null) {
+            return inventory.getSkuDetails(sku).getPriceAmountMicros();
+        }
+        return 0;
+    }
+
     public String getProductName(String sku) {
         SkuDetails skuDetails = null;
         if(sku != null) {

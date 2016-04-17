@@ -42,6 +42,8 @@ import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.analytics.ecommerce.Product;
+import com.google.android.gms.analytics.ecommerce.ProductAction;
 
 import java.util.Calendar;
 import java.util.List;
@@ -196,6 +198,15 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
             @Override
             public void onClick(View view) {
                 if (validateSubscription()) {
+                    //Google Analytics to track users that clicked the "subscribe" button
+                    //to initiate the purchase flow (not yet successfully subscribed)
+                    //we want to track how many users start the purchase flow vs. how many successfully purchase
+                    mTracker.send(new HitBuilders.EventBuilder()
+                            .setCategory("Growth")
+                            .setAction("Button-Click")
+                            .setLabel("Subscription")
+                            .setValue(1)
+                            .build());
 
                     UserProfile userProfile = UserProfileUtils.getUserProfile(SubscriptionActivity.this);
                     if (userProfile != null) {
@@ -459,9 +470,28 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                                 UserProfileUtils.getUserProfile(SubscriptionActivity.this).getAccessToken());
 
                         //Doktermu Tracking - Subscription
-                        //Google Android in-app conversion tracking snippet for successful Subscription
+                        //Google AdWords Android in-app conversion tracking snippet for successful Subscription
                         AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
                                 "926691219", "yAbrCLeyyGUQk9_wuQM", "1.00", true);
+
+                        //Google Analytics tracking for successful Subscription
+                        Product product = new Product()
+                                .setName(subscription.getProductName())
+                                .setPrice(billingClient.getPriceAmountMicros(info.getSku()));
+
+                        ProductAction productAction = new ProductAction(ProductAction.ACTION_PURCHASE)
+                                .setTransactionId(info.getOrderId());
+
+                        // Add the transaction data to the event.
+                        HitBuilders.EventBuilder builder = new HitBuilders.EventBuilder()
+                                .setCategory("Growth")
+                                .setAction("Purchase")
+                                .setLabel("Subscription")
+                                .addProduct(product)
+                                .setProductAction(productAction);
+
+                        // Send the transaction data with the event.
+                        mTracker.send(builder.build());
 
                         registerSubscription(subscription);
 
