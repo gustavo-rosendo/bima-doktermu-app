@@ -18,13 +18,6 @@
             android:src="@drawable/bima_logo_icon_white"
             android:contentDescription="@string/app_name"/>
 
-        <ImageView
-            android:layout_width="@dimen/loading_bima_text_width"
-            android:layout_height="@dimen/loading_bima_text_height"
-            android:src="@drawable/bima_logo_text_white"
-            android:layout_marginTop="@dimen/generic_normal_margin"
-            android:contentDescription="@string/app_name"/>
-
     </LinearLayout>
 
 </layout>
