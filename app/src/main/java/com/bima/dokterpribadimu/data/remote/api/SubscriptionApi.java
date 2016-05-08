@@ -88,7 +88,7 @@ public class SubscriptionApi extends BaseApi<SubscriptionService> {
                             subscription.getPrice(),
                             subscription.getAccessToken()
                     ).execute();
-                    if (response.isSuccess()) {
+                    if (response.isSuccessful()) {
                         subscriber.onNext((BaseResponse) response.body());
                         subscriber.onCompleted();
                     } else {

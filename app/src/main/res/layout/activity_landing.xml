@@ -26,40 +26,28 @@
             android:contentDescription="@string/app_name"/>
 
         <Button
-            android:id="@+id/login_facebook_button"
+            android:id="@+id/login_sign_in_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/generic_button_height"
             android:layout_marginBottom="@dimen/generic_large_margin"
-            android:layout_above="@+id/login_gplus_button"
-            android:text="@string/sign_in_fb"
-            android:textAllCaps="false"
+            android:layout_above="@+id/login_register_button"
+            android:text="@string/sign_in"
+            android:textAllCaps="true"
             android:textColor="@android:color/white"
             android:textSize="16sp"
-            android:background="@drawable/rounded_fb_blue_bg_selector"/>
+            android:background="@drawable/rounded_bima_blue_bg_selector"/>
 
         <Button
-            android:id="@+id/login_gplus_button"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/generic_button_height"
-            android:layout_marginBottom="@dimen/generic_large_margin"
-            android:layout_above="@+id/login_email_button"
-            android:text="@string/sign_in_gplus"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:background="@drawable/rounded_gplus_red_bg_selector"/>
-
-        <Button
-            android:id="@+id/login_email_button"
+            android:id="@+id/login_register_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/generic_button_height"
             android:layout_marginBottom="@dimen/generic_large_margin"
             android:layout_alignParentBottom="true"
-            android:text="@string/sign_in_email"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
+            android:text="@string/register"
+            android:textAllCaps="true"
+            android:textColor="@color/bima_blue"
             android:textSize="16sp"
-            android:background="@drawable/rounded_email_green_bg_selector"/>
+            android:background="@drawable/rounded_bima_blue_o_bg_selector"/>
 
     </RelativeLayout>
 

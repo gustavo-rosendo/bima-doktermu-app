@@ -1,10 +1,10 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 
@@ -21,17 +21,18 @@ public class SignInActivity extends BaseActivity {
 
     private static final String TAG = SignInActivity.class.getSimpleName();
 
-    private static final int SIGN_IN = 0;
-    private static final int REGISTER = 1;
-
-    private static final int[] STRING_IDS = {
-            R.string.sign_in,
-            R.string.register
-    };
+    private static final String SIGN_IN = "sign_in";
 
     private ActivitySignInBinding binding;
 
     private Tracker mTracker;
+    private boolean isSignIn;
+
+    public static Intent create(Context context, boolean isSignIn) {
+        Intent intent = new Intent(context, SignInActivity.class);
+        intent.putExtra(SIGN_IN, isSignIn);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,8 @@ public class SignInActivity extends BaseActivity {
     }
 
     private void initViews() {
+        isSignIn = getIntent().getBooleanExtra(SIGN_IN, true);
+
         binding.toolbarBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,54 +66,13 @@ public class SignInActivity extends BaseActivity {
             }
         });
 
-        FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-
-            @Override
-            public Fragment getItem(int position) {
-                switch (position) {
-                    case SIGN_IN:
-                        return SignInFragment.newInstance();
-                    case REGISTER:
-                        return RegisterFragment.newInstance();
-                    default:
-                        return SignInFragment.newInstance();
-                }
-            }
-
-            @Override
-            public int getCount() {
-                return STRING_IDS.length;
-            }
-
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return getString(STRING_IDS[position]);
-            }
-
-            @Override
-            public int getItemPosition(Object object) {
-                return POSITION_NONE;
-            }
-        };
-
-        binding.signinViewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                binding.toolbarTitle.setText(getString(STRING_IDS[position]));
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
-        binding.signinViewpager.setAdapter(adapter);
-        binding.signinViewpagerTab.setupWithViewPager(binding.signinViewpager);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (isSignIn) {
+            ft.replace(R.id.signin_frame, SignInFragment.newInstance()).commit();
+            binding.toolbarTitle.setText(getString(R.string.sign_in));
+        } else {
+            ft.replace(R.id.signin_frame, RegisterFragment.newInstance()).commit();
+            binding.toolbarTitle.setText(getString(R.string.register));
+        }
     }
 }

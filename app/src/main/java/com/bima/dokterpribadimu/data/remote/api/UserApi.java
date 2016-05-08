@@ -121,7 +121,7 @@ public class UserApi extends BaseApi<UserService> {
                             userProfile.getName(), userProfile.getMsisdn(),
                             userProfile.getDateOfBirth(), userProfile.getGender(),
                             userProfile.getEmail(), userProfile.getAccessToken()).execute();
-                    if (response.isSuccess()) {
+                    if (response.isSuccessful()) {
                         subscriber.onNext((BaseResponse) response.body());
                         subscriber.onCompleted();
                     } else {

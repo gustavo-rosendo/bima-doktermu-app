@@ -131,8 +131,8 @@ public class BaseActivity extends RxAppCompatActivity {
         startActivity(new Intent(this, LandingActivity.class));
     }
 
-    protected void startSignInActivity() {
-        startActivity(new Intent(this, SignInActivity.class));
+    protected void startSignInActivity(boolean isSignIn) {
+        startActivity(SignInActivity.create(this, isSignIn));
     }
 
     protected void startDoctorCallActivityOnTop() {

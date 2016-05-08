@@ -18,10 +18,93 @@
             android:paddingRight="@dimen/generic_large_padding"
             android:paddingEnd="@dimen/generic_large_padding">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/register_facebook_button"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/generic_button_height"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="@dimen/generic_large_margin"
+                    android:text="@string/sign_in_fb"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:background="@drawable/rounded_fb_blue_bg_selector"/>
+
+                <Button
+                    android:id="@+id/register_gplus_button"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/generic_button_height"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/generic_normal_margin"
+                    android:layout_marginStart="@dimen/generic_normal_margin"
+                    android:layout_marginBottom="@dimen/generic_large_margin"
+                    android:text="@string/sign_in_gplus"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:background="@drawable/rounded_gplus_red_bg_selector"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_large_margin"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:layout_weight="1"
+                    android:background="@color/grey_dark"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/generic_normal_margin"
+                    android:layout_marginLeft="@dimen/generic_normal_margin"
+                    android:layout_marginRight="@dimen/generic_normal_margin"
+                    android:layout_marginEnd="@dimen/generic_normal_margin"
+                    android:text="@string/or"
+                    android:textAllCaps="true"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="@dimen/generic_subheading_text_size"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:layout_weight="1"
+                    android:background="@color/grey_dark"/>
+
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/register_name_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_xlarge_margin">
+
+                <EditText
+                    android:id="@+id/register_name_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/full_name_hint"
+                    android:textSize="@dimen/generic_subheading_text_size"
+                    android:inputType="textEmailAddress"/>
+
+            </android.support.design.widget.TextInputLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/register_email_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_large_margin">
 
                 <EditText
                     android:id="@+id/register_email_field"
@@ -50,6 +133,23 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/register_agent_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_large_margin">
+
+                <EditText
+                    android:id="@+id/register_agent_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:hint="@string/agent_number"
+                    android:textSize="@dimen/generic_subheading_text_size"
+                    android:inputType="numberSigned"/>
+
+            </android.support.design.widget.TextInputLayout>
+
             <Button
                 android:id="@+id/register_button"
                 android:layout_width="wrap_content"
@@ -61,7 +161,7 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/generic_button_text_size"
-                android:background="@drawable/rounded_green_bg_selector"/>
+                android:background="@drawable/rounded_bima_blue_bg_selector"/>
 
         </LinearLayout>
 

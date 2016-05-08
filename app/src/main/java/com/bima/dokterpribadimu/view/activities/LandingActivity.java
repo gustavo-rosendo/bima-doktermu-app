@@ -105,7 +105,7 @@ public class LandingActivity extends BaseActivity implements EasyPermissions.Per
     }
 
     private void initViews() {
-        binding.loginFacebookButton.setOnClickListener(new View.OnClickListener() {
+        /*binding.loginFacebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loginClient = FacebookClient.getInstance();
@@ -121,12 +121,19 @@ public class LandingActivity extends BaseActivity implements EasyPermissions.Per
                 loginClient.init(LandingActivity.this, loginListener);
                 loginClient.signIn();
             }
-        });
+        });*/
 
-        binding.loginEmailButton.setOnClickListener(new View.OnClickListener() {
+        binding.loginSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startSignInActivity();
+                startSignInActivity(true);
+            }
+        });
+
+        binding.loginRegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startSignInActivity(false);
             }
         });
     }

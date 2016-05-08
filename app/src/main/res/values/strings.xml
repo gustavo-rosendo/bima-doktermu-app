@@ -6,9 +6,9 @@
     <string name="facebook_app_id">1568480343444186</string>
 
     <!-- sign in -->
-    <string name="sign_in_fb">Masuk dengan Facebook</string>
-    <string name="sign_in_gplus">Masuk dengan Google</string>
-    <string name="sign_in_email">Masuk dengan Email</string>
+    <string name="sign_in_fb">Facebook</string>
+    <string name="sign_in_gplus">Google</string>
+    <string name="sign_in_email">Masuk</string>
     <string name="sign_in">Masuk</string>
     <string name="register">Daftar</string>
     <string name="email">Email</string>
@@ -21,6 +21,7 @@
         Namun apabila anda direferensikan oleh agen atau mitra kerja BIMA, mohon isi nomor referensi pada kolom yang tertera.</string>
     <string name="agent_number">Nomor Referensi</string>
     <string name="validate">Kirim</string>
+    <string name="or">Atau</string>
 
     <!-- home -->
     <string name="home">Home</string>

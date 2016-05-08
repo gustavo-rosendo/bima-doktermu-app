@@ -3,14 +3,16 @@
 
     <item android:state_pressed="true">
         <shape>
-            <corners android:radius="@dimen/generic_large_corner_radius"/>
+            <corners android:topRightRadius="@dimen/generic_large_corner_radius"
+                android:bottomRightRadius="@dimen/generic_large_corner_radius"/>
             <solid android:color="@color/gplus_red_dark"/>
         </shape>
     </item>
 
     <item>
         <shape>
-            <corners android:radius="@dimen/generic_large_corner_radius"/>
+            <corners android:topRightRadius="@dimen/generic_large_corner_radius"
+                android:bottomRightRadius="@dimen/generic_large_corner_radius"/>
             <solid android:color="@color/gplus_red"/>
         </shape>
     </item>
