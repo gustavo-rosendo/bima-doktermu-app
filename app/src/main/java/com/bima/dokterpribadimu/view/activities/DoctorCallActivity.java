@@ -3,6 +3,7 @@ package com.bima.dokterpribadimu.view.activities;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
@@ -13,11 +14,17 @@ import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.fragments.DoctorCallFragment;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 public class DoctorCallActivity extends BaseActivity {
 
     private ActivityDoctorCallBinding binding;
     private DrawerFragment drawerFragment;
+
+    private static final String TAG = DoctorCallActivity.class.getSimpleName();
+
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +33,19 @@ public class DoctorCallActivity extends BaseActivity {
 
         DokterPribadimuApplication.getComponent().inject(this);
 
+        // Obtain the shared Tracker instance.
+        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+
         init();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.d(TAG, "Setting screen name: " + TAG);
+        mTracker.setScreenName("Image~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

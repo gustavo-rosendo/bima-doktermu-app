@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +23,9 @@ import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
+import com.google.ads.conversiontracking.AdWordsConversionReporter;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.List;
 
@@ -53,6 +57,8 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
     private Location location;
     private LocationTracker locationTracker;
 
+    private Tracker mTracker;
+
     public static Intent create(Context context, UserProfile userProfile, String password) {
         Intent intent = new Intent(context, RegisterNameActivity.class);
         intent.putExtra(USER_PROFILE, GsonUtils.toJson(userProfile));
@@ -67,7 +73,19 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
 
         DokterPribadimuApplication.getComponent().inject(this);
 
+        // Obtain the shared Tracker instance.
+        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+
         init();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.d(TAG, "Setting screen name: " + TAG);
+        mTracker.setScreenName("Image~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override
@@ -199,6 +217,19 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
                                     Constants.KEY_USER_PROFILE,
                                     GsonUtils.toJson(userProfile)
                             );
+
+                            //Doktermu AdMobs Tracking - Registration
+                            //Google Android in-app conversion tracking snippet for successful Registration
+                            AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
+                                    "926691219", "bo6bCMjIu2UQk9_wuQM", "1.00", true);
+
+                            //Google Analytics to track number of registrations (all: from AdMobs + others)
+                            mTracker.send(new HitBuilders.EventBuilder()
+                                    .setCategory("Growth")
+                                    .setAction("Registration")
+                                    .setLabel(userProfile.getLoginType())
+                                    .setValue(1)
+                                    .build());
 
                             showSuccessDialog(
                                     R.drawable.ic_smiley,

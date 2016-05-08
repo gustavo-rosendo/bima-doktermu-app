@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
@@ -13,8 +14,12 @@ import com.bima.dokterpribadimu.databinding.ActivitySignInBinding;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.fragments.RegisterFragment;
 import com.bima.dokterpribadimu.view.fragments.SignInFragment;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 public class SignInActivity extends BaseActivity {
+
+    private static final String TAG = SignInActivity.class.getSimpleName();
 
     private static final int SIGN_IN = 0;
     private static final int REGISTER = 1;
@@ -26,6 +31,8 @@ public class SignInActivity extends BaseActivity {
 
     private ActivitySignInBinding binding;
 
+    private Tracker mTracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +40,19 @@ public class SignInActivity extends BaseActivity {
 
         DokterPribadimuApplication.getComponent().inject(this);
 
+        // Obtain the shared Tracker instance.
+        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+
         initViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.d(TAG, "Setting screen name: " + TAG);
+        mTracker.setScreenName("Image~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     private void initViews() {

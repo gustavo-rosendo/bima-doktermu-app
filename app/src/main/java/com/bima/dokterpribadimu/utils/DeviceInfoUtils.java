@@ -28,6 +28,7 @@ public class DeviceInfoUtils {
     private Integer simMcc;
     private String simOperatorName;
     private String msisdnPhoneNumber;
+    private String networkOperatorName;
 
     protected DeviceInfoUtils(Context context) {
         telephonyManager = (TelephonyManager) context
@@ -60,6 +61,7 @@ public class DeviceInfoUtils {
             simMcc = Integer.valueOf(operator.substring(0,3));
             simMnc = Integer.valueOf(operator.substring(3));
             simOperatorName = telephonyManager.getSimOperatorName();
+            networkOperatorName = telephonyManager.getNetworkOperatorName();
         }
         catch (IndexOutOfBoundsException e) {}
 

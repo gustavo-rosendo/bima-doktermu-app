@@ -5,7 +5,9 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.ActivityLoadingBinding;
 import com.bima.dokterpribadimu.model.UserProfile;
@@ -13,6 +15,9 @@ import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
+import com.facebook.appevents.AppEventsLogger;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +30,8 @@ import rx.schedulers.Schedulers;
 
 public class LoadingActivity extends BaseActivity {
 
+    private static final String TAG = LoadingActivity.class.getSimpleName();
+
     private static final int SLEEP_DURATION = 4;
     private static final int ANIMATION_DURATION = 1000;
     private static final float ANIMATE_FROM = 0.9f;
@@ -36,13 +43,27 @@ public class LoadingActivity extends BaseActivity {
 
     private AnimatorSet scaleAnim;
 
+    private Tracker mTracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_loading);
 
+        // Obtain the shared Tracker instance.
+        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+
         initAnim();
         runSplash();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.d(TAG, "Setting screen name: " + TAG);
+        mTracker.setScreenName("Image~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

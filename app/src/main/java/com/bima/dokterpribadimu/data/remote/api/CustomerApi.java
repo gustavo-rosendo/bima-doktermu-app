@@ -33,29 +33,17 @@ public class CustomerApi extends BaseApi<CustomerService> {
      * CustomerApi implementation to register customer
      * @return Observable<BaseResponse>
      */
-    public Observable<BaseResponse> registerCustomer(final Customer customer) {
+    public Observable<BaseResponse> updateCustomer(final Customer customer) {
         return Observable.create(new Observable.OnSubscribe<BaseResponse>() {
             @Override
             public void call(final Subscriber<? super BaseResponse> subscriber) {
                 try {
                     Response response = customerService.registerCustomer(
                                                 customer.getName(),
-                                                customer.getDob(),
                                                 customer.getMsisdn(),
-                                                customer.getProduct(),
-                                                customer.getSubscriptionType(),
-                                                customer.getDateOfPurchase(),
-                                                customer.getPolicyActiveDate(),
-                                                customer.getPolicyExpiryDate(),
-                                                customer.getEmail(),
+                                                customer.getDob(),
                                                 customer.getGender(),
-                                                customer.getSubscriptionLat(),
-                                                customer.getSubscriptionLong(),
-                                                customer.getSubscriptionToken(),
-                                                customer.getDeviceType(),
-                                                customer.getDeviceImei(),
-                                                customer.getDeviceSoftware(),
-                                                customer.getDeviceOperator(),
+                                                customer.getEmail(),
                                                 customer.getAccessToken()
                                         ).execute();
                     if (response.isSuccessful()) {

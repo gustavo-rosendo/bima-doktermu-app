@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -25,6 +26,8 @@ import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.List;
 
@@ -49,6 +52,8 @@ public class LandingActivity extends BaseActivity implements EasyPermissions.Per
     private LoginClient loginClient;
     private DeviceInfoUtils deviceInfoUtils;
 
+    private Tracker mTracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +61,19 @@ public class LandingActivity extends BaseActivity implements EasyPermissions.Per
 
         DokterPribadimuApplication.getComponent().inject(this);
 
+        // Obtain the shared Tracker instance.
+        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+
         init();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        Log.d(TAG, "Setting screen name: " + TAG);
+        mTracker.setScreenName("Image~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);

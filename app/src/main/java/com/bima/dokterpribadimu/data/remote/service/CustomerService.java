@@ -13,25 +13,13 @@ import retrofit2.http.POST;
 public interface CustomerService {
 
     @FormUrlEncoded
-    @POST("/developer/v1/customer")
+    @POST("/v1/customer")
     Call<BaseResponse> registerCustomer(
             @Field("name") String name,
+            @Field("phone_number") String phoneNumber,
             @Field("dob") String dob,
-            @Field("msisdn") String msisdn,
-            @Field("product") String product,
-            @Field("subscription_type") String subscriptionType,
-            @Field("date_of_purchase") String dateOfPurchase,
-            @Field("policy_active_date") String policyActiveDate,
-            @Field("policy_expiry_date") String policyExpiryDate,
-            @Field("email") String email,
             @Field("gender") String gender,
-            @Field("subscription_lat") Double subscriptionLat,
-            @Field("subscription_long") Double subscriptionLong,
-            @Field("subscription_token") String subscriptionToken,
-            @Field("device_type") String deviceType,
-            @Field("device_imei") String deviceImei,
-            @Field("device_software") String deviceSoftware,
-            @Field("device_operator") String deviceOperator,
+            @Field("email") String email,
             @Field("access_token") String accessToken
     );
 }

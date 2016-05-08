@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,7 @@ import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
 import com.bima.dokterpribadimu.data.inappbilling.BillingInitializationListener;
 import com.bima.dokterpribadimu.data.inappbilling.QueryInventoryListener;
 import com.bima.dokterpribadimu.data.remote.api.SubscriptionApi;
+import com.bima.dokterpribadimu.data.remote.api.UserApi;
 import com.bima.dokterpribadimu.databinding.ActivitySubscriptionBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.Subscription;
@@ -37,6 +39,11 @@ import com.bima.dokterpribadimu.utils.iabutil.IabResult;
 import com.bima.dokterpribadimu.utils.iabutil.Purchase;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
+import com.google.ads.conversiontracking.AdWordsConversionReporter;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.analytics.ecommerce.Product;
+import com.google.android.gms.analytics.ecommerce.ProductAction;
 
 import java.util.Calendar;
 import java.util.List;
@@ -83,11 +90,16 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
     private static final String MONTH_STRING_NOV = "Nopember";
     private static final String MONTH_STRING_DEC = "Desember";
 
+    private static boolean isRegisterSubscriptionDone = false;
+
     @Inject
     BillingClient billingClient;
 
     @Inject
     SubscriptionApi subscriptionApi;
+
+    @Inject
+    UserApi userApi;
 
     private Subscription subscription;
 
@@ -96,6 +108,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
     private Location location;
     private LocationTracker locationTracker;
 
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,10 +117,14 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
 
         DokterPribadimuApplication.getComponent().inject(this);
 
+        // Obtain the shared Tracker instance.
+        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+
         init();
     }
 
     private void init() {
+        isRegisterSubscriptionDone = false; //reset the flag
         initLocation();
         initViews();
     }
@@ -133,17 +150,36 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                         Constants.KEY_USER_SUBSCIPTION,
                         isSubscribed);
 
-                if(isSubscribed && subscription != null) {
+                //GUS - updateSubscription must be called ONLY once (after registerSubscription) in this class
+                //      to ensure that the Email template "successful subscription" will be sent only once.
+                if (isSubscribed && isRegisterSubscriptionDone) {
+                    if (subscription == null) {
+                        subscription = new Subscription();
+                        String orderId = StorageUtils.getString(
+                                SubscriptionActivity.this,
+                                Constants.KEY_USER_SUBSCRIPTION_ORDER_ID,
+                                "");
+                        subscription.setOrderId(orderId);
+                    }
                     subscription.setProductName(billingClient.getProductName(BillingClient.SKU_DOKTER_PRIBADIKU_MONTHLY));
                     subscription.setPrice(billingClient.getProductPrice(BillingClient.SKU_DOKTER_PRIBADIKU_MONTHLY));
+                    subscription.setAccessToken(
+                            UserProfileUtils.getUserProfile(SubscriptionActivity.this).getAccessToken());
 
-                    registerSubscription(subscription);
+                    //call the API to update the product name and the price
+                    updateSubscription(subscription);
                 }
             }
 
             @Override
             public void onFailed() {
                 // TODO: handle this
+                showErrorDialog(
+                        R.drawable.ic_bug,
+                        getString(R.string.dialog_failed),
+                        getString(R.string.dialog_sign_in_failed_message),
+                        getString(R.string.dialog_try_once_more),
+                        null);
             }
         });
 
@@ -162,62 +198,39 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
             @Override
             public void onClick(View view) {
                 if (validateSubscription()) {
-                    if (!billingClient.isSubscribedToDokterPribadiKu()) {
-                        billingClient.launchSubscriptionPurchaseFlow(new IabHelper.OnIabPurchaseFinishedListener() {
-                            @Override
-                            public void onIabPurchaseFinished(IabResult result, Purchase info) {
-                                if (result.isSuccess()) {
-                                    subscription = new Subscription();
-                                    subscription.setAccessToken(
-                                            UserProfileUtils.getUserProfile(SubscriptionActivity.this).getAccessToken());
-                                    subscription.setSubscriptionType(Constants.SUBSCRIPTION_TYPE_NEW);
-                                    subscription.setSubscriptionToken(info.getToken());
-                                    subscription.setName(binding.subscriptionNameField.getText().toString());
-                                    subscription.setOrderDate(TimeUtils.getSubscriptionOrderDate());
-                                    subscription.setSubscriptionStart(TimeUtils.getSubscriptionStartDate());
-                                    subscription.setSubscriptionEnd(TimeUtils.getSubscriptionEndDate());
-                                    subscription.setOrderId(info.getOrderId());
-                                    subscription.setPhoneNumber(binding.subscriptionPhoneField.getText().toString());
-                                    subscription.setProductName(billingClient.getProductName(info.getSku()));
-                                    subscription.setPrice(billingClient.getProductPrice(info.getSku()));
-                                    subscription.setDateOfBirth(
-                                            SubscriptionUtils
-                                                    .formatDateOfBirth(binding.subscriptionDobField.getText().toString())
-                                            );
+                    //Google Analytics to track users that clicked the "subscribe" button
+                    //to initiate the purchase flow (not yet successfully subscribed)
+                    //we want to track how many users start the purchase flow vs. how many successfully purchase
+                    mTracker.send(new HitBuilders.EventBuilder()
+                            .setCategory("Growth")
+                            .setAction("Button-Click")
+                            .setLabel("Subscription")
+                            .setValue(1)
+                            .build());
 
-                                    String genderField = binding.subscriptionGenderSpinner.getSelectedItem().toString();
-                                    if (genderField != null) {
-                                        if (genderField.contains("Laki") || genderField.contains("laki") || genderField.contains("Male")) {
-                                            genderField = "Male";
-                                        } else if (genderField.contains("Perempuan") || genderField.contains("perempuan") || genderField.contains("Female")) {
-                                            genderField = "Female";
-                                        } else {
-                                            genderField = ""; //don't save anything, better than saving the wrong gender :P
-                                        }
-                                    }
-                                    subscription.setGender(genderField);
+                    UserProfile userProfile = UserProfileUtils.getUserProfile(SubscriptionActivity.this);
+                    if (userProfile != null) {
+                        //Prepare to call API /v1/user/update
+                        userProfile.setName(binding.subscriptionNameField.getText().toString());
+                        userProfile.setDateOfBirth(
+                                SubscriptionUtils
+                                        .formatDateOfBirth(binding.subscriptionDobField.getText().toString())
+                        );
+                        String genderField = SubscriptionUtils.getChosenGender(
+                                binding.subscriptionGenderSpinner.getSelectedItem().toString());
+                        userProfile.setGender(genderField);
+                        userProfile.setMsisdn(binding.subscriptionPhoneField.getText().toString());
 
-                                    subscription.setDateOfPurchase(subscription.getOrderDate());
-                                    subscription.setPolicyActiveDate(subscription.getSubscriptionStart());
-                                    subscription.setPolicyExpiryDate(subscription.getSubscriptionEnd());
+                        //call API /v1/user/update and check for the result
+                        updateUser(userProfile);
 
-                                    if (location != null) {
-                                        subscription.setSubscriptionLat(location.getLatitude());
-                                        subscription.setSubscriptionLong(location.getLongitude());
-                                    } else {
-                                        subscription.setSubscriptionLat(0.0);
-                                        subscription.setSubscriptionLong(0.0);
-                                    }
-                                } else {
-                                    showErrorDialog(
-                                            R.drawable.ic_bug,
-                                            getString(R.string.dialog_failed),
-                                            getString(R.string.dialog_sign_in_failed_message),
-                                            getString(R.string.dialog_try_once_more),
-                                            null);
-                                }
-                            }
-                        });
+                    } else {
+                        showErrorDialog(
+                                R.drawable.ic_bug,
+                                getString(R.string.dialog_failed),
+                                getString(R.string.dialog_sign_in_failed_message),
+                                getString(R.string.dialog_try_once_more),
+                                null);
                     }
                 }
             }
@@ -304,6 +317,10 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
     @Override
     protected void onResume() {
         super.onResume();
+
+        Log.d(TAG, "Setting screen name: " + TAG);
+        mTracker.setScreenName("Image~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
         initBillingClient();
     }
@@ -416,8 +433,119 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
         }
     }
 
+    private void initPurchaseFlow() {
+        if (!billingClient.isSubscribedToDokterPribadiKu()) {
+            billingClient.launchSubscriptionPurchaseFlow(new IabHelper.OnIabPurchaseFinishedListener() {
+                @Override
+                public void onIabPurchaseFinished(IabResult result, Purchase info) {
+                    if (result.isSuccess()) {
+                        subscription = new Subscription();
+                        subscription.setSubscriptionType(Constants.SUBSCRIPTION_TYPE_NEW);
+
+                        if (location != null) {
+                            subscription.setSubscriptionLat(location.getLatitude());
+                            subscription.setSubscriptionLong(location.getLongitude());
+                        } else {
+                            subscription.setSubscriptionLat(0.0);
+                            subscription.setSubscriptionLong(0.0);
+                        }
+
+                        subscription.setSubscriptionToken(info.getToken());
+                        subscription.setSubscriptionStart(TimeUtils.getSubscriptionStartDate());
+                        subscription.setSubscriptionEnd(TimeUtils.getSubscriptionEndDate());
+                        subscription.setOrderDate(TimeUtils.getSubscriptionOrderDate());
+                        subscription.setOrderId(info.getOrderId());
+                        //save the orderId for later use by /v1/subscription/update
+                        StorageUtils.putString(
+                                SubscriptionActivity.this,
+                                Constants.KEY_USER_SUBSCRIPTION_ORDER_ID,
+                                subscription.getOrderId());
+                        subscription.setPaymentMethod(""); //for now it's not sent by Google but maybe in the future it will
+                        subscription.setProductName(billingClient.getProductName(info.getSku()));
+                        subscription.setPrice(billingClient.getProductPrice(info.getSku()));
+                        subscription.setDateOfPurchase(subscription.getOrderDate());
+                        subscription.setPolicyActiveDate(subscription.getSubscriptionStart());
+                        subscription.setPolicyExpiryDate(subscription.getSubscriptionEnd());
+                        subscription.setAccessToken(
+                                UserProfileUtils.getUserProfile(SubscriptionActivity.this).getAccessToken());
+
+                        //Doktermu Tracking - Subscription
+                        //Google AdWords Android in-app conversion tracking snippet for successful Subscription
+                        AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
+                                "926691219", "yAbrCLeyyGUQk9_wuQM", "1.00", true);
+
+                        //Google Analytics tracking for successful Subscription
+                        Product product = new Product()
+                                .setName(subscription.getProductName())
+                                .setPrice(billingClient.getPriceAmountMicros(info.getSku()));
+
+                        ProductAction productAction = new ProductAction(ProductAction.ACTION_PURCHASE)
+                                .setTransactionId(info.getOrderId());
+
+                        // Add the transaction data to the event.
+                        HitBuilders.EventBuilder builder = new HitBuilders.EventBuilder()
+                                .setCategory("Growth")
+                                .setAction("Purchase")
+                                .setLabel("Subscription")
+                                .addProduct(product)
+                                .setProductAction(productAction);
+
+                        // Send the transaction data with the event.
+                        mTracker.send(builder.build());
+
+                        registerSubscription(subscription);
+
+                    } else {
+                        showErrorDialog(
+                                R.drawable.ic_bug,
+                                getString(R.string.dialog_failed),
+                                getString(R.string.dialog_google_play_failed_message)
+                                        + result.getMessage(), //GUS - show Google's message to the user because it's more specific
+                                getString(R.string.dialog_try_once_more),
+                                null);
+                    }
+                }
+            });
+        }
+    }
+
     /**
-     * Do user login.
+     * Update user's data inputted in the subscription form.
+     * @param userProfile user's data
+     */
+    private void updateUser(final UserProfile userProfile) {
+        userApi.update(userProfile)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse>() {
+
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse response) {
+                        if (response.getStatus() == Constants.Status.SUCCESS) {
+                            initPurchaseFlow();
+                        } else {
+                            handleError(TAG, response.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * Do subscription registration after Google's successful response.
      * @param subscription user's subscription data
      */
     private void registerSubscription(final Subscription subscription) {
@@ -447,6 +575,43 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                     public void onNext(BaseResponse response) {
                         dismissProgressDialog();
 
+                        if (response.getStatus() == Constants.Status.SUCCESS) {
+                            isRegisterSubscriptionDone = true;
+                            //now query Google to update the product_name and the price
+                            initBillingClient();
+                        } else {
+                            handleError(TAG, response.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * Update subscription product name and price after it is registered successfully.
+     * @param subscription user's subscription data
+     */
+    private void updateSubscription(final Subscription subscription) {
+        subscriptionApi.updateSubscription(subscription)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse>() {
+
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse response) {
                         if (response.getStatus() == Constants.Status.SUCCESS) {
                             showSuccessDialog(
                                     R.drawable.ic_dialog_success,

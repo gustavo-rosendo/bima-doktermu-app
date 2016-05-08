@@ -11,7 +11,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 apply plugin: 'com.android.databinding'
 apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'com.google.gms.google-services'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
@@ -27,8 +26,8 @@ android {
         applicationId "com.bima.dokterpribadimu"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 12 // Major -> Millions, Minor -> Thousands, Patch -> Hundreds. E.g 1.3.72 == 1003072
-        versionName "0.0.12"
+        versionCode 15 // Major -> Millions, Minor -> Thousands, Patch -> Hundreds. E.g 1.3.72 == 1003072
+        versionName "0.0.15"
 
         buildConfigField "String", "BASE_URL", "\"https://bimaindonesia.co.id/\""
         buildConfigField "String", "BILL_KEY", "\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj1oiLMNCvso09PcCv4RxGmtKOfYZLR4NrwQ/1FcuRX4vkfYvu9MEZA5eqUpS0NtTnHQGq0YfsAYeZ560bLweADhJUbo+nIIChOLPnnuWYE+HKbKz82jQN+ZCaN06FgSSAtmDz1JUTMVeZasn0LQ3XXa65WF7CozFB1VasyxumYmf3cOtVi/9z+tSxqS3TIxgPn6AMQvcupZ4v5g84vnW2mNdh5Jo55mfhhFko//+JbYIV5BZjyKuHTpPKUxyqPLCToy9D5PyDrK1sNRRQtUu5ihiDWVFbz8ddJCG46o6w9xIebmJQO+/QzkBtjwd/babg83+AHam0OsqfPRaGcAfIwIDAQAB\""
@@ -74,93 +73,90 @@ dependencies {
     final BINDING_ADAPTER_VERSION = '1.1.0'
     final CRASHLYTICS_VERSION = '2.5.5'
     final FACEBOOK_SDK_VERSION = '4.10.0'
-    final PLAY_SERVICE_AUTH_VERSION = '8.3.0'
+    final PLAY_SERVICE_AUTH_VERSION = '8.4.0'
     final CIRCLE_IMAGE_VIEW_VERSION = '2.0.0'
     final LOCATION_TRACKER_VERSION = '3.2'
     final EASY_PERMISSION_VERSION = '0.1.5'
-
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    final PLAY_SERVICE_ANALYTICS_VERSION = '8.4.0'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-
     /**
-     * Support libraries
+     *  Support libraries
      */
     compile "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
-
     /**
-     *  Dependency Injections
+     *   Dependency Injections
      */
     apt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     compile "com.google.dagger:dagger:$DAGGER_VERSION"
     compile 'javax.annotation:jsr250-api:1.0'
-
     /**
-     * The world's most powerful, yet lightest weight crash reporting solution
+     *  The world's most powerful, yet lightest weight crash reporting solution
      */
     compile("com.crashlytics.sdk.android:crashlytics:$CRASHLYTICS_VERSION@aar") {
         transitive = true;
     }
-
     /**
-     *  A powerful image downloading and caching library for Android
+     *   A powerful image downloading and caching library for Android
      */
     compile "com.squareup.picasso:picasso:$PICASSO_VERSION"
-
     /**
-     *  Gson is needed to ease JSON handling and parsing.
+     *   Gson is needed to ease JSON handling and parsing.
      */
     compile "com.google.code.gson:gson:$GSON_VERSION"
-
     /**
-     *  The smart folks at Square open sourced their HTTP-wrapper libraries, which is awesome.
-     *  So let's use it.
+     *   The smart folks at Square open sourced their HTTP-wrapper libraries, which is awesome.
+     *   So let's use it.
      */
     compile "com.squareup.retrofit2:retrofit:$RETROFIT_2_VERSION"
     compile "com.squareup.retrofit2:converter-gson:$RETROFIT_2_VERSION"
     compile "com.squareup.okhttp3:okhttp:$OKHTTP_3_VERSION"
     compile "com.squareup.okhttp3:logging-interceptor:$OKHTTP_3_VERSION"
-
     /**
-     *  Most of the components in this application will communicate through ReactiveX
-     *  programming model. That's why we need to use many of its libraries.
+     *   Most of the components in this application will communicate through ReactiveX
+     *   programming model. That's why we need to use many of its libraries.
      */
     compile "io.reactivex:rxjava:$RX_JAVA_VERSION"
     compile "io.reactivex:rxandroid:$RX_ANDROID_VERSION"
     compile "com.trello:rxlifecycle:$RX_LIFECYCLE_VERSION"
     compile "com.trello:rxlifecycle-components:$RX_LIFECYCLE_VERSION"
-
     /**
-     * Easy way to bind collections to listviews and recyclerviews with Android Data Binding framework.
+     *  Easy way to bind collections to listviews and recyclerviews with Android Data Binding framework.
      */
     compile "me.tatarka.bindingcollectionadapter:bindingcollectionadapter:$BINDING_ADAPTER_VERSION"
     compile "me.tatarka.bindingcollectionadapter:bindingcollectionadapter-recyclerview:$BINDING_ADAPTER_VERSION"
-
     /**
-     * Facebook SDK
+     *  Facebook SDK
      */
     compile "com.facebook.android:facebook-android-sdk:$FACEBOOK_SDK_VERSION"
-
     /**
-     * Google+ Google Sign-In
+     *  Google+ Google Sign-In
      */
     compile "com.google.android.gms:play-services-auth:$PLAY_SERVICE_AUTH_VERSION"
-
     /**
-     * A circular ImageView for Android
+     *  A circular ImageView for Android
      */
     compile "de.hdodenhof:circleimageview:$CIRCLE_IMAGE_VIEW_VERSION"
-
     /**
-     * Android helper that tracks user location
+     *  Android helper that tracks user location
      */
     compile "com.github.quentin7b:android-location-tracker:$LOCATION_TRACKER_VERSION"
-
     /**
-     * Simplify Android M system permissions
+     *  Simplify Android M system permissions
      */
     compile "pub.devrel:easypermissions:$EASY_PERMISSION_VERSION"
+    /**
+     *  Google Play Services for Google Analytics
+     */
+    compile "com.google.android.gms:play-services-analytics:$PLAY_SERVICE_ANALYTICS_VERSION"
+    compile files('libs/GoogleConversionTrackingSdk-2.2.4.jar')
 }
+
+/*
+ * For some weird reason, we must put appy plugin after dependencies for it to work
+ */
+apply plugin: 'com.google.gms.google-services'
