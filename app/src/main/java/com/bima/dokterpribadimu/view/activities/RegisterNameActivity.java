@@ -19,6 +19,7 @@ import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.GsonUtils;
+import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
@@ -239,7 +240,7 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
                                     new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
                                         @Override
                                         public void onClick(DokterPribadimuDialog dialog) {
-                                            startDoctorCallActivityOnTop();
+                                            IntentUtils.startHomeActivityOnTop(RegisterNameActivity.this);
                                         }
                                     });
                         } else {

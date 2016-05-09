@@ -13,6 +13,7 @@ import com.bima.dokterpribadimu.databinding.ActivityLoadingBinding;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.GsonUtils;
+import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.facebook.appevents.AppEventsLogger;
@@ -116,7 +117,7 @@ public class LoadingActivity extends BaseActivity {
                         if (userProfile == null) {
                             startLandingActivity();
                         } else {
-                            startDoctorCallActivityOnTop();
+                            IntentUtils.startHomeActivityOnTop(LoadingActivity.this);
                         }
 
                         finish();

@@ -23,11 +23,12 @@ public class Constants {
     public static final String UNABLE_TO_RESOLVE_HOST = "Unable to resolve host";
     public static final String EMAIL_IS_NOT_REGISTERED = "Email belum terdaftar";
 
-    public static final int DRAWER_TYPE_DOCTOR_ON_CALL = 0;
-    public static final int DRAWER_TYPE_ABOUT = 1;
-    public static final int DRAWER_TYPE_PROFILE = 2;
-    public static final int DRAWER_TYPE_SIGN_OUT = 3;
-    public static final int DRAWER_TYPE_OTHER = 4;
+    public static final int DRAWER_TYPE_HOME = 0;
+    public static final int DRAWER_TYPE_DOCTOR_ON_CALL = 1;
+    public static final int DRAWER_TYPE_ABOUT = 2;
+    public static final int DRAWER_TYPE_PROFILE = 3;
+    public static final int DRAWER_TYPE_SIGN_OUT = 4;
+    public static final int DRAWER_TYPE_OTHER = 5;
 
     public static final String LOGIN_TYPE_EMAIL = "email";
     public static final String LOGIN_TYPE_FACEBOOK = "facebook";

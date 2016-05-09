@@ -12,6 +12,7 @@ import com.bima.dokterpribadimu.data.sns.facebook.FacebookClient;
 import com.bima.dokterpribadimu.data.sns.gplus.GplusClient;
 import com.bima.dokterpribadimu.databinding.FragmentDrawerBinding;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 
@@ -97,6 +98,19 @@ public class DrawerFragment extends BaseFragment {
                 binding.drawerProfileButton.setSelected(true);
                 break;
         }
+
+        binding.drawerBimaImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onDrawerItemPressedListener != null) {
+                    onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_HOME);
+                }
+
+                if (activeDrawer != Constants.DRAWER_TYPE_HOME) {
+                    IntentUtils.startHomeActivityOnTop(getActivity());
+                }
+            }
+        });
 
         binding.drawerDoctorCallButton.setOnClickListener(new View.OnClickListener() {
             @Override

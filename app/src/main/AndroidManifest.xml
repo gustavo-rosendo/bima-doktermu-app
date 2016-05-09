@@ -44,9 +44,11 @@
         <activity android:name=".view.activities.AboutActivity" />
         <activity android:name=".view.activities.SubscriptionActivity" />
         <activity android:name=".view.activities.BookCallActivity" />
-        <activity android:name=".view.activities.RegisterNameActivity"></activity>
+        <activity android:name=".view.activities.RegisterNameActivity" />
+        <activity android:name=".view.activities.HomeActivity" />
 
-        <receiver android:name="com.google.ads.conversiontracking.InstallReceiver"
+        <receiver
+            android:name="com.google.ads.conversiontracking.InstallReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />

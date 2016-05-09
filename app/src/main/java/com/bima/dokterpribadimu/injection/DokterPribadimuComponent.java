@@ -5,6 +5,7 @@ import android.app.Application;
 import com.bima.dokterpribadimu.view.activities.AboutActivity;
 import com.bima.dokterpribadimu.view.activities.BookCallActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
+import com.bima.dokterpribadimu.view.activities.HomeActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.ProfileActivity;
 import com.bima.dokterpribadimu.view.activities.RegisterNameActivity;
@@ -36,6 +37,7 @@ public interface DokterPribadimuComponent {
     void inject(LandingActivity landingActivity);
     void inject(SignInActivity signInActivity);
     void inject(RegisterNameActivity registerNameActivity);
+    void inject(HomeActivity homeActivity);
     void inject(DoctorCallActivity doctorCallActivity);
     void inject(SubscriptionActivity subscriptionActivity);
     void inject(BookCallActivity bookCallActivity);
