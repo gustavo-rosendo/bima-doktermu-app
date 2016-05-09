@@ -34,38 +34,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/generic_xlarge_margin"
-                android:text="@string/about_bima_learn_more"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"/>
-
-            <LinearLayout
-                android:id="@+id/about_website_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/generic_normal_margin"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/about_bima_website"
-                    android:gravity="center"
-                    android:textColor="@color/bima_blue"
-                    android:textSize="16sp"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/generic_separator_height"
-                    android:background="@color/bima_blue"/>
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/generic_xlarge_margin"
                 android:text="@string/about_bima_give_us_call"
                 android:gravity="center"
                 android:textColor="@android:color/black"
@@ -83,6 +51,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/about_bima_phone_number"
+                    android:gravity="center"
+                    android:textColor="@color/bima_blue"
+                    android:textSize="16sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:background="@color/bima_blue"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_xlarge_margin"
+                android:text="@string/about_bima_learn_more"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"/>
+
+            <LinearLayout
+                android:id="@+id/about_website_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_normal_margin"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_bima_website"
                     android:gravity="center"
                     android:textColor="@color/bima_blue"
                     android:textSize="16sp"/>
