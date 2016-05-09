@@ -23,6 +23,10 @@
     <dimen name="landing_bima_text_width">125dp</dimen>
     <dimen name="landing_bima_text_height">75dp</dimen>
 
+    <!-- home -->
+    <dimen name="home_bima_text_width">95dp</dimen>
+    <dimen name="home_bima_text_height">50dp</dimen>
+
     <!-- drawer -->
     <dimen name="drawer_width">260dp</dimen>
 

@@ -3,50 +3,42 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <data>
+        <variable
+            name="viewModel"
+            type="com.bima.dokterpribadimu.view.fragments.HomeFragment.HomeListViewModel"/>
+        <import
+            type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+    </data>
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_height="match_parent"
-        android:padding="@dimen/generic_xlarge_padding"
-        android:orientation="vertical"
-        android:background="@drawable/home_bg">
+        android:layout_width="match_parent">
 
-        <TextView
-            android:id="@+id/home_welcome_text"
-            android:layout_width="wrap_content"
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/generic_xlarge_margin"
-            android:layout_centerHorizontal="true"
-            android:text="@string/welcome"
-            android:textColor="@android:color/white"
-            android:textSize="36sp"/>
+            android:layout_width="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/home_welcome_text"
-            android:layout_marginTop="@dimen/generic_large_margin"
-            android:paddingLeft="@dimen/generic_large_padding"
-            android:paddingStart="@dimen/generic_large_padding"
-            android:paddingRight="@dimen/generic_large_padding"
-            android:paddingEnd="@dimen/generic_large_padding"
-            android:gravity="center_horizontal"
-            android:text="@string/home_info"
-            android:textColor="@android:color/white"
-            android:textSize="24sp"/>
+            <ImageView
+                android:layout_width="@dimen/home_bima_text_width"
+                android:layout_height="@dimen/home_bima_text_height"
+                android:layout_marginTop="@dimen/generic_large_margin"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/bima_logo_text"
+                android:contentDescription="@string/app_name"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/generic_button_height"
-            android:minWidth="225dp"
-            android:layout_marginBottom="@dimen/generic_large_margin"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:text="@string/home_lets_get_started"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:background="@drawable/rounded_bima_blue_bg_selector"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/upcoming_recycler"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/generic_large_margin"
+                app:layoutManager="@{LayoutManagers.grid(2)}"
+                app:items="@{viewModel.items}"
+                app:itemView="@{viewModel.itemView}"/>
 
-    </RelativeLayout>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </layout>

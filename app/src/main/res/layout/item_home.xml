@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="home_item_viewmodel"
+            type="com.bima.dokterpribadimu.viewmodel.HomeItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/generic_large_padding"
+        android:onClick="@{home_item_viewmodel.clickListener}">
+        
+        <com.bima.dokterpribadimu.view.components.AspectRatioImageView
+            android:id="@+id/home_item_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@{home_item_viewmodel.icon}"
+            app:aspectRatio="1.0"
+            app:aspectRatioEnabled="true"
+            app:dominantMeasurement="width"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textSize="@dimen/generic_subheading_text_size"
+            android:text="@{home_item_viewmodel.title}"/>
+
+    </LinearLayout>
+
+</layout>

@@ -69,6 +69,7 @@
     <string name="drawer_news">Artikel</string>
     <string name="drawer_partners">Mitra</string>
     <string name="drawer_subscribe">Aktivasi</string>
+    <string name="drawer_settings">Pengaturan</string>
 
     <!-- subscription -->
     <string name="subscription">Form berlangganan</string>
