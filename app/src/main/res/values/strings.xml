@@ -54,6 +54,7 @@
     <string name="about_bima_phone_number">0274&#8211;2112462</string>
 
     <!-- profile -->
+    <string name="profile">Profil</string>
     <string name="my_profile">Profil saya</string>
     <string name="profile_personal_info">Info personal saya</string>
     <string name="profile_email_address">Alamat email</string>
@@ -63,7 +64,7 @@
 
     <!-- drawer -->
     <string name="drawer_doctor_on_call">Doktermu</string>
-    <string name="drawer_about_bima">Tentang Bima</string>
+    <string name="drawer_about_bima">Tentang BIMA</string>
     <string name="drawer_coming_soon">Fitur yang akan datang</string>
     <string name="drawer_news">Berita</string>
     <string name="drawer_partners">Mitra</string>

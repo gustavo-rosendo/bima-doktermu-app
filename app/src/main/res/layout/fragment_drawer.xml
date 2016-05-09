@@ -40,7 +40,63 @@
                 android:layout_marginLeft="@dimen/generic_large_margin"
                 android:layout_marginStart="@dimen/generic_large_margin"
                 android:text="@string/drawer_doctor_on_call"
-                android:textSize="18sp"
+                android:textSize="@dimen/generic_title_text_size"
+                android:textColor="@color/grey_dark"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/drawer_partners_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:layout_below="@+id/drawer_doctor_call_button"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:background="@drawable/drawer_button_bg_selector">
+
+            <ImageView
+                android:layout_width="@dimen/generic_small_button_height"
+                android:layout_height="@dimen/generic_small_button_height"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
+                android:src="@drawable/ic_drawer_partners"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/generic_large_margin"
+                android:layout_marginStart="@dimen/generic_large_margin"
+                android:text="@string/drawer_partners"
+                android:textSize="@dimen/generic_title_text_size"
+                android:textColor="@color/grey_dark"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/drawer_news_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:layout_below="@+id/drawer_partners_button"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:background="@drawable/drawer_button_bg_selector">
+
+            <ImageView
+                android:layout_width="@dimen/generic_small_button_height"
+                android:layout_height="@dimen/generic_small_button_height"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
+                android:src="@drawable/ic_drawer_news"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/generic_large_margin"
+                android:layout_marginStart="@dimen/generic_large_margin"
+                android:text="@string/drawer_news"
+                android:textSize="@dimen/generic_title_text_size"
                 android:textColor="@color/grey_dark"/>
 
         </LinearLayout>
@@ -49,7 +105,7 @@
             android:id="@+id/drawer_about_bima_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/generic_button_height"
-            android:layout_below="@+id/drawer_doctor_call_button"
+            android:layout_below="@+id/drawer_news_button"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:clickable="true"
@@ -68,7 +124,7 @@
                 android:layout_marginLeft="@dimen/generic_large_margin"
                 android:layout_marginStart="@dimen/generic_large_margin"
                 android:text="@string/drawer_about_bima"
-                android:textSize="18sp"
+                android:textSize="@dimen/generic_title_text_size"
                 android:textColor="@color/grey_dark"/>
 
         </LinearLayout>
@@ -77,7 +133,7 @@
             android:id="@+id/drawer_profile_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/generic_button_height"
-            android:layout_below="@+id/drawer_about_bima_button"
+            android:layout_above="@+id/drawer_sign_out_button"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:clickable="true"
@@ -95,83 +151,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/generic_large_margin"
                 android:layout_marginStart="@dimen/generic_large_margin"
-                android:text="@string/my_profile"
-                android:textSize="18sp"
+                android:text="@string/profile"
+                android:textSize="@dimen/generic_title_text_size"
                 android:textColor="@color/grey_dark"/>
-
-        </LinearLayout>
-
-        <View
-            android:id="@+id/separator"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/generic_separator_height"
-            android:layout_marginTop="@dimen/generic_xlarge_margin"
-            android:layout_marginBottom="@dimen/generic_large_margin"
-            android:layout_below="@+id/drawer_profile_button"
-            android:background="@color/grey_a1"/>
-
-        <TextView
-            android:id="@+id/drawer_coming_soon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/generic_xlarge_margin"
-            android:layout_marginStart="@dimen/generic_xlarge_margin"
-            android:layout_marginBottom="@dimen/generic_normal_margin"
-            android:layout_below="@+id/separator"
-            android:text="@string/drawer_coming_soon"
-            android:textAllCaps="true"
-            android:textColor="@color/grey_dark"
-            android:textSize="12sp"/>
-
-        <LinearLayout
-            android:id="@+id/drawer_news_button"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/generic_button_height"
-            android:layout_below="@+id/drawer_coming_soon"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="@dimen/generic_small_button_height"
-                android:layout_height="@dimen/generic_small_button_height"
-                android:layout_marginLeft="@dimen/generic_xlarge_margin"
-                android:layout_marginStart="@dimen/generic_xlarge_margin"
-                android:src="@drawable/ic_drawer_news"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/generic_large_margin"
-                android:layout_marginStart="@dimen/generic_large_margin"
-                android:text="@string/drawer_news"
-                android:textSize="18sp"
-                android:textColor="@color/grey_a1"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/drawer_partners_button"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/generic_button_height"
-            android:layout_below="@+id/drawer_news_button"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="@dimen/generic_small_button_height"
-                android:layout_height="@dimen/generic_small_button_height"
-                android:layout_marginLeft="@dimen/generic_xlarge_margin"
-                android:layout_marginStart="@dimen/generic_xlarge_margin"
-                android:src="@drawable/ic_drawer_partners"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/generic_large_margin"
-                android:layout_marginStart="@dimen/generic_large_margin"
-                android:text="@string/drawer_partners"
-                android:textSize="18sp"
-                android:textColor="@color/grey_a1"/>
 
         </LinearLayout>
 
@@ -199,7 +181,7 @@
                 android:layout_marginLeft="@dimen/generic_large_margin"
                 android:layout_marginStart="@dimen/generic_large_margin"
                 android:text="@string/sign_out"
-                android:textSize="18sp"
+                android:textSize="@dimen/generic_title_text_size"
                 android:textColor="@color/grey_dark"/>
 
         </LinearLayout>
