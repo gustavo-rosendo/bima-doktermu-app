@@ -18,6 +18,7 @@ import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.TokenUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
+import com.bima.dokterpribadimu.view.activities.SignInActivity;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.bima.dokterpribadimu.view.components.ForgotPasswordDialog;
@@ -66,6 +67,20 @@ public class SignInFragment extends BaseFragment {
     }
 
     private void initViews() {
+        binding.signInFacebookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((SignInActivity) getActivity()).snsLogin(Constants.LOGIN_TYPE_FACEBOOK);
+            }
+        });
+
+        binding.signInGplusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((SignInActivity) getActivity()).snsLogin(Constants.LOGIN_TYPE_GOOGLE);
+            }
+        });
+
         binding.signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

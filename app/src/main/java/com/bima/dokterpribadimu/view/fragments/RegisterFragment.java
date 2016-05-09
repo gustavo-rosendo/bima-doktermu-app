@@ -19,6 +19,7 @@ import com.bima.dokterpribadimu.utils.TokenUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 import com.bima.dokterpribadimu.view.activities.RegisterNameActivity;
+import com.bima.dokterpribadimu.view.activities.SignInActivity;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 
 import java.util.List;
@@ -80,6 +81,20 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
     }
 
     private void initViews() {
+        binding.registerFacebookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((SignInActivity) getActivity()).snsLogin(Constants.LOGIN_TYPE_FACEBOOK);
+            }
+        });
+
+        binding.registerGplusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((SignInActivity) getActivity()).snsLogin(Constants.LOGIN_TYPE_GOOGLE);
+            }
+        });
+
         binding.registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
