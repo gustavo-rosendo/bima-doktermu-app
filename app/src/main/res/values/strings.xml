@@ -104,9 +104,8 @@
     <string name="dialog_signed_in">Berhasil!</string>
     <string name="dialog_signed_in_message">Anda telah berhasil masuk.</string>
     <string name="dialog_password_changed_message">Kata sandi anda telah berhasil diubah</string>
-    <string name="dialog_late">Layanan tutup!</string>
-    <string name="dialog_late_message">Doktermu sudah pulang untuk beristirahat dan bertemu keluarganya.
-        Dokter akan siap melayani besok jam 6 pagi. Sampai jumpa besok dan selamat malam!</string>
+    <string name="dialog_late">Layanan Tutup</string>
+    <string name="dialog_late_message">Mohon buat janji pada jam operasional: 06.00 – 22.00 WIB</string>
     <string name="no_connection">Tidak terhubung dengan internet</string>
     <string name="no_connection_message">Tidak terhubung ke internet.
         Silakan cek koneksi anda dan coba lagi.</string>
