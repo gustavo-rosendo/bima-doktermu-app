@@ -66,8 +66,9 @@
     <string name="drawer_doctor_on_call">Doktermu</string>
     <string name="drawer_about_bima">Tentang BIMA</string>
     <string name="drawer_coming_soon">Fitur yang akan datang</string>
-    <string name="drawer_news">Berita</string>
+    <string name="drawer_news">Artikel</string>
     <string name="drawer_partners">Mitra</string>
+    <string name="drawer_subscribe">Aktivasi</string>
 
     <!-- subscription -->
     <string name="subscription">Form berlangganan</string>

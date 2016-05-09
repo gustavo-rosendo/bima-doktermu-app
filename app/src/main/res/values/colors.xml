@@ -21,4 +21,6 @@
 
     <color name="email_green">#18B791</color>
     <color name="email_green_dark">#139274</color>
+
+    <color name="yellow">#F9B106</color>
 </resources>

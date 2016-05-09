@@ -37,8 +37,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/generic_large_margin"
-                android:layout_marginStart="@dimen/generic_large_margin"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
                 android:text="@string/drawer_doctor_on_call"
                 android:textSize="@dimen/generic_title_text_size"
                 android:textColor="@color/grey_dark"/>
@@ -65,8 +65,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/generic_large_margin"
-                android:layout_marginStart="@dimen/generic_large_margin"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
                 android:text="@string/drawer_partners"
                 android:textSize="@dimen/generic_title_text_size"
                 android:textColor="@color/grey_dark"/>
@@ -93,8 +93,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/generic_large_margin"
-                android:layout_marginStart="@dimen/generic_large_margin"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
                 android:text="@string/drawer_news"
                 android:textSize="@dimen/generic_title_text_size"
                 android:textColor="@color/grey_dark"/>
@@ -121,11 +121,39 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/generic_large_margin"
-                android:layout_marginStart="@dimen/generic_large_margin"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
                 android:text="@string/drawer_about_bima"
                 android:textSize="@dimen/generic_title_text_size"
                 android:textColor="@color/grey_dark"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/drawer_subscribe_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:layout_above="@+id/drawer_profile_button"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:background="@drawable/drawer_button_bg_selector">
+
+            <ImageView
+                android:layout_width="@dimen/generic_small_button_height"
+                android:layout_height="@dimen/generic_small_button_height"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
+                android:src="@drawable/ic_drawer_subscribe"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
+                android:text="@string/drawer_subscribe"
+                android:textSize="@dimen/generic_title_text_size"
+                android:textColor="@color/yellow"/>
 
         </LinearLayout>
 
@@ -149,8 +177,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/generic_large_margin"
-                android:layout_marginStart="@dimen/generic_large_margin"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
                 android:text="@string/profile"
                 android:textSize="@dimen/generic_title_text_size"
                 android:textColor="@color/grey_dark"/>
@@ -178,8 +206,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/generic_large_margin"
-                android:layout_marginStart="@dimen/generic_large_margin"
+                android:layout_marginLeft="@dimen/generic_xlarge_margin"
+                android:layout_marginStart="@dimen/generic_xlarge_margin"
                 android:text="@string/sign_out"
                 android:textSize="@dimen/generic_title_text_size"
                 android:textColor="@color/grey_dark"/>
