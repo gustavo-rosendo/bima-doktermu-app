@@ -44,6 +44,14 @@
     <string name="book_call_about">Apa topik anda?</string>
     <string name="book_my_call">Buat janji sekarang</string>
 
+    <!-- partners -->
+    <string name="partners_inactive_info">Segera aktivasi dan dapatkan potongan harga dari
+        mitra kami di sekitar Anda!</string>
+    <string name="partners_active_info">Temukan dan dapatkan potongan harga dari
+        mitra kami di sekitar Anda!</string>
+    <string name="partners_subscribe">Aktivasi</string>
+    <string name="partners_find">Cari Mitra</string>
+
     <!-- about bima -->
     <string name="about_bima">Tentang BIMA</string>
     <string name="about_bima_info">BIMA adalah perusahaan teknologi informasi yang menyediakan
@@ -193,5 +201,8 @@
         <item>Perempuan</item>
         <item>Pilih jenis kelamin</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

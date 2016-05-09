@@ -14,6 +14,7 @@ import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.FragmentHomeBinding;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 import com.bima.dokterpribadimu.viewmodel.HomeItemViewModel;
@@ -50,7 +51,7 @@ public class HomeFragment extends BaseFragment {
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // TODO: start partners
+                    IntentUtils.startPartnersActivity(getActivity());
                 }
             },
             new View.OnClickListener() {

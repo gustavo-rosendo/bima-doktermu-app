@@ -25,10 +25,13 @@ public class Constants {
 
     public static final int DRAWER_TYPE_HOME = 0;
     public static final int DRAWER_TYPE_DOCTOR_ON_CALL = 1;
-    public static final int DRAWER_TYPE_ABOUT = 2;
-    public static final int DRAWER_TYPE_PROFILE = 3;
-    public static final int DRAWER_TYPE_SIGN_OUT = 4;
-    public static final int DRAWER_TYPE_OTHER = 5;
+    public static final int DRAWER_TYPE_PARTNERS = 2;
+    public static final int DRAWER_TYPE_NEWS = 3;
+    public static final int DRAWER_TYPE_ABOUT = 4;
+    public static final int DRAWER_TYPE_SUBSCRIBE = 5;
+    public static final int DRAWER_TYPE_PROFILE = 6;
+    public static final int DRAWER_TYPE_SIGN_OUT = 7;
+    public static final int DRAWER_TYPE_OTHER = 8;
 
     public static final String LOGIN_TYPE_EMAIL = "email";
     public static final String LOGIN_TYPE_FACEBOOK = "facebook";

@@ -91,6 +91,9 @@ public class DrawerFragment extends BaseFragment {
             case Constants.DRAWER_TYPE_DOCTOR_ON_CALL:
                 binding.drawerDoctorCallButton.setSelected(true);
                 break;
+            case Constants.DRAWER_TYPE_PARTNERS:
+                binding.drawerPartnersButton.setSelected(true);
+                break;
             case Constants.DRAWER_TYPE_ABOUT:
                 binding.drawerAboutBimaButton.setSelected(true);
                 break;
@@ -121,6 +124,19 @@ public class DrawerFragment extends BaseFragment {
 
                 if (activeDrawer != Constants.DRAWER_TYPE_DOCTOR_ON_CALL) {
                     startDoctorCallActivity();
+                }
+            }
+        });
+
+        binding.drawerPartnersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onDrawerItemPressedListener != null) {
+                    onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_PARTNERS);
+                }
+
+                if (activeDrawer != Constants.DRAWER_TYPE_PARTNERS) {
+                    IntentUtils.startPartnersActivity(getActivity());
                 }
             }
         });

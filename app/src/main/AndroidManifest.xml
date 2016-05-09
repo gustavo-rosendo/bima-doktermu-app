@@ -55,6 +55,7 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".view.activities.PartnersActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/generic_xlarge_padding"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/partners_icon"
+            android:layout_width="@dimen/doctor_call_icon_width"
+            android:layout_height="@dimen/doctor_call_icon_height"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_partners"
+            android:contentDescription="@string/app_name"/>
+
+        <TextView
+            android:id="@+id/partners_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/partners_info_text"
+            android:layout_marginBottom="@dimen/generic_large_margin"
+            android:layout_centerHorizontal="true"
+            android:text="@string/drawer_partners"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/doctor_call_title_text_size"/>
+
+        <TextView
+            android:id="@+id/partners_info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/partners_button"
+            android:layout_marginBottom="@dimen/generic_xxlarge_margin"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding"
+            android:gravity="center_horizontal"
+            android:text="@string/partners_inactive_info"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/doctor_call_info_text_size"/>
+
+        <Button
+            android:id="@+id/partners_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/generic_button_height"
+            android:minWidth="225dp"
+            android:layout_marginBottom="@dimen/generic_large_margin"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/partners_subscribe"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@drawable/rounded_email_green_bg_selector"/>
+
+    </RelativeLayout>
+
+</layout>

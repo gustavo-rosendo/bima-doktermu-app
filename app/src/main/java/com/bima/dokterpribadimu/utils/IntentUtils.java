@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.bima.dokterpribadimu.view.activities.HomeActivity;
+import com.bima.dokterpribadimu.view.activities.PartnersActivity;
 
 /**
  * Created by apradanas on 5/9/16.
@@ -26,5 +27,13 @@ public class IntentUtils {
         Intent intent = new Intent(context, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
+    }
+
+    /**
+     *
+     * @param context caller's activity / fragment context
+     */
+    public static void startPartnersActivity(Context context) {
+        context.startActivity(new Intent(context, PartnersActivity.class));
     }
 }
