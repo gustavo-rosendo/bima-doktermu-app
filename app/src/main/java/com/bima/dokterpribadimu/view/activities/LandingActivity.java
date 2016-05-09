@@ -16,6 +16,7 @@ import com.bima.dokterpribadimu.data.sns.facebook.FacebookClient;
 import com.bima.dokterpribadimu.data.sns.gplus.GplusClient;
 import com.bima.dokterpribadimu.databinding.ActivityLandingBinding;
 import com.bima.dokterpribadimu.utils.DeviceInfoUtils;
+import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.facebook.appevents.AppEventsLogger;
 
@@ -88,14 +89,14 @@ public class LandingActivity extends BaseActivity implements EasyPermissions.Per
         binding.loginSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startSignInActivity(true);
+                IntentUtils.startSignInActivity(LandingActivity.this, true);
             }
         });
 
         binding.loginRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startSignInActivity(false);
+                IntentUtils.startSignInActivity(LandingActivity.this, false);
             }
         });
     }

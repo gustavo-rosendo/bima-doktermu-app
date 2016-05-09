@@ -1,6 +1,5 @@
 package com.bima.dokterpribadimu.view.base;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,10 +7,6 @@ import android.widget.Toast;
 
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.utils.Constants;
-import com.bima.dokterpribadimu.view.activities.BookCallActivity;
-import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
-import com.bima.dokterpribadimu.view.activities.LandingActivity;
-import com.bima.dokterpribadimu.view.activities.SignInActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuProgressDialog;
 import com.facebook.appevents.AppEventsLogger;
@@ -125,24 +120,6 @@ public class BaseActivity extends RxAppCompatActivity {
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
-    }
-
-    protected void startLandingActivity() {
-        startActivity(new Intent(this, LandingActivity.class));
-    }
-
-    protected void startSignInActivity(boolean isSignIn) {
-        startActivity(SignInActivity.create(this, isSignIn));
-    }
-
-    protected void startDoctorCallActivityOnTop() {
-        Intent intent = new Intent(this, DoctorCallActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
-
-    protected void startBookCallActivity() {
-        startActivity(new Intent(this, BookCallActivity.class));
     }
 
 }

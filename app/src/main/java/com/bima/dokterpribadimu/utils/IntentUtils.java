@@ -3,13 +3,34 @@ package com.bima.dokterpribadimu.utils;
 import android.content.Context;
 import android.content.Intent;
 
+import com.bima.dokterpribadimu.view.activities.BookCallActivity;
+import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.HomeActivity;
+import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersActivity;
+import com.bima.dokterpribadimu.view.activities.SignInActivity;
 
 /**
  * Created by apradanas on 5/9/16.
  */
 public class IntentUtils {
+
+    /**
+     *
+     * @param context caller's activity / fragment context
+     */
+    public static void startLandingActivity(Context context) {
+        context.startActivity(new Intent(context, LandingActivity.class));
+    }
+
+    /**
+     *
+     * @param context caller's activity / fragment context
+     * @param isSignIn true for SignIn, false for Register
+     */
+    public static void startSignInActivity(Context context, boolean isSignIn) {
+        context.startActivity(SignInActivity.create(context, isSignIn));
+    }
 
     /**
      *
@@ -35,5 +56,23 @@ public class IntentUtils {
      */
     public static void startPartnersActivity(Context context) {
         context.startActivity(new Intent(context, PartnersActivity.class));
+    }
+
+    /**
+     *
+     * @param context caller's activity / fragment context
+     */
+    public static void startBookCallActivity(Context context) {
+        context.startActivity(new Intent(context, BookCallActivity.class));
+    }
+
+    /**
+     * Start DoctorCallActivity and clear any stack behind it
+     * @param context caller's activity / fragment context
+     */
+    public static void startDoctorCallActivityOnTop(Context context) {
+        Intent intent = new Intent(context, DoctorCallActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
     }
 }

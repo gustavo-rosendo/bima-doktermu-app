@@ -29,6 +29,7 @@ import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.Subscription;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.SubscriptionUtils;
 import com.bima.dokterpribadimu.utils.TimeUtils;
@@ -621,7 +622,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                                     new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
                                         @Override
                                         public void onClick(DokterPribadimuDialog dialog) {
-                                            startBookCallActivity();
+                                            IntentUtils.startBookCallActivity(SubscriptionActivity.this);
                                             finish();
                                         }
                                     }

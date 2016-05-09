@@ -17,6 +17,7 @@ import com.bima.dokterpribadimu.data.remote.api.BookingApi;
 import com.bima.dokterpribadimu.databinding.ActivityBookCallBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.TimeUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
@@ -217,7 +218,7 @@ public class BookCallActivity extends BaseActivity {
                                     new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
                                         @Override
                                         public void onClick(DokterPribadimuDialog dialog) {
-                                            startDoctorCallActivityOnTop();
+                                            IntentUtils.startDoctorCallActivityOnTop(BookCallActivity.this);
                                         }
                                     }
                             );
