@@ -44,12 +44,8 @@ public class LandingActivity extends BaseActivity implements EasyPermissions.Per
     private static final String TAG = LandingActivity.class.getSimpleName();
     private static final int RC_PHONE_STATE_PERMISSION = 0;
 
-    @Inject
-    UserApi userApi;
-
     private ActivityLandingBinding binding;
 
-    private LoginClient loginClient;
     private DeviceInfoUtils deviceInfoUtils;
 
     private Tracker mTracker;
@@ -89,7 +85,6 @@ public class LandingActivity extends BaseActivity implements EasyPermissions.Per
 
     private void init() {
         initDeviceInfo();
-        initLoginClient();
         initViews();
     }
 
@@ -105,24 +100,6 @@ public class LandingActivity extends BaseActivity implements EasyPermissions.Per
     }
 
     private void initViews() {
-        /*binding.loginFacebookButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginClient = FacebookClient.getInstance();
-                loginClient.init(LandingActivity.this, loginListener);
-                loginClient.signIn();
-            }
-        });
-
-        binding.loginGplusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginClient = GplusClient.getInstance();
-                loginClient.init(LandingActivity.this, loginListener);
-                loginClient.signIn();
-            }
-        });*/
-
         binding.loginSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,136 +113,6 @@ public class LandingActivity extends BaseActivity implements EasyPermissions.Per
                 startSignInActivity(false);
             }
         });
-    }
-
-    private void initLoginClient() {
-        loginClient = FacebookClient.getInstance();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        loginClient.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        loginClient.onStop();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        loginClient.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private LoginListener loginListener = new LoginListener() {
-        @Override
-        public void onSuccess(UserProfile userProfile) {
-            if (deviceInfoUtils != null) {
-                userProfile.setDeviceType(
-                        String.format(
-                                Constants.DEVICE_TYPE_FORMAT,
-                                deviceInfoUtils.getBrand(),
-                                deviceInfoUtils.getProduct()));
-                userProfile.setDeviceImei(deviceInfoUtils.getDeviceId());
-                userProfile.setMsisdn(deviceInfoUtils.getMsisdnPhoneNumber());
-                userProfile.setDeviceOperator(deviceInfoUtils.getSimOperatorName());
-                userProfile.setDeviceSoftware(String.format(Constants.DEVICE_SOFTWARE_FORMAT, deviceInfoUtils.getRelease()));
-            }
-
-            login(userProfile, "");
-        }
-
-        @Override
-        public void onSignOut() {
-
-        }
-
-        @Override
-        public void onFail() {
-            showErrorDialog(
-                    R.drawable.ic_bug,
-                    getString(R.string.dialog_failed),
-                    getString(R.string.dialog_sign_in_failed_message),
-                    getString(R.string.dialog_try_once_more),
-                    null);
-        }
-
-        @Override
-        public void onCancel() {
-            Toast.makeText(
-                    LandingActivity.this,
-                    getString(R.string.dialog_sign_in_canceled_message),
-                    Toast.LENGTH_SHORT
-            ).show();
-        }
-    };
-
-    /**
-     * Do user login.
-     * @param userProfile UserProfile object from SNS login
-     */
-    private void login(final UserProfile userProfile, final String password) {
-        userApi.login(
-                    userProfile.getEmail(),
-                    password,
-                    userProfile.getLoginType(),
-                    userProfile.getAccessToken(),
-                    userProfile)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(this.<BaseResponse>bindToLifecycle())
-                .subscribe(new Subscriber<BaseResponse>() {
-
-                    @Override
-                    public void onStart() {
-                        showProgressDialog();
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        dismissProgressDialog();
-                        handleError(TAG, e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(BaseResponse signInResponse) {
-                        dismissProgressDialog();
-
-                        if (signInResponse.getStatus() == Constants.Status.SUCCESS) {
-                            StorageUtils.putString(
-                                    LandingActivity.this,
-                                    Constants.KEY_USER_PROFILE,
-                                    GsonUtils.toJson(userProfile)
-                            );
-
-                            showSuccessDialog(
-                                    R.drawable.ic_smiley,
-                                    getString(R.string.dialog_signed_in),
-                                    getString(R.string.dialog_signed_in_message),
-                                    getString(R.string.dialog_get_started),
-                                    new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
-                                        @Override
-                                        public void onClick(DokterPribadimuDialog dialog) {
-                                            startDoctorCallActivityOnTop();
-                                        }
-                                    });
-                        } else {
-                            if (signInResponse.getMessage().contains(Constants.EMAIL_IS_NOT_REGISTERED) ||
-                                    signInResponse.getMessage().equalsIgnoreCase(Constants.EMAIL_IS_NOT_REGISTERED)) {
-                                startActivity(RegisterNameActivity.create(LandingActivity.this, userProfile, password));
-                            } else {
-                                handleError(TAG, signInResponse.getMessage());
-                            }
-                        }
-                    }
-                });
     }
 
     @Override
