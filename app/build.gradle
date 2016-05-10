@@ -62,7 +62,7 @@ android {
 
     productFlavors {
         development {
-            buildConfigField "String", "BASE_URL", "\"https://bimaindonesia.co.id/\""
+            buildConfigField "String", "BASE_URL", "\"https://developer.bimaindonesia.co.id/\""
         }
 
         production {
