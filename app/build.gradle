@@ -26,7 +26,8 @@ android {
         applicationId "com.bima.dokterpribadimu"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 15 // Major -> Millions, Minor -> Thousands, Patch -> Hundreds. E.g 1.3.72 == 1003072
+        versionCode 15
+        // Major -> Millions, Minor -> Thousands, Patch -> Hundreds. E.g 1.3.72 == 1003072
         versionName "0.0.15"
 
         buildConfigField "String", "BILL_KEY", "\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj1oiLMNCvso09PcCv4RxGmtKOfYZLR4NrwQ/1FcuRX4vkfYvu9MEZA5eqUpS0NtTnHQGq0YfsAYeZ560bLweADhJUbo+nIIChOLPnnuWYE+HKbKz82jQN+ZCaN06FgSSAtmDz1JUTMVeZasn0LQ3XXa65WF7CozFB1VasyxumYmf3cOtVi/9z+tSxqS3TIxgPn6AMQvcupZ4v5g84vnW2mNdh5Jo55mfhhFko//+JbYIV5BZjyKuHTpPKUxyqPLCToy9D5PyDrK1sNRRQtUu5ihiDWVFbz8ddJCG46o6w9xIebmJQO+/QzkBtjwd/babg83+AHam0OsqfPRaGcAfIwIDAQAB\""
@@ -85,6 +86,7 @@ dependencies {
     final BINDING_ADAPTER_VERSION = '1.1.0'
     final CRASHLYTICS_VERSION = '2.5.5'
     final FACEBOOK_SDK_VERSION = '4.10.0'
+    final PLAY_SERVICE_MAPS_VERSION = '8.4.0'
     final PLAY_SERVICE_AUTH_VERSION = '8.4.0'
     final CIRCLE_IMAGE_VIEW_VERSION = '2.0.0'
     final LOCATION_TRACKER_VERSION = '3.2'
@@ -93,6 +95,7 @@ dependencies {
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+    compile 'javax.annotation:jsr250-api:1.0'
 
     /**
      *  Support libraries
@@ -108,7 +111,6 @@ dependencies {
      */
     apt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     compile "com.google.dagger:dagger:$DAGGER_VERSION"
-    compile 'javax.annotation:jsr250-api:1.0'
 
     /**
      *  The world's most powerful, yet lightest weight crash reporting solution
@@ -181,6 +183,11 @@ dependencies {
      */
     compile "com.google.android.gms:play-services-analytics:$PLAY_SERVICE_ANALYTICS_VERSION"
     compile files('libs/GoogleConversionTrackingSdk-2.2.4.jar')
+
+    /**
+     * Maps
+     */
+    compile "com.google.android.gms:play-services-maps:$PLAY_SERVICE_MAPS_VERSION"
 }
 
 /**

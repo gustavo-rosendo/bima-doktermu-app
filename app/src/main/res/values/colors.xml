@@ -2,6 +2,7 @@
 <resources>
     <color name="bima_blue">#2D63AF</color>
     <color name="bima_blue_dark">#224B84</color>
+    <color name="bima_blue_alpha">#202D63AF</color>
 
     <color name="fb_blue">#3B5998</color>
     <color name="fb_blue_dark">#2F4779</color>

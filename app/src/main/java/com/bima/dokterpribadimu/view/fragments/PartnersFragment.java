@@ -1,6 +1,7 @@
 package com.bima.dokterpribadimu.view.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.databinding.FragmentPartnersBinding;
+import com.bima.dokterpribadimu.view.activities.PartnersLandingActivity;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 
 /**
@@ -41,6 +43,11 @@ public class PartnersFragment extends BaseFragment {
     }
 
     private void initViews() {
-        // TODO
+        binding.partnersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), PartnersLandingActivity.class));
+            }
+        });
     }
 }
