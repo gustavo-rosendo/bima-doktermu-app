@@ -8,22 +8,56 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageButton
+                android:id="@+id/partners_my_location_button"
+                android:layout_width="@dimen/generic_large_button_height"
+                android:layout_height="@dimen/generic_large_button_height"
+                android:layout_marginRight="@dimen/generic_large_margin"
+                android:layout_marginEnd="@dimen/generic_large_margin"
+                android:layout_marginBottom="@dimen/generic_normal_margin"
+                android:layout_above="@+id/partners_menu_button"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/ic_my_location"
+                android:contentDescription="@string/app_name"
+                android:visibility="gone"/>
+
+            <ImageButton
+                android:id="@+id/partners_menu_button"
+                android:layout_width="@dimen/generic_large_button_height"
+                android:layout_height="@dimen/generic_large_button_height"
+                android:layout_marginRight="@dimen/generic_large_margin"
+                android:layout_marginEnd="@dimen/generic_large_margin"
+                android:layout_marginBottom="@dimen/generic_large_margin"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/ic_partners_menu"
+                android:contentDescription="@string/app_name"
+                android:visibility="gone"/>
 
             <android.support.design.widget.AppBarLayout
                 android:id="@+id/appbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/generic_large_margin"
                 android:background="@android:color/white">
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/generic_toolbar_height"
-                    android:background="@color/bima_blue"
+                    android:background="@android:color/white"
                     app:elevation="4dp"
                     app:contentInsetLeft="0dp"
                     app:contentInsetStart="0dp" >
@@ -37,7 +71,7 @@
                             android:layout_width="@dimen/generic_toolbar_button_height"
                             android:layout_height="@dimen/generic_toolbar_button_height"
                             android:padding="@dimen/generic_toolbar_image_button_padding"
-                            android:src="@drawable/ic_menu"
+                            android:src="@drawable/ic_menu_black"
                             android:background="?android:attr/selectableItemBackground"
                             android:scaleType="fitXY"/>
 
@@ -48,8 +82,8 @@
                             android:gravity="center_vertical"
                             android:layout_toRightOf="@+id/toolbar_home_button"
                             android:layout_toEndOf="@+id/toolbar_home_button"
-                            android:text="@string/doctor_on_call"
-                            android:textColor="@android:color/white"
+                            android:text="@string/partners_search_our_partners"
+                            android:textColor="@color/grey_a1"
                             android:textSize="18sp"/>
 
                     </RelativeLayout>
@@ -58,12 +92,7 @@
 
             </android.support.design.widget.AppBarLayout>
 
-            <FrameLayout
-                android:id="@+id/fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
+        </RelativeLayout>
 
         <FrameLayout
             android:id="@+id/fragment_drawer"

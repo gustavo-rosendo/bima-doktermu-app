@@ -151,6 +151,9 @@
     <!-- maps -->
     <string name="your_location">Lokasi anda</string>
 
+    <!-- partners -->
+    <string name="partners_search_our_partners">Cari mitra</string>
+
     <!-- province -->
     <string-array name="province_arrays">
         <item>Nangroe Aceh Darussalam</item>

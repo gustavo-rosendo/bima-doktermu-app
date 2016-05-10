@@ -2,11 +2,11 @@ package com.bima.dokterpribadimu.view.activities;
 
 import android.Manifest;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.View;
 
@@ -47,6 +47,8 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
     private Location location;
     private LocationTracker locationTracker;
 
+    private boolean isLocationSet = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +70,22 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
             @Override
             public void onClick(View view) {
                 binding.drawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
+
+        binding.partnersMyLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (map != null && location != null) {
+                    moveToUserLocation();
+                }
+            }
+        });
+
+        binding.partnersMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: show partners category menu
             }
         });
     }
@@ -114,6 +132,9 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         map.getUiSettings().setMapToolbarEnabled(false);
         map.getUiSettings().setZoomControlsEnabled(false);
 
+        binding.partnersMyLocationButton.setVisibility(View.VISIBLE);
+        binding.partnersMenuButton.setVisibility(View.VISIBLE);
+
         initLocation();
     }
 
@@ -151,7 +172,10 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                 public void onLocationFound(@NonNull Location location) {
                     PartnersLandingActivity.this.location = location;
 
-                    updateUserLocation();
+                    if (!isLocationSet) {
+                        isLocationSet = true;
+                        moveToUserLocation();
+                    }
                 }
 
                 @Override
@@ -177,8 +201,9 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
 
     }
 
-    private void updateUserLocation() {
+    private void moveToUserLocation() {
         if (map != null) {
+            map.clear();
             // Add a marker in user's location and move the camera
             LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
             map.addMarker(
@@ -187,14 +212,14 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                             .title(getString(R.string.your_location))
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_pin))
             );
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, DEFAULT_STREET_ZOOM_LEVEL));
 
             map.addCircle(new CircleOptions()
                     .center(userLatLng)
                     .radius(500)
                     .strokeWidth(2)
-                    .strokeColor(Color.parseColor("#2D63AF"))
-                    .fillColor(Color.parseColor("#252D63AF")));
+                    .strokeColor(ContextCompat.getColor(this, R.color.bima_blue))
+                    .fillColor(ContextCompat.getColor(this, R.color.bima_blue_alpha)));
         }
     }
 }
