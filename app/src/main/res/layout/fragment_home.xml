@@ -12,6 +12,7 @@
     </data>
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/home_scroll_view"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
@@ -21,8 +22,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="@dimen/home_bima_text_width"
-                android:layout_height="@dimen/home_bima_text_height"
+                android:layout_width="@dimen/landing_bima_text_width"
+                android:layout_height="@dimen/landing_bima_text_height"
                 android:layout_marginTop="@dimen/generic_large_margin"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/bima_logo_text"

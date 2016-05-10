@@ -117,6 +117,14 @@ public class HomeFragment extends BaseFragment {
                             clickListeners[i])
             );
         }
+
+        // scroll to top
+        binding.homeScrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                binding.homeScrollView.scrollTo(0, 0);
+            }
+        });
     }
 
     public static class HomeListViewModel {
