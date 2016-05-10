@@ -30,26 +30,28 @@
 
     <!-- doctor on call -->
     <string name="doctor_on_call">Doktermu</string>
-    <string name="doctor_on_call_info">Mulai konsultasi untuk memilih topik konsultasi.
-        Dokter akan menelponmu dalam waktu kurang dari 1 jam setelah membuat janji.</string>
+    <string name="doctor_on_call_info">Doktermu akan menjawab pertanyaan dan keluhan Anda seputar kesehatan.</string>
     <string name="doctor_on_call_book_a_call">Mulai konsultasi</string>
 
     <!-- book a call -->
     <string name="book_call_tell_us_more">Topik konsultasi</string>
     <string name="book_call_info">
-        Penyakit: Ketahui penyakit anda, penyebab, tanda-tandanya, dan langkah menghadapinya!\n\n
-        Gaya hidup sehat: konsultasikan gaya hidupmu agar menjadi lebih sehat dan bertenaga!\n\n
-        Tips: Ketahui tips seputar makanan sehat, jenis obat, dan segala informasi yang mempengaruhi kesehatanmu!</string>
+        Gejala Penyakit: Ketahui, cegah, dan tangani gejala penyakit Anda secepatnya.\n\n
+        Gaya hidup sehat: Dapatkan anjuran pola hidup sehat agar lebih bertenaga dan jauh dari penyakit!\n\n
+        Tips Kesehatan: Ketahui tips untuk menghindari/mengatasi masalah kesehatan Anda.</string>
     <string name="book_call_about">Apa topik anda?</string>
     <string name="book_my_call">Buat janji sekarang</string>
+    <string name="book_call_rules">
+        Jam buka 06.00 - 22.00 WIB\n
+        Anda akan dihubugi dalam 1 jam ke depan (maksimal)</string>
 
     <!-- about bima -->
     <string name="about_bima">Tentang BIMA</string>
-    <string name="about_bima_info">BIMA adalah perusahaan di bidang pelayanan kesehatan
-        dan asuransi mobile di Negara berkembang</string>
-    <string name="about_bima_learn_more">Untuk informasi lebih lanjut, kunjungi</string>
+    <string name="about_bima_info">BIMA memberi akses pada layanan kesehatan dan produk asuransi
+        terjangkau dengan teknologi informasi</string>
+    <string name="about_bima_learn_more">Informasi lebih lanjut</string>
     <string name="about_bima_website">www.bimaindonesia.co.id</string>
-    <string name="about_bima_give_us_call">Atau hubungi kami</string>
+    <string name="about_bima_give_us_call">Pelayanan konsumen</string>
     <string name="about_bima_phone_number">0274&#8211;2112462</string>
 
     <!-- profile -->
@@ -64,8 +66,8 @@
     <string name="drawer_doctor_on_call">Doktermu</string>
     <string name="drawer_about_bima">Tentang Bima</string>
     <string name="drawer_coming_soon">Fitur yang akan datang</string>
-    <string name="drawer_news">Berita</string>
-    <string name="drawer_partners">Mitra</string>
+    <string name="drawer_news">Artikel Kesehatan</string>
+    <string name="drawer_partners">Cari Mitra Doktermu</string>
 
     <!-- subscription -->
     <string name="subscription">Form berlangganan</string>
@@ -79,11 +81,11 @@
     <string name="subscription_agent_number">Nomor agent</string>
     <string name="subscription_agent_number_optional">Nomor agent (pilihan)</string>
     <string name="subscription_subscribe">Mulai berlangganan</string>
-    <string name="your_subscription">Rencana Langganan Saya</string>
-    <string name="monthly_plan">Rencana bulanan:</string>
+    <string name="your_subscription">Informasi akun</string>
+    <string name="monthly_plan">Status berlangganan:</string>
     <string name="subscription_enabled">Aktif</string>
     <string name="subscription_disabled">Non-aktif</string>
-    <string name="manage_subscription">Pengaturan Rencana Langganan</string>
+    <string name="manage_subscription">Pengaturan</string>
 
     <!-- sign out -->
     <string name="sign_out">Keluar</string>
@@ -96,13 +98,13 @@
     <string name="dialog_waiting">Siap menunggu</string>
     <string name="dialog_book_first_call">Kembali</string>
     <string name="dialog_success">Berhasil!</string>
+    <string name="dialog_book_call_success">Janji berhasil dibuat</string>
     <string name="dialog_failed">Maaf</string>
     <string name="dialog_signed_in">Berhasil!</string>
     <string name="dialog_signed_in_message">Anda telah berhasil masuk.</string>
     <string name="dialog_password_changed_message">Kata sandi anda telah berhasil diubah</string>
     <string name="dialog_late">Layanan tutup!</string>
-    <string name="dialog_late_message">Doktermu sudah pulang untuk beristirahat dan bertemu keluarganya.
-        Dokter akan siap melayani besok jam 6 pagi. Sampai jumpa besok dan selamat malam!</string>
+    <string name="dialog_late_message">Mohon membuat janji pada jam kerja kami 06.00 - 22.00 WIB</string>
     <string name="no_connection">Tidak terhubung dengan internet</string>
     <string name="no_connection_message">Tidak terhubung ke internet.
         Silakan cek koneksi anda dan coba lagi.</string>
@@ -116,8 +118,7 @@
     <string name="invalid_password_message">Kata sandi minimal %d karakter.</string>
     <string name="dialog_subscription_success_message">Anda berhasil berlangganan Doktermu.
         Mulailah membuat janji dengan dokter anda!</string>
-    <string name="dialog_book_call_done_message">Dalam waktu 1 jam kedepan dokter akan menghubungimu.
-        Mohon tunggu dan pastikan <i>smartphone</i> anda berdering!</string>
+    <string name="dialog_book_call_done_message">Pastikan handphone Anda aktif dan berdering!</string>
     <string name="invalid_name_message">Nama yang anda masukkan kosong atau kurang lengkap</string>
     <string name="invalid_referral_message">Nomor referensi agen yang anda masukkan harus berupa 4 digit</string>
     <string name="invalid_gender_message">Pilih jenis kelamin anda</string>

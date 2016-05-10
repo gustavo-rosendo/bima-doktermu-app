@@ -33,9 +33,9 @@ import rx.schedulers.Schedulers;
 
 public class BookCallActivity extends BaseActivity {
 
-    private static final String SICKNESS_STRING = "Penyakit";
+    private static final String SICKNESS_STRING = "Gejala Penyakit";
     private static final String HEALTHY_LIFE_STRING = "Gaya hidup sehat";
-    private static final String TIPS_STRING = "Tips";
+    private static final String TIPS_STRING = "Tips Kesehatan";
     private static final String SICKNESS = "sickness";
     private static final String HEALTHY_LIFE = "healthy_life";
     private static final String TIPS = "tips";
@@ -211,9 +211,9 @@ public class BookCallActivity extends BaseActivity {
 
                             showSuccessDialog(
                                     R.drawable.ic_thumb_up,
-                                    getString(R.string.dialog_success),
+                                    getString(R.string.dialog_book_call_success),
                                     getString(R.string.dialog_book_call_done_message),
-                                    getString(R.string.dialog_waiting),
+                                    getString(R.string.dialog_take_me_home),
                                     new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
                                         @Override
                                         public void onClick(DokterPribadimuDialog dialog) {

@@ -63,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <!--
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -73,20 +74,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="30sp"
                     android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/generic_xlarge_margin"
-                    android:paddingLeft="@dimen/generic_large_padding"
-                    android:paddingStart="@dimen/generic_large_padding"
-                    android:paddingRight="@dimen/generic_large_padding"
-                    android:paddingEnd="@dimen/generic_large_padding"
-                    android:gravity="center_horizontal"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/book_call_info"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"/>
+                    -->
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -97,6 +85,7 @@
                     android:paddingEnd="@dimen/generic_large_padding"
                     android:gravity="center_horizontal"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/generic_normal_margin"
                     android:text="@string/book_call_about"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
@@ -124,8 +113,22 @@
                     android:layout_marginLeft="@dimen/generic_xxlarge_margin"
                     android:layout_marginRight="@dimen/generic_xxlarge_margin"
                     android:layout_marginEnd="@dimen/generic_xxlarge_margin"
-                    android:layout_marginBottom="@dimen/generic_xxlarge_margin"
+                    android:layout_marginBottom="@dimen/generic_large_margin"
                     android:background="@android:color/darker_gray"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/generic_large_margin"
+                    android:paddingLeft="@dimen/generic_large_padding"
+                    android:paddingStart="@dimen/generic_large_padding"
+                    android:paddingRight="@dimen/generic_large_padding"
+                    android:paddingEnd="@dimen/generic_large_padding"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/book_call_info"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"/>
 
                 <Button
                     android:id="@+id/book_call_button"
@@ -139,6 +142,20 @@
                     android:textColor="@android:color/white"
                     android:textSize="16sp"
                     android:background="@drawable/rounded_green_bg_selector"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/generic_large_margin"
+                    android:paddingLeft="@dimen/generic_large_padding"
+                    android:paddingStart="@dimen/generic_large_padding"
+                    android:paddingRight="@dimen/generic_large_padding"
+                    android:paddingEnd="@dimen/generic_large_padding"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/book_call_rules"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
