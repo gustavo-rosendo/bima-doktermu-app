@@ -148,6 +148,9 @@
     <string name="rationale_location">Doktermu perlu mengakses GPS anda untuk mengaktifkan semua fitur aplikasi.</string>
     <string name="rationale_phone">Doktermu perlu mengakses informasi anda untuk mengaktifkan semua fitur aplikasi.</string>
 
+    <!-- maps -->
+    <string name="your_location">Lokasi anda</string>
+
     <!-- province -->
     <string-array name="province_arrays">
         <item>Nangroe Aceh Darussalam</item>
@@ -204,5 +207,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_partner_landing">PartnerLandingActivity</string>
 
 </resources>
