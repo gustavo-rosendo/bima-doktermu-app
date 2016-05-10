@@ -74,4 +74,11 @@ public interface UserService {
             @Field("new_password") String newPassword,
             @Field("access_token") String accessToken
     );
+
+    @FormUrlEncoded
+    @POST("/v2/user/forgotpass")
+    Call<BaseResponse> resetPassword(
+            @Field("email") String email,
+            @Field("access_token") String accessToken
+    );
 }

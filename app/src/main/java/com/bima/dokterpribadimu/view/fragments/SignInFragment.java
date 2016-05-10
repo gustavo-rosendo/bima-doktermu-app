@@ -102,8 +102,9 @@ public class SignInFragment extends BaseFragment {
                 forgotPasswordDialog.setListener(new ForgotPasswordDialog.OnForgotPasswordDialogClickListener() {
                     @Override
                     public void onClick(ForgotPasswordDialog dialog, String email) {
-                        // TODO: do request
                         dismissForgotPasswordDialog();
+
+                        resetPassword(email, TokenUtils.generateToken(email + System.currentTimeMillis()));
                     }
                 });
 
@@ -208,6 +209,51 @@ public class SignInFragment extends BaseFragment {
                                             startDoctorCallActivityOnTop();
                                         }
                                     });
+                        } else {
+                            handleError(TAG, signInResponse.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * Do reset login
+     * @param email user's email
+     */
+    private void resetPassword(final String email, final String accessToken) {
+        userApi.resetPassword(email, accessToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse>() {
+
+                    @Override
+                    public void onStart() {
+                        showProgressDialog();
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        dismissProgressDialog();
+
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse signInResponse) {
+                        dismissProgressDialog();
+
+                        if (signInResponse.getStatus() == Status.SUCCESS) {
+                            showSuccessDialog(
+                                    R.drawable.ic_smiley,
+                                    getString(R.string.dialog_forgot_password_success),
+                                    getString(R.string.dialog_forgot_password_success_message),
+                                    getString(R.string.dialog_take_me_home),
+                                    null);
                         } else {
                             handleError(TAG, signInResponse.getMessage());
                         }
