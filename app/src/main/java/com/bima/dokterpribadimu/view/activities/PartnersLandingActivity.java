@@ -40,6 +40,9 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
     // Zoom level info: https://developers.google.com/maps/documentation/android-api/views#zoom
     private static final float DEFAULT_STREET_ZOOM_LEVEL = 15;
 
+    private static final int CIRCLE_RADIUS_METER = 500;
+    private static final int CIRCLE_STROKE_WIDTH = 2;
+
     private ActivityPartnersLandingBinding binding;
     private DrawerFragment drawerFragment;
 
@@ -216,8 +219,8 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
 
             map.addCircle(new CircleOptions()
                     .center(userLatLng)
-                    .radius(500)
-                    .strokeWidth(2)
+                    .radius(CIRCLE_RADIUS_METER)
+                    .strokeWidth(CIRCLE_STROKE_WIDTH)
                     .strokeColor(ContextCompat.getColor(this, R.color.bima_blue))
                     .fillColor(ContextCompat.getColor(this, R.color.bima_blue_alpha)));
         }

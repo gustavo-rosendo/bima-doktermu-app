@@ -185,7 +185,7 @@ dependencies {
     compile files('libs/GoogleConversionTrackingSdk-2.2.4.jar')
 
     /**
-     * Maps
+     * Google Play Services for Google Maps
      */
     compile "com.google.android.gms:play-services-maps:$PLAY_SERVICE_MAPS_VERSION"
 }
