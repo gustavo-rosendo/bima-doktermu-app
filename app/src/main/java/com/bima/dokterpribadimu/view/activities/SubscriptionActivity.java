@@ -201,6 +201,8 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                     //Google Analytics to track users that clicked the "subscribe" button
                     //to initiate the purchase flow (not yet successfully subscribed)
                     //we want to track how many users start the purchase flow vs. how many successfully purchase
+                    mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+                    mTracker.setScreenName(null);
                     mTracker.send(new HitBuilders.EventBuilder()
                             .setCategory("Growth")
                             .setAction("Button-Click")
@@ -482,6 +484,10 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                         ProductAction productAction = new ProductAction(ProductAction.ACTION_PURCHASE)
                                 .setTransactionId(info.getOrderId());
 
+                        // Obtain the shared Tracker instance.
+                        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+                        mTracker.setScreenName(null);
+
                         // Add the transaction data to the event.
                         HitBuilders.EventBuilder builder = new HitBuilders.EventBuilder()
                                 .setCategory("Growth")
@@ -492,6 +498,10 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
 
                         // Send the transaction data with the event.
                         mTracker.send(builder.build());
+
+                        Log.d(TAG, "Setting screen name: " + Constants.BIMA_GOOGLE_ANALYTICS_SUBSCRIPTION_CONVERSION);
+                        mTracker.setScreenName("Screen~" + Constants.BIMA_GOOGLE_ANALYTICS_SUBSCRIPTION_CONVERSION);
+                        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
                         registerSubscription(subscription);
 

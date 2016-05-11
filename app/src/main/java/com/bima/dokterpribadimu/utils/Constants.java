@@ -16,6 +16,9 @@ public class Constants {
     public static final String BIMA_EMAIL = "cs@bimaindonesia.co.id";
     public static final String GOOGLE_PLAY_MANAGE_SUBSCRIPTION = "https://play.google.com/store/account";
 
+    public static final String BIMA_GOOGLE_ANALYTICS_REGISTRATION_CONVERSION = "RegistrationSuccessDialog";
+    public static final String BIMA_GOOGLE_ANALYTICS_SUBSCRIPTION_CONVERSION = "SubscriptionSuccessDialog";
+
     public static final String FACEBOOK_APP_ID = "com.facebook.katana";
     public static final String TWITTER_APP_ID = "com.twitter.android";
 
