@@ -212,7 +212,6 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                     UserProfile userProfile = UserProfileUtils.getUserProfile(SubscriptionActivity.this);
                     if (userProfile != null) {
                         //Prepare to call API /v1/user/update
-                        userProfile.setName(binding.subscriptionNameField.getText().toString());
                         userProfile.setDateOfBirth(
                                 SubscriptionUtils
                                         .formatDateOfBirth(binding.subscriptionDobField.getText().toString())
@@ -260,13 +259,6 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.subscriptionGenderSpinner.setAdapter(spinnerAdapter);
         binding.subscriptionGenderSpinner.setSelection(spinnerAdapter.getCount());
-
-        UserProfile userProfile = UserProfileUtils.getUserProfile(this);
-        if (userProfile != null) {
-            binding.subscriptionNameField.setText(userProfile.getName());
-            binding.subscriptionEmailField.setText(userProfile.getEmail());
-        }
-
         binding.subscriptionDobField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -349,10 +341,10 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
      * @return boolean true if subscription data are valid, boolean false if otherwise
      */
     private boolean validateSubscription() {
-        if (!ValidationUtils.isValidName(binding.subscriptionNameField.getText().toString())) {
+        if (!ValidationUtils.isValidPhoneNumber(binding.subscriptionPhoneField.getText().toString())) {
             Toast.makeText(
                     this,
-                    getString(R.string.invalid_name_message),
+                    getString(R.string.invalid_phone_number_message),
                     Toast.LENGTH_SHORT
             ).show();
         } else if (binding.subscriptionGenderSpinner.getSelectedItemPosition()
@@ -367,18 +359,6 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
             Toast.makeText(
                     this,
                     getString(R.string.invalid_dob_message),
-                    Toast.LENGTH_SHORT
-            ).show();
-        } else if (!ValidationUtils.isValidPhoneNumber(binding.subscriptionPhoneField.getText().toString())) {
-            Toast.makeText(
-                    this,
-                    getString(R.string.invalid_phone_number_message),
-                    Toast.LENGTH_SHORT
-            ).show();
-        } else if (!ValidationUtils.isValidEmail(binding.subscriptionEmailField.getText().toString())) {
-            Toast.makeText(
-                    this,
-                    getString(R.string.invalid_email_message),
                     Toast.LENGTH_SHORT
             ).show();
         } else {

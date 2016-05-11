@@ -80,7 +80,7 @@
     <string name="drawer_settings">Pengaturan</string>
 
     <!-- subscription -->
-    <string name="subscription">Form berlangganan</string>
+    <string name="subscription">Aktivasi</string>
     <string name="subscription_name">Nama</string>
     <string name="subscription_phone_number">Nomor telepon</string>
     <string name="subscription_email">Email</string>
@@ -90,12 +90,13 @@
     <string name="subscription_province">Provinsi</string>
     <string name="subscription_agent_number">Nomor agent</string>
     <string name="subscription_agent_number_optional">Nomor agent (pilihan)</string>
-    <string name="subscription_subscribe">Mulai berlangganan</string>
+    <string name="subscription_subscribe">Aktifkan</string>
     <string name="your_subscription">Rencana Langganan Saya</string>
     <string name="monthly_plan">Rencana bulanan:</string>
     <string name="subscription_enabled">Aktif</string>
     <string name="subscription_disabled">Non-aktif</string>
     <string name="manage_subscription">Pengaturan Rencana Langganan</string>
+    <string name="subscription_info">Mohon isi form di bawah ini untuk mengaktifkan seluruh layanan Doktermu.</string>
 
     <!-- sign out -->
     <string name="sign_out">Keluar</string>

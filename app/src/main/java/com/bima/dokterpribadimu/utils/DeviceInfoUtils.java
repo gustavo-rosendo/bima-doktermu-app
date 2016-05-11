@@ -9,6 +9,8 @@ import android.telephony.TelephonyManager;
  */
 public class DeviceInfoUtils {
 
+    public static final String NETWORK_OPERATOR_TELKOMSEL = "TELKOMSEL";
+
     private static TelephonyManager telephonyManager;
     private static DeviceInfoUtils instance = null;
 
@@ -86,6 +88,14 @@ public class DeviceInfoUtils {
      */
     public String getDeviceId() {
         return deviceId;
+    }
+
+    /**
+     * Returns the name of the operator being used (TELKOMSEL, AXIS, etc.)
+     * @return name of the operator
+     */
+    public String getNetworkOperatorName() {
+        return networkOperatorName;
     }
 
     /**
