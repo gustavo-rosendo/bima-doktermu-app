@@ -147,6 +147,8 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
             locationTracker.stopListening();
         }
 
+        drawerFragment.setOnDrawerItemPressedListener(null);
+
         super.onDestroy();
     }
 

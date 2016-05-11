@@ -3,6 +3,7 @@ package com.bima.dokterpribadimu.injection;
 import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
 import com.bima.dokterpribadimu.data.remote.api.BookingApi;
 import com.bima.dokterpribadimu.data.remote.api.CustomerApi;
+import com.bima.dokterpribadimu.data.remote.api.NewsApi;
 import com.bima.dokterpribadimu.data.remote.api.SubscriptionApi;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
 
@@ -39,6 +40,12 @@ public final class DataModule {
     @Singleton
     SubscriptionApi provideSubscriptionService() {
         return new SubscriptionApi();
+    }
+
+    @Provides
+    @Singleton
+    NewsApi provideNewsService() {
+        return new NewsApi();
     }
 
     @Provides

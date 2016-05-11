@@ -7,6 +7,8 @@ import com.bima.dokterpribadimu.view.activities.BookCallActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.HomeActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
+import com.bima.dokterpribadimu.view.activities.NewsActivity;
+import com.bima.dokterpribadimu.view.activities.NewsDetailActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersLandingActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersActivity;
 import com.bima.dokterpribadimu.view.activities.ProfileActivity;
@@ -17,6 +19,7 @@ import com.bima.dokterpribadimu.view.fragments.AboutFragment;
 import com.bima.dokterpribadimu.view.fragments.DoctorCallFragment;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
 import com.bima.dokterpribadimu.view.fragments.HomeFragment;
+import com.bima.dokterpribadimu.view.fragments.NewsFragment;
 import com.bima.dokterpribadimu.view.fragments.PartnersFragment;
 import com.bima.dokterpribadimu.view.fragments.ProfileFragment;
 import com.bima.dokterpribadimu.view.fragments.RegisterFragment;
@@ -46,6 +49,8 @@ public interface DokterPribadimuComponent {
     void inject(BookCallActivity bookCallActivity);
     void inject(PartnersActivity partnersActivity);
     void inject(PartnersLandingActivity partnersLandingActivity);
+    void inject(NewsActivity newsActivity);
+    void inject(NewsDetailActivity newsDetailActivity);
     void inject(ProfileActivity profileActivity);
     void inject(AboutActivity aboutActivity);
     void inject(DrawerFragment drawerFragment);
@@ -54,6 +59,7 @@ public interface DokterPribadimuComponent {
     void inject(RegisterFragment registerFragment);
     void inject(DoctorCallFragment doctorCallFragment);
     void inject(PartnersFragment partnersFragment);
+    void inject(NewsFragment newsFragment);
     void inject(ProfileFragment profileFragment);
     void inject(AboutFragment profileFragment);
 

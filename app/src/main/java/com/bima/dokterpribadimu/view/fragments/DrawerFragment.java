@@ -60,6 +60,8 @@ public class DrawerFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         FacebookClient.release();
+        GplusClient.release();
+        loginClient = null;
 
         super.onDestroy();
     }
@@ -93,6 +95,9 @@ public class DrawerFragment extends BaseFragment {
                 break;
             case Constants.DRAWER_TYPE_PARTNERS:
                 binding.drawerPartnersButton.setSelected(true);
+                break;
+            case Constants.DRAWER_TYPE_NEWS:
+                binding.drawerNewsButton.setSelected(true);
                 break;
             case Constants.DRAWER_TYPE_ABOUT:
                 binding.drawerAboutBimaButton.setSelected(true);
@@ -137,6 +142,19 @@ public class DrawerFragment extends BaseFragment {
 
                 if (activeDrawer != Constants.DRAWER_TYPE_PARTNERS) {
                     IntentUtils.startPartnersActivity(getActivity());
+                }
+            }
+        });
+
+        binding.drawerNewsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onDrawerItemPressedListener != null) {
+                    onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_NEWS);
+                }
+
+                if (activeDrawer != Constants.DRAWER_TYPE_NEWS) {
+                    IntentUtils.startNewsActivity(getActivity());
                 }
             }
         });

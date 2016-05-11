@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/generic_toolbar_height"
+                android:background="@color/bima_blue"
+                app:elevation="4dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/toolbar_back_button"
+                        android:layout_width="@dimen/generic_toolbar_button_height"
+                        android:layout_height="@dimen/generic_toolbar_button_height"
+                        android:padding="@dimen/generic_toolbar_image_button_padding"
+                        android:src="@drawable/ic_arrow_back"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_toRightOf="@+id/toolbar_back_button"
+                        android:layout_toEndOf="@+id/toolbar_back_button"
+                        android:text="@string/news"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"/>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/news_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_large_margin"
+                    android:paddingLeft="@dimen/generic_large_padding"
+                    android:paddingStart="@dimen/generic_large_padding"
+                    android:paddingRight="@dimen/generic_large_padding"
+                    android:paddingEnd="@dimen/generic_large_padding"
+                    android:textColor="@android:color/primary_text_light"
+                    android:textSize="@dimen/generic_headline_text_size"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/news_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_large_margin"
+                    android:paddingLeft="@dimen/generic_large_padding"
+                    android:paddingStart="@dimen/generic_large_padding"
+                    android:paddingRight="@dimen/generic_large_padding"
+                    android:paddingEnd="@dimen/generic_large_padding"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="@dimen/generic_subheading_text_size"/>
+
+                <ImageView
+                    android:id="@+id/news_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_large_margin"
+                    android:scaleType="fitStart"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/app_name"/>
+
+                <TextView
+                    android:id="@+id/news_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_large_margin"
+                    android:paddingLeft="@dimen/generic_large_padding"
+                    android:paddingStart="@dimen/generic_large_padding"
+                    android:paddingRight="@dimen/generic_large_padding"
+                    android:paddingEnd="@dimen/generic_large_padding"
+                    android:textColor="@android:color/primary_text_light"
+                    android:textSize="@dimen/generic_body_text_size"/>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</layout>

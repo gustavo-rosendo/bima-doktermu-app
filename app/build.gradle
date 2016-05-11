@@ -63,7 +63,7 @@ android {
 
     productFlavors {
         development {
-            buildConfigField "String", "BASE_URL", "\"https://developer.bimaindonesia.co.id/\""
+            buildConfigField "String", "BASE_URL", "\"http://developer.bimaindonesia.co.id/\""
         }
 
         production {
@@ -188,6 +188,12 @@ dependencies {
      * Google Play Services for Google Maps
      */
     compile "com.google.android.gms:play-services-maps:$PLAY_SERVICE_MAPS_VERSION"
+
+    /**
+     * A memory leak detection library for Android and Java
+     */
+    //debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+    //releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
 }
 
 /**

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.bima.dokterpribadimu.injection.DokterPribadimuComponent;
 import com.crashlytics.android.Crashlytics;
+
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 
@@ -49,6 +50,7 @@ public class DokterPribadimuApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
+        //LeakCanary.install(this);
 
         sInstance = this;
         mComponent = DokterPribadimuComponent.Initializer.init(this);
