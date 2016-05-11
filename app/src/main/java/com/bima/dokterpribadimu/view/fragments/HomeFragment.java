@@ -57,7 +57,7 @@ public class HomeFragment extends BaseFragment {
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // TODO: start news
+                    IntentUtils.startNewsActivity(getActivity());
                 }
             },
             new View.OnClickListener() {
@@ -125,6 +125,16 @@ public class HomeFragment extends BaseFragment {
                 binding.homeScrollView.scrollTo(0, 0);
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        for (HomeItemViewModel itemViewModel : homeListViewModel.items) {
+            itemViewModel.setClickListener(null);
+        }
+        homeListViewModel.items.clear();
+
+        super.onDestroy();
     }
 
     public static class HomeListViewModel {

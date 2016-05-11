@@ -77,4 +77,7 @@
     <dimen name="dialog_min_width">300dp</dimen>
     <dimen name="generic_normal_stroke">2dp</dimen>
 
+    <!-- news -->
+    <dimen name="news_image_height">100dp</dimen>
+
 </resources>

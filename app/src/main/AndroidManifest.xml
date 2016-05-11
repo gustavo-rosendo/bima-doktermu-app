@@ -47,7 +47,7 @@
         <activity android:name=".view.activities.RegisterNameActivity" />
         <activity android:name=".view.activities.HomeActivity" />
         <activity android:name=".view.activities.PartnersActivity" />
-        <activity android:name=".view.activities.PartnersLandingActivity"/>
+        <activity android:name=".view.activities.PartnersLandingActivity" />
 
         <receiver
             android:name="com.google.ads.conversiontracking.InstallReceiver"
@@ -69,6 +69,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity android:name=".view.activities.NewsActivity" />
+        <activity android:name=".view.activities.NewsDetailActivity"></activity>
     </application>
 
 </manifest>

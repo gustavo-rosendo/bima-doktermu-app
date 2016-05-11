@@ -21,6 +21,10 @@ public class HomeItemViewModel extends BaseObservable {
         this.clickListener = clickListener;
     }
 
+    public void setClickListener(View.OnClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
     @Bindable
     public String getTitle() {
         return title;

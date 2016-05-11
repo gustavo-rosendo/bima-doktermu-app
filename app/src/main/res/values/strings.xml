@@ -156,6 +156,12 @@
     <!-- partners -->
     <string name="partners_search_our_partners">Cari mitra</string>
 
+    <!-- news -->
+    <string name="news">Artikel</string>
+    <string name="news_diseases">Gejala Penyakit</string>
+    <string name="news_healthy_living">Gaya Hidup Sehat</string>
+    <string name="news_tips">Tips Sehat</string>
+
     <!-- province -->
     <string-array name="province_arrays">
         <item>Nangroe Aceh Darussalam</item>

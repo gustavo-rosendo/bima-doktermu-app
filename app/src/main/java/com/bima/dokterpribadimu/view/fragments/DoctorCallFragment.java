@@ -71,6 +71,13 @@ public class DoctorCallFragment extends BaseFragment {
         super.onPause();
     }
 
+    @Override
+    public void onDestroy() {
+        billingClient.release();
+
+        super.onDestroy();
+    }
+
     private void initBillingClient() {
         billingClient.setBillingInitializationListener(new BillingInitializationListener() {
             @Override

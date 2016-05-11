@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.bima.dokterpribadimu.view.fragments.NewsFragment.NewsListViewModel"/>
+        <import
+            type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/upcoming_recycler"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/generic_small_padding"
+            android:paddingStart="@dimen/generic_small_padding"
+            android:paddingRight="@dimen/generic_small_padding"
+            android:paddingEnd="@dimen/generic_small_padding"
+            app:layoutManager="@{LayoutManagers.linear()}"
+            app:items="@{viewModel.items}"
+            app:itemView="@{viewModel.itemView}"/>
+
+        <ProgressBar
+            android:id="@+id/dialog_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"/>
+
+    </RelativeLayout>
+
+</layout>

@@ -3,10 +3,13 @@ package com.bima.dokterpribadimu.utils;
 import android.content.Context;
 import android.content.Intent;
 
+import com.bima.dokterpribadimu.model.News;
 import com.bima.dokterpribadimu.view.activities.BookCallActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.HomeActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
+import com.bima.dokterpribadimu.view.activities.NewsActivity;
+import com.bima.dokterpribadimu.view.activities.NewsDetailActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
 
@@ -56,6 +59,23 @@ public class IntentUtils {
      */
     public static void startPartnersActivity(Context context) {
         context.startActivity(new Intent(context, PartnersActivity.class));
+    }
+
+    /**
+     *
+     * @param context caller's activity / fragment context
+     */
+    public static void startNewsActivity(Context context) {
+        context.startActivity(new Intent(context, NewsActivity.class));
+    }
+
+    /**
+     *
+     * @param context caller's activity / fragment context
+     * @param news news to be displayed
+     */
+    public static void startNewsDetailActivity(Context context, News news) {
+        context.startActivity(NewsDetailActivity.create(context, news));
     }
 
     /**

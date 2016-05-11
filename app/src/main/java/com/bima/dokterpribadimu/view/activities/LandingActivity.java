@@ -25,14 +25,12 @@ import java.util.List;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class LandingActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
+public class LandingActivity extends BaseActivity {
 
     private static final String TAG = LandingActivity.class.getSimpleName();
     private static final int RC_PHONE_STATE_PERMISSION = 0;
 
     private ActivityLandingBinding binding;
-
-    private DeviceInfoUtils deviceInfoUtils;
 
     private Tracker mTracker;
 
@@ -61,28 +59,8 @@ public class LandingActivity extends BaseActivity implements EasyPermissions.Per
         AppEventsLogger.activateApp(this);
     }
 
-    @Override
-    protected void onDestroy() {
-        FacebookClient.release();
-        GplusClient.release();
-
-        super.onDestroy();
-    }
-
     private void init() {
-        initDeviceInfo();
         initViews();
-    }
-
-    @AfterPermissionGranted(RC_PHONE_STATE_PERMISSION)
-    public void initDeviceInfo() {
-        if (EasyPermissions.hasPermissions(this, Manifest.permission.READ_PHONE_STATE)) {
-            deviceInfoUtils = DeviceInfoUtils.getInstance(this);
-        } else {
-            // Ask for one permission
-            EasyPermissions.requestPermissions(this, getString(R.string.rationale_location),
-                    RC_PHONE_STATE_PERMISSION, Manifest.permission.READ_PHONE_STATE);
-        }
     }
 
     private void initViews() {
@@ -99,23 +77,5 @@ public class LandingActivity extends BaseActivity implements EasyPermissions.Per
                 IntentUtils.startSignInActivity(LandingActivity.this, false);
             }
         });
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        // Forward results to EasyPermissions
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-    }
-
-    @Override
-    public void onPermissionsGranted(int requestCode, List<String> perms) {
-
-    }
-
-    @Override
-    public void onPermissionsDenied(int requestCode, List<String> perms) {
-
     }
 }
