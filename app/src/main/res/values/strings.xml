@@ -141,6 +141,7 @@
     <string name="dialog_old_password">Kata sandi lama</string>
     <string name="dialog_new_password">Kata sandi baru</string>
     <string name="dialog_validate">Validasi</string>
+    <string name="dialog_send">Kirim</string>
     <string name="dialog_cancel">Batalkan</string>
     <string name="time_limit_to_book_call">Anda dapat membuat maksimal 1 janji per jam dengan dokter anda</string>
     <string name="dialog_forgot_password_info">Kami akan mengirimkan kata sandi yang baru ke alamat email Anda</string>
@@ -162,6 +163,9 @@
     <string name="news_diseases">Gejala Penyakit</string>
     <string name="news_healthy_living">Gaya Hidup Sehat</string>
     <string name="news_tips">Tips Sehat</string>
+
+    <!-- rate your call -->
+    <string name="rate_your_call">Bagaimana konsultasi Anda?</string>
 
     <!-- province -->
     <string-array name="province_arrays">
