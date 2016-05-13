@@ -31,9 +31,14 @@
 
     <!-- doctor on call -->
     <string name="doctor_on_call">Doktermu</string>
-    <string name="doctor_on_call_info">Mulai konsultasi untuk memilih topik konsultasi.
-        Dokter akan menelponmu dalam waktu kurang dari 1 jam setelah membuat janji.</string>
+    <string name="doctor_on_call_info">Dokter kami akan menjawab
+        pertanyaan dan keluhan Anda seputar kesehatan.\n\n
+        Jam Operasional\n
+        06.00 – 22.00 WIB</string>
+    <string name="doctor_on_call_subscription_info">
+        Segera aktivasi layanan kami untuk memulai konsultasi dengan dokter!</string>
     <string name="doctor_on_call_book_a_call">Mulai konsultasi</string>
+    <string name="doctor_on_call_subscribe">Aktivasi</string>
 
     <!-- book a call -->
     <string name="book_call_tell_us_more">Topik konsultasi</string>
@@ -114,6 +119,7 @@
     <string name="dialog_waiting">Siap menunggu</string>
     <string name="dialog_book_first_call">Kembali</string>
     <string name="dialog_success">Berhasil!</string>
+    <string name="dialog_book_call_success">Janji berhasil dibuat</string>
     <string name="dialog_failed">Maaf</string>
     <string name="dialog_signed_in">Berhasil!</string>
     <string name="dialog_signed_in_message">Anda telah berhasil masuk.</string>
@@ -133,8 +139,7 @@
     <string name="invalid_password_message">Kata sandi minimal %d karakter.</string>
     <string name="dialog_subscription_success_message">Anda berhasil berlangganan Doktermu.
         Mulailah membuat janji dengan dokter anda!</string>
-    <string name="dialog_book_call_done_message">Dalam waktu 1 jam kedepan dokter akan menghubungimu.
-        Mohon tunggu dan pastikan <i>smartphone</i> anda berdering!</string>
+    <string name="dialog_book_call_done_message">Pastikan telepon genggam Anda aktif dan berdering!</string>
     <string name="invalid_name_message">Nama yang anda masukkan kosong atau kurang lengkap</string>
     <string name="invalid_referral_message">Nomor referensi agen yang anda masukkan harus berupa 4 digit</string>
     <string name="invalid_gender_message">Pilih jenis kelamin anda</string>

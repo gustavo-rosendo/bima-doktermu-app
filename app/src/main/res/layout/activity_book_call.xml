@@ -103,7 +103,7 @@
                     android:paddingLeft="-8dp"
                     android:paddingEnd="-8dp"
                     android:paddingRight="-8dp"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:layout_marginTop="@dimen/generic_xlarge_margin"
                     android:entries="@array/call_topics_arrays"/>
 
                 <View
@@ -127,9 +127,10 @@
                     android:paddingLeft="-8dp"
                     android:paddingEnd="-8dp"
                     android:paddingRight="-8dp"
-                    android:layout_marginTop="@dimen/generic_normal_margin"/>
+                    android:layout_marginTop="@dimen/generic_xlarge_margin"/>
 
                 <View
+                    android:id="@+id/book_call_subtopic_underline_view"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/generic_separator_height"
                     android:layout_marginStart="@dimen/generic_xxlarge_margin"

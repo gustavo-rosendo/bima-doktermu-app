@@ -110,6 +110,15 @@ public class DoctorCallFragment extends BaseFragment {
     }
 
     private void initViews() {
+        if (billingClient.isSubscribedToDokterPribadiKu()) {
+            binding.doctorCallInfoText.setText(getResources().getString(R.string.doctor_on_call_info));
+            binding.bookCallButton.setText(getResources().getString(R.string.doctor_on_call_book_a_call));
+        }
+        else {
+            binding.doctorCallInfoText.setText(getResources().getString(R.string.doctor_on_call_subscription_info));
+            binding.bookCallButton.setText(getResources().getString(R.string.doctor_on_call_subscribe));
+        }
+
         binding.bookCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

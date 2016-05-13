@@ -18,10 +18,11 @@
             android:contentDescription="@string/app_name"/>
 
         <TextView
-            android:id="@+id/home_welcome_text"
+            android:id="@+id/doctor_call_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/doctor_call_info_text"
+            android:layout_below="@+id/doctor_call_icon"
+            android:layout_marginTop="@dimen/generic_large_margin"
             android:layout_marginBottom="@dimen/generic_large_margin"
             android:layout_centerHorizontal="true"
             android:text="@string/doctor_on_call"
@@ -33,7 +34,7 @@
             android:id="@+id/doctor_call_info_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/book_call_button"
+            android:layout_below="@+id/doctor_call_title"
             android:layout_marginBottom="@dimen/generic_xxlarge_margin"
             android:paddingLeft="@dimen/generic_large_padding"
             android:paddingStart="@dimen/generic_large_padding"
@@ -50,7 +51,7 @@
             android:layout_height="@dimen/generic_button_height"
             android:minWidth="225dp"
             android:layout_marginBottom="@dimen/generic_large_margin"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/doctor_call_info_text"
             android:layout_centerHorizontal="true"
             android:text="@string/doctor_on_call_book_a_call"
             android:textAllCaps="false"

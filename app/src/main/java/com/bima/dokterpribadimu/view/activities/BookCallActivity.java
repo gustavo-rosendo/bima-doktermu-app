@@ -250,16 +250,19 @@ public class BookCallActivity extends BaseActivity {
                     case 0:
                         binding.bookCallSubtopicSpinner.setAdapter(spinnerSubTopicReproductionAdapter);
                         binding.bookCallSubtopicSpinner.setSelection(spinnerSubTopicReproductionAdapter.getCount());
+                        binding.bookCallSubtopicUnderlineView.setVisibility(View.VISIBLE);
                         binding.bookCallSubtopicSpinner.setVisibility(View.VISIBLE);
                         binding.bookCallSubtopicSpinner.setEnabled(true);
                         break;
                     case 1:
                         binding.bookCallSubtopicSpinner.setAdapter(spinnerSubTopicHealthAdapter);
                         binding.bookCallSubtopicSpinner.setSelection(spinnerSubTopicHealthAdapter.getCount());
+                        binding.bookCallSubtopicUnderlineView.setVisibility(View.VISIBLE);
                         binding.bookCallSubtopicSpinner.setVisibility(View.VISIBLE);
                         binding.bookCallSubtopicSpinner.setEnabled(true);
                         break;
                     default:
+                        binding.bookCallSubtopicUnderlineView.setVisibility(View.INVISIBLE);
                         binding.bookCallSubtopicSpinner.setVisibility(View.INVISIBLE);
                         binding.bookCallSubtopicSpinner.setEnabled(false);
                         break;
@@ -274,6 +277,7 @@ public class BookCallActivity extends BaseActivity {
         });
 
         //In the beginning, the subtopics list is invisible
+        binding.bookCallSubtopicUnderlineView.setVisibility(View.INVISIBLE);
         binding.bookCallSubtopicSpinner.setVisibility(View.INVISIBLE);
         binding.bookCallSubtopicSpinner.setEnabled(false);
 
@@ -369,9 +373,9 @@ public class BookCallActivity extends BaseActivity {
 
                             showSuccessDialog(
                                     R.drawable.ic_thumb_up,
-                                    getString(R.string.dialog_success),
+                                    getString(R.string.dialog_book_call_success),
                                     getString(R.string.dialog_book_call_done_message),
-                                    getString(R.string.dialog_waiting),
+                                    getString(R.string.dialog_take_me_home),
                                     new DokterPribadimuDialog.OnDokterPribadimuDialogClickListener() {
                                         @Override
                                         public void onClick(DokterPribadimuDialog dialog) {
