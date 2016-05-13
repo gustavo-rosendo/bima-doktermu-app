@@ -24,6 +24,7 @@ import com.bima.dokterpribadimu.utils.TimeUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
+import com.bima.dokterpribadimu.view.components.PhoneInfoModalDialog;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.common.server.converter.StringToIntConverter;
@@ -60,6 +61,8 @@ public class BookCallActivity extends BaseActivity {
     private ActivityBookCallBinding binding;
 
     private Tracker mTracker;
+
+    private PhoneInfoModalDialog phoneInfoModalDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -283,7 +286,50 @@ public class BookCallActivity extends BaseActivity {
 
         //Show the phone number where the user will be called
         binding.bookCallPhoneNumber.setText(UserProfileUtils.getUserProfile(BookCallActivity.this).getMsisdn());
+
+        binding.bookCallPhoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(phoneInfoModalDialog == null) {
+                    phoneInfoModalDialog = new PhoneInfoModalDialog(BookCallActivity.this);
+                }
+
+                phoneInfoModalDialog.setListener(new PhoneInfoModalDialog.OnPhoneInfoModalDialogClickListener() {
+                    @Override
+                    public void onClick(PhoneInfoModalDialog dialog) {
+                        dismissPhoneInfoModalDialog();
+                    }
+                });
+
+                phoneInfoModalDialog.showDialog();
+            }
+        });
+
+        binding.bookCallPhoneInfoModal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(phoneInfoModalDialog == null) {
+                    phoneInfoModalDialog = new PhoneInfoModalDialog(BookCallActivity.this);
+                }
+
+                phoneInfoModalDialog.setListener(new PhoneInfoModalDialog.OnPhoneInfoModalDialogClickListener() {
+                    @Override
+                    public void onClick(PhoneInfoModalDialog dialog) {
+                        dismissPhoneInfoModalDialog();
+                    }
+                });
+
+                phoneInfoModalDialog.showDialog();
+            }
+        });
     }
+
+    private void dismissPhoneInfoModalDialog() {
+        phoneInfoModalDialog.dismiss();
+        phoneInfoModalDialog.clearReference();
+        phoneInfoModalDialog = null;
+    }
+
 
 
     /**

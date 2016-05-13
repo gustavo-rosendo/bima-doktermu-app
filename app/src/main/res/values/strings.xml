@@ -157,6 +157,9 @@
     <string name="dialog_forgot_password_info">Kami akan mengirimkan kata sandi yang baru ke alamat email Anda</string>
     <string name="dialog_forgot_password_success">Berhasil!</string>
     <string name="dialog_forgot_password_success_message">Kata sandi yang baru akan dikirim ke alamat email Anda</string>
+    <string name="dialog_phone_info_modal_text">
+        Dokter akan menelpon Anda pada nomor yang tertera.\n
+        Untuk merubahnya silahkan masuk ke menu profil.</string>
 
     <!-- permission -->
     <string name="rationale_location">Doktermu perlu mengakses GPS anda untuk mengaktifkan semua fitur aplikasi.</string>
