@@ -42,7 +42,12 @@
         Gaya hidup sehat: konsultasikan gaya hidupmu agar menjadi lebih sehat dan bertenaga!\n\n
         Tips: Ketahui tips seputar makanan sehat, jenis obat, dan segala informasi yang mempengaruhi kesehatanmu!</string>
     <string name="book_call_about">Apa topik anda?</string>
+    <string name="book_call_phone">Nomor telepon Anda:</string>
+    <string name="book_call_phone_info_modal">\?</string>
     <string name="book_my_call">Buat janji sekarang</string>
+    <string name="book_call_rules">
+        Jam buka 06.00 - 22.00 WIB\n
+        Anda akan dihubugi dalam 1 jam ke depan (maksimal)</string>
 
     <!-- partners -->
     <string name="partners_inactive_info">Segera aktivasi dan dapatkan potongan harga dari
@@ -206,12 +211,30 @@
         <item>Pilih provinsi anda</item>
     </string-array>
 
-    <!-- call about -->
-    <string-array name="call_about_arrays">
-        <item>Penyakit</item>
-        <item>Gaya hidup sehat</item>
-        <item>Tips</item>
+    <!-- call about topics -->
+    <string-array name="call_topics_arrays">
+        <item>Reproduksi</item>
+        <item>Kesehatan dan Penyakit Organ</item>
+        <item>Diet dan Nutrisi</item>
+        <item>Cedera</item>
+        <item>Lain-lain</item>
         <item>Pilih topik</item>
+    </string-array>
+
+    <!-- call about subtopics -->
+    <string-array name="call_reproduksi_subtopics_arrays">
+        <item>Kehamilan &#38; Kesuburan</item>
+        <item>Kesehatan Bayi &#38; Anak</item>
+        <item>Kesehatan &#38; Penyakit Kelamin</item>
+        <item>Pilih sub-topik</item>
+    </string-array>
+    <string-array name="call_kesehatan_subtopics_arrays">
+        <item>Kesehatan &#38; Penyakit Dalam</item>
+        <item>Kesehatan &#38; Penyakit Tulang</item>
+        <item>Kesehatan &#38; Penyakit Syaraf</item>
+        <item>Kesehatan &#38; Penyakit Mata</item>
+        <item>Kesehatan &#38; Penyakit THT</item>
+        <item>Pilih sub-topik</item>
     </string-array>
 
     <!-- gender -->

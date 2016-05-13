@@ -33,12 +33,16 @@ public class BookingApi extends BaseApi<BookingService> {
      * @return Observable<BaseResponse>
      */
     public Observable<BaseResponse> bookCall(
-            final String callTopic, final String accessToken) {
+            final String callTopic, final String callSubTopic,
+            final String phoneNumber, final String accessToken) {
         return Observable.create(new Observable.OnSubscribe<BaseResponse>() {
             @Override
             public void call(final Subscriber<? super BaseResponse> subscriber) {
                 try {
-                    Response response = bookingService.bookCall(callTopic, accessToken).execute();
+                    Response response = bookingService.bookCall(callTopic,
+                                                                callSubTopic,
+                                                                phoneNumber,
+                                                                accessToken).execute();
                     if (response.isSuccessful()) {
                         subscriber.onNext((BaseResponse) response.body());
                         subscriber.onCompleted();
