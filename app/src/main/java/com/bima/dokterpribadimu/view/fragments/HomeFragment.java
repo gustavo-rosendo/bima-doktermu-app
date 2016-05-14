@@ -12,12 +12,17 @@ import android.view.ViewGroup;
 import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
+import com.bima.dokterpribadimu.data.inappbilling.BillingInitializationListener;
+import com.bima.dokterpribadimu.data.inappbilling.QueryInventoryListener;
 import com.bima.dokterpribadimu.databinding.FragmentHomeBinding;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 import com.bima.dokterpribadimu.viewmodel.HomeItemViewModel;
+
+import javax.inject.Inject;
 
 import me.tatarka.bindingcollectionadapter.ItemView;
 
@@ -30,6 +35,9 @@ public class HomeFragment extends BaseFragment {
 
     private FragmentHomeBinding binding;
     private HomeListViewModel homeListViewModel = new HomeListViewModel();
+
+    @Inject
+    BillingClient billingClient;
 
     private int[] resIds = {
             R.drawable.ic_home_doctor, R.drawable.ic_home_partners, R.drawable.ic_home_news,
@@ -128,13 +136,60 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        initBillingClient();
+    }
+
+    @Override
+    public void onPause() {
+        billingClient.release();
+
+        super.onPause();
+    }
+
+    @Override
     public void onDestroy() {
         for (HomeItemViewModel itemViewModel : homeListViewModel.items) {
             itemViewModel.setClickListener(null);
         }
         homeListViewModel.items.clear();
 
+        billingClient.release();
+
         super.onDestroy();
+    }
+
+    private void initBillingClient() {
+        billingClient.setBillingInitializationListener(new BillingInitializationListener() {
+            @Override
+            public void onSuccess() {
+                billingClient.queryInventoryAsync();
+            }
+
+            @Override
+            public void onFailed() {
+                // TODO: handle this
+            }
+        });
+
+        billingClient.setQueryInventoryListener(new QueryInventoryListener() {
+            @Override
+            public void onSuccess(boolean isSubscribed) {
+                StorageUtils.putBoolean(
+                        getActivity(),
+                        Constants.KEY_USER_SUBSCIPTION,
+                        isSubscribed);
+            }
+
+            @Override
+            public void onFailed() {
+                // TODO: handle this
+            }
+        });
+
+        billingClient.init(getActivity());
     }
 
     public static class HomeListViewModel {

@@ -1,29 +1,18 @@
 package com.bima.dokterpribadimu.view.activities;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-
-import android.Manifest;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
-import com.bima.dokterpribadimu.data.sns.facebook.FacebookClient;
-import com.bima.dokterpribadimu.data.sns.gplus.GplusClient;
 import com.bima.dokterpribadimu.databinding.ActivityLandingBinding;
-import com.bima.dokterpribadimu.utils.DeviceInfoUtils;
 import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.facebook.appevents.AppEventsLogger;
-
-import java.util.List;
-
-import pub.devrel.easypermissions.AfterPermissionGranted;
-import pub.devrel.easypermissions.EasyPermissions;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 public class LandingActivity extends BaseActivity {
 

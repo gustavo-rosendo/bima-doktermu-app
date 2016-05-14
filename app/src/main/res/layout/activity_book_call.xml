@@ -85,7 +85,7 @@
                     android:paddingEnd="@dimen/generic_large_padding"
                     android:gravity="center_horizontal"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:layout_marginTop="@dimen/generic_large_margin"
                     android:text="@string/book_call_about"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
@@ -137,13 +137,49 @@
                     android:layout_marginLeft="@dimen/generic_xxlarge_margin"
                     android:layout_marginRight="@dimen/generic_xxlarge_margin"
                     android:layout_marginEnd="@dimen/generic_xxlarge_margin"
-                    android:layout_marginBottom="@dimen/generic_large_margin"
                     android:background="@android:color/darker_gray"/>
 
-                <!--
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_xlarge_margin"
+                    android:layout_marginBottom="@dimen/generic_normal_margin"
+                    android:paddingLeft="@dimen/generic_large_padding"
+                    android:paddingStart="@dimen/generic_large_padding"
+                    android:paddingRight="@dimen/generic_large_padding"
+                    android:paddingEnd="@dimen/generic_large_padding"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/book_call_info_1"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"/>
+
+                <LinearLayout
+                    android:id="@+id/book_call_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/book_call_email"
+                        android:gravity="center"
+                        android:textColor="@color/bima_blue"
+                        android:textSize="16sp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/generic_separator_height"
+                        android:background="@color/bima_blue"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_large_margin"
                     android:layout_marginBottom="@dimen/generic_large_margin"
                     android:paddingLeft="@dimen/generic_large_padding"
                     android:paddingStart="@dimen/generic_large_padding"
@@ -151,10 +187,9 @@
                     android:paddingEnd="@dimen/generic_large_padding"
                     android:gravity="center_horizontal"
                     android:layout_gravity="center_horizontal"
-                    android:text="@string/book_call_info"
+                    android:text="@string/book_call_info_2"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp"/>
-                -->
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"

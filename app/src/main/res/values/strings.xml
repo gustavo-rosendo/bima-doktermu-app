@@ -42,10 +42,13 @@
 
     <!-- book a call -->
     <string name="book_call_tell_us_more">Topik konsultasi</string>
-    <string name="book_call_info">
-        Penyakit: Ketahui penyakit anda, penyebab, tanda-tandanya, dan langkah menghadapinya!\n\n
-        Gaya hidup sehat: konsultasikan gaya hidupmu agar menjadi lebih sehat dan bertenaga!\n\n
-        Tips: Ketahui tips seputar makanan sehat, jenis obat, dan segala informasi yang mempengaruhi kesehatanmu!</string>
+    <string name="book_call_info_1">
+        Jika lebih dari 1 jam anda tidak dihubungi oleh team kami, silahkan mengirim email ke:
+    </string>
+    <string name="book_call_email">doktermu@bimaindonesia.co.id</string>
+    <string name="book_call_info_2">
+        Tulis nama lengkap dan nomer telepon anda yang aktif.
+    </string>
     <string name="book_call_about">Apa topik anda?</string>
     <string name="book_call_phone">Nomor telepon Anda:</string>
     <string name="book_call_phone_info_modal">\?</string>
@@ -147,6 +150,11 @@
     <string name="invalid_phone_number_message">Nomor telepon anda kosong atau tidak valid.
         Silakan cek atau masukkan ulang nomor telepon anda.</string>
     <string name="invalid_call_topic_message">Pilih topik konsultasi anda</string>
+    <string name="invalid_call_subtopic_message">Pilih sub-topik konsultasi anda</string>
+    <string name="invalid_call_phone_number_message">
+        Nomor telepon anda kosong atau tidak valid.
+        Silakan masukkan ulang nomor telepon anda di menu profil.
+    </string>
     <string name="dialog_change_password">Ubah kata sandi</string>
     <string name="dialog_old_password">Kata sandi lama</string>
     <string name="dialog_new_password">Kata sandi baru</string>

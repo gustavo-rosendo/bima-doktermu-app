@@ -1,8 +1,10 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +29,9 @@ import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.bima.dokterpribadimu.view.components.PhoneInfoModalDialog;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.google.android.gms.common.server.converter.StringToIntConverter;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.inject.Inject;
 
@@ -54,6 +58,8 @@ public class BookCallActivity extends BaseActivity {
     private static final String SUBTOPIC_THT_DISEASE = "penyakit_tht";
 
     private static final String TAG = BookCallActivity.class.getSimpleName();
+
+    private static final String CALL_ID = "call_id";
 
     @Inject
     BookingApi bookingApi;
@@ -99,7 +105,7 @@ public class BookCallActivity extends BaseActivity {
         binding.bookCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (validateTopic() && validateBookTimeLimit()) {
+                if (validateTopic() && validateSubTopic() && validatePhoneNumber() && validateBookTimeLimit()) {
                     String topic = "";
                     String subTopic = "";
 
@@ -265,8 +271,8 @@ public class BookCallActivity extends BaseActivity {
                         binding.bookCallSubtopicSpinner.setEnabled(true);
                         break;
                     default:
-                        binding.bookCallSubtopicUnderlineView.setVisibility(View.INVISIBLE);
-                        binding.bookCallSubtopicSpinner.setVisibility(View.INVISIBLE);
+                        binding.bookCallSubtopicUnderlineView.setVisibility(View.GONE);
+                        binding.bookCallSubtopicSpinner.setVisibility(View.GONE);
                         binding.bookCallSubtopicSpinner.setEnabled(false);
                         break;
                 }
@@ -280,8 +286,8 @@ public class BookCallActivity extends BaseActivity {
         });
 
         //In the beginning, the subtopics list is invisible
-        binding.bookCallSubtopicUnderlineView.setVisibility(View.INVISIBLE);
-        binding.bookCallSubtopicSpinner.setVisibility(View.INVISIBLE);
+        binding.bookCallSubtopicUnderlineView.setVisibility(View.GONE);
+        binding.bookCallSubtopicSpinner.setVisibility(View.GONE);
         binding.bookCallSubtopicSpinner.setEnabled(false);
 
         //Show the phone number where the user will be called
@@ -322,6 +328,21 @@ public class BookCallActivity extends BaseActivity {
                 phoneInfoModalDialog.showDialog();
             }
         });
+
+        binding.bookCallEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = getResources().getString(R.string.book_call_email);
+                startMailIntent(email);
+            }
+        });
+    }
+
+    private void startMailIntent(String email) {
+        Intent emailIntent = new Intent(
+                Intent.ACTION_SENDTO,
+                Uri.fromParts("mailto", email, null));
+        startActivity(Intent.createChooser(emailIntent, "Send email"));
     }
 
     private void dismissPhoneInfoModalDialog() {
@@ -329,8 +350,6 @@ public class BookCallActivity extends BaseActivity {
         phoneInfoModalDialog.clearReference();
         phoneInfoModalDialog = null;
     }
-
-
 
     /**
      * Validate book a call topic
@@ -348,6 +367,53 @@ public class BookCallActivity extends BaseActivity {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Validate book a call sub-topic
+     * @return boolean true if sub-topic are valid, boolean false if otherwise
+     */
+    private boolean validateSubTopic() {
+        boolean isValid = false;
+
+        if(binding.bookCallSubtopicSpinner.getVisibility() == View.VISIBLE) {
+            if (binding.bookCallSubtopicSpinner.getSelectedItemPosition()
+                    == binding.bookCallSubtopicSpinner.getCount()) {
+                Toast.makeText(
+                        this,
+                        getString(R.string.invalid_call_subtopic_message),
+                        Toast.LENGTH_SHORT
+                ).show();
+            } else {
+                return true;
+            }
+        }
+        else {
+            isValid = true;
+        }
+
+        return isValid;
+    }
+
+    /**
+     * Validate book a call phone number. A phone number is valid if it has at least 11 digits, like in: 02742112462
+     * @return boolean true if phone number is valid, boolean false if otherwise
+     */
+    private boolean validatePhoneNumber() {
+        boolean isValid = false;
+
+        if(binding.bookCallPhoneNumber.getText().length() < Constants.PHONE_NUMBER_MINIMAL_DIGITS) {
+            Toast.makeText(
+                    this,
+                    getString(R.string.invalid_call_phone_number_message),
+                    Toast.LENGTH_LONG
+            ).show();
+        }
+        else {
+            isValid = true;
+        }
+
+        return isValid;
     }
 
     /**
@@ -416,6 +482,25 @@ public class BookCallActivity extends BaseActivity {
                                     BookCallActivity.this,
                                     Constants.KEY_BOOK_CALL_TIME_MILLIS,
                                     TimeUtils.getElapsedTimeMillis());
+
+                            if(response.getData() != null) {
+                                String jsonResponse = response.getData().toString();
+                                String callId = "";
+                                try {
+                                    JSONObject jsonObject = new JSONObject(jsonResponse);
+                                    if(jsonObject.has(CALL_ID)) {
+                                        callId = String.valueOf(jsonObject.optInt(CALL_ID));
+                                    }
+                                } catch (JSONException e) {
+                                    Log.e(TAG, "Error reading call_id from jsonResponse = " + jsonResponse);
+                                    Log.e(TAG, "Error message = " + e.getMessage());
+                                }
+                                StorageUtils.putString(
+                                        BookCallActivity.this,
+                                        Constants.KEY_BOOK_CALL_ID_LAST_CALL,
+                                        callId);
+                                Log.d(TAG, "Storing last call's id = " + callId);
+                            }
 
                             showSuccessDialog(
                                     R.drawable.ic_thumb_up,
