@@ -2,6 +2,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.bima.dokterpribadimu.view.fragments.ProfileFragment.CallHistoryListViewModel"/>
+        <import
+            type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -83,6 +91,58 @@
                         android:gravity="end"
                         android:text="@string/subscription_disabled"
                         android:textColor="@color/orange"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/generic_normal_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/next_billing_date"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/profile_next_billing_date_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="-"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/generic_normal_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/member_number"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/profile_member_number_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="-"
+                        android:textColor="@android:color/black"
                         android:textSize="16sp"/>
 
                 </LinearLayout>
@@ -211,7 +271,105 @@
 
                     </LinearLayout>
 
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_large_margin"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/my_phone_number"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/generic_normal_margin"
+                                android:text="@string/my_phone_number"
+                                android:textColor="@color/grey_a1"
+                                android:textSize="16sp"/>
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/profile_my_phone_number_button"
+                            android:layout_width="@dimen/generic_button_height"
+                            android:layout_height="@dimen/generic_button_height">
+
+                            <ImageView
+                                android:layout_width="@dimen/generic_small_button_height"
+                                android:layout_height="@dimen/generic_small_button_height"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_edit"
+                                android:contentDescription="@string/app_name"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:layout_marginTop="@dimen/generic_xlarge_margin"
+                    android:background="@color/grey_light"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_xlarge_margin"
+                    android:text="@string/profile_call_history_info"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/upcoming_recycler"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:paddingLeft="@dimen/generic_small_padding"
+                        android:paddingStart="@dimen/generic_small_padding"
+                        android:paddingRight="@dimen/generic_small_padding"
+                        android:paddingEnd="@dimen/generic_small_padding"
+                        app:layoutManager="@{LayoutManagers.linear()}"
+                        app:items="@{viewModel.items}"
+                        app:itemView="@{viewModel.itemView}"/>
+
+                    <ProgressBar
+                        android:id="@+id/dialog_progress_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:indeterminate="true"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/profile_call_history_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:gravity="end"
+                    android:text="@string/profile_call_history_more"
+                    android:textAllCaps="true"
+                    android:textColor="@color/bima_blue"
+                    android:textSize="16sp"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -224,13 +382,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/generic_xlarge_margin"
-                    android:layout_marginBottom="@dimen/generic_xlarge_margin"
+                    android:layout_marginBottom="@dimen/generic_normal_margin"
                     android:layout_marginLeft="@dimen/generic_large_margin"
                     android:layout_marginStart="@dimen/generic_large_margin"
                     android:layout_marginRight="@dimen/generic_large_margin"
                     android:layout_marginEnd="@dimen/generic_large_margin"
+                    android:textAlignment="center"
                     android:textColor="@color/grey_a1"
                     android:textSize="16sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/bima_drawer_logo"
+                        android:contentDescription="@string/cerise"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 

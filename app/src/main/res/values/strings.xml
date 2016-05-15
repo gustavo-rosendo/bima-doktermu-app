@@ -77,11 +77,19 @@
     <!-- profile -->
     <string name="profile">Profil</string>
     <string name="my_profile">Profil saya</string>
-    <string name="profile_personal_info">Info personal saya</string>
-    <string name="profile_email_address">Alamat email</string>
-    <string name="profile_password">Kata sandi saya</string>
+    <string name="profile_personal_info">Info personal</string>
+    <string name="profile_email_address">Email</string>
+    <string name="profile_password">Kata sandi</string>
     <string name="profile_asterisk_password">********</string>
-    <string name="profile_app_info">BIMA Mobile v%s\nHak Cipta &#169;BIMA - 2016</string>
+    <string name="my_phone_number">Nomor telepon</string>
+    <string name="profile_call_history_info">Konsultasi terakhir</string>
+    <string name="profile_call_history_more">Selebihnya</string>
+    <string name="profile_app_info">
+        BIMA Mobile v%s\n
+        Hak Cipta &#169;BIMA - 2016\n\n
+        A concept designed and developed by Cerise
+    </string>
+    <string name="cerise">Cerise</string>
 
     <!-- drawer -->
     <string name="drawer_doctor_on_call">Doktermu</string>
@@ -104,11 +112,13 @@
     <string name="subscription_agent_number">Nomor agent</string>
     <string name="subscription_agent_number_optional">Nomor agent (pilihan)</string>
     <string name="subscription_subscribe">Aktifkan</string>
-    <string name="your_subscription">Rencana Langganan Saya</string>
-    <string name="monthly_plan">Rencana bulanan:</string>
+    <string name="your_subscription">Info akun</string>
+    <string name="monthly_plan">Status aktivasi:</string>
+    <string name="next_billing_date">Akhir masa aktif:</string>
+    <string name="member_number">Nomor anggota:</string>
     <string name="subscription_enabled">Aktif</string>
-    <string name="subscription_disabled">Non-aktif</string>
-    <string name="manage_subscription">Pengaturan Rencana Langganan</string>
+    <string name="subscription_disabled">Tidak aktif</string>
+    <string name="manage_subscription">Pengaturan</string>
     <string name="subscription_info">Mohon isi form di bawah ini untuk mengaktifkan seluruh layanan Doktermu.</string>
 
     <!-- sign out -->

@@ -80,4 +80,7 @@
     <!-- news -->
     <dimen name="news_image_height">100dp</dimen>
 
+    <!-- call history -->
+    <dimen name="call_history_image_height">60dp</dimen>
+
 </resources>
