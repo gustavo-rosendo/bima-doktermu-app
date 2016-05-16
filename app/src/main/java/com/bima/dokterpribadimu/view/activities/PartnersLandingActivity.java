@@ -290,7 +290,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                             partners.clear();
                             partners.addAll(partnerResponse.getData().getPartner());
 
-                            addPartnersMarker();
+                            moveToUserLocation();
                         } else {
                             handleError(TAG, partnerResponse.getMessage());
                         }
