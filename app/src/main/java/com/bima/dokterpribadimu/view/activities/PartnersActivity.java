@@ -11,7 +11,6 @@ import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.ActivityPartnersBinding;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
-import com.bima.dokterpribadimu.view.fragments.DoctorCallFragment;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
 import com.bima.dokterpribadimu.view.fragments.PartnersFragment;
 

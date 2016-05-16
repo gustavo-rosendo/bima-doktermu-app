@@ -1,5 +1,8 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -14,8 +17,6 @@ import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.fragments.AboutFragment;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 public class AboutActivity extends BaseActivity {
 

@@ -1,12 +1,15 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentTransaction;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -30,8 +33,6 @@ import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.bima.dokterpribadimu.view.fragments.RegisterFragment;
 import com.bima.dokterpribadimu.view.fragments.SignInFragment;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import java.util.List;
 

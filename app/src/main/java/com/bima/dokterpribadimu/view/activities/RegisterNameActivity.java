@@ -1,5 +1,9 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import com.google.ads.conversiontracking.AdWordsConversionReporter;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +13,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
@@ -24,9 +27,6 @@ import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
-import com.google.ads.conversiontracking.AdWordsConversionReporter;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import java.util.List;
 

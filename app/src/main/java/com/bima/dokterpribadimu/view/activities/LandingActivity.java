@@ -1,5 +1,8 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,8 +14,6 @@ import com.bima.dokterpribadimu.databinding.ActivityLandingBinding;
 import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.facebook.appevents.AppEventsLogger;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 public class LandingActivity extends BaseActivity {
 

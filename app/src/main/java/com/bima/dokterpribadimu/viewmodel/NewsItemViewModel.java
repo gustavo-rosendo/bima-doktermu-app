@@ -10,10 +10,6 @@ import com.bima.dokterpribadimu.model.News;
 import com.bima.dokterpribadimu.utils.DateFormatterUtils;
 import com.squareup.picasso.Picasso;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * Created by apradanas on 5/11/16.
  */

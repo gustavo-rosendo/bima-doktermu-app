@@ -16,10 +16,6 @@ import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.squareup.picasso.Picasso;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class NewsDetailActivity extends BaseActivity {
 
     private static final String NEWS = "news";

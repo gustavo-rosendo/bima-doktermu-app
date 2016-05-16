@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
@@ -16,7 +15,6 @@ import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.DeviceInfoUtils;
 import com.bima.dokterpribadimu.utils.TokenUtils;
-import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 import com.bima.dokterpribadimu.view.activities.RegisterNameActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;

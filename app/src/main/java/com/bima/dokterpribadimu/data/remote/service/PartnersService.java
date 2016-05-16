@@ -2,7 +2,6 @@ package com.bima.dokterpribadimu.data.remote.service;
 
 import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.CategoriesResponse;
-import com.bima.dokterpribadimu.model.NewsResponse;
 import com.bima.dokterpribadimu.model.PartnerResponse;
 
 import retrofit2.Call;

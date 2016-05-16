@@ -23,7 +23,6 @@ import com.bima.dokterpribadimu.model.BimaCall;
 import com.bima.dokterpribadimu.model.CallHistoryResponse;
 import com.bima.dokterpribadimu.model.ProfileResponse;
 import com.bima.dokterpribadimu.model.UserProfile;
-import com.bima.dokterpribadimu.utils.BookingUtils;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
@@ -32,6 +31,7 @@ import com.bima.dokterpribadimu.view.components.ChangePasswordDialog;
 import com.bima.dokterpribadimu.viewmodel.CallHistoryItemViewModel;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -68,7 +68,7 @@ public class ProfileFragment extends BaseFragment {
     private ChangePasswordDialog dialog;
 
     private CallHistoryListViewModel callHistoryListViewModel = new CallHistoryListViewModel();
-    private List<BimaCall> callHistoryItems;
+    private List<BimaCall> callHistoryItems = new ArrayList<>();
 
     public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();

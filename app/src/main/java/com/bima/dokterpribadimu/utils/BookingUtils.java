@@ -1,8 +1,5 @@
 package com.bima.dokterpribadimu.utils;
 
-import com.bima.dokterpribadimu.DokterPribadimuApplication;
-import com.bima.dokterpribadimu.R;
-
 /**
  * Created by gustavo.santos on 5/16/2016.
  */

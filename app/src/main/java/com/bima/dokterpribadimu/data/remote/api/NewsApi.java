@@ -3,12 +3,10 @@ package com.bima.dokterpribadimu.data.remote.api;
 import com.bima.dokterpribadimu.data.remote.base.BaseApi;
 import com.bima.dokterpribadimu.data.remote.service.NewsService;
 import com.bima.dokterpribadimu.model.BaseResponse;
-import com.bima.dokterpribadimu.model.News;
 import com.bima.dokterpribadimu.model.NewsResponse;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 
 import java.io.IOException;
-import java.util.List;
 
 import retrofit2.Response;
 import rx.Observable;

@@ -1,5 +1,8 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
@@ -28,8 +31,6 @@ import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.bima.dokterpribadimu.view.components.PhoneInfoModalDialog;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import org.json.JSONException;
 import org.json.JSONObject;

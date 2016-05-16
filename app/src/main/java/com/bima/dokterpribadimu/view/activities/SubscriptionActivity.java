@@ -1,5 +1,11 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import com.google.ads.conversiontracking.AdWordsConversionReporter;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.analytics.ecommerce.Product;
+import com.google.android.gms.analytics.ecommerce.ProductAction;
+
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -40,11 +46,6 @@ import com.bima.dokterpribadimu.utils.iabutil.IabResult;
 import com.bima.dokterpribadimu.utils.iabutil.Purchase;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
-import com.google.ads.conversiontracking.AdWordsConversionReporter;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-import com.google.android.gms.analytics.ecommerce.Product;
-import com.google.android.gms.analytics.ecommerce.ProductAction;
 
 import java.util.Calendar;
 import java.util.List;

@@ -1,12 +1,12 @@
 package com.bima.dokterpribadimu;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
+
 import android.app.Application;
 
 import com.bima.dokterpribadimu.injection.DokterPribadimuComponent;
 import com.crashlytics.android.Crashlytics;
-
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
 
 import io.fabric.sdk.android.Fabric;
 

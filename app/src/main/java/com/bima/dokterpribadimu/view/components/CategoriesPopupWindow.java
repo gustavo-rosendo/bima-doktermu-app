@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.graphics.drawable.BitmapDrawable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -16,7 +15,6 @@ import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.PopupMenuCategoryBinding;
 import com.bima.dokterpribadimu.model.Category;
 import com.bima.dokterpribadimu.viewmodel.CategoryItemViewModel;
-import com.bima.dokterpribadimu.viewmodel.NewsItemViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,9 @@
 package com.bima.dokterpribadimu.view.activities;
 
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.databinding.DataBindingUtil;
@@ -16,9 +19,6 @@ import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
-import com.facebook.appevents.AppEventsLogger;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import java.util.concurrent.TimeUnit;
 
