@@ -15,12 +15,15 @@ import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.data.remote.api.CallHistoryApi;
+import com.bima.dokterpribadimu.data.remote.api.ProfileApi;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
 import com.bima.dokterpribadimu.databinding.FragmentProfileBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.BimaCall;
 import com.bima.dokterpribadimu.model.CallHistoryResponse;
+import com.bima.dokterpribadimu.model.ProfileResponse;
 import com.bima.dokterpribadimu.model.UserProfile;
+import com.bima.dokterpribadimu.utils.BookingUtils;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
@@ -28,6 +31,8 @@ import com.bima.dokterpribadimu.view.base.BaseFragment;
 import com.bima.dokterpribadimu.view.components.ChangePasswordDialog;
 import com.bima.dokterpribadimu.viewmodel.CallHistoryItemViewModel;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -47,8 +52,13 @@ public class ProfileFragment extends BaseFragment {
 
     private static final int CALL_HISTORY_LIMIT = 200;
 
+    private static final int MAX_NUM_CALLS_TO_SHOW = 3;
+
     @Inject
     UserApi userApi;
+
+    @Inject
+    ProfileApi profileApi;
 
     @Inject
     CallHistoryApi callHistoryApi;
@@ -58,6 +68,7 @@ public class ProfileFragment extends BaseFragment {
     private ChangePasswordDialog dialog;
 
     private CallHistoryListViewModel callHistoryListViewModel = new CallHistoryListViewModel();
+    private List<BimaCall> callHistoryItems;
 
     public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();
@@ -79,15 +90,42 @@ public class ProfileFragment extends BaseFragment {
 
         initViews();
 
+        initProfileInfo();
+
         initCallHistory();
 
         return binding.getRoot();
+    }
+
+    private void initProfileInfo() {
+        getProfileInfo(UserProfileUtils.getUserProfile(getActivity()).getAccessToken());
     }
 
     private void initCallHistory() {
         binding.setViewModel(callHistoryListViewModel);
 
         getCallHistory(CALL_HISTORY_LIMIT, UserProfileUtils.getUserProfile(getActivity()).getAccessToken());
+
+        binding.profileCallHistoryMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int indexNextItem = callHistoryListViewModel.items.size();
+                if(indexNextItem < callHistoryItems.size()) {
+                    for(int i = 0; i < MAX_NUM_CALLS_TO_SHOW && (indexNextItem + i < callHistoryItems.size()) ; i++) {
+                        callHistoryListViewModel.items.add(
+                                new CallHistoryItemViewModel(
+                                        callHistoryItems.get(indexNextItem + i),
+                                        new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                // add action when user clicks on a call
+                                            }
+                                        })
+                        );
+                    }
+                }
+            }
+        });
     }
 
     private void initViews() {
@@ -221,6 +259,54 @@ public class ProfileFragment extends BaseFragment {
 
 
     /**
+     * Get user's profile info
+     * @param accessToken user's access token
+     */
+    private void getProfileInfo(final String accessToken) {
+        profileApi.getProfileInfo(accessToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse<ProfileResponse>>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse<ProfileResponse>>() {
+
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        binding.dialogProgressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        binding.dialogProgressBar.setVisibility(View.GONE);
+
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse<ProfileResponse> profileResponse) {
+                        if (profileResponse.getStatus() == Constants.Status.SUCCESS) {
+                            String subscriptionEnd = profileResponse.getData().getSubscriptionEnd();
+                            if(subscriptionEnd == null) {
+                                subscriptionEnd = "";
+                            }
+                            binding.profileNextBillingDateText.setText(subscriptionEnd);
+
+                            String memberNumber = profileResponse.getData().getMemberNumber();
+                            if(memberNumber == null) {
+                                memberNumber = "";
+                            }
+                            binding.profileMemberNumberText.setText(memberNumber);
+                        } else {
+                            handleError(TAG, profileResponse.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
      * Get call history list
      * @param limit restrict the number of returned calls from the history
      * @param accessToken user's access token
@@ -253,17 +339,24 @@ public class ProfileFragment extends BaseFragment {
                         if (callHistoryResponse.getStatus() == Constants.Status.SUCCESS) {
                             callHistoryListViewModel.items.clear();
 
+                            int count = 0;
                             for (final BimaCall booking : callHistoryResponse.getData().getCalls()) {
-                                callHistoryListViewModel.items.add(
-                                        new CallHistoryItemViewModel(
-                                                booking,
-                                                new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-                                                        // add action when user clicks on a call
-                                                    }
-                                                })
-                                );
+                                callHistoryItems.add(booking);
+
+                                //show only the first three items in the beginning
+                                if(count < MAX_NUM_CALLS_TO_SHOW) {
+                                    callHistoryListViewModel.items.add(
+                                            new CallHistoryItemViewModel(
+                                                    booking,
+                                                    new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View view) {
+                                                            // add action when user clicks on a call
+                                                        }
+                                                    })
+                                    );
+                                }
+                                count++;
                             }
                         } else {
                             handleError(TAG, callHistoryResponse.getMessage());
