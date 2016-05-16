@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="category_item_viewmodel"
+            type="com.bima.dokterpribadimu.viewmodel.CategoryItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/generic_small_padding"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:background="@drawable/rounded_categories_button_bg_selector"
+            android:onClick="@{category_item_viewmodel.clickListener}"
+            android:text="@{category_item_viewmodel.title}"
+            android:textAllCaps="false"
+            android:textColor="@drawable/categories_text_color_selector" />
+
+    </LinearLayout>
+
+</layout>

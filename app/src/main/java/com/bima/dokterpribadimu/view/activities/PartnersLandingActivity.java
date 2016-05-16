@@ -1,15 +1,5 @@
 package com.bima.dokterpribadimu.view.activities;
 
-import android.Manifest;
-import android.databinding.DataBindingUtil;
-import android.location.Location;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.view.Gravity;
-import android.view.View;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -19,21 +9,49 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.Manifest;
+import android.databinding.DataBindingUtil;
+import android.location.Location;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.PopupWindow;
+
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.data.remote.api.PartnersApi;
 import com.bima.dokterpribadimu.databinding.ActivityPartnersLandingBinding;
+import com.bima.dokterpribadimu.model.BaseResponse;
+import com.bima.dokterpribadimu.model.CategoriesResponse;
+import com.bima.dokterpribadimu.model.Category;
+import com.bima.dokterpribadimu.model.Partner;
+import com.bima.dokterpribadimu.model.PartnerResponse;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
+import com.bima.dokterpribadimu.view.components.CategoriesPopupWindow;
+import com.bima.dokterpribadimu.view.components.CategoriesPopupWindow.CategoryClickListener;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import fr.quentinklein.slt.LocationTracker;
 import fr.quentinklein.slt.TrackerSettings;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class PartnersLandingActivity extends BaseActivity implements OnMapReadyCallback, EasyPermissions.PermissionCallbacks {
+
+    private static final String TAG = PartnersLandingActivity.class.getSimpleName();
 
     private static final int RC_LOCATION_PERMISSION = 1;
 
@@ -43,6 +61,11 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
     private static final int CIRCLE_RADIUS_METER = 500;
     private static final int CIRCLE_STROKE_WIDTH = 2;
 
+    private static final int POPUP_BOTTOM_MARGIN = 400;
+
+    @Inject
+    PartnersApi partnersApi;
+
     private ActivityPartnersLandingBinding binding;
     private DrawerFragment drawerFragment;
 
@@ -51,6 +74,11 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
     private LocationTracker locationTracker;
 
     private boolean isLocationSet = false;
+
+    private CategoriesPopupWindow categoriesPopupWindow;
+
+    private List<Category> categories = new ArrayList<>();
+    private List<Partner> partners = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +94,8 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         initViews();
         setupDrawerFragment();
         setupMapFragment();
+
+        getCategories(UserProfileUtils.getUserProfile(this).getAccessToken());
     }
 
     private void initViews() {
@@ -85,10 +115,42 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
             }
         });
 
+        categoriesPopupWindow = new CategoriesPopupWindow(PartnersLandingActivity.this);
+
         binding.partnersMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: show partners category menu
+                if (categories.size() > 0) {
+                    binding.appbar.setVisibility(View.INVISIBLE);
+                    binding.overlayView.setVisibility(View.VISIBLE);
+                    binding.partnersMenuButton.setSelected(true);
+
+                    categoriesPopupWindow.setCategories(categories);
+                    categoriesPopupWindow.setClickListener(new CategoryClickListener() {
+                        @Override
+                        public void onClick(Category category) {
+                            categoriesPopupWindow.dismiss();
+
+                            getPartners(
+                                    category.getCategoryName(),
+                                    UserProfileUtils.getUserProfile(PartnersLandingActivity.this).getAccessToken());
+                        }
+                    });
+                    categoriesPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                        @Override
+                        public void onDismiss() {
+                            binding.appbar.setVisibility(View.VISIBLE);
+                            binding.overlayView.setVisibility(View.GONE);
+                            binding.partnersMenuButton.setSelected(false);
+                        }
+                    });
+                    categoriesPopupWindow.showAtLocation(
+                            binding.partnersMenuButton,
+                            Gravity.BOTTOM|Gravity.CENTER,
+                            0,
+                            POPUP_BOTTOM_MARGIN
+                    );
+                }
             }
         });
     }
@@ -147,9 +209,93 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
             locationTracker.stopListening();
         }
 
+        if (categoriesPopupWindow != null) {
+            categoriesPopupWindow.release();
+        }
+
         drawerFragment.setOnDrawerItemPressedListener(null);
 
         super.onDestroy();
+    }
+
+    /**
+     * Get partners categories
+     * @param accessToken user's access token
+     */
+    private void getCategories(final String accessToken) {
+        partnersApi.getCategories(accessToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse<CategoriesResponse>>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse<CategoriesResponse>>() {
+
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse<CategoriesResponse> categoriesResponse) {
+                        if (categoriesResponse.getStatus() == Constants.Status.SUCCESS) {
+                            categories = categoriesResponse.getData().getCategories();
+                        } else {
+                            handleError(TAG, categoriesResponse.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * Get partners categories
+     * @param accessToken user's access token
+     */
+    private void getPartners(final String partnerCategory, final String accessToken) {
+        partnersApi.getPartners(partnerCategory, "", accessToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse<PartnerResponse>>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse<PartnerResponse>>() {
+
+                    @Override
+                    public void onStart() {
+                        showProgressDialog();
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        dismissProgressDialog();
+
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse<PartnerResponse> partnerResponse) {
+                        dismissProgressDialog();
+
+                        if (partnerResponse.getStatus() == Constants.Status.SUCCESS) {
+                            partners.clear();
+                            partners.addAll(partnerResponse.getData().getPartner());
+
+                            addPartnersMarker();
+                        } else {
+                            handleError(TAG, partnerResponse.getMessage());
+                        }
+                    }
+                });
     }
 
     @AfterPermissionGranted(RC_LOCATION_PERMISSION)
@@ -225,6 +371,24 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                     .strokeWidth(CIRCLE_STROKE_WIDTH)
                     .strokeColor(ContextCompat.getColor(this, R.color.bima_blue))
                     .fillColor(ContextCompat.getColor(this, R.color.bima_blue_alpha)));
+
+            if (partners.size() > 0) {
+                addPartnersMarker();
+            }
+        }
+    }
+
+    private void addPartnersMarker() {
+        for (Partner partner : partners) {
+            Double latitude = Double.parseDouble(partner.getPartnerLat());
+            Double longitude = Double.parseDouble(partner.getPartnerLong());
+            LatLng userLatLng = new LatLng(latitude, longitude);
+            map.addMarker(
+                new MarkerOptions()
+                        .position(userLatLng)
+                        .title(partner.getPartnerName())
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
+            );
         }
     }
 }

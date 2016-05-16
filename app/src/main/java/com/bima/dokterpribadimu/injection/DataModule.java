@@ -5,6 +5,7 @@ import com.bima.dokterpribadimu.data.remote.api.BookingApi;
 import com.bima.dokterpribadimu.data.remote.api.CallHistoryApi;
 import com.bima.dokterpribadimu.data.remote.api.CustomerApi;
 import com.bima.dokterpribadimu.data.remote.api.NewsApi;
+import com.bima.dokterpribadimu.data.remote.api.PartnersApi;
 import com.bima.dokterpribadimu.data.remote.api.ProfileApi;
 import com.bima.dokterpribadimu.data.remote.api.SubscriptionApi;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
@@ -54,6 +55,12 @@ public final class DataModule {
     @Singleton
     ProfileApi provideProfileService() {
         return new ProfileApi();
+    }
+
+    @Provides
+    @Singleton
+    PartnersApi providePartnersService() {
+        return new PartnersApi();
     }
 
     @Provides

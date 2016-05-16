@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.bima.dokterpribadimu.view.components.CategoriesPopupWindow.CategoryListViewModel"/>
+        <import
+            type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/category_recycler"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:overScrollMode="never"
+            app:layoutManager="@{LayoutManagers.linear()}"
+            app:items="@{viewModel.items}"
+            app:itemView="@{viewModel.itemView}"/>
+
+    </RelativeLayout>
+
+</layout>

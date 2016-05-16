@@ -32,20 +32,6 @@
                 android:contentDescription="@string/app_name"
                 android:visibility="gone"/>
 
-            <ImageButton
-                android:id="@+id/partners_menu_button"
-                android:layout_width="@dimen/generic_large_button_height"
-                android:layout_height="@dimen/generic_large_button_height"
-                android:layout_marginRight="@dimen/generic_large_margin"
-                android:layout_marginEnd="@dimen/generic_large_margin"
-                android:layout_marginBottom="@dimen/generic_large_margin"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:background="@drawable/ic_partners_menu"
-                android:contentDescription="@string/app_name"
-                android:visibility="gone"/>
-
             <android.support.design.widget.AppBarLayout
                 android:id="@+id/appbar"
                 android:layout_width="match_parent"
@@ -91,6 +77,27 @@
                 </android.support.v7.widget.Toolbar>
 
             </android.support.design.widget.AppBarLayout>
+
+            <View
+                android:id="@+id/overlay_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey_dark_transparent"
+                android:visibility="gone"/>
+
+            <ImageButton
+                android:id="@+id/partners_menu_button"
+                android:layout_width="@dimen/generic_large_button_height"
+                android:layout_height="@dimen/generic_large_button_height"
+                android:layout_marginRight="@dimen/generic_large_margin"
+                android:layout_marginEnd="@dimen/generic_large_margin"
+                android:layout_marginBottom="@dimen/generic_large_margin"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/partner_menu_bg_selector"
+                android:contentDescription="@string/app_name"
+                android:visibility="gone"/>
 
         </RelativeLayout>
 

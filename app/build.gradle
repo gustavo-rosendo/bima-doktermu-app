@@ -73,8 +73,7 @@ android {
 }
 
 dependencies {
-    final SUPPORT_LIBRARY_VERSION = '23.2.1'
-    final SUPPORT_LIBRARY_LATEST_VERSION = '23.3.0'
+    final SUPPORT_LIBRARY_VERSION = '23.4.0'
     final RETROFIT_2_VERSION = '2.0.0'
     final OKHTTP_3_VERSION = '3.2.0'
     final DAGGER_VERSION = '2.0.2'
@@ -101,10 +100,10 @@ dependencies {
      *  Support libraries
      */
     compile "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_LATEST_VERSION"
+    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:design:$SUPPORT_LIBRARY_LATEST_VERSION"
-    compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_LATEST_VERSION"
+    compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
 
     /**
      *   Dependency Injections
