@@ -19,6 +19,7 @@ import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.data.remote.api.BookingApi;
 import com.bima.dokterpribadimu.databinding.ActivityBookCallBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
+import com.bima.dokterpribadimu.utils.BookingUtils;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
@@ -40,22 +41,6 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class BookCallActivity extends BaseActivity {
-
-    private static final String TOPIC_REPRODUCTION = "reproduksi";
-    private static final String TOPIC_HEALTH_ORGAN_DISEASE = "kesehatan_penyakit_organ";
-    private static final String TOPIC_DIET_NUTRITION = "diet_nutrisi";
-    private static final String TOPIC_INJURY = "cedera";
-    private static final String TOPIC_OTHERS = "lain_lain";
-
-    private static final String SUBTOPIC_PREGNANCY = "kehamilan_kesuburan";
-    private static final String SUBTOPIC_BABY_CHILDREN_HEALTH = "kesehatan_bayi_anak";
-    private static final String SUBTOPIC_HEALTH_SEXUAL_DISEASE = "kesehatan_penyakit_kelamin";
-
-    private static final String SUBTOPIC_INTERNAL_DISEASE = "penyakit_dalam";
-    private static final String SUBTOPIC_BONE_DISEASE = "penyakit_tulang";
-    private static final String SUBTOPIC_NEURAL_DISEASE = "penyakit_syaraf";
-    private static final String SUBTOPIC_EYE_DISEASE = "penyakit_mata";
-    private static final String SUBTOPIC_THT_DISEASE = "penyakit_tht";
 
     private static final String TAG = BookCallActivity.class.getSimpleName();
 
@@ -114,18 +99,18 @@ public class BookCallActivity extends BaseActivity {
 
                     switch (topicPosition) {
                         case 0:
-                            topic = TOPIC_REPRODUCTION;
+                            topic = BookingUtils.TOPIC_REPRODUCTION;
 
                             subTopicPosition = binding.bookCallSubtopicSpinner.getSelectedItemPosition();
                             switch (subTopicPosition) {
                                 case 0:
-                                    subTopic = SUBTOPIC_PREGNANCY;
+                                    subTopic = BookingUtils.SUBTOPIC_PREGNANCY;
                                     break;
                                 case 1:
-                                    subTopic = SUBTOPIC_BABY_CHILDREN_HEALTH;
+                                    subTopic = BookingUtils.SUBTOPIC_BABY_CHILDREN_HEALTH;
                                     break;
                                 case 2:
-                                    subTopic = SUBTOPIC_HEALTH_SEXUAL_DISEASE;
+                                    subTopic = BookingUtils.SUBTOPIC_HEALTH_SEXUAL_DISEASE;
                                     break;
                                 default:
                                     subTopic = "";
@@ -134,24 +119,24 @@ public class BookCallActivity extends BaseActivity {
 
                             break;
                         case 1:
-                            topic = TOPIC_HEALTH_ORGAN_DISEASE;
+                            topic = BookingUtils.TOPIC_HEALTH_ORGAN_DISEASE;
 
                             subTopicPosition = binding.bookCallSubtopicSpinner.getSelectedItemPosition();
                             switch (subTopicPosition) {
                                 case 0:
-                                    subTopic = SUBTOPIC_INTERNAL_DISEASE;
+                                    subTopic = BookingUtils.SUBTOPIC_INTERNAL_DISEASE;
                                     break;
                                 case 1:
-                                    subTopic = SUBTOPIC_BONE_DISEASE;
+                                    subTopic = BookingUtils.SUBTOPIC_BONE_DISEASE;
                                     break;
                                 case 2:
-                                    subTopic = SUBTOPIC_NEURAL_DISEASE;
+                                    subTopic = BookingUtils.SUBTOPIC_NEURAL_DISEASE;
                                     break;
                                 case 3:
-                                    subTopic = SUBTOPIC_EYE_DISEASE;
+                                    subTopic = BookingUtils.SUBTOPIC_EYE_DISEASE;
                                     break;
                                 case 4:
-                                    subTopic = SUBTOPIC_THT_DISEASE;
+                                    subTopic = BookingUtils.SUBTOPIC_THT_DISEASE;
                                     break;
                                 default:
                                     subTopic = "";
@@ -160,15 +145,15 @@ public class BookCallActivity extends BaseActivity {
 
                             break;
                         case 2:
-                            topic = TOPIC_DIET_NUTRITION;
+                            topic = BookingUtils.TOPIC_DIET_NUTRITION;
                             subTopic = "";
                             break;
                         case 3:
-                            topic = TOPIC_INJURY;
+                            topic = BookingUtils.TOPIC_INJURY;
                             subTopic = "";
                             break;
                         case 4:
-                            topic = TOPIC_OTHERS;
+                            topic = BookingUtils.TOPIC_OTHERS;
                             subTopic = "";
                             break;
                         default:
