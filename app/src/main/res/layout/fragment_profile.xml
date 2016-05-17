@@ -22,7 +22,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="91dp"
-                android:background="@color/grey_light"/>
+                android:background="@drawable/cover_image"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_picture_image"
@@ -31,7 +31,7 @@
                 android:layout_marginTop="@dimen/generic_large_margin"
                 android:layout_centerHorizontal="true"
                 app:civ_border_width="4dp"
-                app:civ_border_color="@color/grey_light"/>
+                app:civ_border_color="@color/bima_blue"/>
 
             <TextView
                 android:id="@+id/profile_name_text"
@@ -387,25 +387,17 @@
                     android:layout_marginStart="@dimen/generic_large_margin"
                     android:layout_marginRight="@dimen/generic_large_margin"
                     android:layout_marginEnd="@dimen/generic_large_margin"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="@color/grey_a1"
                     android:textSize="16sp"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/generic_normal_margin"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/bima_drawer_logo"
-                        android:contentDescription="@string/cerise"/>
-
-                </LinearLayout>
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/cerise_logo"
+                    android:contentDescription="@string/cerise"/>
 
             </LinearLayout>
 
