@@ -1,12 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.bima.dokterpribadimu.view.activities.PartnersSearchActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</RelativeLayout>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.bima.dokterpribadimu.view.activities.PartnersSearchActivity.SearchListViewModel" />
+
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_large_margin"
+            android:layout_marginBottom="@dimen/generic_normal_margin"
+            android:layout_marginStart="@dimen/generic_large_margin"
+            android:layout_marginLeft="@dimen/generic_large_margin"
+            android:layout_marginRight="@dimen/generic_large_margin"
+            android:layout_marginEnd="@dimen/generic_large_margin"
+            android:background="@android:color/white">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/generic_toolbar_height"
+                android:background="@android:color/white"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:elevation="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/toolbar_back_button"
+                        android:layout_width="@dimen/generic_toolbar_button_height"
+                        android:layout_height="@dimen/generic_toolbar_button_height"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:padding="@dimen/generic_toolbar_image_button_padding"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_arrow_back_black" />
+
+                    <EditText
+                        android:id="@+id/toolbar_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toEndOf="@+id/toolbar_back_button"
+                        android:layout_toRightOf="@+id/toolbar_back_button"
+                        android:background="@android:color/transparent"
+                        android:gravity="center_vertical"
+                        android:hint="@string/partners_search_our_partners"
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/generic_large_margin"
+            android:layout_marginLeft="@dimen/generic_large_margin"
+            android:layout_marginRight="@dimen/generic_large_margin"
+            android:layout_marginStart="@dimen/generic_large_margin"
+            android:layout_marginBottom="@dimen/generic_small_margin">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/search_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:paddingEnd="@dimen/generic_small_padding"
+                android:paddingLeft="@dimen/generic_small_padding"
+                android:paddingRight="@dimen/generic_small_padding"
+                android:paddingStart="@dimen/generic_small_padding"
+                app:itemView="@{viewModel.itemView}"
+                app:items="@{viewModel.items}"
+                app:layoutManager="@{LayoutManagers.linear()}" />
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</layout>

@@ -11,6 +11,7 @@ import com.bima.dokterpribadimu.view.activities.NewsActivity;
 import com.bima.dokterpribadimu.view.activities.NewsDetailActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersLandingActivity;
+import com.bima.dokterpribadimu.view.activities.PartnersSearchActivity;
 import com.bima.dokterpribadimu.view.activities.ProfileActivity;
 import com.bima.dokterpribadimu.view.activities.RegisterNameActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
@@ -49,6 +50,7 @@ public interface DokterPribadimuComponent {
     void inject(BookCallActivity bookCallActivity);
     void inject(PartnersActivity partnersActivity);
     void inject(PartnersLandingActivity partnersLandingActivity);
+    void inject(PartnersSearchActivity partnersSearchActivity);
     void inject(NewsActivity newsActivity);
     void inject(NewsDetailActivity newsDetailActivity);
     void inject(ProfileActivity profileActivity);
