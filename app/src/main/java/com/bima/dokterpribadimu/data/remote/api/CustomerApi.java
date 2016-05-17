@@ -20,7 +20,7 @@ public class CustomerApi extends BaseApi<CustomerService> {
     private CustomerService customerService;
 
     public CustomerApi() {
-        super();
+        super(BaseApi.API_TYPE_SERVER);
         this.customerService = this.createService();
     }
 

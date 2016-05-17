@@ -20,7 +20,7 @@ public class ProfileApi extends BaseApi<ProfileService> {
     private ProfileService profileService;
 
     public ProfileApi() {
-        super();
+        super(BaseApi.API_TYPE_SERVER);
         this.profileService = this.createService();
     }
 

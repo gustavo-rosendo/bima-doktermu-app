@@ -4,6 +4,7 @@ import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
 import com.bima.dokterpribadimu.data.remote.api.BookingApi;
 import com.bima.dokterpribadimu.data.remote.api.CallHistoryApi;
 import com.bima.dokterpribadimu.data.remote.api.CustomerApi;
+import com.bima.dokterpribadimu.data.remote.api.DirectionsApi;
 import com.bima.dokterpribadimu.data.remote.api.NewsApi;
 import com.bima.dokterpribadimu.data.remote.api.PartnersApi;
 import com.bima.dokterpribadimu.data.remote.api.ProfileApi;
@@ -37,6 +38,12 @@ public final class DataModule {
     @Singleton
     CustomerApi provideCustomerService() {
         return new CustomerApi();
+    }
+
+    @Provides
+    @Singleton
+    DirectionsApi provideDirectionsService() {
+        return new DirectionsApi();
     }
 
     @Provides

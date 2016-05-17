@@ -20,7 +20,7 @@ public class UserApi extends BaseApi<UserService> {
     private UserService userService;
 
     public UserApi() {
-        super();
+        super(BaseApi.API_TYPE_SERVER);
         userService = this.createService();
     }
 

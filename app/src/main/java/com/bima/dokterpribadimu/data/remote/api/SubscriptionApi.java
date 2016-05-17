@@ -20,7 +20,7 @@ public class SubscriptionApi extends BaseApi<SubscriptionService> {
     private SubscriptionService subscriptionService;
 
     public SubscriptionApi() {
-        super();
+        super(BaseApi.API_TYPE_SERVER);
         subscriptionService = this.createService();
     }
 

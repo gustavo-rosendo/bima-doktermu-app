@@ -1,9 +1,9 @@
 package com.bima.dokterpribadimu.data.remote.api;
 
 import com.bima.dokterpribadimu.data.remote.base.BaseApi;
-import com.bima.dokterpribadimu.data.remote.service.NewsService;
+import com.bima.dokterpribadimu.data.remote.service.DirectionsService;
 import com.bima.dokterpribadimu.model.BaseResponse;
-import com.bima.dokterpribadimu.model.NewsResponse;
+import com.bima.dokterpribadimu.model.directions.DirectionsResponse;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 
 import java.io.IOException;
@@ -13,34 +13,34 @@ import rx.Observable;
 import rx.Subscriber;
 
 /**
- * Created by apradanas on 5/11/16.
+ * Created by apradanas.
  */
-public class NewsApi extends BaseApi<NewsService> {
+public class DirectionsApi extends BaseApi<DirectionsService> {
 
-    private NewsService newsService;
+    private DirectionsService directionsService;
 
-    public NewsApi() {
-        super(BaseApi.API_TYPE_SERVER);
-        this.newsService = this.createService();
+    public DirectionsApi() {
+        super(BaseApi.API_TYPE_MAPS);
+        directionsService = this.createService();
     }
 
     @Override
     protected Class getServiceClass() {
-        return NewsService.class;
+        return DirectionsService.class;
     }
 
     /**
-     * NewsApi implementation to get news
-     * @return Observable<BaseResponse>
+     * Directions implementation to get news
+     * @return Observable<DirectionsResponse>
      */
-    public Observable<BaseResponse<NewsResponse>> getNews(final String newsCategory, final String accessToken) {
-        return Observable.create(new Observable.OnSubscribe<BaseResponse<NewsResponse>>() {
+    public Observable<DirectionsResponse> getDirections(final boolean sensor, final String origin, final String destination) {
+        return Observable.create(new Observable.OnSubscribe<DirectionsResponse>() {
             @Override
-            public void call(final Subscriber<? super BaseResponse<NewsResponse>> subscriber) {
+            public void call(final Subscriber<? super DirectionsResponse> subscriber) {
                 try {
-                    Response response = newsService.getNews(newsCategory, accessToken).execute();
+                    Response response = directionsService.getDistance(sensor, origin, destination).execute();
                     if (response.isSuccessful()) {
-                        subscriber.onNext((BaseResponse<NewsResponse>) response.body());
+                        subscriber.onNext((DirectionsResponse) response.body());
                         subscriber.onCompleted();
                     } else {
                         BaseResponse error = GsonUtils.fromJson(

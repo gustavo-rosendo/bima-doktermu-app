@@ -21,7 +21,7 @@ public class PartnersApi extends BaseApi<PartnersService> {
     private PartnersService partnersService;
 
     public PartnersApi() {
-        super();
+        super(BaseApi.API_TYPE_SERVER);
         this.partnersService = this.createService();
     }
 

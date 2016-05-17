@@ -31,6 +31,9 @@ import static okhttp3.logging.HttpLoggingInterceptor.Level;
  */
 public abstract class BaseApi<T> {
 
+    public static final int API_TYPE_SERVER = 0;
+    public static final int API_TYPE_MAPS = 1;
+
     private static final String BASE_URL = BuildConfig.BASE_URL;
 
     public static int MAX_IDLE_CONNECTIONS = 30;
@@ -38,7 +41,7 @@ public abstract class BaseApi<T> {
 
     private final Retrofit retrofit;
 
-    public BaseApi() {
+    public BaseApi(int apiType) {
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create();
@@ -57,7 +60,7 @@ public abstract class BaseApi<T> {
                 .build();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(apiType == API_TYPE_SERVER ? BASE_URL : BuildConfig.MAPS_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build();
