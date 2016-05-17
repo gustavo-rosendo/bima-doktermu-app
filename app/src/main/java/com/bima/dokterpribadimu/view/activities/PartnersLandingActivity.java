@@ -30,6 +30,7 @@ import com.bima.dokterpribadimu.model.Category;
 import com.bima.dokterpribadimu.model.Partner;
 import com.bima.dokterpribadimu.model.PartnerResponse;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.CategoriesPopupWindow;
@@ -103,6 +104,13 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
             @Override
             public void onClick(View view) {
                 binding.drawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
+
+        binding.toolbarTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentUtils.startPartnersSearchActivity(PartnersLandingActivity.this);
             }
         });
 
@@ -201,6 +209,24 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         binding.partnersMenuButton.setVisibility(View.VISIBLE);
 
         initLocation();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (locationTracker != null) {
+            locationTracker.startListening();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        if (locationTracker != null) {
+            locationTracker.stopListening();
+        }
+
+        super.onPause();
     }
 
     @Override

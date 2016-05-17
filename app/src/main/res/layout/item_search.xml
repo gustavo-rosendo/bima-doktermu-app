@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="search_item_viewmodel"
+            type="com.bima.dokterpribadimu.viewmodel.SearchItemViewModel" />
+        <import type="android.view.View"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/generic_normal_padding"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="@{search_item_viewmodel.clickListener}">
+
+        <ImageView
+            android:layout_width="@dimen/search_icon_width_height"
+            android:layout_height="@dimen/search_icon_width_height"
+            android:padding="@dimen/search_icon_padding"
+            android:src="@{search_item_viewmodel.icon}"
+            android:contentDescription="@string/app_name"
+            tools:src="@drawable/ic_place"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/generic_normal_margin"
+            android:layout_marginStart="@dimen/generic_normal_margin"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="@{search_item_viewmodel.name}"
+                    android:textColor="@android:color/primary_text_light"
+                    android:textSize="@dimen/generic_subheading_text_size"
+                    android:textStyle="bold"
+                    tools:text="Apotek Jalan Byron New Yorkshire"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:layout_marginLeft="@dimen/generic_small_margin"
+                    android:layout_marginStart="@dimen/generic_small_margin"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:visibility="@{search_item_viewmodel.hasDiscount ? View.VISIBLE : View.GONE}">
+
+                    <ImageView
+                        android:layout_width="@dimen/search_discount_icon_width_height"
+                        android:layout_height="@dimen/search_discount_icon_width_height"
+                        android:src="@drawable/ic_discount"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/generic_small_margin"
+                        android:layout_marginStart="@dimen/generic_small_margin"
+                        android:maxLines="1"
+                        android:text="@{search_item_viewmodel.discount}"
+                        android:textColor="@color/bima_blue"
+                        android:textSize="@dimen/generic_subheading_text_size"
+                        tools:text="-100%"/>
+
+                </LinearLayout>
+                
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{search_item_viewmodel.address}"
+                android:textColor="@color/grey_a1"
+                android:textSize="@dimen/generic_body_text_size"
+                tools:text="2 Johnson Street, Byron Bay 2481 New Yorkshire"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/generic_separator_height"
+                android:layout_marginTop="@dimen/generic_large_margin"
+                android:background="@color/grey_a1"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
