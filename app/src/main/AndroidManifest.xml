@@ -40,6 +40,7 @@
         <activity android:name=".view.activities.PartnersActivity" />
         <activity android:name=".view.activities.PartnersLandingActivity" />
         <activity android:name=".view.activities.PartnersSearchActivity" />
+        <activity android:name=".view.activities.PartnerDetailActivity" />
         <activity android:name=".view.activities.NewsDetailActivity" />
         <activity android:name=".view.activities.NewsActivity" />
 
