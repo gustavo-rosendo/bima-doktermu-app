@@ -21,6 +21,7 @@ import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.Partner;
 import com.bima.dokterpribadimu.model.PartnerResponse;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.viewmodel.SearchItemViewModel;
@@ -138,7 +139,7 @@ public class PartnersSearchActivity extends BaseActivity {
                         if (partnerResponse.getStatus() == Constants.Status.SUCCESS) {
                             searchListViewModel.items.clear();
 
-                            for (Partner partner : partnerResponse.getData().getPartner()) {
+                            for (final Partner partner : partnerResponse.getData().getPartner()) {
                                 searchListViewModel.items.add(
                                         new SearchItemViewModel(
                                                 partner,
@@ -146,7 +147,10 @@ public class PartnersSearchActivity extends BaseActivity {
                                                 new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View view) {
-                                                        // TODO
+                                                        IntentUtils.startPartnersDetailActivity(
+                                                                PartnersSearchActivity.this,
+                                                                partner
+                                                        );
                                                     }
                                                 })
                                 );
