@@ -84,6 +84,8 @@ public class PartnersSearchActivity extends BaseActivity {
                             editable.toString(),
                             UserProfileUtils.getUserProfile(PartnersSearchActivity.this).getAccessToken()
                     );
+                } else {
+                    searchListViewModel.items.clear();
                 }
             }
         });
