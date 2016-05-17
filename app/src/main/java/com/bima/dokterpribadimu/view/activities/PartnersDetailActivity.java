@@ -1,0 +1,319 @@
+package com.bima.dokterpribadimu.view.activities;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.databinding.DataBindingUtil;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableList;
+import android.location.Location;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.RelativeLayout;
+
+import com.bima.dokterpribadimu.BR;
+import com.bima.dokterpribadimu.DokterPribadimuApplication;
+import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.databinding.ActivityPartnersDetailBinding;
+import com.bima.dokterpribadimu.model.Discount;
+import com.bima.dokterpribadimu.model.Partner;
+import com.bima.dokterpribadimu.utils.GsonUtils;
+import com.bima.dokterpribadimu.view.base.BaseActivity;
+import com.bima.dokterpribadimu.viewmodel.DiscountItemViewModel;
+import com.bima.dokterpribadimu.viewmodel.SearchItemViewModel;
+
+import java.util.List;
+
+import fr.quentinklein.slt.LocationTracker;
+import fr.quentinklein.slt.TrackerSettings;
+import me.tatarka.bindingcollectionadapter.ItemView;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+
+public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCallback, EasyPermissions.PermissionCallbacks {
+
+    private static final String TAG = PartnersDetailActivity.class.getSimpleName();
+
+    private static final String PARTNER = "partner";
+
+    private static final int RC_LOCATION_PERMISSION = 1;
+
+    // Zoom level info: https://developers.google.com/maps/documentation/android-api/views#zoom
+    private static final float DEFAULT_STREET_ZOOM_LEVEL = 15;
+
+    private ActivityPartnersDetailBinding binding;
+
+    private GoogleMap map;
+    private Location location;
+    private LocationTracker locationTracker;
+
+    private Partner partner;
+    private DiscountListViewModel discountListViewModel = new DiscountListViewModel();
+
+    public static Intent create(Context context, Partner partner) {
+        Intent intent = new Intent(context, PartnersDetailActivity.class);
+        intent.putExtra(PARTNER, GsonUtils.toJson(partner));
+        return intent;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_partners_detail);
+
+        DokterPribadimuApplication.getComponent().inject(this);
+
+        init();
+    }
+
+    private void init() {
+        partner = GsonUtils.fromJson(getIntent().getExtras().getString(PARTNER), Partner.class);
+
+        initViews();
+        setupMapFragment();
+    }
+
+    private void initViews() {
+        binding.setViewModel(discountListViewModel);
+
+        binding.toolbarBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        binding.partnersMyLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveToUserLocation();
+            }
+        });
+
+        binding.partnersDetailHeaderLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (binding.partnersDetailFooterLayout.getVisibility() == View.GONE) {
+                    showDetailFooter();
+                } else {
+                    hideDetailFooter();
+                }
+            }
+        });
+
+        binding.toolbarTitle.setText(partner.getPartnerName());
+
+        binding.partnersName.setText(partner.getPartnerName());
+        binding.partnersAddress.setText(partner.getPartnerAddress());
+
+        binding.partnersFooterAddress.setText(partner.getPartnerAddress());
+
+        String discountAmount = hasDiscount() ?
+                partner.getDiscount().get(0).getDiscount().replace(" ", "") : "-";
+        binding.partnersDiscount.setText(discountAmount);
+
+        if (hasDiscount()) {
+            for (Discount discount : partner.getDiscount()) {
+                discountListViewModel.items.add(
+                        new DiscountItemViewModel(discount)
+                );
+            }
+        }
+    }
+
+    private void setupMapFragment() {
+        SupportMapFragment mapFragment = SupportMapFragment.newInstance();
+        mapFragment.getMapAsync(this);
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction
+                .replace(R.id.fragment_container, mapFragment)
+                .commit();
+    }
+
+    private void showDetailFooter() {
+        if (hasDiscount()) {
+            binding.partnersFooterDiscountLayout.setVisibility(View.VISIBLE);
+        }
+        binding.partnersDetailFooterLayout.setVisibility(View.VISIBLE);
+
+        RelativeLayout.LayoutParams headerParams = (RelativeLayout.LayoutParams) binding.partnersDetailHeaderLayout.getLayoutParams();
+        headerParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+        headerParams.addRule(RelativeLayout.ABOVE, binding.partnersDetailFooterLayout.getId());
+        binding.partnersDetailHeaderLayout.setLayoutParams(headerParams);
+        binding.partnersDetailHeaderLayout.setSelected(true);
+        binding.partnersCarButton.setSelected(true);
+        binding.partnersName.setSelected(true);
+        binding.partnersDiscountTitle.setSelected(true);
+        binding.partnersDiscount.setSelected(true);
+        binding.partnersAddress.setVisibility(View.GONE);
+        binding.partnersMyLocationButton.setVisibility(View.GONE);
+    }
+
+    private void hideDetailFooter() {
+        RelativeLayout.LayoutParams headerParams = (RelativeLayout.LayoutParams) binding.partnersDetailHeaderLayout.getLayoutParams();
+        headerParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        headerParams.addRule(RelativeLayout.ABOVE, 0);
+        binding.partnersDetailHeaderLayout.setLayoutParams(headerParams);
+        binding.partnersDetailHeaderLayout.setSelected(false);
+        binding.partnersCarButton.setSelected(false);
+        binding.partnersName.setSelected(false);
+        binding.partnersDiscountTitle.setSelected(false);
+        binding.partnersDiscount.setSelected(false);
+        binding.partnersAddress.setVisibility(View.VISIBLE);
+        binding.partnersMyLocationButton.setVisibility(View.VISIBLE);
+
+        binding.partnersDetailFooterLayout.setVisibility(View.GONE);
+        binding.partnersFooterDiscountLayout.setVisibility(View.GONE);
+    }
+
+    private boolean hasDiscount() {
+        return partner.getDiscount().size() > 0;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (locationTracker != null) {
+            locationTracker.startListening();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        if (locationTracker != null) {
+            locationTracker.stopListening();
+        }
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (locationTracker != null) {
+            locationTracker.stopListening();
+        }
+
+        super.onDestroy();
+    }
+
+    /**
+     * Manipulates the map once available. This callback is triggered when the map is ready to be
+     * used. This is where we can add markers or lines, add listeners or move the camera. In this
+     * case, we just add a marker near Sydney, Australia. If Google Play services is not installed
+     * on the device, the user will be prompted to install it inside the SupportMapFragment. This
+     * method will only be triggered once the user has installed Google Play services and returned
+     * to the app.
+     */
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
+
+        // disable map toolbar and zoom buttons
+        map.getUiSettings().setMapToolbarEnabled(false);
+        map.getUiSettings().setZoomControlsEnabled(false);
+
+        initLocation();
+        addPartnersMarker(true);
+    }
+
+    @AfterPermissionGranted(RC_LOCATION_PERMISSION)
+    public void initLocation() {
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            startLocationTracker();
+        } else {
+            // Ask for one permission
+            EasyPermissions.requestPermissions(this, getString(R.string.rationale_location),
+                    RC_LOCATION_PERMISSION, Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+    }
+
+    private void startLocationTracker() {
+        TrackerSettings settings =
+                new TrackerSettings()
+                        .setUseGPS(true)
+                        .setUseNetwork(true)
+                        .setUsePassive(true);
+
+        try {
+            locationTracker = new LocationTracker(this, settings) {
+
+                @Override
+                public void onLocationFound(@NonNull Location location) {
+                    PartnersDetailActivity.this.location = location;
+                }
+
+                @Override
+                public void onTimeout() {
+                    startLocationTracker();
+                }
+            };
+            locationTracker.startListening();
+        } catch (SecurityException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void moveToUserLocation() {
+        if (map != null && location != null) {
+            map.clear();
+            // Add a marker in user's location and move the camera
+            LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+            map.addMarker(
+                    new MarkerOptions()
+                            .position(userLatLng)
+                            .title(getString(R.string.your_location))
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_pin))
+            );
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+
+            addPartnersMarker(false);
+        }
+    }
+
+    private void addPartnersMarker(boolean animateCamera) {
+        Double latitude = Double.parseDouble(partner.getPartnerLat());
+        Double longitude = Double.parseDouble(partner.getPartnerLong());
+        LatLng partnerLatLng = new LatLng(latitude, longitude);
+        map.addMarker(
+                new MarkerOptions()
+                        .position(partnerLatLng)
+                        .title(partner.getPartnerName())
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
+        );
+
+        if (animateCamera) {
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(partnerLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+        }
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+
+    }
+
+    public static class DiscountListViewModel {
+        public final ObservableList<DiscountItemViewModel> items = new ObservableArrayList<>();
+        public final ItemView itemView = ItemView.of(BR.discount_item_viewmodel, R.layout.item_discount);
+    }
+}

@@ -88,4 +88,7 @@
     <dimen name="search_discount_icon_width_height">16dp</dimen>
     <dimen name="search_icon_padding">8dp</dimen>
 
+    <!-- partner detail -->
+    <dimen name="partner_detail_car_button_margin_bottom">-32dp</dimen>
+
 </resources>

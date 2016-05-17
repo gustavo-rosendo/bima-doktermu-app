@@ -188,6 +188,8 @@
 
     <!-- partners -->
     <string name="partners_search_our_partners">Cari mitra</string>
+    <string name="partners_discount_up_to">Diskon hingga</string>
+    <string name="partners_your_discount">Diskon Anda</string>
 
     <!-- news -->
     <string name="news">Artikel</string>
@@ -269,9 +271,5 @@
         <item>Perempuan</item>
         <item>Pilih jenis kelamin</item>
     </string-array>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_partner_landing">PartnerLandingActivity</string>
 
 </resources>

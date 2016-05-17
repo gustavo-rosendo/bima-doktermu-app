@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.bima.dokterpribadimu.model.News;
+import com.bima.dokterpribadimu.model.Partner;
 import com.bima.dokterpribadimu.view.activities.BookCallActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.HomeActivity;
@@ -11,6 +12,7 @@ import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.NewsActivity;
 import com.bima.dokterpribadimu.view.activities.NewsDetailActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersActivity;
+import com.bima.dokterpribadimu.view.activities.PartnersDetailActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersSearchActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
 
@@ -68,6 +70,15 @@ public class IntentUtils {
      */
     public static void startPartnersSearchActivity(Context context) {
         context.startActivity(new Intent(context, PartnersSearchActivity.class));
+    }
+
+    /**
+     *
+     * @param context caller's activity / fragment context
+     * @param partner partner's detail to be displayed
+     */
+    public static void startPartnersDetailActivity(Context context, Partner partner) {
+        context.startActivity(PartnersDetailActivity.create(context, partner));
     }
 
     /**
