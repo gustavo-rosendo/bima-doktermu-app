@@ -13,6 +13,7 @@ import com.bima.dokterpribadimu.view.activities.NewsActivity;
 import com.bima.dokterpribadimu.view.activities.NewsDetailActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersDetailActivity;
+import com.bima.dokterpribadimu.view.activities.PartnersLandingActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersSearchActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
 
@@ -62,6 +63,14 @@ public class IntentUtils {
      */
     public static void startPartnersActivity(Context context) {
         context.startActivity(new Intent(context, PartnersActivity.class));
+    }
+
+    /**
+     *
+     * @param context caller's activity / fragment context
+     */
+    public static void startPartnersLandingActivity(Context context) {
+        context.startActivity(new Intent(context, PartnersLandingActivity.class));
     }
 
     /**

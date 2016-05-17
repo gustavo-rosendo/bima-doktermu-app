@@ -8,7 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
+import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.FragmentPartnersBinding;
+import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.IntentUtils;
+import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.activities.PartnersLandingActivity;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 
@@ -43,10 +47,22 @@ public class PartnersFragment extends BaseFragment {
     }
 
     private void initViews() {
+        final boolean subscriptionActive =
+                StorageUtils.getBoolean(getActivity(), Constants.KEY_USER_SUBSCIPTION, false);
+
+        if (subscriptionActive) {
+            binding.partnersInfoText.setText(getString(R.string.partners_active_info));
+            binding.partnersButton.setText(getString(R.string.partners_find));
+        }
+
         binding.partnersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), PartnersLandingActivity.class));
+                if (subscriptionActive) {
+                    IntentUtils.startPartnersLandingActivity(getActivity());
+                } else {
+                    startSubscriptionActivity();
+                }
             }
         });
     }
