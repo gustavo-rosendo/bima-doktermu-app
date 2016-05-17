@@ -124,15 +124,16 @@ public class DoctorCallFragment extends BaseFragment {
             public void onClick(View view) {
                 int hour = TimeUtils.getCurrentTimeHour();
                 int ampm = TimeUtils.getCurrentTimeAmPm();
-                if ((ampm == Calendar.PM && hour >= NIGHT_HOUR_LIMIT) ||
-                        (ampm == Calendar.AM && hour < MORNING_HOUR_LIMIT)) {
-                    showLateDialog(getString(R.string.dialog_take_me_home), null);
-                } else {
-                    if (billingClient.isSubscribedToDokterPribadiKu()) {
-                        startBookCallActivity();
+                if (billingClient.isSubscribedToDokterPribadiKu()) {
+                    if ((ampm == Calendar.PM && hour >= NIGHT_HOUR_LIMIT) ||
+                            (ampm == Calendar.AM && hour < MORNING_HOUR_LIMIT)) {
+                        showLateDialog(getString(R.string.dialog_take_me_home), null);
                     } else {
-                        startSubscriptionActivity();
+                        startBookCallActivity();
                     }
+                }
+                else {
+                    startSubscriptionActivity();
                 }
             }
         });
