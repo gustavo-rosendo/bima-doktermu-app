@@ -19,7 +19,7 @@ public class RateYourCallApi extends BaseApi<RateYourCallService> {
     private RateYourCallService rateYourCallService;
 
     public RateYourCallApi(){
-        super();
+        super(BaseApi.API_TYPE_SERVER);
         rateYourCallService = this.createService();
     }
 

@@ -20,7 +20,7 @@ public class CallHistoryApi extends BaseApi<CallHistoryService> {
     private CallHistoryService callHistoryService;
 
     public CallHistoryApi() {
-        super();
+        super(BaseApi.API_TYPE_SERVER);
         this.callHistoryService = this.createService();
     }
 

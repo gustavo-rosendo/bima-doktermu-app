@@ -19,7 +19,7 @@ public class BookingApi extends BaseApi<BookingService> {
     private BookingService bookingService;
 
     public BookingApi() {
-        super();
+        super(BaseApi.API_TYPE_SERVER);
         bookingService = this.createService();
     }
 

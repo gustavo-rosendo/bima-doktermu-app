@@ -171,16 +171,34 @@
                     android:textSize="@dimen/generic_subheading_text_size"
                     android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/partners_address"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/generic_small_margin"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="2 Johnson Street, Byron Bay 2481 New Yorkshire"
-                    android:textColor="@color/grey_a1"
-                    android:textSize="@dimen/generic_body_text_size"/>
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/partners_address"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@drawable/grey_to_white_text_color_selector"
+                        android:textSize="@dimen/generic_body_text_size"/>
+
+                    <TextView
+                        android:id="@+id/partners_duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/generic_small_margin"
+                        android:layout_marginStart="@dimen/generic_small_margin"
+                        android:maxLines="1"
+                        android:textColor="@drawable/blue_to_white_text_color_selector"
+                        android:textSize="@dimen/generic_body_text_size"/>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/partners_discount_layout"

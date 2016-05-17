@@ -20,27 +20,43 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.data.remote.api.DirectionsApi;
 import com.bima.dokterpribadimu.databinding.ActivityPartnersDetailBinding;
+import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.Discount;
 import com.bima.dokterpribadimu.model.Partner;
+import com.bima.dokterpribadimu.model.PartnerResponse;
+import com.bima.dokterpribadimu.model.directions.DirectionsResponse;
+import com.bima.dokterpribadimu.model.directions.Leg;
+import com.bima.dokterpribadimu.model.directions.Route;
+import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.GsonUtils;
+import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.viewmodel.DiscountItemViewModel;
 import com.bima.dokterpribadimu.viewmodel.SearchItemViewModel;
 
 import java.util.List;
+import java.util.Locale;
+
+import javax.inject.Inject;
 
 import fr.quentinklein.slt.LocationTracker;
 import fr.quentinklein.slt.TrackerSettings;
 import me.tatarka.bindingcollectionadapter.ItemView;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCallback, EasyPermissions.PermissionCallbacks {
 
@@ -52,6 +68,11 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
 
     // Zoom level info: https://developers.google.com/maps/documentation/android-api/views#zoom
     private static final float DEFAULT_STREET_ZOOM_LEVEL = 15;
+
+    private static final String DIRECTIONS_PATTERN = "%s,%s";
+
+    @Inject
+    DirectionsApi directionsApi;
 
     private ActivityPartnersDetailBinding binding;
 
@@ -155,10 +176,7 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
         binding.partnersDetailHeaderLayout.setLayoutParams(headerParams);
         binding.partnersDetailHeaderLayout.setSelected(true);
         binding.partnersCarButton.setSelected(true);
-        binding.partnersName.setSelected(true);
-        binding.partnersDiscountTitle.setSelected(true);
-        binding.partnersDiscount.setSelected(true);
-        binding.partnersAddress.setVisibility(View.GONE);
+        binding.partnersAddress.setText("Duration"); // TODO: change with category name
         binding.partnersMyLocationButton.setVisibility(View.GONE);
     }
 
@@ -169,10 +187,7 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
         binding.partnersDetailHeaderLayout.setLayoutParams(headerParams);
         binding.partnersDetailHeaderLayout.setSelected(false);
         binding.partnersCarButton.setSelected(false);
-        binding.partnersName.setSelected(false);
-        binding.partnersDiscountTitle.setSelected(false);
-        binding.partnersDiscount.setSelected(false);
-        binding.partnersAddress.setVisibility(View.VISIBLE);
+        binding.partnersAddress.setText(partner.getPartnerAddress());
         binding.partnersMyLocationButton.setVisibility(View.VISIBLE);
 
         binding.partnersDetailFooterLayout.setVisibility(View.GONE);
@@ -254,6 +269,8 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
                 @Override
                 public void onLocationFound(@NonNull Location location) {
                     PartnersDetailActivity.this.location = location;
+
+                    setupDirectionRequest();
                 }
 
                 @Override
@@ -310,6 +327,53 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
 
+    }
+
+    private void setupDirectionRequest() {
+        String origin = String.format(Locale.US, DIRECTIONS_PATTERN, String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()));
+        String destination = String.format(Locale.US, DIRECTIONS_PATTERN, partner.getPartnerLat(), partner.getPartnerLong());
+        getDirections(false, origin, destination);
+    }
+
+    private void getDirections(final boolean sensor, final String origin, final String destination) {
+        directionsApi.getDirections(sensor, origin, destination)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<DirectionsResponse>bindToLifecycle())
+                .subscribe(new Subscriber<DirectionsResponse>() {
+
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(
+                                PartnersDetailActivity.this,
+                                e.getMessage(),
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    }
+
+                    @Override
+                    public void onNext(DirectionsResponse partnerResponse) {
+                        String duration = "";
+                        List<Route> routes = partnerResponse.getRoutes();
+                        if (routes.size() > 0) {
+                            List<Leg> legs = routes.get(0).getLegs();
+                            if (legs.size() > 0) {
+                                duration = legs.get(0).getDuration().getText();
+                            }
+                        }
+                        binding.partnersDuration.setText(duration);
+                    }
+                });
     }
 
     public static class DiscountListViewModel {
