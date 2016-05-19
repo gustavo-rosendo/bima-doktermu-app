@@ -25,45 +25,29 @@
             android:paddingEnd="@dimen/generic_large_padding"
             android:layout_marginTop="@dimen/generic_large_margin"
             android:gravity="center"
-            android:text="@string/dialog_change_password"
+            android:text="@string/dialog_change_phone_number"
             android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="bold"/>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/edit_old_password_container"
+            android:id="@+id/change_phone_number_dialog_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/generic_large_margin">
 
             <EditText
-                android:id="@+id/edit_old_password_field"
+                android:id="@+id/change_phone_number_dialog_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/generic_normal_margin"
-                android:hint="@string/dialog_old_password"
-                android:inputType="textPassword"/>
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/edit_new_password_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/generic_large_margin">
-
-            <EditText
-                android:id="@+id/edit_new_password_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/generic_normal_margin"
-                android:hint="@string/dialog_new_password"
-                android:inputType="textPassword"/>
+                android:hint="@string/dialog_new_phone_number"
+                android:inputType="phone"/>
 
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/edit_validate_button"
+            android:id="@+id/change_phone_number_validate_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/generic_large_margin"

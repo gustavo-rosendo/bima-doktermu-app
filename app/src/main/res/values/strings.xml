@@ -137,6 +137,7 @@
     <string name="dialog_signed_in">Berhasil!</string>
     <string name="dialog_signed_in_message">Anda telah berhasil masuk.</string>
     <string name="dialog_password_changed_message">Kata sandi anda telah berhasil diubah</string>
+    <string name="dialog_phone_number_changed_message">Nomor telepon anda telah berhasil diubah</string>
     <string name="dialog_late">Layanan Tutup</string>
     <string name="dialog_late_message">Mohon buat janji pada jam operasional: 06.00 – 22.00 WIB</string>
     <string name="no_connection">Tidak terhubung dengan internet</string>
@@ -168,6 +169,8 @@
     <string name="dialog_change_password">Ubah kata sandi</string>
     <string name="dialog_old_password">Kata sandi lama</string>
     <string name="dialog_new_password">Kata sandi baru</string>
+    <string name="dialog_change_phone_number">Ubah nomor telepon</string>
+    <string name="dialog_new_phone_number">Nomor telepon baru</string>
     <string name="dialog_validate">Validasi</string>
     <string name="dialog_send">Kirim</string>
     <string name="dialog_cancel">Batalkan</string>

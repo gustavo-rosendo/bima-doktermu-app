@@ -180,6 +180,7 @@
                         android:textStyle="bold"/>
 
                     <LinearLayout
+                        android:id="@+id/profile_email_address_linear_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/generic_large_margin"
@@ -226,6 +227,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/profile_edit_password_linear_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/generic_large_margin"
@@ -273,6 +275,7 @@
 
 
                     <LinearLayout
+                        android:id="@+id/profile_my_phone_number_linear_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/generic_large_margin"
@@ -293,6 +296,7 @@
                                 android:textSize="16sp"/>
 
                             <TextView
+                                android:id="@+id/profile_my_phone_number_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/generic_normal_margin"
@@ -308,10 +312,11 @@
                             android:layout_height="@dimen/generic_button_height">
 
                             <ImageView
+                                android:id="@+id/profile_my_phone_number_image_view"
                                 android:layout_width="@dimen/generic_small_button_height"
                                 android:layout_height="@dimen/generic_small_button_height"
                                 android:layout_centerInParent="true"
-                                android:src="@drawable/ic_edit"
+                                android:src="@drawable/ic_add"
                                 android:contentDescription="@string/app_name"/>
 
                         </RelativeLayout>

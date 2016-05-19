@@ -28,6 +28,7 @@ import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 import com.bima.dokterpribadimu.view.components.ChangePasswordDialog;
+import com.bima.dokterpribadimu.view.components.ChangePhoneNumberDialog;
 import com.bima.dokterpribadimu.viewmodel.CallHistoryItemViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -66,6 +67,8 @@ public class ProfileFragment extends BaseFragment {
     private FragmentProfileBinding binding;
 
     private ChangePasswordDialog dialog;
+
+    private ChangePhoneNumberDialog phoneNumberDialog;
 
     private CallHistoryListViewModel callHistoryListViewModel = new CallHistoryListViewModel();
     private List<BimaCall> callHistoryItems = new ArrayList<>();
@@ -186,8 +189,34 @@ public class ProfileFragment extends BaseFragment {
                 }
             });
         } else {
-            binding.profilePersonalInfoLayout.setVisibility(View.GONE);
+            binding.profileEmailAddressLinearLayout.setVisibility(View.GONE);
+            binding.profileEditPasswordLinearLayout.setVisibility(View.GONE);
         }
+
+        if(userProfile.getMsisdn() == null || userProfile.getMsisdn().isEmpty()) {
+            binding.profileMyPhoneNumberImageView.setImageResource(R.drawable.ic_add);
+        }
+        else {
+            binding.profileMyPhoneNumberText.setText(userProfile.getMsisdn());
+            binding.profileMyPhoneNumberImageView.setImageResource(R.drawable.ic_edit);
+        }
+        binding.profileMyPhoneNumberButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (phoneNumberDialog == null) {
+                    phoneNumberDialog = new ChangePhoneNumberDialog(getActivity());
+                }
+
+                phoneNumberDialog.setListener(new ChangePhoneNumberDialog.OnChangePhoneNumberDialogClickListener() {
+                    @Override
+                    public void onClick(ChangePhoneNumberDialog phoneNumberDialog, String newPhoneNumber) {
+                        changePhoneNumber(
+                                newPhoneNumber,
+                                UserProfileUtils.getUserProfile(getActivity()).getAccessToken());
+                    }
+                }).showDialog();
+            }
+        });
 
         binding.profileManageSubscriptionText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,6 +286,54 @@ public class ProfileFragment extends BaseFragment {
                 });
     }
 
+    /**
+     * Do change phone number.
+     * @param newPhoneNumber user's phoneNumber
+     * @param accessToken user's access token
+     */
+    private void changePhoneNumber(final String newPhoneNumber, final String accessToken) {
+        profileApi.changePhoneNumber(newPhoneNumber, accessToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse>() {
+
+                    @Override
+                    public void onStart() {
+                        showProgressDialog();
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        dismissProgressDialog();
+
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse response) {
+                        dismissProgressDialog();
+
+                        if (response.getStatus() == Constants.Status.SUCCESS) {
+                            phoneNumberDialog.dismiss();
+                            phoneNumberDialog= null;
+
+                            showSuccessDialog(
+                                    R.drawable.ic_smiley,
+                                    getString(R.string.dialog_signed_in),
+                                    getString(R.string.dialog_phone_number_changed_message),
+                                    getString(R.string.dialog_take_me_home),
+                                    null);
+                        } else {
+                            handleError(TAG, response.getMessage());
+                        }
+                    }
+                });
+    }
 
     /**
      * Get user's profile info

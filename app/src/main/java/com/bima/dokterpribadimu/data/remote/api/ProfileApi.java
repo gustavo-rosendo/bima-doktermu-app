@@ -55,4 +55,33 @@ public class ProfileApi extends BaseApi<ProfileService> {
             }
         });
     }
+
+    /**
+     * ProfileApi implementation to change phone number
+     *
+     * @return Observable<BaseResponse>
+     */
+    public Observable<BaseResponse> changePhoneNumber(
+            final String newPhoneNumber, final String accessToken){
+        return Observable.create(new Observable.OnSubscribe<BaseResponse>(){
+            @Override
+            public void call(final Subscriber<? super BaseResponse> subscriber){
+                try{
+                    Response response = profileService.changePhoneNumber(newPhoneNumber, accessToken).execute();
+                    if(response.isSuccessful()){
+                        subscriber.onNext((BaseResponse)response.body());
+                        subscriber.onCompleted();
+                    }else{
+                        BaseResponse error= GsonUtils.fromJson(
+                                response.errorBody().string(),
+                                BaseResponse.class);
+                        subscriber.onError(new Exception(error.getMessage()));
+                    }
+                }catch(IOException e){
+                    e.printStackTrace();
+                    subscriber.onError(e);
+                }
+            }
+        });
+    }
 }
