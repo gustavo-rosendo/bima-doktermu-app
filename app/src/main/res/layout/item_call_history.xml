@@ -26,7 +26,9 @@
             <com.bima.dokterpribadimu.view.components.AspectRatioImageView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/call_history_image_height"
-                android:src="@drawable/ic_edit"
+                android:src="@drawable/ic_history"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
                 android:scaleType="centerCrop"
                 app:aspectRatio="1.0"
                 app:aspectRatioEnabled="true"

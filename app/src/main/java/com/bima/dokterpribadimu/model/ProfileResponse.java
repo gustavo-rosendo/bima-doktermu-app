@@ -4,58 +4,13 @@ package com.bima.dokterpribadimu.model;
  * Created by gustavo.santos on 5/16/2016.
  */
 public class ProfileResponse {
-    private String subscriptionStart;
-    private String subscriptionEnd;
-    private String policyActiveDate;
-    private String policyExpiryDate;
-    private String memberNumber;
-    private String accessToken;
+    private Profile profile;
 
-    public String getSubscriptionStart() {
-        return subscriptionStart;
+    public Profile getProfile() {
+        return profile;
     }
 
-    public String getSubscriptionEnd() {
-        return subscriptionEnd;
-    }
-
-    public String getPolicyActiveDate() {
-        return policyActiveDate;
-    }
-
-    public String getPolicyExpiryDate() {
-        return policyExpiryDate;
-    }
-
-    public String getMemberNumber() {
-        return memberNumber;
-    }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setSubscriptionStart(String subscriptionStart) {
-        this.subscriptionStart = subscriptionStart;
-    }
-
-    public void setSubscriptionEnd(String subscriptionEnd) {
-        this.subscriptionEnd = subscriptionEnd;
-    }
-
-    public void setPolicyActiveDate(String policyActiveDate) {
-        this.policyActiveDate = policyActiveDate;
-    }
-
-    public void setPolicyExpiryDate(String policyExpiryDate) {
-        this.policyExpiryDate = policyExpiryDate;
-    }
-
-    public void setMemberNumber(String memberNumber) {
-        this.memberNumber = memberNumber;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }

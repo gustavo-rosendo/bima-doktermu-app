@@ -288,13 +288,13 @@ public class ProfileFragment extends BaseFragment {
                     @Override
                     public void onNext(BaseResponse<ProfileResponse> profileResponse) {
                         if (profileResponse.getStatus() == Constants.Status.SUCCESS) {
-                            String subscriptionEnd = profileResponse.getData().getSubscriptionEnd();
+                            String subscriptionEnd = profileResponse.getData().getProfile().getSubscriptionEnd();
                             if(subscriptionEnd == null) {
                                 subscriptionEnd = "";
                             }
                             binding.profileNextBillingDateText.setText(subscriptionEnd);
 
-                            String memberNumber = profileResponse.getData().getMemberNumber();
+                            String memberNumber = profileResponse.getData().getProfile().getMemberNumber();
                             if(memberNumber == null) {
                                 memberNumber = "";
                             }
