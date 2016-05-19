@@ -24,6 +24,7 @@ import com.bima.dokterpribadimu.model.CallHistoryResponse;
 import com.bima.dokterpribadimu.model.ProfileResponse;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
@@ -321,6 +322,16 @@ public class ProfileFragment extends BaseFragment {
                         if (response.getStatus() == Constants.Status.SUCCESS) {
                             phoneNumberDialog.dismiss();
                             phoneNumberDialog= null;
+
+                            UserProfile userProfile = UserProfileUtils.getUserProfile(getActivity());
+                            userProfile.setMsisdn(newPhoneNumber);
+                            StorageUtils.putString(
+                                    getActivity(),
+                                    Constants.KEY_USER_PROFILE,
+                                    GsonUtils.toJson(userProfile)
+                            );
+                            binding.profileMyPhoneNumberText.setText(newPhoneNumber);
+                            binding.profileMyPhoneNumberImageView.setImageResource(R.drawable.ic_edit);
 
                             showSuccessDialog(
                                     R.drawable.ic_smiley,

@@ -19,6 +19,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
@@ -314,7 +315,17 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
 
                         if (partnerResponse.getStatus() == Constants.Status.SUCCESS) {
                             partners.clear();
-                            partners.addAll(partnerResponse.getData().getPartner());
+
+                            if(partnerResponse.getData() == null) {
+                                Toast.makeText(
+                                        DokterPribadimuApplication.getInstance().getApplicationContext(),
+                                        DokterPribadimuApplication.getInstance().getResources().getString(R.string.partners_none_found),
+                                        Toast.LENGTH_LONG
+                                ).show();
+                            }
+                            else {
+                                partners.addAll(partnerResponse.getData().getPartner());
+                            }
 
                             moveToUserLocation();
                         } else {
