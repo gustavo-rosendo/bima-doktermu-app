@@ -181,6 +181,7 @@
     <string name="dialog_phone_info_modal_text">
         Dokter akan menelpon Anda pada nomor yang tertera.\n
         Untuk merubahnya silahkan masuk ke menu profil.</string>
+    <string name="dialog_already_subscribed_message">Anda sudah terdaftar</string>
 
     <!-- permission -->
     <string name="rationale_location">Doktermu perlu mengakses GPS anda untuk mengaktifkan semua fitur aplikasi.</string>

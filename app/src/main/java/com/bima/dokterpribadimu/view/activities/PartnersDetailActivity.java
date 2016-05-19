@@ -65,6 +65,8 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
     // Zoom level info: https://developers.google.com/maps/documentation/android-api/views#zoom
     private static final float DEFAULT_STREET_ZOOM_LEVEL = 15;
 
+    private static final float DEFAULT_POLYLINE_WIDTH = 7;
+
     private static final String DIRECTIONS_PATTERN = "%s,%s";
 
     @Inject
@@ -339,7 +341,7 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
             List<LatLng> polylines = MapsUtils.decodePolylines(route.getOverviewPolyline().getPoints());
             map.addPolyline(
                     new PolylineOptions()
-                            .width(5)
+                            .width(DEFAULT_POLYLINE_WIDTH)
                             .color(ContextCompat.getColor(this, R.color.bima_blue))
                             .geodesic(true)
                             .addAll(polylines)
