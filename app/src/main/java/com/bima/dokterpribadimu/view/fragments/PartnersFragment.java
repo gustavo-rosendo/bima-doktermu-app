@@ -58,11 +58,11 @@ public class PartnersFragment extends BaseFragment {
         binding.partnersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (subscriptionActive) {
+                //if (subscriptionActive) {
                     IntentUtils.startPartnersLandingActivity(getActivity());
-                } else {
+                /*} else {
                     startSubscriptionActivity();
-                }
+                }*/
             }
         });
     }

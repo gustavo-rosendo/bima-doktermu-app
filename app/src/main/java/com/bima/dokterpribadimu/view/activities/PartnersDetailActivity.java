@@ -5,9 +5,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import android.Manifest;
 import android.content.Context;
@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -30,20 +29,17 @@ import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.data.remote.api.DirectionsApi;
 import com.bima.dokterpribadimu.databinding.ActivityPartnersDetailBinding;
-import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.Discount;
 import com.bima.dokterpribadimu.model.Partner;
-import com.bima.dokterpribadimu.model.PartnerResponse;
 import com.bima.dokterpribadimu.model.directions.DirectionsResponse;
 import com.bima.dokterpribadimu.model.directions.Leg;
 import com.bima.dokterpribadimu.model.directions.Route;
-import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.GsonUtils;
-import com.bima.dokterpribadimu.utils.IntentUtils;
+import com.bima.dokterpribadimu.utils.MapsUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.viewmodel.DiscountItemViewModel;
-import com.bima.dokterpribadimu.viewmodel.SearchItemViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -83,6 +79,9 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
     private Partner partner;
     private DiscountListViewModel discountListViewModel = new DiscountListViewModel();
 
+    private boolean isPolylineShowed = false;
+    private List<Route> routes = new ArrayList<>();
+
     public static Intent create(Context context, Partner partner) {
         Intent intent = new Intent(context, PartnersDetailActivity.class);
         intent.putExtra(PARTNER, GsonUtils.toJson(partner));
@@ -119,7 +118,15 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
         binding.partnersMyLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                moveToUserLocation();
+                updateUserLocation(true, isPolylineShowed);
+            }
+        });
+
+        binding.partnersCarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPolylineShowed = !isPolylineShowed;
+                updateUserLocation(false, isPolylineShowed);
             }
         });
 
@@ -286,7 +293,7 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
         }
     }
 
-    private void moveToUserLocation() {
+    private void updateUserLocation(boolean moveToUserLocation, boolean updatePolylines) {
         if (map != null && location != null) {
             map.clear();
             // Add a marker in user's location and move the camera
@@ -297,9 +304,16 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
                             .title(getString(R.string.your_location))
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_pin))
             );
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+
+            if (moveToUserLocation) {
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+            }
 
             addPartnersMarker(false);
+
+            if (updatePolylines) {
+                updatePolyLines();
+            }
         }
     }
 
@@ -319,6 +333,20 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
         }
     }
 
+    private void updatePolyLines() {
+        if (routes.size() > 0) {
+            Route route = routes.get(0);
+            List<LatLng> polylines = MapsUtils.decodePolylines(route.getOverviewPolyline().getPoints());
+            map.addPolyline(
+                    new PolylineOptions()
+                            .width(5)
+                            .color(ContextCompat.getColor(this, R.color.bima_blue))
+                            .geodesic(true)
+                            .addAll(polylines)
+            );
+        }
+    }
+
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
 
@@ -330,8 +358,16 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
     }
 
     private void setupDirectionRequest() {
-        String origin = String.format(Locale.US, DIRECTIONS_PATTERN, String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()));
-        String destination = String.format(Locale.US, DIRECTIONS_PATTERN, partner.getPartnerLat(), partner.getPartnerLong());
+        String origin = String.format(
+                            Locale.US,
+                            DIRECTIONS_PATTERN,
+                            String.valueOf(location.getLatitude()),
+                            String.valueOf(location.getLongitude()));
+        String destination = String.format(
+                                Locale.US,
+                                DIRECTIONS_PATTERN,
+                                partner.getPartnerLat(),
+                                partner.getPartnerLong());
         getDirections(false, origin, destination);
     }
 
@@ -364,7 +400,7 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
                     @Override
                     public void onNext(DirectionsResponse partnerResponse) {
                         String duration = "";
-                        List<Route> routes = partnerResponse.getRoutes();
+                        routes = partnerResponse.getRoutes();
                         if (routes.size() > 0) {
                             List<Leg> legs = routes.get(0).getLegs();
                             if (legs.size() > 0) {
@@ -372,6 +408,8 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
                             }
                         }
                         binding.partnersDuration.setText(duration);
+
+                        updateUserLocation(false, isPolylineShowed);
                     }
                 });
     }
