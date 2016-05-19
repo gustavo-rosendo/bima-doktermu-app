@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
+import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.data.sns.LoginClient;
 import com.bima.dokterpribadimu.data.sns.facebook.FacebookClient;
 import com.bima.dokterpribadimu.data.sns.gplus.GplusClient;
@@ -168,6 +170,29 @@ public class DrawerFragment extends BaseFragment {
 
                 if (activeDrawer != Constants.DRAWER_TYPE_ABOUT) {
                     startAboutActivity();
+                }
+            }
+        });
+
+        binding.drawerSubscribeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final boolean subscriptionActive =
+                        StorageUtils.getBoolean(getActivity(), Constants.KEY_USER_SUBSCIPTION, false);
+
+                if (!subscriptionActive) {
+                    if (onDrawerItemPressedListener != null) {
+                        onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_SUBSCRIBE);
+                    }
+
+                    if (activeDrawer != Constants.DRAWER_TYPE_PROFILE) {
+                        startSubscriptionActivity();
+                    }
+                } else {
+                    Toast.makeText(
+                            getActivity(),
+                            getString(R.string.dialog_already_subscribed_message),
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
