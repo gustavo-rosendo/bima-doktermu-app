@@ -185,7 +185,7 @@ public class DrawerFragment extends BaseFragment {
                         onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_SUBSCRIBE);
                     }
 
-                    if (activeDrawer != Constants.DRAWER_TYPE_PROFILE) {
+                    if (activeDrawer != Constants.DRAWER_TYPE_SUBSCRIBE) {
                         startSubscriptionActivity();
                     }
                 } else {
