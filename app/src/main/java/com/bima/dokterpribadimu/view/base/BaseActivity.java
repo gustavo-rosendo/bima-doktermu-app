@@ -54,7 +54,7 @@ public class BaseActivity extends RxAppCompatActivity {
     }
 
     protected void handleError(String tag, String errorMessage) {
-        if (errorMessage == null) {
+        if (errorMessage == null || errorMessage.contains(Constants.ILLEGAL_STATE_EXCEPTION)) {
             errorMessage = getString(R.string.dialog_sign_in_failed_message);
         }
 

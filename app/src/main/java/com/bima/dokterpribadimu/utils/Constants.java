@@ -21,6 +21,7 @@ public class Constants {
 
     public static final String NETWORK_IS_UNREACHABLE = "Network is unreachable";
     public static final String UNABLE_TO_RESOLVE_HOST = "Unable to resolve host";
+    public static final String ILLEGAL_STATE_EXCEPTION = "IllegalStateException";
     public static final String EMAIL_IS_NOT_REGISTERED = "Email belum terdaftar";
 
     public static final int DRAWER_TYPE_HOME = 0;
