@@ -446,6 +446,12 @@ public class ProfileFragment extends BaseFragment {
                                 }
                                 count++;
                             }
+
+                            //Hide the "Show more" button if there are
+                            //only 3 calls in the history
+                            if(callHistoryItems.size() <= MAX_NUM_CALLS_TO_SHOW) {
+                                binding.profileCallHistoryMore.setVisibility(View.GONE);
+                            }
                         } else {
                             handleError(TAG, callHistoryResponse.getMessage());
                         }
