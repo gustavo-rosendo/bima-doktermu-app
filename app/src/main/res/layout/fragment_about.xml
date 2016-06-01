@@ -118,15 +118,6 @@
                     android:contentDescription="@string/app_name"/>
 
                 <ImageView
-                    android:id="@+id/about_instagram_button"
-                    android:layout_width="@dimen/generic_button_height"
-                    android:layout_height="@dimen/generic_button_height"
-                    android:layout_marginLeft="@dimen/generic_large_margin"
-                    android:layout_marginStart="@dimen/generic_large_margin"
-                    android:src="@drawable/ic_instagram"
-                    android:contentDescription="@string/app_name"/>
-
-                <ImageView
                     android:id="@+id/about_email_button"
                     android:layout_width="@dimen/generic_button_height"
                     android:layout_height="@dimen/generic_button_height"
