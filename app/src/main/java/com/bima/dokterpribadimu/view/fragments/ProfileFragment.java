@@ -115,7 +115,8 @@ public class ProfileFragment extends BaseFragment {
             public void onClick(View v) {
                 int indexNextItem = callHistoryListViewModel.items.size();
                 if(indexNextItem < callHistoryItems.size()) {
-                    for(int i = 0; i < MAX_NUM_CALLS_TO_SHOW && (indexNextItem + i < callHistoryItems.size()) ; i++) {
+                    int i = 0;
+                    for(; i < MAX_NUM_CALLS_TO_SHOW && (indexNextItem + i < callHistoryItems.size()) ; i++) {
                         callHistoryListViewModel.items.add(
                                 new CallHistoryItemViewModel(
                                         callHistoryItems.get(indexNextItem + i),
@@ -126,6 +127,12 @@ public class ProfileFragment extends BaseFragment {
                                             }
                                         })
                         );
+                    }
+
+                    //Hide the "Show more" button if
+                    //all calls in the history were already shown
+                    if(indexNextItem + i >= callHistoryItems.size()) {
+                        binding.profileCallHistoryMore.setVisibility(View.GONE);
                     }
                 }
             }
