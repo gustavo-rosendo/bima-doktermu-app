@@ -51,5 +51,5 @@ public class Constants {
     public static final String DEVICE_TYPE_FORMAT = "%s %s";
     public static final String DEVICE_SOFTWARE_FORMAT = "Android %s";
 
-    public static final int PHONE_NUMBER_MINIMAL_DIGITS = 11;
+    public static final int PHONE_NUMBER_MINIMAL_DIGITS = 3;
 }
