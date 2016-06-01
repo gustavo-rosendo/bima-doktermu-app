@@ -108,11 +108,15 @@ public class HomeFragment extends BaseFragment {
     private void initViews() {
         binding.setViewModel(homeListViewModel);
 
+        updateHomeItem();
+    }
+
+    private void updateHomeItem() {
+        homeListViewModel.items.clear();
         for (int i = 0; i < HOME_ITEM_COUNT; i++) {
             if (i == HOME_ITEM_COUNT - 1) {
                 // show settings if already subscribed
-                boolean subscriptionActive =
-                        StorageUtils.getBoolean(getActivity(), Constants.KEY_USER_SUBSCIPTION, false);
+                boolean subscriptionActive = billingClient.isSubscribedToDokterPribadiKu();
                 if (subscriptionActive) {
                     i++;
                 }
@@ -181,6 +185,8 @@ public class HomeFragment extends BaseFragment {
                         getActivity(),
                         Constants.KEY_USER_SUBSCIPTION,
                         isSubscribed);
+
+                updateHomeItem();
             }
 
             @Override
