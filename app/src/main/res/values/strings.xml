@@ -68,8 +68,7 @@
 
     <!-- about bima -->
     <string name="about_bima">Tentang BIMA</string>
-    <string name="about_bima_info">BIMA adalah perusahaan teknologi informasi yang menyediakan
-        akses kepada layanan kesehatan dan produk asuransi</string>
+    <string name="about_bima_info">Kami menyediakan layanan kesehatan dan asuransi berbasis teknologi informasi</string>
     <string name="about_bima_learn_more">Informasi lebih lanjut</string>
     <string name="about_bima_website">www.bimaindonesia.co.id</string>
     <string name="about_bima_give_us_call">Layanan konsumen</string>
