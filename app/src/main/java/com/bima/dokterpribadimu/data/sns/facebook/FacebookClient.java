@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.data.sns.LoginClient;
 import com.bima.dokterpribadimu.data.sns.LoginListener;
 import com.bima.dokterpribadimu.model.FacebookProfile;
@@ -11,6 +12,7 @@ import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.TokenUtils;
+import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -107,21 +109,36 @@ public class FacebookClient implements LoginClient {
                         String picture = "https://graph.facebook.com/" + fbProfile.getId() + "/picture?type=large";
                         String email = fbProfile.getEmail() != null ? fbProfile.getEmail() : "";
 
-                        UserProfile userProfile = new UserProfile(
-                                                            fbProfile.getId(),
-                                                            fbProfile.getName(),
-                                                            fbProfile.getFirstName(),
-                                                            fbProfile.getLastName(),
-                                                            email,
-                                                            picture,
-                                                            "",
-                                                            "",
-                                                            Constants.LOGIN_TYPE_FACEBOOK,
-                                                            0.0,
-                                                            0.0,
-                                                            TokenUtils.generateToken(
-                                                                    fbProfile.getEmail() + System.currentTimeMillis())
-                                                    );
+                        UserProfile userProfile = UserProfileUtils.getUserProfile(
+                                DokterPribadimuApplication.getInstance().getApplicationContext());
+                        if(userProfile == null) {
+                            userProfile = new UserProfile(
+                                    fbProfile.getId(),
+                                    fbProfile.getName(),
+                                    fbProfile.getFirstName(),
+                                    fbProfile.getLastName(),
+                                    email,
+                                    picture,
+                                    "",
+                                    "",
+                                    Constants.LOGIN_TYPE_FACEBOOK,
+                                    0.0,
+                                    0.0,
+                                    TokenUtils.generateToken(
+                                            fbProfile.getEmail() + System.currentTimeMillis())
+                            );
+                        }
+                        else {
+                            userProfile.setId(fbProfile.getId());
+                            userProfile.setName(fbProfile.getName());
+                            userProfile.setFirstName(fbProfile.getFirstName());
+                            userProfile.setLastName(fbProfile.getLastName());
+                            userProfile.setEmail(email);
+                            userProfile.setPicture(picture);
+                            userProfile.setLoginType(Constants.LOGIN_TYPE_FACEBOOK);
+                            userProfile.setAccessToken(TokenUtils.generateToken(
+                                    fbProfile.getEmail() + System.currentTimeMillis()));
+                        }
 
                         loginListener.onSuccess(userProfile);
                     }

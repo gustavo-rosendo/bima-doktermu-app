@@ -4,6 +4,9 @@ import android.content.Context;
 import android.os.Build;
 import android.telephony.TelephonyManager;
 
+import com.bima.dokterpribadimu.DokterPribadimuApplication;
+import com.bima.dokterpribadimu.model.UserProfile;
+
 /**
  * Created by apradanas on 3/6/16.
  */
@@ -37,15 +40,24 @@ public class DeviceInfoUtils {
                 .getSystemService(Context.TELEPHONY_SERVICE);
 
         deviceId = telephonyManager.getDeviceId();
-        if(telephonyManager.getLine1Number() != null) {
-            msisdnPhoneNumber = telephonyManager.getLine1Number();
-        }
-        else if(telephonyManager.getVoiceMailNumber() != null) {
-            msisdnPhoneNumber = telephonyManager.getVoiceMailNumber();
+
+        UserProfile userProfile = UserProfileUtils.getUserProfile(
+                DokterPribadimuApplication.getInstance().getApplicationContext());
+        if(userProfile != null && userProfile.getMsisdn() != null && userProfile.getMsisdn() != "") {
+            msisdnPhoneNumber = userProfile.getMsisdn();
         }
         else {
-            msisdnPhoneNumber = "000000000000";
+            if(telephonyManager.getLine1Number() != null) {
+                msisdnPhoneNumber = telephonyManager.getLine1Number();
+            }
+            else if(telephonyManager.getVoiceMailNumber() != null) {
+                msisdnPhoneNumber = telephonyManager.getVoiceMailNumber();
+            }
+            else {
+                msisdnPhoneNumber = "000000000000";
+            }
         }
+
         board = Build.BOARD;
         brand = Build.BRAND;
         device = Build.DEVICE;

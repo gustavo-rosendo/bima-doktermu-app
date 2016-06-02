@@ -1,5 +1,7 @@
 package com.bima.dokterpribadimu.data.sns.gplus;
 
+import com.bima.dokterpribadimu.DokterPribadimuApplication;
+import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -87,20 +89,37 @@ public class GplusClient implements LoginClient, GoogleApiClient.OnConnectionFai
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount signInAccount = result.getSignInAccount();
 
-            UserProfile userProfile = new UserProfile(
-                    signInAccount.getId(),
-                    signInAccount.getDisplayName(),
-                    "",
-                    "",
-                    signInAccount.getEmail(),
-                    signInAccount.getPhotoUrl() != null ? signInAccount.getPhotoUrl().toString() : "",
-                    "",
-                    "",
-                    Constants.LOGIN_TYPE_GOOGLE,
-                    0.0,
-                    0.0,
-                    TokenUtils.generateToken(signInAccount.getEmail() + System.currentTimeMillis())
-            );
+            UserProfile userProfile = UserProfileUtils.getUserProfile(
+                    DokterPribadimuApplication.getInstance().getApplicationContext());
+
+            if(userProfile == null) {
+                userProfile = new UserProfile(
+                        signInAccount.getId(),
+                        signInAccount.getDisplayName(),
+                        "",
+                        "",
+                        signInAccount.getEmail(),
+                        signInAccount.getPhotoUrl() != null ? signInAccount.getPhotoUrl().toString() : "",
+                        "",
+                        "",
+                        Constants.LOGIN_TYPE_GOOGLE,
+                        0.0,
+                        0.0,
+                        TokenUtils.generateToken(signInAccount.getEmail() + System.currentTimeMillis())
+                );
+            }
+            else {
+                userProfile.setId(signInAccount.getId());
+                userProfile.setName(signInAccount.getDisplayName());
+                userProfile.setFirstName("");
+                userProfile.setLastName("");
+                userProfile.setEmail(signInAccount.getEmail());
+                userProfile.setPicture(signInAccount.getPhotoUrl() != null ? signInAccount.getPhotoUrl().toString() : "");
+                userProfile.setLoginType(Constants.LOGIN_TYPE_GOOGLE);
+                userProfile.setAccessToken(TokenUtils.generateToken(
+                        signInAccount.getEmail() + System.currentTimeMillis()));
+            }
+
             loginListener.onSuccess(userProfile);
         } else {
             loginListener.onFail();

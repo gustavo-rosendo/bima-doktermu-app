@@ -220,7 +220,8 @@ public class DrawerFragment extends BaseFragment {
                 signOutFacebook();
                 signOutGPlus();
 
-                StorageUtils.remove(getActivity(), Constants.KEY_USER_PROFILE);
+                //GUS - Fix issue #60: Phone number is not saved after log out
+                //StorageUtils.remove(getActivity(), Constants.KEY_USER_PROFILE);
 
                 startLandingActivityOnTop();
             }
