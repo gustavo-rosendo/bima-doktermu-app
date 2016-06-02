@@ -24,6 +24,7 @@ public class Constants {
     public static final String SOCKET_TIMEOUT_EXCEPTION = "SocketTimeoutException";
     public static final String ILLEGAL_STATE_EXCEPTION = "IllegalStateException";
     public static final String EMAIL_IS_NOT_REGISTERED = "Email belum terdaftar";
+    public static final String EMAIL_NOT_FOUND = "email address was not found";
 
     public static final int DRAWER_TYPE_HOME = 0;
     public static final int DRAWER_TYPE_DOCTOR_ON_CALL = 1;
