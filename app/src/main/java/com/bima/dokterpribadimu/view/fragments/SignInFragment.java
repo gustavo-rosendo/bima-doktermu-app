@@ -266,7 +266,17 @@ public class SignInFragment extends BaseFragment {
                                     getString(R.string.dialog_take_me_home),
                                     null);
                         } else {
-                            handleError(TAG, signInResponse.getMessage());
+                            String errorMessage = signInResponse.getMessage();
+                            if (errorMessage.contains(Constants.EMAIL_NOT_FOUND)) {
+                                showErrorDialog(
+                                        R.drawable.ic_bug,
+                                        getString(R.string.dialog_reset_password_email_not_registered_title),
+                                        getString(R.string.dialog_reset_password_email_not_registered_message),
+                                        getString(R.string.dialog_try_once_more),
+                                        null);
+                            } else {
+                                handleError(TAG, signInResponse.getMessage());
+                            }
                         }
                     }
                 });
