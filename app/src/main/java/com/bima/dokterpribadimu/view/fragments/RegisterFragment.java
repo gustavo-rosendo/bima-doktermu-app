@@ -121,7 +121,9 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
                                         deviceInfoUtils.getBrand(),
                                         deviceInfoUtils.getProduct()));
                         userProfile.setDeviceImei(deviceInfoUtils.getDeviceId());
-                        userProfile.setMsisdn(deviceInfoUtils.getMsisdnPhoneNumber());
+                        if(userProfile.getMsisdn().isEmpty()) {
+                            userProfile.setMsisdn(deviceInfoUtils.getMsisdnPhoneNumber());
+                        }
                         userProfile.setDeviceOperator(deviceInfoUtils.getSimOperatorName());
                         userProfile.setDeviceSoftware(String.format(Constants.DEVICE_SOFTWARE_FORMAT, deviceInfoUtils.getRelease()));
                     }

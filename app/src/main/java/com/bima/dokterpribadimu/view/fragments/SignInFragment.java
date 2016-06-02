@@ -16,6 +16,7 @@ import com.bima.dokterpribadimu.utils.Constants.Status;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.TokenUtils;
+import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
@@ -177,20 +178,31 @@ public class SignInFragment extends BaseFragment {
 
                         if (signInResponse.getStatus() == Status.SUCCESS) {
 
-                            UserProfile userProfile = new UserProfile(
-                                                                "",
-                                                                "",
-                                                                "",
-                                                                "",
-                                                                email,
-                                                                "",
-                                                                "",
-                                                                "",
-                                                                Constants.LOGIN_TYPE_EMAIL,
-                                                                0.0,
-                                                                0.0,
-                                                                accessToken
-                                                            );
+                            UserProfile userProfile = UserProfileUtils.getUserProfile(
+                                    DokterPribadimuApplication.getInstance().getApplicationContext());
+
+                            if(userProfile == null) {
+                                userProfile = new UserProfile(
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        email,
+                                        "",
+                                        "",
+                                        "",
+                                        Constants.LOGIN_TYPE_EMAIL,
+                                        0.0,
+                                        0.0,
+                                        accessToken
+                                );
+                            }
+                            else {
+                                userProfile.setEmail(email);
+                                userProfile.setLoginType(Constants.LOGIN_TYPE_EMAIL);
+                                userProfile.setAccessToken(accessToken);
+                            }
+
                             StorageUtils.putString(
                                     getActivity(),
                                     Constants.KEY_USER_PROFILE,
