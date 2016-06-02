@@ -34,6 +34,10 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/generic_large_margin"
+                android:paddingLeft="@dimen/generic_large_margin"
+                android:paddingStart="@dimen/generic_large_margin"
+                android:paddingRight="@dimen/generic_large_margin"
+                android:paddingEnd="@dimen/generic_large_margin"
                 app:layoutManager="@{LayoutManagers.grid(2)}"
                 app:items="@{viewModel.items}"
                 app:itemView="@{viewModel.itemView}"/>

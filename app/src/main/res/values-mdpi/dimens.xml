@@ -26,6 +26,7 @@
     <!-- home -->
     <dimen name="home_bima_text_width">50dp</dimen>
     <dimen name="home_bima_text_height">25dp</dimen>
+    <dimen name="home_item_image_width">90dp</dimen>
 
     <!-- drawer -->
     <dimen name="drawer_width">260dp</dimen>
