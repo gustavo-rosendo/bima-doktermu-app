@@ -29,6 +29,7 @@
     <!-- home -->
     <dimen name="home_bima_text_width">100dp</dimen>
     <dimen name="home_bima_text_height">75dp</dimen>
+    <dimen name="home_item_image_width">135dp</dimen>
 
     <!-- doctor on call -->
     <dimen name="doctor_call_icon_width">165dp</dimen>
