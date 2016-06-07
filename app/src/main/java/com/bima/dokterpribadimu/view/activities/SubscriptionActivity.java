@@ -164,7 +164,8 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                         subscription.setOrderId(orderId);
                     }
                     subscription.setProductName(billingClient.getProductName(BillingClient.SKU_DOKTER_PRIBADIKU_MONTHLY));
-                    subscription.setPrice(billingClient.getProductPrice(BillingClient.SKU_DOKTER_PRIBADIKU_MONTHLY));
+                    String priceStr = billingClient.getProductPrice(BillingClient.SKU_DOKTER_PRIBADIKU_MONTHLY);
+                    subscription.setPrice(SubscriptionUtils.formatSubscriptionPrice(priceStr));
                     subscription.setAccessToken(
                             UserProfileUtils.getUserProfile(SubscriptionActivity.this).getAccessToken());
 

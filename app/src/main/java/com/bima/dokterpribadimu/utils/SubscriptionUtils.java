@@ -69,6 +69,18 @@ public class SubscriptionUtils {
         return finalDateOfBirth;
     }
 
+    public static String formatSubscriptionPrice(String priceStr) {
+        if(priceStr == null) {
+            return "";
+        }
+
+        String formattedPrice = priceStr.replace("IDR", "");
+        formattedPrice = formattedPrice.replace(",", "");
+        formattedPrice = formattedPrice.trim();
+
+        return formattedPrice;
+    }
+
     public static String getChosenGender(String genderField) {
         String genderFormatted = "";
         if (genderField != null) {
