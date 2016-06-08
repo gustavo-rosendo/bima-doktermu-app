@@ -7,6 +7,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.Manifest;
@@ -427,5 +428,23 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
             );
         }
+
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                String title = marker.getTitle();
+                if (!title.equalsIgnoreCase(getString(R.string.your_location))) {
+                    for (Partner partner : partners) {
+                        if (partner.getPartnerName().equalsIgnoreCase(title)) {
+                            IntentUtils.startPartnersDetailActivity(
+                                    PartnersLandingActivity.this,
+                                    partner);
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+        });
     }
 }
