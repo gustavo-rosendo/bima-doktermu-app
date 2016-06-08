@@ -35,6 +35,6 @@
     <dimen name="doctor_call_icon_width">165dp</dimen>
     <dimen name="doctor_call_icon_height">165dp</dimen>
     <dimen name="doctor_call_title_text_size">30sp</dimen>
-    <dimen name="doctor_call_info_text_size">20sp</dimen>
+    <dimen name="doctor_call_info_text_size">18sp</dimen>
 
 </resources>
