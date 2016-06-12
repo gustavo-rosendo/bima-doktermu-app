@@ -41,12 +41,12 @@ public class HomeFragment extends BaseFragment {
 
     private int[] resIds = {
             R.drawable.ic_home_doctor, R.drawable.ic_home_partners, R.drawable.ic_home_news,
-            R.drawable.ic_home_subscribe, R.drawable.ic_home_settings
+            R.drawable.ic_home_settings, R.drawable.ic_home_subscribe
     };
 
     private int[] stringIds = {
             R.string.drawer_doctor_on_call, R.string.drawer_partners, R.string.drawer_news,
-            R.string.drawer_subscribe, R.string.drawer_settings
+            R.string.drawer_settings, R.string.drawer_subscribe
     };
 
     private View.OnClickListener[] clickListeners = {
@@ -71,13 +71,13 @@ public class HomeFragment extends BaseFragment {
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startSubscriptionActivity();
+                    startProfileActivity();
                 }
             },
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startProfileActivity();
+                    startSubscriptionActivity();
                 }
             }
     };
@@ -108,20 +108,15 @@ public class HomeFragment extends BaseFragment {
     private void initViews() {
         binding.setViewModel(homeListViewModel);
 
-        updateHomeItem();
+        initHomeItem();
     }
 
-    private void updateHomeItem() {
+    //Distinguish between initHomeItem() and updateHomeItem() to avoid blinking the screen every time
+    private void initHomeItem() {
         homeListViewModel.items.clear();
-        for (int i = 0; i < HOME_ITEM_COUNT; i++) {
-            if (i == HOME_ITEM_COUNT - 1) {
-                // show settings if already subscribed
-                boolean subscriptionActive = billingClient.isSubscribedToDokterPribadiKu();
-                if (subscriptionActive) {
-                    i++;
-                }
-            }
 
+        //Show home screen with "Settings" button as default
+        for (int i = 0; i < HOME_ITEM_COUNT; i++) {
             homeListViewModel.items.add(
                     new HomeItemViewModel(
                             resIds[i],
@@ -137,6 +132,33 @@ public class HomeFragment extends BaseFragment {
                 binding.homeScrollView.scrollTo(0, 0);
             }
         });
+    }
+
+    private void updateHomeItem() {
+        boolean subscriptionActive = billingClient.isSubscribedToDokterPribadiKu();
+
+        // show "Subscribe" button if not yet subscribed
+        if (!subscriptionActive) {
+            // change from "Settings" to "Subscribe"
+            int idSettingButton = HOME_ITEM_COUNT - 1;
+            homeListViewModel.items.remove(idSettingButton);
+
+            int idSubscribeButton = HOME_ITEM_COUNT;
+            homeListViewModel.items.add(
+                    new HomeItemViewModel(
+                            resIds[idSubscribeButton],
+                            getString(stringIds[idSubscribeButton]),
+                            clickListeners[idSubscribeButton])
+            );
+
+            // scroll to top
+            binding.homeScrollView.post(new Runnable() {
+                @Override
+                public void run() {
+                    binding.homeScrollView.scrollTo(0, 0);
+                }
+            });
+        }
     }
 
     @Override
