@@ -543,9 +543,14 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
             public boolean onMarkerClick(Marker marker) {
                 marker.showInfoWindow();
                 String title = marker.getTitle();
+                LatLng markerLatLng = marker.getPosition();
                 if (!title.equalsIgnoreCase(getString(R.string.your_location))) {
                     for (Partner partner : partners) {
-                        if (partner.getPartnerName().equalsIgnoreCase(title)) {
+                        Double latitude = Double.parseDouble(partner.getPartnerLat());
+                        Double longitude = Double.parseDouble(partner.getPartnerLong());
+                        LatLng userLatLng = new LatLng(latitude, longitude);
+                        if (userLatLng.latitude == markerLatLng.latitude
+                                && userLatLng.longitude == markerLatLng.longitude) {
                             selectedPartner = partner;
 
                             // call API to get the directions to the selected partner
