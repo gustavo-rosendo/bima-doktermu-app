@@ -1,75 +1,42 @@
 {
   "project_info": {
-    "project_id": "dokter-pribadimu",
-    "project_number": "423310825659",
-    "name": "Dokter Pribadimu"
+    "project_number": "447102420467",
+    "firebase_url": "https://doktermu-app.firebaseio.com",
+    "project_id": "doktermu-app",
+    "storage_bucket": "doktermu-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:423310825659:android:6af355750dc1e79d",
-        "client_id": "android:com.bima.dokterpribadimu",
-        "client_type": 1,
+        "mobilesdk_app_id": "1:447102420467:android:6af355750dc1e79d",
         "android_client_info": {
-          "package_name": "com.bima.dokterpribadimu",
-          "certificate_hash": []
+          "package_name": "com.bima.dokterpribadimu"
         }
       },
       "oauth_client": [
         {
-          "client_id": "423310825659-3tkh7f26j2o0i5cvest147bslmvkurvt.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.bima.dokterpribadimu",
-            "certificate_hash": "B5B111D3B06519543686FC5B9F8A6EA953B9E2F1"
-          }
-        },
-        {
-          "client_id": "423310825659-uiburhie1au98d90q8f3vk5pp7omtou8.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.bima.dokterpribadimu",
-            "certificate_hash": "A4B47C70EB3722E7A4F6027748E4D7E0B8862746"
-          }
-        },
-        {
-          "client_id": "423310825659-vlsra18h7fvq7ojkl4hslghfk0nvqhv3.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.bima.dokterpribadimu",
-            "certificate_hash": "D43EA956D81EA8A36253076AED8415CA7AE2B60F"
-          }
-        },
-        {
-          "client_id": "423310825659-dno5q9o29sc7vcvu79f7ugpgujeo813i.apps.googleusercontent.com",
+          "client_id": "447102420467-nlefamu2aiev3j6ehjh9bp1ajcfmv02a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
-      "api_key": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR3zFiHEQG0M2c7a0WkvWn9x2xObtkqfI"
+        }
+      ],
       "services": {
         "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": "UA-75715428-1"
-          }
-        },
-        "cloud_messaging_service": {
-          "status": 1,
-          "apns_config": []
+          "status": 1
         },
         "appinvite_service": {
           "status": 1,
           "other_platform_oauth_client": []
         },
-        "google_signin_service": {
-          "status": 2
-        },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }
   ],
-  "client_info": [],
-  "ARTIFACT_VERSION": "1"
+  "configuration_version": "1"
 }
