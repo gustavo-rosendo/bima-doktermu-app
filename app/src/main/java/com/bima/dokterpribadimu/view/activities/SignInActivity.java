@@ -56,7 +56,7 @@ public class SignInActivity extends BaseActivity implements EasyPermissions.Perm
 
     private ActivitySignInBinding binding;
 
-    private Tracker mTracker;
+//    private Tracker mTracker;
     private boolean isSignIn;
 
     private LoginClient loginClient;
@@ -76,7 +76,7 @@ public class SignInActivity extends BaseActivity implements EasyPermissions.Perm
         DokterPribadimuApplication.getComponent().inject(this);
 
         // Obtain the shared Tracker instance.
-        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+//        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
 
         initDeviceInfo();
         initLoginClient();
@@ -122,9 +122,9 @@ public class SignInActivity extends BaseActivity implements EasyPermissions.Perm
     protected void onResume() {
         super.onResume();
 
-        Log.d(TAG, "Setting screen name: " + TAG);
-        mTracker.setScreenName("Image~" + TAG);
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+//        Log.d(TAG, "Setting screen name: " + TAG);
+//        mTracker.setScreenName("Image~" + TAG);
+//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override
