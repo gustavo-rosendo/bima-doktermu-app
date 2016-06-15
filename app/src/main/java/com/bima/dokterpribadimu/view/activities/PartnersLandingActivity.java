@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.PopupWindow;
@@ -527,15 +528,22 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
 
     private void addPartnersMarker() {
         for (Partner partner : partners) {
-            Double latitude = Double.parseDouble(partner.getPartnerLat());
-            Double longitude = Double.parseDouble(partner.getPartnerLong());
-            LatLng userLatLng = new LatLng(latitude, longitude);
-            map.addMarker(
-                new MarkerOptions()
-                        .position(userLatLng)
-                        .title(partner.getPartnerName())
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
-            );
+            try {
+                Double latitude = Double.parseDouble(partner.getPartnerLat());
+                Double longitude = Double.parseDouble(partner.getPartnerLong());
+                LatLng userLatLng = new LatLng(latitude, longitude);
+                map.addMarker(
+                        new MarkerOptions()
+                                .position(userLatLng)
+                                .title(partner.getPartnerName())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
+                );
+            } catch (NumberFormatException e) {
+                Log.e(TAG, "Could not add marker for Partner '" + partner.getPartnerName()
+                        + "' - error message: "
+                        + e.getMessage());
+                e.printStackTrace();
+            }
         }
 
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
