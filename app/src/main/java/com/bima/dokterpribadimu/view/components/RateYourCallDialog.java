@@ -11,9 +11,13 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
+import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.DialogRateYourCallBinding;
+import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.StorageUtils;
 
 /**
  * Created by gusta_000 on 13/5/2016.
@@ -86,7 +90,17 @@ public class RateYourCallDialog extends Dialog {
                                 RateYourCallDialog.this,
                                 rating);
                         Log.d("RateYourCallDialog", "Rating given: " + rating);
+
+                        // Reset last call id
+                        resetLastCallId();
                     }
+                }
+                else {
+                    Toast.makeText(
+                            DokterPribadimuApplication.getInstance().getApplicationContext(),
+                            DokterPribadimuApplication.getInstance().getString(R.string.rate_your_call_invalid),
+                            Toast.LENGTH_LONG
+                    ).show();
                 }
             }
         });
@@ -94,6 +108,8 @@ public class RateYourCallDialog extends Dialog {
         binding.rateCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Reset last call id
+                resetLastCallId();
                 dismiss();
             }
         });
@@ -130,5 +146,13 @@ public class RateYourCallDialog extends Dialog {
     public RateYourCallDialog setListener(OnRateYourCallDialogClickListener listener) {
         this.listener = listener;
         return this;
+    }
+
+    private void resetLastCallId() {
+        // Reset last call id so that the Rating dialog will not show again
+        StorageUtils.putString(
+                DokterPribadimuApplication.getInstance().getApplicationContext(),
+                Constants.KEY_BOOK_CALL_ID_LAST_CALL,
+                "0");
     }
 }
