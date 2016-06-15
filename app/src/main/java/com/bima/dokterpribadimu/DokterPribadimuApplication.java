@@ -70,5 +70,8 @@ public class DokterPribadimuApplication extends Application {
 
         sInstance = this;
         mComponent = DokterPribadimuComponent.Initializer.init(this);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 }
