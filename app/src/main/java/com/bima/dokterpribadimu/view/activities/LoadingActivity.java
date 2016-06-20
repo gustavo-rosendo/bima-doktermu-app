@@ -44,7 +44,7 @@ public class LoadingActivity extends BaseActivity {
 
     private AnimatorSet scaleAnim;
 
-//    private Tracker mTracker;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class LoadingActivity extends BaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_loading);
 
         // Obtain the shared Tracker instance.
-//        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
 
         initAnim();
         runSplash();
@@ -62,9 +62,9 @@ public class LoadingActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-//        Log.d(TAG, "Setting screen name: " + TAG);
-//        mTracker.setScreenName("Image~" + TAG);
-//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        Log.d(TAG, "Setting screen name: " + TAG);
+        mTracker.setScreenName("Image~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

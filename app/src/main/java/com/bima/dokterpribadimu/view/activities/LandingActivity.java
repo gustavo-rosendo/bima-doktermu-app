@@ -22,7 +22,7 @@ public class LandingActivity extends BaseActivity {
 
     private ActivityLandingBinding binding;
 
-//    private Tracker mTracker;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class LandingActivity extends BaseActivity {
         DokterPribadimuApplication.getComponent().inject(this);
 
         // Obtain the shared Tracker instance.
-//        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
 
         init();
     }
@@ -41,9 +41,9 @@ public class LandingActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-//        Log.d(TAG, "Setting screen name: " + TAG);
-//        mTracker.setScreenName("Image~" + TAG);
-//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        Log.d(TAG, "Setting screen name: " + TAG);
+        mTracker.setScreenName("Image~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);

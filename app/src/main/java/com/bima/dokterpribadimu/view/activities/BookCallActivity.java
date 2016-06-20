@@ -52,7 +52,7 @@ public class BookCallActivity extends BaseActivity {
 
     private ActivityBookCallBinding binding;
 
-//    private Tracker mTracker;
+    private Tracker mTracker;
 
     private PhoneInfoModalDialog phoneInfoModalDialog;
 
@@ -64,7 +64,7 @@ public class BookCallActivity extends BaseActivity {
         DokterPribadimuApplication.getComponent().inject(this);
 
         // Obtain the shared Tracker instance.
-//        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
 
         initViews();
     }
@@ -73,9 +73,9 @@ public class BookCallActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-//        Log.d(TAG, "Setting screen name: " + TAG);
-//        mTracker.setScreenName("Image~" + TAG);
-//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        Log.d(TAG, "Setting screen name: " + TAG);
+        mTracker.setScreenName("Image~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     private void initViews() {

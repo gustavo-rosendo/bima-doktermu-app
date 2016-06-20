@@ -110,7 +110,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
     private Location location;
     private LocationTracker locationTracker;
 
-//    private Tracker mTracker;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +120,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
         DokterPribadimuApplication.getComponent().inject(this);
 
         // Obtain the shared Tracker instance.
-//        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
 
         init();
     }
@@ -204,12 +204,12 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                     //Google Analytics to track users that clicked the "subscribe" button
                     //to initiate the purchase flow (not yet successfully subscribed)
                     //we want to track how many users start the purchase flow vs. how many successfully purchase
-//                    mTracker.send(new HitBuilders.EventBuilder()
-//                            .setCategory("Growth")
-//                            .setAction("Button-Click")
-//                            .setLabel("Subscription")
-//                            .setValue(1)
-//                            .build());
+                    mTracker.send(new HitBuilders.EventBuilder()
+                            .setCategory("Growth")
+                            .setAction("Button-Click")
+                            .setLabel("Subscription")
+                            .setValue(1)
+                            .build());
 
                     UserProfile userProfile = UserProfileUtils.getUserProfile(SubscriptionActivity.this);
                     if (userProfile != null) {
@@ -313,9 +313,9 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
     protected void onResume() {
         super.onResume();
 
-//        Log.d(TAG, "Setting screen name: " + TAG);
-//        mTracker.setScreenName("Image~" + TAG);
-//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        Log.d(TAG, "Setting screen name: " + TAG);
+        mTracker.setScreenName("Image~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
         initBillingClient();
     }
@@ -454,27 +454,27 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
 
                         //Doktermu Tracking - Subscription
                         //Google AdWords Android in-app conversion tracking snippet for successful Subscription
-//                        AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
-//                                "926691219", "yAbrCLeyyGUQk9_wuQM", "1.00", true);
+                        AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
+                                "926691219", "yAbrCLeyyGUQk9_wuQM", "1.00", true);
 
                         //Google Analytics tracking for successful Subscription
-//                        Product product = new Product()
-//                                .setName(subscription.getProductName())
-//                                .setPrice(billingClient.getPriceAmountMicros(info.getSku()));
-//
-//                        ProductAction productAction = new ProductAction(ProductAction.ACTION_PURCHASE)
-//                                .setTransactionId(info.getOrderId());
-//
-//                        // Add the transaction data to the event.
-//                        HitBuilders.EventBuilder builder = new HitBuilders.EventBuilder()
-//                                .setCategory("Growth")
-//                                .setAction("Purchase")
-//                                .setLabel("Subscription")
-//                                .addProduct(product)
-//                                .setProductAction(productAction);
-//
-//                        // Send the transaction data with the event.
-//                        mTracker.send(builder.build());
+                        Product product = new Product()
+                                .setName(subscription.getProductName())
+                                .setPrice(billingClient.getPriceAmountMicros(info.getSku()));
+
+                        ProductAction productAction = new ProductAction(ProductAction.ACTION_PURCHASE)
+                                .setTransactionId(info.getOrderId());
+
+                        // Add the transaction data to the event.
+                        HitBuilders.EventBuilder builder = new HitBuilders.EventBuilder()
+                                .setCategory("Growth")
+                                .setAction("Purchase")
+                                .setLabel("Subscription")
+                                .addProduct(product)
+                                .setProductAction(productAction);
+
+                        // Send the transaction data with the event.
+                        mTracker.send(builder.build());
 
                         registerSubscription(subscription);
 
