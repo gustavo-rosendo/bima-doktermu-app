@@ -1,39 +1,32 @@
 {
   "project_info": {
-    "project_number": "714772415110",
-    "firebase_url": "https://doktermubimamobile.firebaseio.com",
-    "project_id": "doktermubimamobile",
-    "storage_bucket": "doktermubimamobile.appspot.com"
+    "project_number": "447102420467",
+    "firebase_url": "https://doktermu-app.firebaseio.com",
+    "project_id": "doktermu-app",
+    "storage_bucket": "doktermu-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:714772415110:android:6af355750dc1e79d",
+        "mobilesdk_app_id": "1:447102420467:android:6af355750dc1e79d",
         "android_client_info": {
           "package_name": "com.bima.dokterpribadimu"
         }
       },
       "oauth_client": [
         {
-          "client_id": "714772415110-bdbgavumlg0rq6r3jqghas0datd5thjm.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "714772415110-okj444pah03bf8km06h8n4jv5fvrt7jo.apps.googleusercontent.com",
+          "client_id": "447102420467-nlefamu2aiev3j6ehjh9bp1ajcfmv02a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCLvk8rNu1T6mC52B8HMsApq1ziJ8nioM4"
+          "current_key": "AIzaSyBR3zFiHEQG0M2c7a0WkvWn9x2xObtkqfI"
         }
       ],
       "services": {
         "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": "UA-75715428-1"
-          }
+          "status": 1
         },
         "appinvite_service": {
           "status": 1,
