@@ -86,14 +86,12 @@ dependencies {
     final BINDING_ADAPTER_VERSION = '1.1.0'
     final CRASHLYTICS_VERSION = '2.5.5'
     final FACEBOOK_SDK_VERSION = '4.10.0'
-    final PLAY_SERVICE_MAPS_VERSION = '9.0.0'
-    final PLAY_SERVICE_AUTH_VERSION = '9.0.0'
+    final PLAY_SERVICE_MAPS_VERSION = '8.4.0'
+    final PLAY_SERVICE_AUTH_VERSION = '8.4.0'
     final CIRCLE_IMAGE_VIEW_VERSION = '2.0.0'
     final LOCATION_TRACKER_VERSION = '3.2'
     final EASY_PERMISSION_VERSION = '0.1.5'
-    final PLAY_SERVICE_ANALYTICS_VERSION = '9.0.0'
-    final FIREBASE_SDK_CORE_LIBRARY_VERSION = '9.0.2'
-    final FIREBASE_SDK_ADMOB_LIBRARY_VERSION = '9.0.2'
+    final PLAY_SERVICE_ANALYTICS_VERSION = '8.4.0'
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -190,16 +188,6 @@ dependencies {
      * Google Play Services for Google Maps
      */
     compile "com.google.android.gms:play-services-maps:$PLAY_SERVICE_MAPS_VERSION"
-
-    /**
-     *  Google Play Services for Firebase core (Analytics) library
-     */
-    compile "com.google.firebase:firebase-core:$FIREBASE_SDK_CORE_LIBRARY_VERSION"
-
-    /**
-     *  Google Play Services for Firebase AdMob library
-     */
-    compile "com.google.firebase:firebase-ads:$FIREBASE_SDK_ADMOB_LIBRARY_VERSION"
 
     /**
      * A memory leak detection library for Android and Java
