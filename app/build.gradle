@@ -92,7 +92,6 @@ dependencies {
     final LOCATION_TRACKER_VERSION = '3.2'
     final EASY_PERMISSION_VERSION = '0.1.5'
     final PLAY_SERVICE_ANALYTICS_VERSION = '9.0.0'
-    final PLAY_SERVICES_TAGMANAGER_VERSION = '9.0.0'
     final FIREBASE_SDK_CORE_LIBRARY_VERSION = '9.0.2'
     final FIREBASE_SDK_ADMOB_LIBRARY_VERSION = '9.0.2'
 
@@ -201,11 +200,6 @@ dependencies {
      *  Google Play Services for Firebase AdMob library
      */
     compile "com.google.firebase:firebase-ads:$FIREBASE_SDK_ADMOB_LIBRARY_VERSION"
-
-    /**
-     *  Google Play Services for TagManager library
-     */
-    compile "com.google.android.gms:play-services-tagmanager:$PLAY_SERVICES_TAGMANAGER_VERSION"
 
     /**
      * A memory leak detection library for Android and Java
