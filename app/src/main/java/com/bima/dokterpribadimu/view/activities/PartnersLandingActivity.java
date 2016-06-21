@@ -596,6 +596,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                                         int discountValue = Integer.parseInt(aux);
                                         if(discountValue > lastDiscountValue) {
                                             discountAmount = String.valueOf(discountValue) + "%";
+                                            lastDiscountValue = discountValue;
                                         }
                                     } catch (NumberFormatException e) {
                                         Log.e(TAG, "Error when trying to parse discount value. Message: " + e.getMessage());
