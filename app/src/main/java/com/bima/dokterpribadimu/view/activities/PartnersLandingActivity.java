@@ -633,17 +633,19 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
     }
 
     private void setupDirectionRequest(Partner partner) {
-        String origin = String.format(
-                Locale.US,
-                DIRECTIONS_PATTERN,
-                String.valueOf(location.getLatitude()),
-                String.valueOf(location.getLongitude()));
-        String destination = String.format(
-                Locale.US,
-                DIRECTIONS_PATTERN,
-                partner.getPartnerLat(),
-                partner.getPartnerLong());
-        getDirections(false, origin, destination);
+        if(location != null) {
+            String origin = String.format(
+                    Locale.US,
+                    DIRECTIONS_PATTERN,
+                    String.valueOf(location.getLatitude()),
+                    String.valueOf(location.getLongitude()));
+            String destination = String.format(
+                    Locale.US,
+                    DIRECTIONS_PATTERN,
+                    partner.getPartnerLat(),
+                    partner.getPartnerLong());
+            getDirections(false, origin, destination);
+        }
     }
 
     private void getDirections(final boolean sensor, final String origin, final String destination) {
