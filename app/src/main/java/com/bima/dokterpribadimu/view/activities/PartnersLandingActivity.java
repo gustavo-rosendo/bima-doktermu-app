@@ -1,5 +1,6 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.data.remote.api.DirectionsApi;
 import com.bima.dokterpribadimu.model.Discount;
 import com.bima.dokterpribadimu.model.directions.DirectionsResponse;
@@ -19,6 +20,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.Manifest;
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableList;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -57,6 +60,7 @@ import javax.inject.Inject;
 
 import fr.quentinklein.slt.LocationTracker;
 import fr.quentinklein.slt.TrackerSettings;
+import me.tatarka.bindingcollectionadapter.ItemView;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 import rx.Subscriber;
@@ -99,7 +103,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
     private List<Route> routes = new ArrayList<>();
     private Partner selectedPartner;
 
-    private PartnersDetailActivity.DiscountListViewModel discountListViewModel = new PartnersDetailActivity.DiscountListViewModel();
+    private DiscountListViewModel discountListViewModel = new DiscountListViewModel();
 
     private CategoriesPopupWindow categoriesPopupWindow;
 
@@ -125,6 +129,8 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
     }
 
     private void initViews() {
+        binding.setViewModel(discountListViewModel);
+
         binding.toolbarHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -570,17 +576,32 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
 
                             binding.partnersFooterAddress.setText(partner.getPartnerAddress());
 
-                            String discountAmount = hasDiscount() ?
-                                    partner.getDiscount().get(0).getDiscount().replace(" ", "") : "-";
-                            binding.partnersDiscount.setText(discountAmount);
-
+                            String discountAmount = "-";
                             if (hasDiscount()) {
+                                int lastDiscountValue = 0;
+                                // Clear list before adding to avoid double items
+                                discountListViewModel.items.clear();
                                 for (Discount discount : partner.getDiscount()) {
                                     discountListViewModel.items.add(
                                             new DiscountItemViewModel(discount)
                                     );
+
+                                    //Search for the biggest discount value
+                                    String aux = discount.getDiscount().replace(" ", "");
+                                    aux = aux.replace("%", "");
+                                    try {
+                                        int discountValue = Integer.parseInt(aux);
+                                        if(discountValue > lastDiscountValue) {
+                                            discountAmount = String.valueOf(discountValue) + "%";
+                                        }
+                                    } catch (NumberFormatException e) {
+                                        Log.e(TAG, "Error when trying to parse discount value. Message: " + e.getMessage());
+                                        e.printStackTrace();
+                                        discountAmount = aux + "%";
+                                    }
                                 }
                             }
+                            binding.partnersDiscount.setText(discountAmount);
 
                             binding.partnersMyLocationButton.setVisibility(View.GONE);
                             binding.partnersMenuButton.setVisibility(View.GONE);
@@ -661,6 +682,11 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                         binding.partnersDuration.setText(duration);
                     }
                 });
+    }
+
+    public static class DiscountListViewModel {
+        public final ObservableList<DiscountItemViewModel> items = new ObservableArrayList<>();
+        public final ItemView itemView = ItemView.of(BR.discount_item_viewmodel, R.layout.item_discount);
     }
 
 }

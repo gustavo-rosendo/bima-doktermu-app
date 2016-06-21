@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -150,17 +151,32 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
 
         binding.partnersFooterAddress.setText(partner.getPartnerAddress());
 
-        String discountAmount = hasDiscount() ?
-                partner.getDiscount().get(0).getDiscount().replace(" ", "") : "-";
-        binding.partnersDiscount.setText(discountAmount);
-
+        String discountAmount = "-";
         if (hasDiscount()) {
+            int lastDiscountValue = 0;
+            // Clear list before adding to avoid double items
+            discountListViewModel.items.clear();
             for (Discount discount : partner.getDiscount()) {
                 discountListViewModel.items.add(
                         new DiscountItemViewModel(discount)
                 );
+
+                //Search for the biggest discount value
+                String aux = discount.getDiscount().replace(" ", "");
+                aux = aux.replace("%", "");
+                try {
+                    int discountValue = Integer.parseInt(aux);
+                    if(discountValue > lastDiscountValue) {
+                        discountAmount = String.valueOf(discountValue) + "%";
+                    }
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, "Error when trying to parse discount value. Message: " + e.getMessage());
+                    e.printStackTrace();
+                    discountAmount = aux + "%";
+                }
             }
         }
+        binding.partnersDiscount.setText(discountAmount);
     }
 
     private void setupMapFragment() {

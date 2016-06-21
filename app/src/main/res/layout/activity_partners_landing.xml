@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.bima.dokterpribadimu.view.activities.PartnersDetailActivity.DiscountListViewModel" />
+            type="com.bima.dokterpribadimu.view.activities.PartnersLandingActivity.DiscountListViewModel" />
 
         <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
     </data>
