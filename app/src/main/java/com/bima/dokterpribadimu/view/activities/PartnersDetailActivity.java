@@ -312,26 +312,29 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
     }
 
     private void updateUserLocation(boolean moveToUserLocation, boolean updatePolylines) {
-        if (map != null && location != null) {
+        if (map != null) {
             map.clear();
-            // Add a marker in user's location and move the camera
-            LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-            map.addMarker(
-                    new MarkerOptions()
-                            .position(userLatLng)
-                            .title(getString(R.string.your_location))
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_pin))
-            );
+            if(location != null) {
+                // Add a marker in user's location and move the camera
+                LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                map.addMarker(
+                        new MarkerOptions()
+                                .position(userLatLng)
+                                .title(getString(R.string.your_location))
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_pin))
+                );
 
-            if (moveToUserLocation) {
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+                if (moveToUserLocation) {
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+                }
+
+                if (updatePolylines) {
+                    updatePolyLines();
+                }
             }
 
+            // Add partners if there are any, independently of the user's location
             addPartnersMarker(false);
-
-            if (updatePolylines) {
-                updatePolyLines();
-            }
         }
     }
 

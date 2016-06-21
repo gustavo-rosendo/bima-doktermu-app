@@ -487,28 +487,31 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
     }
 
     private void updateUserLocation(boolean moveToUserLocation) {
-        if (map != null && location != null) {
+        if (map != null) {
             map.clear();
-            // Add a marker in user's location and move the camera
-            LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-            map.addMarker(
-                    new MarkerOptions()
-                            .position(userLatLng)
-                            .title(getString(R.string.your_location))
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_pin))
-            );
+            if(location != null) {
+                // Add a marker in user's location and move the camera
+                LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                map.addMarker(
+                        new MarkerOptions()
+                                .position(userLatLng)
+                                .title(getString(R.string.your_location))
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_pin))
+                );
 
-            map.addCircle(new CircleOptions()
-                    .center(userLatLng)
-                    .radius(CIRCLE_RADIUS_METER)
-                    .strokeWidth(CIRCLE_STROKE_WIDTH)
-                    .strokeColor(ContextCompat.getColor(this, R.color.bima_blue))
-                    .fillColor(ContextCompat.getColor(this, R.color.bima_blue_alpha)));
+                map.addCircle(new CircleOptions()
+                        .center(userLatLng)
+                        .radius(CIRCLE_RADIUS_METER)
+                        .strokeWidth(CIRCLE_STROKE_WIDTH)
+                        .strokeColor(ContextCompat.getColor(this, R.color.bima_blue))
+                        .fillColor(ContextCompat.getColor(this, R.color.bima_blue_alpha)));
 
-            if (moveToUserLocation) {
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+                if (moveToUserLocation) {
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+                }
             }
 
+            // Add partners if there are any, independently of the user's location
             if (partners.size() > 0) {
                 addPartnersMarker();
             }
