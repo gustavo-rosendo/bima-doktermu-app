@@ -29,7 +29,7 @@ public class ServerTimeClient {
                     subscriber.onCompleted();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    if (e.getMessage().contains(Constants.SOCKET_TIMEOUT_EXCEPTION)) {
+                    if (e.toString().contains(Constants.SOCKET_TIMEOUT_EXCEPTION)) {
                         subscriber.onNext(null);
                         subscriber.onCompleted();
                     } else {
