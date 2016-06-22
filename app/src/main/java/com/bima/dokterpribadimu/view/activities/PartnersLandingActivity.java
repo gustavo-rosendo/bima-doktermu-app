@@ -199,6 +199,12 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                         public void onClick(Category category) {
                             categoriesPopupWindow.dismiss();
 
+                            // reset selected
+                            for (Category c : categories) {
+                                c.setSelected(false);
+                            }
+                            category.setSelected(true);
+
                             getPartners(
                                     category.getCategoryName(),
                                     UserProfileUtils.getUserProfile(PartnersLandingActivity.this).getAccessToken());

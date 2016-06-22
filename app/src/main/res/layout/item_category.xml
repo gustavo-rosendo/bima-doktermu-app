@@ -16,13 +16,15 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/category_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/generic_button_height"
             android:background="@drawable/rounded_categories_button_bg_selector"
             android:onClick="@{category_item_viewmodel.clickListener}"
             android:text="@{category_item_viewmodel.title}"
             android:textAllCaps="false"
-            android:textColor="@drawable/categories_text_color_selector" />
+            android:textColor="@drawable/categories_text_color_selector"
+            app:selected="@{category_item_viewmodel.selected}"/>
 
     </LinearLayout>
 
