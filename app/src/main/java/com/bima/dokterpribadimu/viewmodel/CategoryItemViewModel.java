@@ -2,10 +2,8 @@ package com.bima.dokterpribadimu.viewmodel;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.databinding.BindingAdapter;
 import android.view.View;
 
-import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.model.Category;
 
 /**
@@ -19,16 +17,6 @@ public class CategoryItemViewModel extends BaseObservable {
     public CategoryItemViewModel(Category category, View.OnClickListener clickListener) {
         this.category = category;
         this.clickListener = clickListener;
-    }
-
-    @Bindable
-    public boolean isSelected() {
-        return category.isSelected();
-    }
-
-    @BindingAdapter("bind:selected")
-    public static void setViewSelected(View view, boolean selected) {
-        view.setSelected(selected);
     }
 
     @Bindable
