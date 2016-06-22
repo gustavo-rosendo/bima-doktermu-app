@@ -11,7 +11,7 @@ import rx.Subscriber;
 public class ServerTimeClient {
 
     private static final String TIME_SERVER = "time.nist.gov"; // server list: http://tf.nist.gov/tf-cgi/servers.cgi
-    private static final int REQUEST_TIME_OUT_MILLIS = 30000; // 30 seconds
+    private static final int REQUEST_TIME_OUT_MILLIS = 10000; //10 seconds //30000; // 30 seconds
 
     /**
      * ServerTimeClient implementation to get SNTP Client
