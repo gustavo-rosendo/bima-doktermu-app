@@ -77,8 +77,9 @@ public class RateYourCallDialog extends Dialog {
      * Initialize dialog views. Do all view related here.
      */
     private void initDialogViews() {
-        Drawable progress = binding.ratingBar.getProgressDrawable();
-        DrawableCompat.setTint(progress, Color.GRAY);
+//        Drawable progress = binding.ratingBar.getProgressDrawable();
+//        DrawableCompat.setTint(progress, Color.GRAY);
+        binding.ratingBar.setProgress(0);
 
         binding.rateSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
