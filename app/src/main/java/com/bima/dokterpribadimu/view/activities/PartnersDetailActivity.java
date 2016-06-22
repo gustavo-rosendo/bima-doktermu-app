@@ -168,7 +168,7 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
                     float discountValue = Float.parseFloat(aux);
                     if(discountValue > lastDiscountValue) {
                         discountAmount = String.valueOf(discountValue);
-                        discountAmount.replace(".0", ""); // erase the decimal if the number is rounded. Ex.: 10.0
+                        discountAmount = discountAmount.replace(".0", ""); // erase the decimal if the number is rounded. Ex.: 10.0
                         discountAmount += "%";
                         lastDiscountValue = discountValue;
                     }
