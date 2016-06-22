@@ -54,7 +54,7 @@ public class DeviceInfoUtils {
                 msisdnPhoneNumber = telephonyManager.getVoiceMailNumber();
             }
             else {
-                msisdnPhoneNumber = "000000000000";
+                msisdnPhoneNumber = "";
             }
         }
 
@@ -223,7 +223,7 @@ public class DeviceInfoUtils {
 
     /**
      * Returns the phone number string for line 1, for example, the MSISDN
-     * for a GSM phone. Return string 000000000000 if it is unavailable.
+     * for a GSM phone. Return an empty string if it is unavailable.
      * @return phone number string
      */
     public String getMsisdnPhoneNumber() {
