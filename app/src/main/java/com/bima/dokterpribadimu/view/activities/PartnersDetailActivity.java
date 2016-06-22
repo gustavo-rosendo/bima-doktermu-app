@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -150,17 +151,32 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
 
         binding.partnersFooterAddress.setText(partner.getPartnerAddress());
 
-        String discountAmount = hasDiscount() ?
-                partner.getDiscount().get(0).getDiscount().replace(" ", "") : "-";
-        binding.partnersDiscount.setText(discountAmount);
-
+        String discountAmount = "-";
         if (hasDiscount()) {
+            int lastDiscountValue = 0;
+            // Clear list before adding to avoid double items
+            discountListViewModel.items.clear();
             for (Discount discount : partner.getDiscount()) {
                 discountListViewModel.items.add(
                         new DiscountItemViewModel(discount)
                 );
+
+                //Search for the biggest discount value
+                String aux = discount.getDiscount().replace(" ", "");
+                aux = aux.replace("%", "");
+                try {
+                    int discountValue = Integer.parseInt(aux);
+                    if(discountValue > lastDiscountValue) {
+                        discountAmount = String.valueOf(discountValue) + "%";
+                    }
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, "Error when trying to parse discount value. Message: " + e.getMessage());
+                    e.printStackTrace();
+                    discountAmount = aux + "%";
+                }
             }
         }
+        binding.partnersDiscount.setText(discountAmount);
     }
 
     private void setupMapFragment() {
@@ -296,26 +312,29 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
     }
 
     private void updateUserLocation(boolean moveToUserLocation, boolean updatePolylines) {
-        if (map != null && location != null) {
+        if (map != null) {
             map.clear();
-            // Add a marker in user's location and move the camera
-            LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-            map.addMarker(
-                    new MarkerOptions()
-                            .position(userLatLng)
-                            .title(getString(R.string.your_location))
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_pin))
-            );
+            if(location != null) {
+                // Add a marker in user's location and move the camera
+                LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                map.addMarker(
+                        new MarkerOptions()
+                                .position(userLatLng)
+                                .title(getString(R.string.your_location))
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_pin))
+                );
 
-            if (moveToUserLocation) {
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+                if (moveToUserLocation) {
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+                }
+
+                if (updatePolylines) {
+                    updatePolyLines();
+                }
             }
 
+            // Add partners if there are any, independently of the user's location
             addPartnersMarker(false);
-
-            if (updatePolylines) {
-                updatePolyLines();
-            }
         }
     }
 

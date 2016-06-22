@@ -1,5 +1,13 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import com.bima.dokterpribadimu.BR;
+import com.bima.dokterpribadimu.data.remote.api.DirectionsApi;
+import com.bima.dokterpribadimu.model.Discount;
+import com.bima.dokterpribadimu.model.directions.DirectionsResponse;
+import com.bima.dokterpribadimu.model.directions.Leg;
+import com.bima.dokterpribadimu.model.directions.Route;
+import com.bima.dokterpribadimu.utils.MapsUtils;
+import com.bima.dokterpribadimu.viewmodel.DiscountItemViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -12,14 +20,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.Manifest;
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableList;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
@@ -38,14 +50,17 @@ import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.CategoriesPopupWindow;
 import com.bima.dokterpribadimu.view.components.CategoriesPopupWindow.CategoryClickListener;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
 import fr.quentinklein.slt.LocationTracker;
 import fr.quentinklein.slt.TrackerSettings;
+import me.tatarka.bindingcollectionadapter.ItemView;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 import rx.Subscriber;
@@ -64,10 +79,16 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
     private static final int CIRCLE_RADIUS_METER = 500;
     private static final int CIRCLE_STROKE_WIDTH = 2;
 
+    private static final float DEFAULT_POLYLINE_WIDTH = 7;
+    private static final String DIRECTIONS_PATTERN = "%s,%s";
+
     private static final int POPUP_BOTTOM_MARGIN = 400;
 
     @Inject
     PartnersApi partnersApi;
+
+    @Inject
+    DirectionsApi directionsApi;
 
     private ActivityPartnersLandingBinding binding;
     private DrawerFragment drawerFragment;
@@ -77,6 +98,12 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
     private LocationTracker locationTracker;
 
     private boolean isLocationSet = false;
+
+    private boolean isPolylineShowed = false;
+    private List<Route> routes = new ArrayList<>();
+    private Partner selectedPartner;
+
+    private DiscountListViewModel discountListViewModel = new DiscountListViewModel();
 
     private CategoriesPopupWindow categoriesPopupWindow;
 
@@ -102,6 +129,8 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
     }
 
     private void initViews() {
+        binding.setViewModel(discountListViewModel);
+
         binding.toolbarHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +149,36 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
             @Override
             public void onClick(View view) {
                 if (map != null && location != null) {
-                    moveToUserLocation();
+                    updateUserLocation(true);
+                }
+            }
+        });
+
+        binding.partnersFooterMyLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (map != null && location != null) {
+                    // Move the camera to user's location
+                    LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+                }
+            }
+        });
+
+        binding.partnersCarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updatePolyLines();
+            }
+        });
+
+        binding.partnersHeaderLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (binding.partnersFooterLayout.getVisibility() == View.GONE) {
+                    showDetailFooter();
+                } else {
+                    hideDetailFooter();
                 }
             }
         });
@@ -190,6 +248,44 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                 .commit();
     }
 
+    private void showDetailFooter() {
+        if (hasDiscount()) {
+            binding.partnersFooterDiscountLayout.setVisibility(View.VISIBLE);
+        }
+        binding.partnersFooterLayout.setVisibility(View.VISIBLE);
+
+        RelativeLayout.LayoutParams headerParams = (RelativeLayout.LayoutParams) binding.partnersHeaderLayout.getLayoutParams();
+        headerParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+        headerParams.addRule(RelativeLayout.ABOVE, binding.partnersFooterLayout.getId());
+        binding.partnersHeaderLayout.setLayoutParams(headerParams);
+        binding.partnersHeaderLayout.setSelected(true);
+        binding.partnersCarButton.setSelected(true);
+        binding.partnersAddress.setText("Duration"); // TODO: change with category name
+        binding.partnersMyLocationButton.setVisibility(View.GONE);
+    }
+
+    private void hideDetailFooter() {
+        RelativeLayout.LayoutParams headerParams = (RelativeLayout.LayoutParams) binding.partnersHeaderLayout.getLayoutParams();
+        headerParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        headerParams.addRule(RelativeLayout.ABOVE, 0);
+        binding.partnersHeaderLayout.setLayoutParams(headerParams);
+        binding.partnersHeaderLayout.setSelected(false);
+        binding.partnersCarButton.setSelected(false);
+        if(selectedPartner != null) {
+            binding.partnersAddress.setText(selectedPartner.getPartnerAddress());
+        }
+        binding.partnersMyLocationButton.setVisibility(View.VISIBLE);
+
+        binding.partnersFooterLayout.setVisibility(View.GONE);
+        binding.partnersFooterDiscountLayout.setVisibility(View.GONE);
+    }
+
+    private boolean hasDiscount() {
+        if(selectedPartner != null) {
+            return selectedPartner.getDiscount().size() > 0;
+        }
+        return false;
+    }
 
     /**
      * Manipulates the map once available. This callback is triggered when the map is ready to be
@@ -328,7 +424,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                                 partners.addAll(partnerResponse.getData().getPartner());
                             }
 
-                            moveToUserLocation();
+                            updateUserLocation(true);
                         } else {
                             handleError(TAG, partnerResponse.getMessage());
                         }
@@ -363,7 +459,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
 
                     if (!isLocationSet) {
                         isLocationSet = true;
-                        moveToUserLocation();
+                        updateUserLocation(true);
                     }
                 }
 
@@ -390,55 +486,130 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
 
     }
 
-    private void moveToUserLocation() {
+    private void updateUserLocation(boolean moveToUserLocation) {
         if (map != null) {
             map.clear();
-            // Add a marker in user's location and move the camera
-            LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-            map.addMarker(
-                    new MarkerOptions()
-                            .position(userLatLng)
-                            .title(getString(R.string.your_location))
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_pin))
-            );
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+            if(location != null) {
+                // Add a marker in user's location and move the camera
+                LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                map.addMarker(
+                        new MarkerOptions()
+                                .position(userLatLng)
+                                .title(getString(R.string.your_location))
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_pin))
+                );
 
-            map.addCircle(new CircleOptions()
-                    .center(userLatLng)
-                    .radius(CIRCLE_RADIUS_METER)
-                    .strokeWidth(CIRCLE_STROKE_WIDTH)
-                    .strokeColor(ContextCompat.getColor(this, R.color.bima_blue))
-                    .fillColor(ContextCompat.getColor(this, R.color.bima_blue_alpha)));
+                map.addCircle(new CircleOptions()
+                        .center(userLatLng)
+                        .radius(CIRCLE_RADIUS_METER)
+                        .strokeWidth(CIRCLE_STROKE_WIDTH)
+                        .strokeColor(ContextCompat.getColor(this, R.color.bima_blue))
+                        .fillColor(ContextCompat.getColor(this, R.color.bima_blue_alpha)));
 
+                if (moveToUserLocation) {
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+                }
+            }
+
+            // Add partners if there are any, independently of the user's location
             if (partners.size() > 0) {
                 addPartnersMarker();
             }
         }
     }
 
+    private void updatePolyLines() {
+        if(!isPolylineShowed) {
+            if (routes.size() > 0) {
+                Route route = routes.get(0);
+                List<LatLng> polylines = MapsUtils.decodePolylines(route.getOverviewPolyline().getPoints());
+                map.addPolyline(
+                        new PolylineOptions()
+                                .width(DEFAULT_POLYLINE_WIDTH)
+                                .color(ContextCompat.getColor(this, R.color.bima_blue))
+                                .geodesic(true)
+                                .addAll(polylines)
+                );
+                isPolylineShowed = true;
+            }
+        }
+    }
+
     private void addPartnersMarker() {
         for (Partner partner : partners) {
-            Double latitude = Double.parseDouble(partner.getPartnerLat());
-            Double longitude = Double.parseDouble(partner.getPartnerLong());
-            LatLng userLatLng = new LatLng(latitude, longitude);
-            map.addMarker(
-                new MarkerOptions()
-                        .position(userLatLng)
-                        .title(partner.getPartnerName())
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
-            );
+            try {
+                Double latitude = Double.parseDouble(partner.getPartnerLat());
+                Double longitude = Double.parseDouble(partner.getPartnerLong());
+                LatLng userLatLng = new LatLng(latitude, longitude);
+                map.addMarker(
+                        new MarkerOptions()
+                                .position(userLatLng)
+                                .title(partner.getPartnerName())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
+                );
+            } catch (NumberFormatException e) {
+                Log.e(TAG, "Could not add marker for Partner '" + partner.getPartnerName()
+                        + "' - error message: "
+                        + e.getMessage());
+                e.printStackTrace();
+            }
         }
 
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                marker.showInfoWindow();
                 String title = marker.getTitle();
+                LatLng markerLatLng = marker.getPosition();
                 if (!title.equalsIgnoreCase(getString(R.string.your_location))) {
                     for (Partner partner : partners) {
-                        if (partner.getPartnerName().equalsIgnoreCase(title)) {
-                            IntentUtils.startPartnersDetailActivity(
-                                    PartnersLandingActivity.this,
-                                    partner);
+                        Double latitude = Double.parseDouble(partner.getPartnerLat());
+                        Double longitude = Double.parseDouble(partner.getPartnerLong());
+                        LatLng userLatLng = new LatLng(latitude, longitude);
+                        if (userLatLng.latitude == markerLatLng.latitude
+                                && userLatLng.longitude == markerLatLng.longitude) {
+                            selectedPartner = partner;
+
+                            // call API to get the directions to the selected partner
+                            setupDirectionRequest(partner);
+
+                            // set the details of the selected partner
+                            binding.partnersName.setText(partner.getPartnerName());
+                            binding.partnersAddress.setText(partner.getPartnerAddress());
+
+                            binding.partnersFooterAddress.setText(partner.getPartnerAddress());
+
+                            String discountAmount = "-";
+                            if (hasDiscount()) {
+                                int lastDiscountValue = 0;
+                                // Clear list before adding to avoid double items
+                                discountListViewModel.items.clear();
+                                for (Discount discount : partner.getDiscount()) {
+                                    discountListViewModel.items.add(
+                                            new DiscountItemViewModel(discount)
+                                    );
+
+                                    //Search for the biggest discount value
+                                    String aux = discount.getDiscount().replace(" ", "");
+                                    aux = aux.replace("%", "");
+                                    try {
+                                        int discountValue = Integer.parseInt(aux);
+                                        if(discountValue > lastDiscountValue) {
+                                            discountAmount = String.valueOf(discountValue) + "%";
+                                            lastDiscountValue = discountValue;
+                                        }
+                                    } catch (NumberFormatException e) {
+                                        Log.e(TAG, "Error when trying to parse discount value. Message: " + e.getMessage());
+                                        e.printStackTrace();
+                                        discountAmount = aux + "%";
+                                    }
+                                }
+                            }
+                            binding.partnersDiscount.setText(discountAmount);
+
+                            binding.partnersMyLocationButton.setVisibility(View.GONE);
+                            binding.partnersMenuButton.setVisibility(View.GONE);
+                            binding.partnersFooterRelativeLayout.setVisibility(View.VISIBLE);
                             return true;
                         }
                     }
@@ -446,5 +617,82 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                 return false;
             }
         });
+
+        map.setOnInfoWindowCloseListener(new GoogleMap.OnInfoWindowCloseListener(){
+            @Override
+            public void onInfoWindowClose(Marker marker) {
+                binding.partnersFooterRelativeLayout.setVisibility(View.GONE);
+                binding.partnersMyLocationButton.setVisibility(View.VISIBLE);
+                binding.partnersMenuButton.setVisibility(View.VISIBLE);
+
+                if (map != null) {
+                    isPolylineShowed = false;
+                    updateUserLocation(false);
+                }
+            }
+        });
     }
+
+    private void setupDirectionRequest(Partner partner) {
+        if(location != null) {
+            String origin = String.format(
+                    Locale.US,
+                    DIRECTIONS_PATTERN,
+                    String.valueOf(location.getLatitude()),
+                    String.valueOf(location.getLongitude()));
+            String destination = String.format(
+                    Locale.US,
+                    DIRECTIONS_PATTERN,
+                    partner.getPartnerLat(),
+                    partner.getPartnerLong());
+            getDirections(false, origin, destination);
+        }
+    }
+
+    private void getDirections(final boolean sensor, final String origin, final String destination) {
+        directionsApi.getDirections(sensor, origin, destination)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<DirectionsResponse>bindToLifecycle())
+                .subscribe(new Subscriber<DirectionsResponse>() {
+
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(
+                                PartnersLandingActivity.this,
+                                e.getMessage(),
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    }
+
+                    @Override
+                    public void onNext(DirectionsResponse partnerResponse) {
+                        String duration = "";
+                        routes = partnerResponse.getRoutes();
+                        if (routes.size() > 0) {
+                            List<Leg> legs = routes.get(0).getLegs();
+                            if (legs.size() > 0) {
+                                duration = legs.get(0).getDuration().getText();
+                            }
+                        }
+                        binding.partnersDuration.setText(duration);
+                    }
+                });
+    }
+
+    public static class DiscountListViewModel {
+        public final ObservableList<DiscountItemViewModel> items = new ObservableArrayList<>();
+        public final ItemView itemView = ItemView.of(BR.discount_item_viewmodel, R.layout.item_discount);
+    }
+
 }

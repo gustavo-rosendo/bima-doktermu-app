@@ -55,7 +55,7 @@
     <string name="book_my_call">Buat janji sekarang</string>
     <string name="book_call_rules">
         Jam buka 06.00 - 22.00 WIB\n
-        Anda akan dihubugi dalam 1 jam ke depan (maksimal)</string>
+        Anda akan dihubungi dalam 1 jam ke depan (maksimal)</string>
 
     <!-- partners -->
     <string name="partners_inactive_info">Segera aktivasi dan dapatkan potongan harga dari
@@ -205,6 +205,9 @@
 
     <!-- rate your call -->
     <string name="rate_your_call">Bagaimana konsultasi Anda?</string>
+    <string name="rate_your_call_invalid">Tolong memberikan rating minimal 1 bintang</string>
+    <string name="dialog_rate_your_call_success">Berhasil!</string>
+    <string name="dialog_rate_your_call_success_message">Terimakasih.</string>
 
     <!-- province -->
     <string-array name="province_arrays">

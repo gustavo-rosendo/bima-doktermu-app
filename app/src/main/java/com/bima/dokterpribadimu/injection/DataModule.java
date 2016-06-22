@@ -8,6 +8,7 @@ import com.bima.dokterpribadimu.data.remote.api.DirectionsApi;
 import com.bima.dokterpribadimu.data.remote.api.NewsApi;
 import com.bima.dokterpribadimu.data.remote.api.PartnersApi;
 import com.bima.dokterpribadimu.data.remote.api.ProfileApi;
+import com.bima.dokterpribadimu.data.remote.api.RateYourCallApi;
 import com.bima.dokterpribadimu.data.remote.api.SubscriptionApi;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
 import com.bima.dokterpribadimu.data.servertime.ServerTimeClient;
@@ -87,5 +88,11 @@ public final class DataModule {
     @Singleton
     ServerTimeClient provideServerTimeClient() {
         return new ServerTimeClient();
+    }
+
+    @Provides
+    @Singleton
+    RateYourCallApi provideRateYourCallService() {
+        return new RateYourCallApi();
     }
 }
