@@ -587,7 +587,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
 
                             String discountAmount = "-";
                             if (hasDiscount()) {
-                                int lastDiscountValue = 0;
+                                float lastDiscountValue = 0;
                                 // Clear list before adding to avoid double items
                                 discountListViewModel.items.clear();
                                 for (Discount discount : partner.getDiscount()) {
@@ -599,15 +599,17 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                                     String aux = discount.getDiscount().replace(" ", "");
                                     aux = aux.replace("%", "");
                                     try {
-                                        int discountValue = Integer.parseInt(aux);
+                                        float discountValue = Float.parseFloat(aux);
                                         if(discountValue > lastDiscountValue) {
-                                            discountAmount = String.valueOf(discountValue) + "%";
+                                            discountAmount = String.valueOf(discountValue);
+                                            discountAmount.replace(".0", ""); // erase the decimal if the number is rounded. Ex.: 10.0
+                                            discountAmount += "%";
                                             lastDiscountValue = discountValue;
                                         }
                                     } catch (NumberFormatException e) {
                                         Log.e(TAG, "Error when trying to parse discount value. Message: " + e.getMessage());
                                         e.printStackTrace();
-                                        discountAmount = aux + "%";
+                                        discountAmount = aux.equalsIgnoreCase("-") ? aux : (aux + "%");
                                     }
                                 }
                             }
