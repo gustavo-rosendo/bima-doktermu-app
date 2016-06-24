@@ -563,8 +563,17 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                 LatLng markerLatLng = marker.getPosition();
                 if (!title.equalsIgnoreCase(getString(R.string.your_location))) {
                     for (Partner partner : partners) {
-                        Double latitude = Double.parseDouble(partner.getPartnerLat());
-                        Double longitude = Double.parseDouble(partner.getPartnerLong());
+                        Double latitude = 0.0;
+                        Double longitude = 0.0;
+                        try {
+                            latitude = Double.parseDouble(partner.getPartnerLat());
+                            longitude = Double.parseDouble(partner.getPartnerLong());
+                        } catch(NumberFormatException e) {
+                            Log.e(TAG, "Could not parse Lat/Long for Partner '" + partner.getPartnerName()
+                                    + "' - error message: "
+                                    + e.getMessage());
+                            e.printStackTrace();
+                        }
                         LatLng userLatLng = new LatLng(latitude, longitude);
                         if (userLatLng.latitude == markerLatLng.latitude
                                 && userLatLng.longitude == markerLatLng.longitude) {

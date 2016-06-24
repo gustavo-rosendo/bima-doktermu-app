@@ -342,18 +342,25 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
     }
 
     private void addPartnersMarker(boolean animateCamera) {
-        Double latitude = Double.parseDouble(partner.getPartnerLat());
-        Double longitude = Double.parseDouble(partner.getPartnerLong());
-        LatLng partnerLatLng = new LatLng(latitude, longitude);
-        map.addMarker(
-                new MarkerOptions()
-                        .position(partnerLatLng)
-                        .title(partner.getPartnerName())
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
-        );
+        try {
+            Double latitude = Double.parseDouble(partner.getPartnerLat());
+            Double longitude = Double.parseDouble(partner.getPartnerLong());
+            LatLng partnerLatLng = new LatLng(latitude, longitude);
+            map.addMarker(
+                    new MarkerOptions()
+                            .position(partnerLatLng)
+                            .title(partner.getPartnerName())
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
+            );
 
-        if (animateCamera) {
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(partnerLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+            if (animateCamera) {
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(partnerLatLng, DEFAULT_STREET_ZOOM_LEVEL));
+            }
+        } catch(NumberFormatException e) {
+            Log.e(TAG, "Could not parse Lat/Long for Partner '" + partner.getPartnerName()
+                    + "' - error message: "
+                    + e.getMessage());
+            e.printStackTrace();
         }
     }
 
