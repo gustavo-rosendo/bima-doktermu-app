@@ -91,9 +91,6 @@ public class RateYourCallDialog extends Dialog {
                                 RateYourCallDialog.this,
                                 rating);
                         Log.d("RateYourCallDialog", "Rating given: " + rating);
-
-                        // Reset last call id
-                        resetLastCallId();
                     }
                 }
                 else {
@@ -109,11 +106,16 @@ public class RateYourCallDialog extends Dialog {
         binding.rateCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Reset last call id
-                resetLastCallId();
                 dismiss();
             }
         });
+    }
+
+    @Override
+    public void dismiss() {
+        // Reset last call id
+        resetLastCallId();
+        super.dismiss();
     }
 
     private boolean validateRating(float rating) {
