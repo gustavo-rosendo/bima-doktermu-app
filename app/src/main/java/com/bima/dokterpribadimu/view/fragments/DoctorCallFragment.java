@@ -260,7 +260,11 @@ public class DoctorCallFragment extends BaseFragment {
         double lastBookedCallTimeMillis = StorageUtils.getDouble(
                 DokterPribadimuApplication.getInstance().getApplicationContext(),
                 Constants.KEY_BOOK_CALL_TIME_MILLIS,
-                TimeUtils.getElapsedTimeMillis()); //if it's not found, it shouldn't show the rate call dialog
+                -1);
+        //if it's not found, it shouldn't show the rate call dialog
+        if(lastBookedCallTimeMillis == -1) {
+            return false;
+        }
 
         String callId = StorageUtils.getString(
                 DokterPribadimuApplication.getInstance().getApplicationContext(),
@@ -275,6 +279,7 @@ public class DoctorCallFragment extends BaseFragment {
                     + " - error message: "
                     + e.getMessage());
             e.printStackTrace();
+            return false;
         }
 
         boolean canShowRateYourCall = false;

@@ -155,5 +155,10 @@ public class RateYourCallDialog extends Dialog {
                 DokterPribadimuApplication.getInstance().getApplicationContext(),
                 Constants.KEY_BOOK_CALL_ID_LAST_CALL,
                 "0");
+        // Reset book call time
+        StorageUtils.putDouble(
+                DokterPribadimuApplication.getInstance().getApplicationContext(),
+                Constants.KEY_BOOK_CALL_TIME_MILLIS,
+                -1);
     }
 }
