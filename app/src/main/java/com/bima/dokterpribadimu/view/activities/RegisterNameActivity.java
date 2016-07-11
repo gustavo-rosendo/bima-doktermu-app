@@ -58,7 +58,7 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
     private Location location;
     private LocationTracker locationTracker;
 
-    private Tracker mTracker;
+//    private Tracker mTracker;
 
     public static Intent create(Context context, UserProfile userProfile, String password) {
         Intent intent = new Intent(context, RegisterNameActivity.class);
@@ -75,7 +75,7 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
         DokterPribadimuApplication.getComponent().inject(this);
 
         // Obtain the shared Tracker instance.
-        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
+//        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
 
         init();
     }
@@ -84,9 +84,9 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
     protected void onResume() {
         super.onResume();
 
-        Log.d(TAG, "Setting screen name: " + TAG);
-        mTracker.setScreenName("Image~" + TAG);
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+//        Log.d(TAG, "Setting screen name: " + TAG);
+//        mTracker.setScreenName("Image~" + TAG);
+//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override
@@ -221,16 +221,16 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
 
                             //Doktermu AdMobs Tracking - Registration
                             //Google Android in-app conversion tracking snippet for successful Registration
-                            AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
-                                    "926691219", "bo6bCMjIu2UQk9_wuQM", "1.00", true);
+//                            AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
+//                                    "926691219", "bo6bCMjIu2UQk9_wuQM", "1.00", true);
 
                             //Google Analytics to track number of registrations (all: from AdMobs + others)
-                            mTracker.send(new HitBuilders.EventBuilder()
-                                    .setCategory("Growth")
-                                    .setAction("Registration")
-                                    .setLabel(userProfile.getLoginType())
-                                    .setValue(1)
-                                    .build());
+//                            mTracker.send(new HitBuilders.EventBuilder()
+//                                    .setCategory("Growth")
+//                                    .setAction("Registration")
+//                                    .setLabel(userProfile.getLoginType())
+//                                    .setValue(1)
+//                                    .build());
 
                             showSuccessDialog(
                                     R.drawable.ic_smiley,
