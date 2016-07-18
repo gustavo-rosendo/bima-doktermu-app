@@ -13,6 +13,7 @@ import com.bima.dokterpribadimu.databinding.ActivityOnboardingBinding;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.fragments.OnboardingOpeningFragment;
 import com.bima.dokterpribadimu.view.fragments.OnboardingPhotoFragment;
+import com.bima.dokterpribadimu.view.fragments.OnboardingSocialFragment;
 
 public class OnboardingActivity extends BaseActivity {
 
@@ -61,6 +62,8 @@ public class OnboardingActivity extends BaseActivity {
                         return OnboardingOpeningFragment.newInstance();
                     case ONBOARDING_PHOTO_POSITION:
                         return OnboardingPhotoFragment.newInstance();
+                    case ONBOARDING_SOCIAL_POSITION:
+                        return OnboardingSocialFragment.newInstance();
                     default:
                         return OnboardingOpeningFragment.newInstance();
                 }

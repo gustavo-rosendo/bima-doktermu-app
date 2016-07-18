@@ -15,8 +15,28 @@
             android:contentDescription="@string/app_name"
             android:src="@drawable/landing_bg"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black_overlay"/>
+
         <TextView
             android:id="@+id/onboarding_info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/generic_xlarge_margin"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding"
+            android:gravity="center_horizontal"
+            android:text="This is just dummy placeholder message text"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/generic_subheading_text_size"/>
+
+        <TextView
+            android:id="@+id/onboarding_bottom_share_text"
             android:layout_width="match_parent"
             android:layout_height="@dimen/generic_large_button_height"
             android:paddingLeft="@dimen/generic_large_padding"
@@ -26,7 +46,7 @@
             android:layout_alignParentBottom="true"
             android:gravity="center"
             android:background="@color/bima_blue"
-            android:text="This is just dummy placeholder message text"
+            android:text="@string/onboarding_share"
             android:textColor="@android:color/white"
             android:textSize="@dimen/generic_body_text_size"/>
 

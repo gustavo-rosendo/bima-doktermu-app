@@ -8,6 +8,7 @@
     <!-- onboarding -->
     <string name="onboarding_skip">SKIP</string>
     <string name="onboarding_next">NEXT</string>
+    <string name="onboarding_share">SHARE WITH YOUR FRIENDS</string>
 
     <!-- sign in -->
     <string name="sign_in_fb">Facebook</string>
