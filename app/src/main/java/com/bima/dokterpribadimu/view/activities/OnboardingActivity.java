@@ -12,7 +12,7 @@ import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.ActivityOnboardingBinding;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.fragments.AboutFragment;
-import com.bima.dokterpribadimu.view.fragments.NewsFragment;
+import com.bima.dokterpribadimu.view.fragments.OnboardingOpeningFragment;
 
 public class OnboardingActivity extends BaseActivity {
 
@@ -50,7 +50,7 @@ public class OnboardingActivity extends BaseActivity {
 
             @Override
             public Fragment getItem(int position) {
-                return AboutFragment.newInstance();
+                return OnboardingOpeningFragment.newInstance();
             }
 
             @Override

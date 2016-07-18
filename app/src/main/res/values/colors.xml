@@ -25,4 +25,6 @@
     <color name="email_green_dark">#139274</color>
 
     <color name="yellow">#F9B106</color>
+
+    <color name="black_overlay">#7F000000</color>
 </resources>
