@@ -114,12 +114,13 @@ public class LoadingActivity extends BaseActivity {
                                 UserProfile.class
                         );
 
-                        if (userProfile == null) {
+                        /*if (userProfile == null) {
                             IntentUtils.startLandingActivity(LoadingActivity.this);
                         } else {
-                            IntentUtils.startOnboardingActivity(LoadingActivity.this);
-                            //IntentUtils.startHomeActivityOnTop(LoadingActivity.this);
-                        }
+                            IntentUtils.startHomeActivityOnTop(LoadingActivity.this);
+                        }*/
+                        // FIXME: fix onboarding flow. this current flow is for testing purpose only
+                        IntentUtils.startOnboardingActivity(LoadingActivity.this);
 
                         finish();
                     }

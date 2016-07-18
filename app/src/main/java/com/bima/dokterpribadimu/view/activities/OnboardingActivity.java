@@ -10,6 +10,11 @@ import android.view.View;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.ActivityOnboardingBinding;
+import com.bima.dokterpribadimu.model.UserProfile;
+import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.GsonUtils;
+import com.bima.dokterpribadimu.utils.IntentUtils;
+import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.fragments.OnboardingOpeningFragment;
 import com.bima.dokterpribadimu.view.fragments.OnboardingPhotoFragment;
@@ -41,8 +46,14 @@ public class OnboardingActivity extends BaseActivity {
         binding.onboardingSkipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: remove hardcode
                 binding.onboardingViewPager.setCurrentItem(ONBOARDING_COUNT - 1, true);
+            }
+        });
+
+        binding.onboardingPreviousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.onboardingViewPager.setCurrentItem(currentItem - 1, true);
             }
         });
 
@@ -50,6 +61,24 @@ public class OnboardingActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 binding.onboardingViewPager.setCurrentItem(currentItem + 1, true);
+            }
+        });
+
+        binding.onboardingJumpInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserProfile userProfile = GsonUtils.fromJson(
+                        StorageUtils.getString(OnboardingActivity.this, Constants.KEY_USER_PROFILE, ""),
+                        UserProfile.class
+                );
+
+                if (userProfile == null) {
+                    IntentUtils.startLandingActivity(OnboardingActivity.this);
+                } else {
+                    IntentUtils.startHomeActivityOnTop(OnboardingActivity.this);
+                }
+
+                finish();
             }
         });
 
@@ -94,6 +123,15 @@ public class OnboardingActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 currentItem = position;
+
+                binding.onboardingSkipButton.setVisibility(
+                        position == ONBOARDING_OPENING_POSITION ? View.VISIBLE : View.GONE);
+                binding.onboardingPreviousButton.setVisibility(
+                        position == ONBOARDING_OPENING_POSITION ? View.GONE : View.VISIBLE);
+                binding.onboardingNextButton.setVisibility(
+                        position == ONBOARDING_SOCIAL_POSITION ? View.GONE : View.VISIBLE);
+                binding.onboardingJumpInButton.setVisibility(
+                        position == ONBOARDING_SOCIAL_POSITION ? View.VISIBLE : View.GONE);
             }
 
             @Override

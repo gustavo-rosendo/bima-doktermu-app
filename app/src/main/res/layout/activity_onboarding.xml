@@ -31,6 +31,16 @@
                 android:text="@string/onboarding_skip"
                 android:textColor="@android:color/white"/>
 
+            <Button
+                android:id="@+id/onboarding_previous_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/onboarding_previous"
+                android:textColor="@android:color/white"
+                android:visibility="gone"/>
+
             <com.viewpagerindicator.CirclePageIndicator
                 android:id="@+id/onboarding_indicator"
                 android:layout_height="wrap_content"
@@ -48,6 +58,16 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:text="@string/onboarding_next"
                 android:textColor="@android:color/white"/>
+
+            <Button
+                android:id="@+id/onboarding_jump_in_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/onboarding_jump_in"
+                android:textColor="@android:color/white"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
