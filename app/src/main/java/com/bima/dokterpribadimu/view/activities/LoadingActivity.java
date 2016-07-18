@@ -117,7 +117,8 @@ public class LoadingActivity extends BaseActivity {
                         if (userProfile == null) {
                             IntentUtils.startLandingActivity(LoadingActivity.this);
                         } else {
-                            IntentUtils.startHomeActivityOnTop(LoadingActivity.this);
+                            IntentUtils.startOnboardingActivity(LoadingActivity.this);
+                            //IntentUtils.startHomeActivityOnTop(LoadingActivity.this);
                         }
 
                         finish();

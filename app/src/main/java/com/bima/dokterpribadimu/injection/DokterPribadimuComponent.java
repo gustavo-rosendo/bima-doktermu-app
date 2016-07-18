@@ -9,6 +9,7 @@ import com.bima.dokterpribadimu.view.activities.HomeActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.NewsActivity;
 import com.bima.dokterpribadimu.view.activities.NewsDetailActivity;
+import com.bima.dokterpribadimu.view.activities.OnboardingActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersDetailActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersLandingActivity;
@@ -42,6 +43,7 @@ import dagger.Component;
 
 public interface DokterPribadimuComponent {
 
+    void inject(OnboardingActivity landingActivity);
     void inject(LandingActivity landingActivity);
     void inject(SignInActivity signInActivity);
     void inject(RegisterNameActivity registerNameActivity);

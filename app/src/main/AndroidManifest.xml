@@ -44,6 +44,7 @@
         <activity android:name=".view.activities.PartnersDetailActivity" />
         <activity android:name=".view.activities.NewsDetailActivity" />
         <activity android:name=".view.activities.NewsActivity" />
+        <activity android:name=".view.activities.OnboardingActivity"/>
 
         <receiver
             android:name="com.google.ads.conversiontracking.InstallReceiver"

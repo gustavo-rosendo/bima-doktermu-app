@@ -5,6 +5,10 @@
     <!-- facebook -->
     <string name="facebook_app_id">1568480343444186</string>
 
+    <!-- onboarding -->
+    <string name="onboarding_skip">SKIP</string>
+    <string name="onboarding_next">NEXT</string>
+
     <!-- sign in -->
     <string name="sign_in_fb">Facebook</string>
     <string name="sign_in_gplus">Google</string>

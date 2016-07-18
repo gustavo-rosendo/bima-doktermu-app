@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/onboarding_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/onboarding_bottom_bar"/>
+
+        <LinearLayout
+            android:id="@+id/onboarding_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_large_button_height"
+            android:padding="@dimen/generic_normal_padding"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:background="@color/bima_blue">
+
+            <Button
+                android:id="@+id/onboarding_skip_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/onboarding_skip"
+                android:textColor="@android:color/white"/>
+
+            <com.viewpagerindicator.CirclePageIndicator
+                android:id="@+id/onboarding_indicator"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:padding="@dimen/generic_small_padding"
+                app:radius="@dimen/generic_xsmall_corner_radius"/>
+
+            <Button
+                android:id="@+id/onboarding_next_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/onboarding_next"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>
