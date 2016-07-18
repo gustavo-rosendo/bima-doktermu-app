@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/onboarding_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/landing_bg"/>
+
+        <TextView
+            android:id="@+id/onboarding_info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/generic_large_button_height"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:background="@color/bima_blue"
+            android:text="This is just dummy placeholder message text"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/doctor_call_info_text_size"/>
+
+    </RelativeLayout>
+
+</layout>

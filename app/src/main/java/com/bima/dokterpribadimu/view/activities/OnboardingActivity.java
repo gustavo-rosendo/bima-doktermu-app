@@ -11,10 +11,16 @@ import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.ActivityOnboardingBinding;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
-import com.bima.dokterpribadimu.view.fragments.AboutFragment;
 import com.bima.dokterpribadimu.view.fragments.OnboardingOpeningFragment;
+import com.bima.dokterpribadimu.view.fragments.OnboardingPhotoFragment;
 
 public class OnboardingActivity extends BaseActivity {
+
+    private static final int ONBOARDING_OPENING_POSITION = 0;
+    private static final int ONBOARDING_PHOTO_POSITION = 1;
+    private static final int ONBOARDING_LIST_POSITION = 2;
+    private static final int ONBOARDING_SOCIAL_POSITION = 3;
+    private static final int ONBOARDING_COUNT = 4;
 
     private ActivityOnboardingBinding binding;
 
@@ -35,7 +41,7 @@ public class OnboardingActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 // TODO: remove hardcode
-                binding.onboardingViewPager.setCurrentItem(3, true);
+                binding.onboardingViewPager.setCurrentItem(ONBOARDING_COUNT - 1, true);
             }
         });
 
@@ -50,12 +56,19 @@ public class OnboardingActivity extends BaseActivity {
 
             @Override
             public Fragment getItem(int position) {
-                return OnboardingOpeningFragment.newInstance();
+                switch (position) {
+                    case ONBOARDING_OPENING_POSITION:
+                        return OnboardingOpeningFragment.newInstance();
+                    case ONBOARDING_PHOTO_POSITION:
+                        return OnboardingPhotoFragment.newInstance();
+                    default:
+                        return OnboardingOpeningFragment.newInstance();
+                }
             }
 
             @Override
             public int getCount() {
-                return 4;
+                return ONBOARDING_COUNT;
             }
 
             @Override
