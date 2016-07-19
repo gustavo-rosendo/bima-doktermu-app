@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
 import com.bima.dokterpribadimu.databinding.FragmentRegisterBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
@@ -99,6 +101,7 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
 //        Log.d(TAG, "Setting screen name: " + TAG);
 //        mTracker.setScreenName("Image~" + TAG);
 //        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_REGISTER);
     }
 
     @AfterPermissionGranted(RC_PHONE_STATE_PERMISSION)
@@ -332,6 +335,7 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
                                             IntentUtils.startHomeActivityOnTop(DokterPribadimuApplication.getInstance().getApplicationContext());
                                         }
                                     });
+                            FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_REGISTER_SUCCESS);
                         } else {
                             handleError(TAG, registerResponse.getMessage());
                         }

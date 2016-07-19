@@ -1,6 +1,8 @@
 package com.bima.dokterpribadimu.view.activities;
 
 import com.bima.dokterpribadimu.BR;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.data.remote.api.DirectionsApi;
 import com.bima.dokterpribadimu.model.Discount;
 import com.bima.dokterpribadimu.model.directions.DirectionsResponse;
@@ -268,6 +270,8 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         binding.partnersCarButton.setSelected(true);
         binding.partnersAddress.setText("Duration"); // TODO: change with category name
         binding.partnersMyLocationButton.setVisibility(View.GONE);
+
+        FirebaseAnalyticsHelper.logViewWindowEvent(EventConstants.WINDOW_PARTNERS_DETAILS_FULL);
     }
 
     private void hideDetailFooter() {
@@ -318,6 +322,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
     @Override
     protected void onResume() {
         super.onResume();
+        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_PARTNERS_MAP);
 
         if (locationTracker != null) {
             locationTracker.startListening();
@@ -627,6 +632,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                             binding.partnersMyLocationButton.setVisibility(View.GONE);
                             binding.partnersMenuButton.setVisibility(View.GONE);
                             binding.partnersFooterRelativeLayout.setVisibility(View.VISIBLE);
+                            FirebaseAnalyticsHelper.logViewWindowEvent(EventConstants.WINDOW_PARTNERS_MAP_DETAILS_SHORT);
                             return true;
                         }
                     }

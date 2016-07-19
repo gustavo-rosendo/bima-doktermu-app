@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
 import com.bima.dokterpribadimu.databinding.FragmentSignInBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
@@ -53,6 +55,13 @@ public class SignInFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
 
         DokterPribadimuApplication.getComponent().inject(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_LOGIN);
     }
 
     @Override
@@ -220,6 +229,7 @@ public class SignInFragment extends BaseFragment {
                                             startDoctorCallActivityOnTop();
                                         }
                                     });
+                            FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_LOGIN_SUCCESS);
                         } else {
                             handleError(TAG, signInResponse.getMessage());
                         }
@@ -265,6 +275,7 @@ public class SignInFragment extends BaseFragment {
                                     getString(R.string.dialog_forgot_password_success_message),
                                     getString(R.string.dialog_take_me_home),
                                     null);
+                            FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_LOGIN_FORGOT_PASSWORD_SUCCESS);
                         } else {
                             String errorMessage = signInResponse.getMessage();
                             if (errorMessage.contains(Constants.EMAIL_NOT_FOUND)) {

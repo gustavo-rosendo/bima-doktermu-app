@@ -1,5 +1,7 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -44,6 +46,7 @@ public class LandingActivity extends BaseActivity {
 //        Log.d(TAG, "Setting screen name: " + TAG);
 //        mTracker.setScreenName("Image~" + TAG);
 //        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_LANDING);
 
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);

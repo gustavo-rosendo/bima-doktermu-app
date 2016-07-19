@@ -12,6 +12,8 @@ import android.widget.PopupWindow;
 
 import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.databinding.PopupMenuCategoryBinding;
 import com.bima.dokterpribadimu.model.Category;
 import com.bima.dokterpribadimu.viewmodel.CategoryItemViewModel;
@@ -59,6 +61,8 @@ public class CategoriesPopupWindow extends PopupWindow {
 
         setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
         setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        FirebaseAnalyticsHelper.logViewWindowEvent(EventConstants.WINDOW_PARTNERS_CATEGORIES);
     }
 
     public void release() {

@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Window;
 
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.databinding.DialogPhoneInfoModalBinding;
 
 /**
@@ -87,6 +89,7 @@ public class PhoneInfoModalDialog extends Dialog {
      */
     public PhoneInfoModalDialog showDialog() {
         show();
+        FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_BOOK_CALL_PHONE_NUMBER);
         return this;
     }
 

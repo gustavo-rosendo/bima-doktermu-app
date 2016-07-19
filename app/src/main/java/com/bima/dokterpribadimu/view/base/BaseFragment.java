@@ -9,6 +9,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.activities.AboutActivity;
 import com.bima.dokterpribadimu.view.activities.BookCallActivity;
@@ -82,6 +84,10 @@ public class BaseFragment extends RxFragment {
                 .setDialogButtonText(buttonText)
                 .setClickListener(clickListener)
                 .showDialog();
+
+        FirebaseAnalyticsHelper.logViewDialogFailedEvent(
+                EventConstants.DIALOG_GENERAL_STATUS_FAILED,
+                message);
     }
 
     protected void showSuccessDialog(

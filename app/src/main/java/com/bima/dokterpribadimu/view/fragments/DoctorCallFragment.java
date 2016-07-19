@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
 import com.bima.dokterpribadimu.data.inappbilling.BillingInitializationListener;
 import com.bima.dokterpribadimu.data.inappbilling.QueryInventoryListener;
@@ -97,6 +99,8 @@ public class DoctorCallFragment extends BaseFragment {
         super.onResume();
 
         initBillingClient();
+
+        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_DOCTOR_CALL);
 
         if(canShowRateYourCall()) {
             if(rateYourCallDialog != null) {

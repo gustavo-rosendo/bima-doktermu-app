@@ -39,7 +39,7 @@ public class DokterPribadimuApplication extends Application {
      * Gets the default {@link Tracker} for this {@link Application}.
      * @return tracker
      */
-    synchronized public FirebaseAnalytics getDefaultFirebaseAnalytics() {
+    public FirebaseAnalytics getDefaultFirebaseAnalytics() {
         if (mFirebaseAnalytics == null) {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -72,6 +72,6 @@ public class DokterPribadimuApplication extends Application {
         mComponent = DokterPribadimuComponent.Initializer.init(this);
 
         // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mFirebaseAnalytics = getDefaultFirebaseAnalytics();
     }
 }

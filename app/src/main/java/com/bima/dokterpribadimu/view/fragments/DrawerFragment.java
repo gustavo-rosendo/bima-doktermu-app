@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.data.sns.LoginClient;
 import com.bima.dokterpribadimu.data.sns.facebook.FacebookClient;
 import com.bima.dokterpribadimu.data.sns.gplus.GplusClient;
@@ -66,6 +68,12 @@ public class DrawerFragment extends BaseFragment {
         loginClient = null;
 
         super.onDestroy();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_MENU_DRAWER);
     }
 
     @Override
