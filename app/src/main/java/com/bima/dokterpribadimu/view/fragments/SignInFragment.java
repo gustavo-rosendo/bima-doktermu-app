@@ -279,7 +279,7 @@ public class SignInFragment extends BaseFragment {
                         } else {
                             String errorMessage = signInResponse.getMessage();
                             if (errorMessage.contains(Constants.EMAIL_NOT_FOUND)) {
-                                showErrorDialog(
+                                showErrorDialog(TAG,
                                         R.drawable.ic_bug,
                                         getString(R.string.dialog_reset_password_email_not_registered_title),
                                         getString(R.string.dialog_reset_password_email_not_registered_message),

@@ -14,6 +14,8 @@ import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.data.remote.api.CallHistoryApi;
 import com.bima.dokterpribadimu.data.remote.api.ProfileApi;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
@@ -84,6 +86,12 @@ public class ProfileFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
 
         DokterPribadimuApplication.getComponent().inject(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_PROFILE);
     }
 
     @Override
@@ -287,6 +295,7 @@ public class ProfileFragment extends BaseFragment {
                                     getString(R.string.dialog_password_changed_message),
                                     getString(R.string.dialog_get_started),
                                     null);
+                            FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_PROFILE_CHANGE_PASSWORD_SUCCESS);
                         } else {
                             handleError(TAG, response.getMessage());
                         }
@@ -346,6 +355,7 @@ public class ProfileFragment extends BaseFragment {
                                     getString(R.string.dialog_phone_number_changed_message),
                                     getString(R.string.dialog_take_me_home),
                                     null);
+                            FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_PROFILE_CHANGE_PHONE_SUCCESS);
                         } else {
                             handleError(TAG, response.getMessage());
                         }

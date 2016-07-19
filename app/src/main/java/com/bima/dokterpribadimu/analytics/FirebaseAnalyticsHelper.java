@@ -23,6 +23,18 @@ public class FirebaseAnalyticsHelper {
         // [END view_screen event]
     }
 
+    public static void logViewScreenNewsEvent(String screenName, String newsCategory) {
+        // [START view_screen event]
+        Log.d(TAG, "Analytics log: logViewScreenNewsEvent(screenName=" + screenName + ", "
+                + "newsCategory=" + newsCategory + ")");
+        Bundle bundle = new Bundle();
+        bundle.putString(EventConstants.PARAM_EVENT_NAME, screenName);
+        bundle.putString(EventConstants.PARAM_NEWS_CATEGORY, newsCategory);
+        DokterPribadimuApplication.getInstance()
+                .getDefaultFirebaseAnalytics().logEvent(EventConstants.TYPE_VIEW_SCREEN, bundle);
+        // [END view_screen event]
+    }
+
     public static void logViewDialogEvent(String dialogName) {
         // [START view_dialog event]
         Log.d(TAG, "Analytics log: logViewDialogEvent(dialogName=" + dialogName + ")");

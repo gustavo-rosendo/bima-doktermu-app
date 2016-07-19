@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.data.remote.api.PartnersApi;
 import com.bima.dokterpribadimu.databinding.ActivityPartnersSearchBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
@@ -54,6 +56,12 @@ public class PartnersSearchActivity extends BaseActivity {
         DokterPribadimuApplication.getComponent().inject(this);
 
         initViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_PARTNERS_SEARCH);
     }
 
     private void initViews() {

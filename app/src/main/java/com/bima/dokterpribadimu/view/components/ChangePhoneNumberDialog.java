@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.databinding.DialogChangePhoneNumberBinding;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 
@@ -101,6 +103,7 @@ public class ChangePhoneNumberDialog extends Dialog {
      */
     public ChangePhoneNumberDialog showDialog() {
         show();
+        FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_PROFILE_CHANGE_PHONE);
         return this;
     }
 

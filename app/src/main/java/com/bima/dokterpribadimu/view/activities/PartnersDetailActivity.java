@@ -1,5 +1,7 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -206,6 +208,7 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
         binding.partnersCarButton.setSelected(true);
         binding.partnersAddress.setText("Duration"); // TODO: change with category name
         binding.partnersMyLocationButton.setVisibility(View.GONE);
+        FirebaseAnalyticsHelper.logViewWindowEvent(EventConstants.WINDOW_PARTNERS_DETAILS_FULL);
     }
 
     private void hideDetailFooter() {
@@ -229,6 +232,7 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
     @Override
     protected void onResume() {
         super.onResume();
+        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_PARTNERS_DETAILS);
 
         if (locationTracker != null) {
             locationTracker.startListening();

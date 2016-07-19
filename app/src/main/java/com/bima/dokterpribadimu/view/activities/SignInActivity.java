@@ -187,7 +187,7 @@ public class SignInActivity extends BaseActivity implements EasyPermissions.Perm
 
         @Override
         public void onFail() {
-            showErrorDialog(
+            showErrorDialog(TAG,
                     R.drawable.ic_bug,
                     getString(R.string.dialog_failed),
                     getString(R.string.dialog_sign_in_failed_message),

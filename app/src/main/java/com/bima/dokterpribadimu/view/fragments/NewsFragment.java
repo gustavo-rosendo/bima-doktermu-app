@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.data.remote.api.NewsApi;
 import com.bima.dokterpribadimu.databinding.FragmentNewsBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
@@ -79,6 +81,8 @@ public class NewsFragment extends BaseFragment {
         binding.setViewModel(newsListViewModel);
 
         getNews(newsCategory, UserProfileUtils.getUserProfile(getActivity()).getAccessToken());
+
+        FirebaseAnalyticsHelper.logViewScreenNewsEvent(EventConstants.SCREEN_NEWS, newsCategory);
     }
 
     @Override
@@ -131,6 +135,11 @@ public class NewsFragment extends BaseFragment {
                                             new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+                                                    FirebaseAnalyticsHelper.logItemViewEvent(
+                                                            EventConstants.SCREEN_NEWS_DETAILS,
+                                                            newsCategory,
+                                                            news.getNewsTitle(),
+                                                            news.getNewsDate());
                                                     IntentUtils.startNewsDetailActivity(getActivity(), news);
                                                 }
                                             })

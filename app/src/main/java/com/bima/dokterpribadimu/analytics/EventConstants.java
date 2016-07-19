@@ -45,9 +45,7 @@ public class EventConstants {
     // The search keyword must also be sent to Analytics
     public static final String SCREEN_PARTNERS_SEARCH   = "10_Screen_Partners_Search";
     public static final String SCREEN_PARTNERS_DETAILS  = "11_Screen_Partners_Details";
-    public static final String SCREEN_NEWS_ILLNESS      = "12_Screen_News_Illness";
-    public static final String SCREEN_NEWS_HEALTH       = "12_Screen_News_Health";
-    public static final String SCREEN_NEWS_TIPS         = "12_Screen_News_Tips";
+    public static final String SCREEN_NEWS              = "12_Screen_News";
     public static final String SCREEN_NEWS_DETAILS      = "13_Screen_News_Details";
     public static final String SCREEN_PROFILE           = "14_Screen_Profile";
     public static final String SCREEN_ABOUT_BIMA        = "15_Screen_About_BIMA";
