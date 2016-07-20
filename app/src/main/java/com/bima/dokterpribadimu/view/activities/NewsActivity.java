@@ -2,6 +2,7 @@ package com.bima.dokterpribadimu.view.activities;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
@@ -39,6 +40,9 @@ public class NewsActivity extends BaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_news);
 
         DokterPribadimuApplication.getComponent().inject(this);
+
+        // In the beginning, it's always the first tab that is shown
+        FirebaseAnalyticsHelper.logViewScreenNewsEvent(EventConstants.SCREEN_NEWS, getString(TITLE_STRING_IDS[0]));
 
         init();
     }
@@ -82,6 +86,14 @@ public class NewsActivity extends BaseActivity {
 
         binding.newsViewpager.setAdapter(adapter);
         binding.newsViewpagerTab.setupWithViewPager(binding.newsViewpager);
+        binding.newsViewpagerTab.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(binding.newsViewpager) {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                super.onTabSelected(tab);
+                String tabTitle = tab.getText().toString();
+                FirebaseAnalyticsHelper.logViewScreenNewsEvent(EventConstants.SCREEN_NEWS, tabTitle);
+            }
+        });
     }
 
     private void setupDrawerFragment() {

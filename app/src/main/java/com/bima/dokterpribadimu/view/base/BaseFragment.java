@@ -86,9 +86,14 @@ public class BaseFragment extends RxFragment {
                 .setClickListener(clickListener)
                 .showDialog();
 
+        String errorMessage = message;
+        if(errorMessage.length() > 35) {
+            //avoid Firebase error due to limit of 36 characters
+            errorMessage = message.substring(0, 34);
+        }
         FirebaseAnalyticsHelper.logViewDialogFailedEvent(
                 EventConstants.DIALOG_GENERAL_STATUS_FAILED,
-                tag + " - " + message);
+                tag + " - " + errorMessage);
     }
 
     protected void showSuccessDialog(

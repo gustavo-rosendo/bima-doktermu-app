@@ -26,6 +26,7 @@ public class EventConstants {
     public static final String PARAM_NEWS_DATE        = "Date";
     public static final String PARAM_CATEGORY         = "Category";
     public static final String PARAM_MESSAGE          = "Message";
+    public static final String PARAM_RATING           = "Rating";
 
     /*
     * Screen names to be sent to Analytics
@@ -69,6 +70,8 @@ public class EventConstants {
     public static final String DIALOG_LOGIN_FORGOT_PASSWORD_SUCCESS     = "Dlg_Login_Forgot_Password_Success";
     public static final String DIALOG_LOGIN_SUCCESS                     = "Dlg_Login_Success";
     public static final String DIALOG_DOCTOR_CALL_LATE_HOURS            = "Dlg_Doctor_Call_Late_Hours";
+    public static final String DIALOG_DOCTOR_CALL_RATING                = "Dlg_Doctor_Call_Rating";
+    public static final String DIALOG_DOCTOR_CALL_RATING_SUCCESS        = "Dlg_Doctor_Call_Rating_Success";
     public static final String DIALOG_BOOK_CALL_PHONE_NUMBER            = "Dlg_Book_Call_Phone_Number";
     public static final String DIALOG_BOOK_CALL_SUCCESS                 = "Dlg_Book_Call_Success";
     public static final String DIALOG_PROFILE_CHANGE_PASSWORD           = "Dlg_Profile_Change_Password";

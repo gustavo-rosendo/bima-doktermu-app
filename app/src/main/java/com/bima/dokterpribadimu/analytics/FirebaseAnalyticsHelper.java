@@ -45,6 +45,17 @@ public class FirebaseAnalyticsHelper {
         // [END view_dialog event]
     }
 
+    public static void logViewDialogRatingEvent(String dialogName, String rating) {
+        // [START view_dialog event]
+        Log.d(TAG, "Analytics log: logViewDialogRatingEvent(dialogName=" + dialogName + ", rating=" + rating + ")");
+        Bundle bundle = new Bundle();
+        bundle.putString(EventConstants.PARAM_EVENT_NAME, dialogName);
+        bundle.putString(EventConstants.PARAM_RATING, rating);
+        DokterPribadimuApplication.getInstance()
+                .getDefaultFirebaseAnalytics().logEvent(EventConstants.TYPE_VIEW_DIALOG, bundle);
+        // [END view_dialog event]
+    }
+
     public static void logViewDialogFailedEvent(String dialogName, String message) {
         // [START view_dialog event]
         Log.d(TAG, "Analytics log: logViewDialogFailedEvent(dialogName=" + dialogName + ", message=" + message + ")");

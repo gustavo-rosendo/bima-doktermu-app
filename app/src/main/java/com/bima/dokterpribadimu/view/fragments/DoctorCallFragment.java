@@ -342,6 +342,7 @@ public class DoctorCallFragment extends BaseFragment {
                                     getString(R.string.dialog_rate_your_call_success_message),
                                     getString(R.string.ok),
                                     null);
+                            FirebaseAnalyticsHelper.logViewDialogRatingEvent(EventConstants.DIALOG_DOCTOR_CALL_RATING_SUCCESS, rating.toString());
                         } else {
                             handleError(TAG, rateCallResponse.getMessage());
                         }

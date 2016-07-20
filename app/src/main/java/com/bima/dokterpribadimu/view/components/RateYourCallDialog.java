@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.databinding.DialogRateYourCallBinding;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.StorageUtils;
@@ -138,6 +140,7 @@ public class RateYourCallDialog extends Dialog {
      */
     public RateYourCallDialog showDialog() {
         show();
+        FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_DOCTOR_CALL_RATING);
         return this;
     }
 
