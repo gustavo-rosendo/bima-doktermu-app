@@ -166,6 +166,11 @@ public class BookCallActivity extends BaseActivity {
                             break;
                     }
 
+                    FirebaseAnalyticsHelper.logBookCallBtnClickEvent(
+                            EventConstants.BTN_BOOK_SCREEN_BOOK_CALL,
+                            topic,
+                            subTopic);
+
                     bookCall(topic, subTopic,
                             UserProfileUtils.getUserProfile(BookCallActivity.this).getMsisdn(),
                             UserProfileUtils.getUserProfile(BookCallActivity.this).getAccessToken());

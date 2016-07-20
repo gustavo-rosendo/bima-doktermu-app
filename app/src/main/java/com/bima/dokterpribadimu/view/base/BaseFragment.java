@@ -20,6 +20,7 @@ import com.bima.dokterpribadimu.view.activities.ProfileActivity;
 import com.bima.dokterpribadimu.view.activities.SubscriptionActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuProgressDialog;
+import com.google.android.gms.analytics.HitBuilders;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
 import static com.bima.dokterpribadimu.view.components.DokterPribadimuDialog.DIALOG_TYPE_ERROR;
@@ -111,6 +112,8 @@ public class BaseFragment extends RxFragment {
                 .setDialogButtonText(buttonText)
                 .setClickListener(clickListener)
                 .showDialog();
+
+        FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_DOCTOR_CALL_LATE_HOURS);
     }
 
     protected void showProgressDialog() {

@@ -189,6 +189,8 @@ public class ProfileFragment extends BaseFragment {
             binding.profileEditPasswordButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PASSWORD_EDIT_SCREEN_PROFILE);
+
                     if (dialog == null) {
                         dialog = new ChangePasswordDialog(getActivity());
                     }
@@ -219,6 +221,8 @@ public class ProfileFragment extends BaseFragment {
         binding.profileMyPhoneNumberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PHONE_EDIT_SCREEN_PROFILE);
+
                 if (phoneNumberDialog == null) {
                     phoneNumberDialog = new ChangePhoneNumberDialog(getActivity());
                 }
@@ -237,6 +241,7 @@ public class ProfileFragment extends BaseFragment {
         binding.profileManageSubscriptionText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SETTING_SCREEN_PROFILE);
                 startViewIntent(Constants.GOOGLE_PLAY_MANAGE_SUBSCRIPTION);
             }
         });

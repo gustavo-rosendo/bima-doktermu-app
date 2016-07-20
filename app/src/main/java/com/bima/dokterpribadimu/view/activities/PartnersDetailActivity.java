@@ -123,6 +123,7 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
         binding.partnersMyLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_MYLOCATION_SCREEN_PARTNERS_DETAILS);
                 updateUserLocation(true, isPolylineShowed);
             }
         });
@@ -130,6 +131,7 @@ public class PartnersDetailActivity extends BaseActivity implements OnMapReadyCa
         binding.partnersCarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_DIRECTIONS_SCREEN_PARTNERS_DETAILS);
                 isPolylineShowed = !isPolylineShowed;
                 updateUserLocation(false, isPolylineShowed);
             }

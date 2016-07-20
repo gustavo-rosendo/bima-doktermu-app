@@ -79,6 +79,7 @@ public class SignInFragment extends BaseFragment {
         binding.signInFacebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_FB_SCREEN_LOGIN);
                 ((SignInActivity) getActivity()).snsLogin(Constants.LOGIN_TYPE_FACEBOOK);
             }
         });
@@ -86,6 +87,7 @@ public class SignInFragment extends BaseFragment {
         binding.signInGplusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_GPLUS_SCREEN_LOGIN);
                 ((SignInActivity) getActivity()).snsLogin(Constants.LOGIN_TYPE_GOOGLE);
             }
         });
@@ -93,6 +95,7 @@ public class SignInFragment extends BaseFragment {
         binding.signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_LOGIN_SCREEN_LOGIN);
                 final String email = binding.signInEmailField.getText().toString();
                 String password = binding.signInPasswordField.getText().toString();
                 if (validateSignIn(email, password)) {

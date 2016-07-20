@@ -150,6 +150,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         binding.partnersMyLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_MYLOCATION_SCREEN_PARTNERS_MAP);
                 if (map != null && location != null) {
                     updateUserLocation(true);
                 }
@@ -159,6 +160,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         binding.partnersFooterMyLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_MYLOCATION_SCREEN_PARTNERS_MAP);
                 if (map != null && location != null) {
                     // Move the camera to user's location
                     LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -170,6 +172,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         binding.partnersCarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_DIRECTIONS_SCREEN_PARTNERS_MAP);
                 updatePolyLines();
             }
         });
@@ -190,6 +193,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         binding.partnersMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_CATEGORY_SCREEN_PARTNERS_MAP);
                 if (categories.size() > 0) {
                     binding.appbar.setVisibility(View.INVISIBLE);
                     binding.overlayView.setVisibility(View.VISIBLE);
@@ -199,6 +203,10 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                     categoriesPopupWindow.setClickListener(new CategoryClickListener() {
                         @Override
                         public void onClick(Category category) {
+                            FirebaseAnalyticsHelper.logCategoryBtnClickEvent(
+                                    EventConstants.BTN_CATEGORY_WINDOW_CATEGORIES,
+                                    category.getCategoryName()
+                            );
                             categoriesPopupWindow.dismiss();
 
                             // reset selected
@@ -271,7 +279,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         binding.partnersAddress.setText("Duration"); // TODO: change with category name
         binding.partnersMyLocationButton.setVisibility(View.GONE);
 
-        FirebaseAnalyticsHelper.logViewWindowEvent(EventConstants.WINDOW_PARTNERS_DETAILS_FULL);
+        FirebaseAnalyticsHelper.logViewWindowEvent(EventConstants.WINDOW_PARTNERS_MAP_DETAILS_FULL);
     }
 
     private void hideDetailFooter() {

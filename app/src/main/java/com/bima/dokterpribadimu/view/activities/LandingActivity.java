@@ -60,6 +60,7 @@ public class LandingActivity extends BaseActivity {
         binding.loginSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_LOGIN_SCREEN_LANDING);
                 IntentUtils.startSignInActivity(LandingActivity.this, true);
             }
         });
@@ -67,6 +68,7 @@ public class LandingActivity extends BaseActivity {
         binding.loginRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_REGISTER_SCREEN_LANDING);
                 IntentUtils.startSignInActivity(LandingActivity.this, false);
             }
         });

@@ -168,9 +168,11 @@ public class DoctorCallFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 if (billingClient.isSubscribedToDokterPribadiKu()) {
+                    FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_BOOK_SCREEN_DOCTOR_CALL);
                     checkServerTime();
                 }
                 else {
+                    FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SUBSCRIBE_SCREEN_DOCTOR_CALL);
                     startSubscriptionActivity();
                 }
             }

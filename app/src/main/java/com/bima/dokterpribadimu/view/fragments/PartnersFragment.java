@@ -61,8 +61,10 @@ public class PartnersFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 if (subscriptionActive) {
+                    FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PARTNERS_SCREEN_PARTNERS_HOME);
                     IntentUtils.startPartnersLandingActivity(getActivity());
                 } else {
+                    FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SUBSCRIBE_SCREEN_PARTNERS_HOME);
                     startSubscriptionActivity();
                 }
             }

@@ -130,7 +130,9 @@ public class PartnersSearchActivity extends BaseActivity {
 
                     @Override
                     public void onCompleted() {
-
+                        FirebaseAnalyticsHelper.logSearchEvent(
+                                EventConstants.SCREEN_PARTNERS_SEARCH,
+                                query);
                     }
 
                     @Override

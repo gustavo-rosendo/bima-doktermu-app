@@ -55,30 +55,35 @@ public class HomeFragment extends BaseFragment {
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_DOCTOR_SCREEN_HOME);
                     startDoctorCallActivity();
                 }
             },
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PARTNERS_SCREEN_HOME);
                     IntentUtils.startPartnersActivity(getActivity());
                 }
             },
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_NEWS_SCREEN_HOME);
                     IntentUtils.startNewsActivity(getActivity());
                 }
             },
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PROFILE_SCREEN_HOME);
                     startProfileActivity();
                 }
             },
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SUBSCRIBE_SCREEN_HOME);
                     startSubscriptionActivity();
                 }
             }

@@ -119,6 +119,7 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
         binding.registerFacebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_FB_SCREEN_REGISTER);
                 ((SignInActivity) getActivity()).snsLogin(Constants.LOGIN_TYPE_FACEBOOK);
             }
         });
@@ -126,6 +127,7 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
         binding.registerGplusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_GPLUS_SCREEN_REGISTER);
                 ((SignInActivity) getActivity()).snsLogin(Constants.LOGIN_TYPE_GOOGLE);
             }
         });
@@ -133,6 +135,8 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
         binding.registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_REGISTER_SCREEN_REGISTER);
+
                 final String email = binding.registerEmailField.getText().toString();
                 String password = binding.registerPasswordField.getText().toString();
                 String referral = binding.registerAgentField.getText().toString();

@@ -1,5 +1,7 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -87,6 +89,7 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
 //        Log.d(TAG, "Setting screen name: " + TAG);
 //        mTracker.setScreenName("Image~" + TAG);
 //        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_REGISTER_NAME);
     }
 
     @Override
@@ -116,6 +119,8 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
         binding.registerValidateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SEND_SCREEN_REGISTER_NAME);
+
                 if (!userProfile.getLoginType().equalsIgnoreCase(Constants.LOGIN_TYPE_EMAIL)) {
                     password = binding.registerPasswordField.getText().toString();
                 }
