@@ -71,12 +71,6 @@ public class DrawerFragment extends BaseFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_MENU_DRAWER);
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         loginClient.onStart();
@@ -176,7 +170,6 @@ public class DrawerFragment extends BaseFragment {
         binding.drawerAboutBimaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_ABOUT_SCREEN_MENU_DRAWER);
                 if (onDrawerItemPressedListener != null) {
                     onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_ABOUT);
                 }
@@ -190,7 +183,6 @@ public class DrawerFragment extends BaseFragment {
         binding.drawerSubscribeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SUBSCRIBE_SCREEN_MENU_DRAWER);
                 final boolean subscriptionActive =
                         StorageUtils.getBoolean(getActivity(), Constants.KEY_USER_SUBSCIPTION, false);
 
@@ -214,7 +206,6 @@ public class DrawerFragment extends BaseFragment {
         binding.drawerProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PROFILE_SCREEN_MENU_DRAWER);
                 if (onDrawerItemPressedListener != null) {
                     onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_PROFILE);
                 }
@@ -228,7 +219,6 @@ public class DrawerFragment extends BaseFragment {
         binding.drawerSignOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SIGNOUT_SCREEN_MENU_DRAWER);
                 if (onDrawerItemPressedListener != null) {
                     onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_SIGN_OUT);
                 }

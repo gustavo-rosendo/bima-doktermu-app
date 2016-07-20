@@ -1,5 +1,7 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -66,6 +68,7 @@ public class AboutActivity extends BaseActivity {
         binding.toolbarHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_MENU_DRAWER);
                 binding.drawerLayout.openDrawer(Gravity.LEFT);
             }
         });

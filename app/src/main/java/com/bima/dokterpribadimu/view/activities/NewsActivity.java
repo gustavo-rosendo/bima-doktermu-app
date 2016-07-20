@@ -10,6 +10,8 @@ import android.view.View;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.databinding.ActivityNewsBinding;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
@@ -50,6 +52,7 @@ public class NewsActivity extends BaseActivity {
         binding.toolbarHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_MENU_DRAWER);
                 binding.drawerLayout.openDrawer(Gravity.LEFT);
             }
         });
