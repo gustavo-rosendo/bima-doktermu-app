@@ -235,6 +235,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                             0,
                             POPUP_BOTTOM_MARGIN
                     );
+                    FirebaseAnalyticsHelper.logViewWindowEvent(EventConstants.WINDOW_PARTNERS_CATEGORIES);
                 }
             }
         });

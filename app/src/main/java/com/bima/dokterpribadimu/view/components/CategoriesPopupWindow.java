@@ -62,7 +62,6 @@ public class CategoriesPopupWindow extends PopupWindow {
         setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
         setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        FirebaseAnalyticsHelper.logViewWindowEvent(EventConstants.WINDOW_PARTNERS_CATEGORIES);
     }
 
     public void release() {
