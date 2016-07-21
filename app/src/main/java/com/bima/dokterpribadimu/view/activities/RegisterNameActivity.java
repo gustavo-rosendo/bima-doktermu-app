@@ -248,6 +248,7 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
                                             IntentUtils.startHomeActivityOnTop(RegisterNameActivity.this);
                                         }
                                     });
+                            FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_REGISTER_SUCCESS);
                         } else {
                             handleError(TAG, registerResponse.getMessage());
                         }

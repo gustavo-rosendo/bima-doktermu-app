@@ -89,7 +89,7 @@ public class EventConstants {
     public static final String BTN_REGISTER_SCREEN_REGISTER             = "Btn_Register_Scr_Register";
     public static final String BTN_FB_SCREEN_REGISTER                   = "Btn_FB_Scr_Register";
     public static final String BTN_GPLUS_SCREEN_REGISTER                = "Btn_Gplus_Scr_Register";
-    public static final String BTN_SEND_SCREEN_REGISTER_NAME            = "Btn_Send_Scr_Register";
+    public static final String BTN_SEND_SCREEN_REGISTER_NAME            = "Btn_Send_Scr_Register_Name";
     public static final String BTN_LOGIN_SCREEN_LOGIN                   = "Btn_Login_Scr_Login";
     public static final String BTN_FB_SCREEN_LOGIN                      = "Btn_FB_Scr_Login";
     public static final String BTN_GPLUS_SCREEN_LOGIN                   = "Btn_Gplus_Scr_Login";
