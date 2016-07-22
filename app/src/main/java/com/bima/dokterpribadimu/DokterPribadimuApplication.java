@@ -1,12 +1,11 @@
 package com.bima.dokterpribadimu;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
-
 import android.app.Application;
 
+import com.bima.dokterpribadimu.analytics.TagManagerHelper;
 import com.bima.dokterpribadimu.injection.DokterPribadimuComponent;
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.analytics.Tracker;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import io.fabric.sdk.android.Fabric;
@@ -73,5 +72,9 @@ public class DokterPribadimuApplication extends Application {
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = getDefaultFirebaseAnalytics();
+
+        // Initialize TagManager and load the container from the web
+        // (if loading from the web fails, load the default container saved in res/raw)
+        TagManagerHelper.initializeTagManager(this);
     }
 }
