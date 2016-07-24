@@ -5,6 +5,7 @@ import android.app.Application;
 import com.bima.dokterpribadimu.analytics.TagManagerHelper;
 import com.bima.dokterpribadimu.injection.DokterPribadimuComponent;
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -18,10 +19,8 @@ public class DokterPribadimuApplication extends Application {
     private static DokterPribadimuApplication sInstance;
     private DokterPribadimuComponent mComponent;
 
-    /*
-     * Google Analytics tracker
-     */
-//    private Tracker mTracker;
+    // Google Analytics tracker
+    private Tracker mGoogleAnalytics;
 
     // FirebaseAnalytics instance
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -35,8 +34,8 @@ public class DokterPribadimuApplication extends Application {
     }
 
     /**
-     * Gets the default {@link Tracker} for this {@link Application}.
-     * @return tracker
+     * Gets the default {@link FirebaseAnalytics} for this {@link Application}.
+     * @return mFirebaseAnalytics
      */
     public FirebaseAnalytics getDefaultFirebaseAnalytics() {
         if (mFirebaseAnalytics == null) {
@@ -46,20 +45,20 @@ public class DokterPribadimuApplication extends Application {
         return mFirebaseAnalytics;
     }
 
-//    /**
-//     * Gets the default FirebaseAnalytics instance for this {@link Application}.
-//     * @return m
-//     */
-//    synchronized public Tracker getDefaultTracker() {
-//        if (mTracker == null) {
-//            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+    /**
+     * Gets the default GoogleAnalytics instance for this {@link Application}.
+     * @return mTracker
+     */
+    synchronized public Tracker getDefaultGATracker() {
+        if (mGoogleAnalytics == null) {
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
             // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
-            //mTracker = analytics.newTracker(R.xml.global_tracker);
-//        }
+            mGoogleAnalytics = analytics.newTracker(R.xml.global_tracker);
+        }
         //Enable Advertising Features
-//        mTracker.enableAdvertisingIdCollection(true);
-//        return mTracker;
-//    }
+        mGoogleAnalytics.enableAdvertisingIdCollection(true);
+        return mGoogleAnalytics;
+    }
 
     @Override
     public void onCreate() {
@@ -73,8 +72,11 @@ public class DokterPribadimuApplication extends Application {
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = getDefaultFirebaseAnalytics();
 
+        // Obtain the GoogleAnalytics instance.
+        mGoogleAnalytics = getDefaultGATracker();
+
         // Initialize TagManager and load the container from the web
         // (if loading from the web fails, load the default container saved in res/raw)
-        TagManagerHelper.initializeTagManager(this);
+        //TagManagerHelper.initializeTagManager(this);
     }
 }

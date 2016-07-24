@@ -10,7 +10,7 @@ import android.view.Window;
 
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.analytics.EventConstants;
-import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.databinding.DialogForgotPasswordBinding;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 
@@ -115,7 +115,7 @@ public class ForgotPasswordDialog extends Dialog {
      */
     public ForgotPasswordDialog showDialog() {
         show();
-        FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_LOGIN_FORGOT_PASSWORD);
+        AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_LOGIN_FORGOT_PASSWORD);
         return this;
     }
 

@@ -1,9 +1,7 @@
 package com.bima.dokterpribadimu.view.activities;
 
 import com.bima.dokterpribadimu.analytics.EventConstants;
-import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -78,7 +76,7 @@ public class BookCallActivity extends BaseActivity {
 //        Log.d(TAG, "Setting screen name: " + TAG);
 //        mTracker.setScreenName("Image~" + TAG);
 //        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_BOOK_CALL);
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_BOOK_CALL);
     }
 
     private void initViews() {
@@ -166,7 +164,7 @@ public class BookCallActivity extends BaseActivity {
                             break;
                     }
 
-                    FirebaseAnalyticsHelper.logBookCallBtnClickEvent(
+                    AnalyticsHelper.logBookCallBtnClickEvent(
                             EventConstants.BTN_BOOK_SCREEN_BOOK_CALL,
                             topic,
                             subTopic);
@@ -508,7 +506,7 @@ public class BookCallActivity extends BaseActivity {
                                         }
                                     }
                             );
-                            FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_BOOK_CALL_SUCCESS);
+                            AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_BOOK_CALL_SUCCESS);
                         } else {
                             StorageUtils.putDouble(
                                     BookCallActivity.this,

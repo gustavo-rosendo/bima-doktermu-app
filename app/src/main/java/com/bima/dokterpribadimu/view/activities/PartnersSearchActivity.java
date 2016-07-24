@@ -16,7 +16,7 @@ import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.analytics.EventConstants;
-import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.data.remote.api.PartnersApi;
 import com.bima.dokterpribadimu.databinding.ActivityPartnersSearchBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
@@ -61,7 +61,7 @@ public class PartnersSearchActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_PARTNERS_SEARCH);
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_PARTNERS_SEARCH);
     }
 
     private void initViews() {
@@ -130,7 +130,7 @@ public class PartnersSearchActivity extends BaseActivity {
 
                     @Override
                     public void onCompleted() {
-                        FirebaseAnalyticsHelper.logSearchEvent(
+                        AnalyticsHelper.logSearchEvent(
                                 EventConstants.SCREEN_PARTNERS_SEARCH,
                                 query);
                     }

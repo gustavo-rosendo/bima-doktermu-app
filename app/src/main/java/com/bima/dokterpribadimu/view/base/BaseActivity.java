@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.analytics.EventConstants;
-import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuProgressDialog;
@@ -92,7 +92,7 @@ public class BaseActivity extends RxAppCompatActivity {
             //avoid Firebase error due to limit of 36 characters
             errorMessage = message.substring(0, 34);
         }
-        FirebaseAnalyticsHelper.logViewDialogFailedEvent(
+        AnalyticsHelper.logViewDialogFailedEvent(
                 EventConstants.DIALOG_GENERAL_STATUS_FAILED,
                 tag + " - " + errorMessage);
     }

@@ -12,7 +12,7 @@ import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.analytics.EventConstants;
-import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.data.remote.api.NewsApi;
 import com.bima.dokterpribadimu.databinding.FragmentNewsBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
@@ -138,7 +138,7 @@ public class NewsFragment extends BaseFragment {
                                                         //avoid Firebase error due to limit of 36 characters
                                                         newsTitle = news.getNewsTitle().substring(0, 34);
                                                     }
-                                                    FirebaseAnalyticsHelper.logItemViewEvent(
+                                                    AnalyticsHelper.logItemViewEvent(
                                                             EventConstants.SCREEN_NEWS_DETAILS,
                                                             newsCategory,
                                                             newsTitle,

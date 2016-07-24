@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.analytics.EventConstants;
-import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.databinding.FragmentAboutBinding;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
@@ -36,7 +36,7 @@ public class AboutFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_ABOUT_BIMA);
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_ABOUT_BIMA);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AboutFragment extends BaseFragment {
         binding.aboutWebsiteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_WEB_SCREEN_ABOUT_BIMA);
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_WEB_SCREEN_ABOUT_BIMA);
                 startViewIntent(Constants.BIMA_WEBSITE);
             }
         });
@@ -62,7 +62,7 @@ public class AboutFragment extends BaseFragment {
         binding.aboutCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_CSPHONE_SCREEN_ABOUT_BIMA);
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_CSPHONE_SCREEN_ABOUT_BIMA);
                 startDialIntent(getString(R.string.about_bima_phone_number));
             }
         });
@@ -70,7 +70,7 @@ public class AboutFragment extends BaseFragment {
         binding.aboutFacebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_FACEBOOK_SCREEN_ABOUT_BIMA);
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_FACEBOOK_SCREEN_ABOUT_BIMA);
                 startFacebookIntent();
             }
         });
@@ -78,7 +78,7 @@ public class AboutFragment extends BaseFragment {
         binding.aboutTwitterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_TWITTER_SCREEN_ABOUT_BIMA);
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_TWITTER_SCREEN_ABOUT_BIMA);
                 startTwitterIntent();
             }
         });
@@ -86,7 +86,7 @@ public class AboutFragment extends BaseFragment {
         binding.aboutEmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_EMAIL_SCREEN_ABOUT_BIMA);
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_EMAIL_SCREEN_ABOUT_BIMA);
                 startMailIntent();
             }
         });

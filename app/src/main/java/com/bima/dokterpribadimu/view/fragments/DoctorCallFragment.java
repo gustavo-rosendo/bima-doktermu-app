@@ -2,7 +2,6 @@ package com.bima.dokterpribadimu.view.fragments;
 
 
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +9,8 @@ import android.view.ViewGroup;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.analytics.EventConstants;
-import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
 import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
 import com.bima.dokterpribadimu.data.inappbilling.BillingInitializationListener;
 import com.bima.dokterpribadimu.data.inappbilling.QueryInventoryListener;
@@ -100,7 +99,7 @@ public class DoctorCallFragment extends BaseFragment {
 
         initBillingClient();
 
-        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_DOCTOR_CALL);
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_DOCTOR_CALL);
 
         if(canShowRateYourCall()) {
             if(rateYourCallDialog != null) {
@@ -168,11 +167,11 @@ public class DoctorCallFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 if (billingClient.isSubscribedToDokterPribadiKu()) {
-                    FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_BOOK_SCREEN_DOCTOR_CALL);
+                    AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_BOOK_SCREEN_DOCTOR_CALL);
                     checkServerTime();
                 }
                 else {
-                    FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SUBSCRIBE_SCREEN_DOCTOR_CALL);
+                    AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SUBSCRIBE_SCREEN_DOCTOR_CALL);
                     startSubscriptionActivity();
                 }
             }
@@ -342,7 +341,7 @@ public class DoctorCallFragment extends BaseFragment {
                                     getString(R.string.dialog_rate_your_call_success_message),
                                     getString(R.string.ok),
                                     null);
-                            FirebaseAnalyticsHelper.logViewDialogRatingEvent(EventConstants.DIALOG_DOCTOR_CALL_RATING_SUCCESS, rating.toString());
+                            AnalyticsHelper.logViewDialogRatingEvent(EventConstants.DIALOG_DOCTOR_CALL_RATING_SUCCESS, rating.toString());
                         } else {
                             handleError(TAG, rateCallResponse.getMessage());
                         }

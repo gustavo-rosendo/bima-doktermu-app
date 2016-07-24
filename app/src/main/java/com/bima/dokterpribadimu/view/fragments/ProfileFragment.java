@@ -15,7 +15,7 @@ import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.analytics.EventConstants;
-import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.data.remote.api.CallHistoryApi;
 import com.bima.dokterpribadimu.data.remote.api.ProfileApi;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
@@ -91,7 +91,7 @@ public class ProfileFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_PROFILE);
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_PROFILE);
     }
 
     @Override
@@ -189,7 +189,7 @@ public class ProfileFragment extends BaseFragment {
             binding.profileEditPasswordButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PASSWORD_EDIT_SCREEN_PROFILE);
+                    AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PASSWORD_EDIT_SCREEN_PROFILE);
 
                     if (dialog == null) {
                         dialog = new ChangePasswordDialog(getActivity());
@@ -221,7 +221,7 @@ public class ProfileFragment extends BaseFragment {
         binding.profileMyPhoneNumberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PHONE_EDIT_SCREEN_PROFILE);
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PHONE_EDIT_SCREEN_PROFILE);
 
                 if (phoneNumberDialog == null) {
                     phoneNumberDialog = new ChangePhoneNumberDialog(getActivity());
@@ -241,7 +241,7 @@ public class ProfileFragment extends BaseFragment {
         binding.profileManageSubscriptionText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SETTING_SCREEN_PROFILE);
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SETTING_SCREEN_PROFILE);
                 startViewIntent(Constants.GOOGLE_PLAY_MANAGE_SUBSCRIPTION);
             }
         });
@@ -300,7 +300,7 @@ public class ProfileFragment extends BaseFragment {
                                     getString(R.string.dialog_password_changed_message),
                                     getString(R.string.dialog_get_started),
                                     null);
-                            FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_PROFILE_CHANGE_PASSWORD_SUCCESS);
+                            AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_PROFILE_CHANGE_PASSWORD_SUCCESS);
                         } else {
                             handleError(TAG, response.getMessage());
                         }
@@ -360,7 +360,7 @@ public class ProfileFragment extends BaseFragment {
                                     getString(R.string.dialog_phone_number_changed_message),
                                     getString(R.string.dialog_take_me_home),
                                     null);
-                            FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_PROFILE_CHANGE_PHONE_SUCCESS);
+                            AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_PROFILE_CHANGE_PHONE_SUCCESS);
                         } else {
                             handleError(TAG, response.getMessage());
                         }

@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.analytics.EventConstants;
-import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.databinding.DialogChangePasswordBinding;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
 
@@ -118,7 +118,7 @@ public class ChangePasswordDialog extends Dialog {
      */
     public ChangePasswordDialog showDialog() {
         show();
-        FirebaseAnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_PROFILE_CHANGE_PASSWORD);
+        AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_PROFILE_CHANGE_PASSWORD);
         return this;
     }
 

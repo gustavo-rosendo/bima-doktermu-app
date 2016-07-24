@@ -1,13 +1,10 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.analytics.EventConstants;
-import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
@@ -46,7 +43,7 @@ public class LandingActivity extends BaseActivity {
 //        Log.d(TAG, "Setting screen name: " + TAG);
 //        mTracker.setScreenName("Image~" + TAG);
 //        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_LANDING);
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_LANDING);
 
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);
@@ -60,7 +57,7 @@ public class LandingActivity extends BaseActivity {
         binding.loginSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_LOGIN_SCREEN_LANDING);
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_LOGIN_SCREEN_LANDING);
                 IntentUtils.startSignInActivity(LandingActivity.this, true);
             }
         });
@@ -68,7 +65,7 @@ public class LandingActivity extends BaseActivity {
         binding.loginRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAnalyticsHelper.logButtonClickEvent(EventConstants.BTN_REGISTER_SCREEN_LANDING);
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_REGISTER_SCREEN_LANDING);
                 IntentUtils.startSignInActivity(LandingActivity.this, false);
             }
         });

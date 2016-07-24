@@ -2,17 +2,13 @@ package com.bima.dokterpribadimu.view.activities;
 
 
 import com.bima.dokterpribadimu.analytics.EventConstants;
-import com.bima.dokterpribadimu.analytics.FirebaseAnalyticsHelper;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.ActivityLoadingBinding;
 import com.bima.dokterpribadimu.model.UserProfile;
@@ -21,7 +17,6 @@ import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.concurrent.TimeUnit;
 
@@ -69,7 +64,7 @@ public class LoadingActivity extends BaseActivity {
 //        mTracker.setScreenName("Image~" + TAG);
 //        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
-        FirebaseAnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_LOADING);
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_LOADING);
     }
 
     @Override
