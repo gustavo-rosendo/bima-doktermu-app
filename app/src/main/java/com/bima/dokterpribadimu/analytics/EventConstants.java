@@ -5,11 +5,6 @@ package com.bima.dokterpribadimu.analytics;
  */
 public class EventConstants {
     /*
-    * Event categories
-    * */
-    public static final String CATEGORY_ACTION  = "Action";
-
-    /*
     * Event types
     * */
     public static final String TYPE_VIEW_SCREEN  = "view_screen";
