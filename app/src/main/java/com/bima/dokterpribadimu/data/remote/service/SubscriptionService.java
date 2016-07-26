@@ -14,7 +14,7 @@ import retrofit2.http.POST;
 public interface SubscriptionService {
 
     @FormUrlEncoded
-    @POST("/v2/subscription")
+    @POST("/v3/subscription")
     Call<BaseResponse> registerSubscription(
             @Field("subscription_type") String subscriptionType,
             @Field("subscription_lat") Double subscriptionLat,
@@ -34,7 +34,7 @@ public interface SubscriptionService {
     );
 
     @FormUrlEncoded
-    @POST("/v2/subscription/update")
+    @POST("/v3/subscription/update")
     Call<BaseResponse> updateSubscription(
             @Field("order_id") String orderId,
             @Field("subscription_token") String subscriptionToken,
@@ -43,12 +43,12 @@ public interface SubscriptionService {
             @Field("access_token") String accessToken
     );
 
-    @GET("/v2/subscription/expired")
+    @GET("/v3/subscription/expired")
     Call<BaseResponse> setSubscriptionExpired(
             @Field("access_token") String accessToken
     );
 
-    @GET("/v2/subscription/stop")
+    @GET("/v3/subscription/stop")
     Call<BaseResponse> setSubscriptionStopped(
             @Field("subscription_end") String subscriptionEnd,
             @Field("access_token") String accessToken

@@ -23,6 +23,8 @@ import com.bima.dokterpribadimu.view.fragments.DoctorCallFragment;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
 import com.bima.dokterpribadimu.view.fragments.HomeFragment;
 import com.bima.dokterpribadimu.view.fragments.NewsFragment;
+import com.bima.dokterpribadimu.view.fragments.OnboardingListCorporateFragment;
+import com.bima.dokterpribadimu.view.fragments.OnboardingListTestimonialFragment;
 import com.bima.dokterpribadimu.view.fragments.OnboardingOpeningFragment;
 import com.bima.dokterpribadimu.view.fragments.OnboardingPhotoFragment;
 import com.bima.dokterpribadimu.view.fragments.OnboardingSocialFragment;
@@ -64,6 +66,8 @@ public interface DokterPribadimuComponent {
     void inject(AboutActivity aboutActivity);
     void inject(OnboardingOpeningFragment onboardingOpeningFragment);
     void inject(OnboardingPhotoFragment onboardingPhotoFragment);
+    void inject(OnboardingListTestimonialFragment onboardingListTestimonialFragment);
+    void inject(OnboardingListCorporateFragment onboardingListCorporateFragment);
     void inject(OnboardingSocialFragment onboardingSocialFragment);
     void inject(DrawerFragment drawerFragment);
     void inject(HomeFragment homeFragment);

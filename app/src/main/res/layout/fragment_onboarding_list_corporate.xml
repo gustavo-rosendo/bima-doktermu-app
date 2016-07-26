@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.bima.dokterpribadimu.view.fragments.OnboardingListCorporateFragment.CorporateListViewModel"/>
+        <import
+            type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/testimonial_recycler"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_above="@+id/onboarding_info_text"
+            app:layoutManager="@{LayoutManagers.grid(2)}"
+            app:items="@{viewModel.items}"
+            app:itemView="@{viewModel.itemView}"/>
+
+        <TextView
+            android:id="@+id/onboarding_info_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_large_button_height"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:background="@color/bima_blue"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/generic_body_text_size"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"/>
+
+    </RelativeLayout>
+
+</layout>

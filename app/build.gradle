@@ -97,6 +97,7 @@ dependencies {
     final FIREBASE_SDK_ANALYTICS_LIBRARY_VERSION = '9.0.2'
     final FIREBASE_SDK_ADMOB_LIBRARY_VERSION = '9.0.2'
     final VIEW_PAGER_INDICATOR_VERSION = '2.4.1'
+    final BOTTOMSHEET_VERSION = '1.5.1'
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -224,6 +225,12 @@ dependencies {
      * Paging indicator widgets compatible with the ViewPager
      */
     compile "com.github.JakeWharton:ViewPagerIndicator:$VIEW_PAGER_INDICATOR_VERSION"
+
+    /**
+     * Android component which presents a dismissible view from the bottom of the screen
+     */
+    compile "com.flipboard:bottomsheet-core:$BOTTOMSHEET_VERSION"
+    compile "com.flipboard:bottomsheet-commons:$BOTTOMSHEET_VERSION"
 }
 
 /**

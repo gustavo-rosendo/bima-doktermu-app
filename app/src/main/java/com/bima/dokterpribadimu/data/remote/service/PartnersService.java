@@ -13,12 +13,12 @@ import retrofit2.http.Query;
  */
 public interface PartnersService {
 
-    @GET("/v2/partners/categories")
+    @GET("/v3/partners/categories")
     Call<BaseResponse<CategoriesResponse>> getCategories(
             @Query("access_token") String accessToken
     );
 
-    @GET("/v2/partners")
+    @GET("/v3/partners")
     Call<BaseResponse<PartnerResponse>> getPartners(
             @Query("partner_category") String partnerCategory,
             @Query("search_string") String searchString,

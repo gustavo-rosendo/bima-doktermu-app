@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 public interface BookingService {
 
     @FormUrlEncoded
-    @POST("/v2/booking")
+    @POST("/v3/booking")
     Call<BaseResponse> bookCall(
             @Field("call_topic") String callTopic,
             @Field("call_subtopic") String callSubTopic,

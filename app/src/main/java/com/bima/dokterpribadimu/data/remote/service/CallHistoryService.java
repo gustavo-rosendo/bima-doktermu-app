@@ -12,7 +12,7 @@ import retrofit2.http.Query;
  */
 public interface CallHistoryService {
 
-    @GET("/v2/booking/history")
+    @GET("/v3/booking/history")
     Call<BaseResponse<CallHistoryResponse>> getCallHistory(
             @Query("limit") int limit,
             @Query("access_token") String accessToken

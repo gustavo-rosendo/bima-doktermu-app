@@ -11,16 +11,27 @@ import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.FragmentOnboardingOpeningBinding;
 import com.bima.dokterpribadimu.databinding.FragmentOnboardingPhotoBinding;
+import com.bima.dokterpribadimu.model.Onboarding;
+import com.bima.dokterpribadimu.utils.GsonUtils;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class OnboardingPhotoFragment extends Fragment {
 
+    private static final String ONBOARDING = "onboarding";
+
     private FragmentOnboardingPhotoBinding binding;
 
-    public static OnboardingPhotoFragment newInstance() {
+    private Onboarding onboarding;
+
+    public static OnboardingPhotoFragment newInstance(Onboarding onboarding) {
+        Bundle bundle = new Bundle();
+        bundle.putString(ONBOARDING, GsonUtils.toJson(onboarding));
+
         OnboardingPhotoFragment fragment = new OnboardingPhotoFragment();
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -43,7 +54,13 @@ public class OnboardingPhotoFragment extends Fragment {
     }
 
     private void init() {
-        // TODO: initialize content
+        onboarding = GsonUtils.fromJson(getArguments().getString(ONBOARDING), Onboarding.class);
+
+        Picasso.with(getActivity())
+                .load(onboarding.getBackgroundImg())
+                .into(binding.onboardingBackground);
+
+        binding.onboardingInfoText.setText(onboarding.getSubtitle());
     }
 
 }

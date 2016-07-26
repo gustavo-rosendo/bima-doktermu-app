@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="testimonial_item_viewmodel"
+            type="com.bima.dokterpribadimu.viewmodel.OnboardingTestimonialItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/generic_normal_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/onboarding_testimonial_width_height"
+                android:layout_height="@dimen/onboarding_testimonial_width_height"
+                android:src="@{testimonial_item_viewmodel.image}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/generic_normal_margin"
+                android:layout_marginStart="@dimen/generic_normal_margin"
+                android:text="@{testimonial_item_viewmodel.desciption}"
+                android:textColor="@android:color/primary_text_light"
+                android:textSize="@dimen/generic_subheading_text_size"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_small_margin"
+            android:text="@{testimonial_item_viewmodel.title}"
+            android:textSize="@dimen/generic_body_text_size"
+            android:gravity="end"
+            tools:text="John Doe - Jakarta"/>
+
+    </LinearLayout>
+
+</layout>

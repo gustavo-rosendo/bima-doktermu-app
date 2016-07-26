@@ -12,7 +12,7 @@ import retrofit2.http.Query;
  */
 public interface NewsService {
 
-    @GET("/v2/news")
+    @GET("/v3/news")
     Call<BaseResponse<NewsResponse>> getNews(
             @Query("news_category") String newsCategory,
             @Query("access_token") String accessToken

@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 public interface RateYourCallService {
 
     @FormUrlEncoded
-    @POST("/v2/booking/rate")
+    @POST("/v3/booking/rate")
     Call<BaseResponse> rateCall(
             @Field("call_id") String callId,
             @Field("rating") Integer rating,

@@ -35,12 +35,16 @@
     <dimen name="generic_subheading_text_size">16sp</dimen>
     <dimen name="generic_body_text_size">14sp</dimen>
     <dimen name="generic_button_text_size">14sp</dimen>
+    <dimen name="generic_small_text_size">12sp</dimen>
 
     <!-- loading -->
     <dimen name="loading_bima_icon_width">155dp</dimen>
     <dimen name="loading_bima_icon_height">155dp</dimen>
     <dimen name="loading_bima_text_width">155dp</dimen>
     <dimen name="loading_bima_text_height">90dp</dimen>
+
+    <!-- onboarding -->
+    <dimen name="onboarding_testimonial_width_height">75dp</dimen>
 
     <!-- landing -->
     <dimen name="landing_bima_icon_width">150dp</dimen>

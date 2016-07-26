@@ -6,6 +6,7 @@ import com.bima.dokterpribadimu.data.remote.api.CallHistoryApi;
 import com.bima.dokterpribadimu.data.remote.api.CustomerApi;
 import com.bima.dokterpribadimu.data.remote.api.DirectionsApi;
 import com.bima.dokterpribadimu.data.remote.api.NewsApi;
+import com.bima.dokterpribadimu.data.remote.api.OnboardingApi;
 import com.bima.dokterpribadimu.data.remote.api.PartnersApi;
 import com.bima.dokterpribadimu.data.remote.api.ProfileApi;
 import com.bima.dokterpribadimu.data.remote.api.RateYourCallApi;
@@ -58,6 +59,12 @@ public final class DataModule {
     @Singleton
     NewsApi provideNewsService() {
         return new NewsApi();
+    }
+
+    @Provides
+    @Singleton
+    OnboardingApi provideOnboardingService() {
+        return new OnboardingApi();
     }
 
     @Provides

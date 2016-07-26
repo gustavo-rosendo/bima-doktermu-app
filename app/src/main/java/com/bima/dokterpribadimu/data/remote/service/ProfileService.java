@@ -15,13 +15,13 @@ import retrofit2.http.Query;
  */
 public interface ProfileService {
 
-    @GET("/v2/profile")
+    @GET("/v3/profile")
     Call<BaseResponse<ProfileResponse>> getProfileInfo(
             @Query("access_token") String accessToken
     );
 
     @FormUrlEncoded
-    @POST("/v2/profile/phone_number")
+    @POST("/v3/profile/phone_number")
     Call<BaseResponse> changePhoneNumber(
             @Field("phone_number") String newPhoneNumber,
             @Field("access_token") String accessToken

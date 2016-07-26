@@ -6,10 +6,10 @@
     <string name="facebook_app_id">1568480343444186</string>
 
     <!-- onboarding -->
-    <string name="onboarding_skip">SKIP</string>
-    <string name="onboarding_previous">PREV</string>
-    <string name="onboarding_next">NEXT</string>
-    <string name="onboarding_jump_in">JUMP IN</string>
+    <string name="onboarding_skip">LEWATI</string>
+    <string name="onboarding_previous">SEBELUMNYA</string>
+    <string name="onboarding_next">BERIKUTNYA</string>
+    <string name="onboarding_jump_in">MASUK</string>
     <string name="onboarding_share">SHARE WITH YOUR FRIENDS</string>
 
     <!-- sign in -->

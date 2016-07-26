@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 public interface CustomerService {
 
     @FormUrlEncoded
-    @POST("/v2/customer")
+    @POST("/v3/customer")
     Call<BaseResponse> registerCustomer(
             @Field("name") String name,
             @Field("phone_number") String phoneNumber,
