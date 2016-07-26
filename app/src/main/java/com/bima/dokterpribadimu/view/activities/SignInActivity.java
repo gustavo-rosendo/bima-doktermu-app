@@ -1,7 +1,7 @@
 package com.bima.dokterpribadimu.view.activities;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.EventConstants;
 
 import android.Manifest;
 import android.content.Context;
@@ -10,7 +10,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -187,7 +186,7 @@ public class SignInActivity extends BaseActivity implements EasyPermissions.Perm
 
         @Override
         public void onFail() {
-            showErrorDialog(
+            showErrorDialog(TAG,
                     R.drawable.ic_bug,
                     getString(R.string.dialog_failed),
                     getString(R.string.dialog_sign_in_failed_message),
@@ -258,6 +257,7 @@ public class SignInActivity extends BaseActivity implements EasyPermissions.Perm
                                             IntentUtils.startHomeActivityOnTop(SignInActivity.this);
                                         }
                                     });
+                            AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_LOGIN_SUCCESS);
                         } else {
                             if (signInResponse.getMessage().contains(Constants.EMAIL_IS_NOT_REGISTERED) ||
                                     signInResponse.getMessage().equalsIgnoreCase(Constants.EMAIL_IS_NOT_REGISTERED)) {

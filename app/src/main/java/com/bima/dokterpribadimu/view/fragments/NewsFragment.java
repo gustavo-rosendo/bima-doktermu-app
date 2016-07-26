@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.data.remote.api.NewsApi;
 import com.bima.dokterpribadimu.databinding.FragmentNewsBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
@@ -131,6 +133,16 @@ public class NewsFragment extends BaseFragment {
                                             new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
+                                                    String newsTitle = news.getNewsTitle();
+                                                    if(newsTitle.length() > 35) {
+                                                        //avoid Firebase error due to limit of 36 characters
+                                                        newsTitle = news.getNewsTitle().substring(0, 34);
+                                                    }
+                                                    AnalyticsHelper.logItemViewEvent(
+                                                            EventConstants.SCREEN_NEWS_DETAILS,
+                                                            newsCategory,
+                                                            newsTitle,
+                                                            news.getNewsDate());
                                                     IntentUtils.startNewsDetailActivity(getActivity(), news);
                                                 }
                                             })

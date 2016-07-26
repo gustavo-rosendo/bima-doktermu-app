@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
 import com.bima.dokterpribadimu.data.inappbilling.BillingInitializationListener;
 import com.bima.dokterpribadimu.data.inappbilling.QueryInventoryListener;
@@ -53,30 +55,35 @@ public class HomeFragment extends BaseFragment {
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_DOCTOR_SCREEN_HOME);
                     startDoctorCallActivity();
                 }
             },
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PARTNERS_SCREEN_HOME);
                     IntentUtils.startPartnersActivity(getActivity());
                 }
             },
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_NEWS_SCREEN_HOME);
                     IntentUtils.startNewsActivity(getActivity());
                 }
             },
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PROFILE_SCREEN_HOME);
                     startProfileActivity();
                 }
             },
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SUBSCRIBE_SCREEN_HOME);
                     startSubscriptionActivity();
                 }
             }
@@ -164,6 +171,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_HOME);
 
         initBillingClient();
     }

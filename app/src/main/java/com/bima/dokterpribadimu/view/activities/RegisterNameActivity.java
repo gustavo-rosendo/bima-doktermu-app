@@ -1,8 +1,7 @@
 package com.bima.dokterpribadimu.view.activities;
 
-import com.google.ads.conversiontracking.AdWordsConversionReporter;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.EventConstants;
 
 import android.Manifest;
 import android.content.Context;
@@ -11,7 +10,6 @@ import android.databinding.DataBindingUtil;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
@@ -87,6 +85,7 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
 //        Log.d(TAG, "Setting screen name: " + TAG);
 //        mTracker.setScreenName("Image~" + TAG);
 //        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_REGISTER_NAME);
     }
 
     @Override
@@ -116,6 +115,8 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
         binding.registerValidateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SEND_SCREEN_REGISTER_NAME);
+
                 if (!userProfile.getLoginType().equalsIgnoreCase(Constants.LOGIN_TYPE_EMAIL)) {
                     password = binding.registerPasswordField.getText().toString();
                 }
@@ -243,6 +244,7 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
                                             IntentUtils.startHomeActivityOnTop(RegisterNameActivity.this);
                                         }
                                     });
+                            AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_REGISTER_SUCCESS);
                         } else {
                             handleError(TAG, registerResponse.getMessage());
                         }

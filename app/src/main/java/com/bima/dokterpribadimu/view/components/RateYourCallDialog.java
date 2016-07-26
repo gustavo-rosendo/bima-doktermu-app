@@ -3,11 +3,8 @@ package com.bima.dokterpribadimu.view.components;
 import android.app.Dialog;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -15,6 +12,8 @@ import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.databinding.DialogRateYourCallBinding;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.StorageUtils;
@@ -138,6 +137,7 @@ public class RateYourCallDialog extends Dialog {
      */
     public RateYourCallDialog showDialog() {
         show();
+        AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_DOCTOR_CALL_RATING);
         return this;
     }
 

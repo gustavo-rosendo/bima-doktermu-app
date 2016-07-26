@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
 import com.bima.dokterpribadimu.databinding.FragmentSignInBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
@@ -56,6 +58,13 @@ public class SignInFragment extends BaseFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_LOGIN);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -70,6 +79,7 @@ public class SignInFragment extends BaseFragment {
         binding.signInFacebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_FB_SCREEN_LOGIN);
                 ((SignInActivity) getActivity()).snsLogin(Constants.LOGIN_TYPE_FACEBOOK);
             }
         });
@@ -77,6 +87,7 @@ public class SignInFragment extends BaseFragment {
         binding.signInGplusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_GPLUS_SCREEN_LOGIN);
                 ((SignInActivity) getActivity()).snsLogin(Constants.LOGIN_TYPE_GOOGLE);
             }
         });
@@ -84,6 +95,7 @@ public class SignInFragment extends BaseFragment {
         binding.signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_LOGIN_SCREEN_LOGIN);
                 final String email = binding.signInEmailField.getText().toString();
                 String password = binding.signInPasswordField.getText().toString();
                 if (validateSignIn(email, password)) {
@@ -220,6 +232,7 @@ public class SignInFragment extends BaseFragment {
                                             startDoctorCallActivityOnTop();
                                         }
                                     });
+                            AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_LOGIN_SUCCESS);
                         } else {
                             handleError(TAG, signInResponse.getMessage());
                         }
@@ -265,10 +278,11 @@ public class SignInFragment extends BaseFragment {
                                     getString(R.string.dialog_forgot_password_success_message),
                                     getString(R.string.dialog_take_me_home),
                                     null);
+                            AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_LOGIN_FORGOT_PASSWORD_SUCCESS);
                         } else {
                             String errorMessage = signInResponse.getMessage();
                             if (errorMessage.contains(Constants.EMAIL_NOT_FOUND)) {
-                                showErrorDialog(
+                                showErrorDialog(TAG,
                                         R.drawable.ic_bug,
                                         getString(R.string.dialog_reset_password_email_not_registered_title),
                                         getString(R.string.dialog_reset_password_email_not_registered_message),

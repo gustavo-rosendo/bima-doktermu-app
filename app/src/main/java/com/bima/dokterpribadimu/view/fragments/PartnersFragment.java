@@ -1,7 +1,6 @@
 package com.bima.dokterpribadimu.view.fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +8,12 @@ import android.view.ViewGroup;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.databinding.FragmentPartnersBinding;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
-import com.bima.dokterpribadimu.view.activities.PartnersLandingActivity;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 
 /**
@@ -59,11 +59,19 @@ public class PartnersFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 if (subscriptionActive) {
+                    AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PARTNERS_SCREEN_PARTNERS_HOME);
                     IntentUtils.startPartnersLandingActivity(getActivity());
                 } else {
+                    AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SUBSCRIBE_SCREEN_PARTNERS_HOME);
                     startSubscriptionActivity();
                 }
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_PARTNERS_HOME);
     }
 }

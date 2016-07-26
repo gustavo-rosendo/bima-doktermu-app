@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.data.sns.LoginClient;
 import com.bima.dokterpribadimu.data.sns.facebook.FacebookClient;
 import com.bima.dokterpribadimu.data.sns.gplus.GplusClient;
@@ -112,6 +114,7 @@ public class DrawerFragment extends BaseFragment {
         binding.drawerBimaImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_BIMA_SCREEN_MENU_DRAWER);
                 if (onDrawerItemPressedListener != null) {
                     onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_HOME);
                 }
@@ -125,6 +128,7 @@ public class DrawerFragment extends BaseFragment {
         binding.drawerDoctorCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_DOCTOR_SCREEN_MENU_DRAWER);
                 if (onDrawerItemPressedListener != null) {
                     onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_DOCTOR_ON_CALL);
                 }
@@ -138,6 +142,7 @@ public class DrawerFragment extends BaseFragment {
         binding.drawerPartnersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PARTNERS_SCREEN_MENU_DRAWER);
                 if (onDrawerItemPressedListener != null) {
                     onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_PARTNERS);
                 }
@@ -151,6 +156,7 @@ public class DrawerFragment extends BaseFragment {
         binding.drawerNewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_NEWS_SCREEN_MENU_DRAWER);
                 if (onDrawerItemPressedListener != null) {
                     onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_NEWS);
                 }
@@ -164,6 +170,7 @@ public class DrawerFragment extends BaseFragment {
         binding.drawerAboutBimaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_ABOUT_SCREEN_MENU_DRAWER);
                 if (onDrawerItemPressedListener != null) {
                     onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_ABOUT);
                 }
@@ -177,6 +184,7 @@ public class DrawerFragment extends BaseFragment {
         binding.drawerSubscribeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SUBSCRIBE_SCREEN_MENU_DRAWER);
                 final boolean subscriptionActive =
                         StorageUtils.getBoolean(getActivity(), Constants.KEY_USER_SUBSCIPTION, false);
 
@@ -200,6 +208,7 @@ public class DrawerFragment extends BaseFragment {
         binding.drawerProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_PROFILE_SCREEN_MENU_DRAWER);
                 if (onDrawerItemPressedListener != null) {
                     onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_PROFILE);
                 }
@@ -213,6 +222,7 @@ public class DrawerFragment extends BaseFragment {
         binding.drawerSignOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SIGNOUT_SCREEN_MENU_DRAWER);
                 if (onDrawerItemPressedListener != null) {
                     onDrawerItemPressedListener.onDrawerItemPressed(Constants.DRAWER_TYPE_SIGN_OUT);
                 }

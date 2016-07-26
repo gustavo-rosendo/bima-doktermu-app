@@ -1,12 +1,11 @@
 package com.bima.dokterpribadimu.view.activities;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.EventConstants;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
@@ -66,6 +65,7 @@ public class DoctorCallActivity extends BaseActivity {
         binding.toolbarHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_MENU_DRAWER);
                 binding.drawerLayout.openDrawer(Gravity.LEFT);
             }
         });

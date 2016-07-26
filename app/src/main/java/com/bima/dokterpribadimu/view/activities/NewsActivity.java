@@ -2,6 +2,7 @@ package com.bima.dokterpribadimu.view.activities;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
@@ -10,6 +11,8 @@ import android.view.View;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.databinding.ActivityNewsBinding;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
@@ -38,6 +41,9 @@ public class NewsActivity extends BaseActivity {
 
         DokterPribadimuApplication.getComponent().inject(this);
 
+        // In the beginning, it's always the first tab that is shown
+        AnalyticsHelper.logViewScreenNewsEvent(EventConstants.SCREEN_NEWS, getString(TITLE_STRING_IDS[0]));
+
         init();
     }
 
@@ -50,6 +56,7 @@ public class NewsActivity extends BaseActivity {
         binding.toolbarHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_MENU_DRAWER);
                 binding.drawerLayout.openDrawer(Gravity.LEFT);
             }
         });
@@ -79,6 +86,14 @@ public class NewsActivity extends BaseActivity {
 
         binding.newsViewpager.setAdapter(adapter);
         binding.newsViewpagerTab.setupWithViewPager(binding.newsViewpager);
+        binding.newsViewpagerTab.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(binding.newsViewpager) {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                super.onTabSelected(tab);
+                String tabTitle = tab.getText().toString();
+                AnalyticsHelper.logViewScreenNewsEvent(EventConstants.SCREEN_NEWS, tabTitle);
+            }
+        });
     }
 
     private void setupDrawerFragment() {

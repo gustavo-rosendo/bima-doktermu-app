@@ -6,6 +6,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuProgressDialog;
@@ -64,7 +66,7 @@ public class BaseActivity extends RxAppCompatActivity {
                 || errorMessage.contains(Constants.UNABLE_TO_RESOLVE_HOST)) {
             Toast.makeText(this, getString(R.string.no_connection_message), Toast.LENGTH_SHORT).show();
         } else {
-            showErrorDialog(
+            showErrorDialog(tag,
                     R.drawable.ic_bug,
                     getString(R.string.dialog_failed),
                     errorMessage,
@@ -73,7 +75,7 @@ public class BaseActivity extends RxAppCompatActivity {
         }
     }
 
-    protected void showErrorDialog(
+    protected void showErrorDialog(String tag,
             int imageResource, String title, String message,
             String buttonText, OnDokterPribadimuDialogClickListener clickListener) {
         dialog.setDialogType(DIALOG_TYPE_ERROR)
@@ -84,6 +86,15 @@ public class BaseActivity extends RxAppCompatActivity {
                 .setDialogButtonText(buttonText)
                 .setClickListener(clickListener)
                 .showDialog();
+
+        String errorMessage = message;
+        if(errorMessage.length() > 35) {
+            //avoid Firebase error due to limit of 36 characters
+            errorMessage = message.substring(0, 34);
+        }
+        AnalyticsHelper.logViewDialogFailedEvent(
+                EventConstants.DIALOG_GENERAL_STATUS_FAILED,
+                tag + " - " + errorMessage);
     }
 
     protected void showSuccessDialog(

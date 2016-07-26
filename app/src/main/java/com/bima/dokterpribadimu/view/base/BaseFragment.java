@@ -9,6 +9,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.activities.AboutActivity;
 import com.bima.dokterpribadimu.view.activities.BookCallActivity;
@@ -62,7 +64,7 @@ public class BaseFragment extends RxFragment {
                 || errorMessage.contains(Constants.UNABLE_TO_RESOLVE_HOST)) {
             Toast.makeText(getActivity(), getString(R.string.no_connection_message), Toast.LENGTH_SHORT).show();
         } else {
-            showErrorDialog(
+            showErrorDialog(tag,
                     R.drawable.ic_bug,
                     getString(R.string.dialog_failed),
                     errorMessage,
@@ -71,7 +73,7 @@ public class BaseFragment extends RxFragment {
         }
     }
 
-    protected void showErrorDialog(
+    protected void showErrorDialog(String tag,
             int imageResource, String title, String message,
             String buttonText, OnDokterPribadimuDialogClickListener clickListener) {
         dialog.setDialogType(DIALOG_TYPE_ERROR)
@@ -82,6 +84,15 @@ public class BaseFragment extends RxFragment {
                 .setDialogButtonText(buttonText)
                 .setClickListener(clickListener)
                 .showDialog();
+
+        String errorMessage = message;
+        if(errorMessage.length() > 35) {
+            //avoid Firebase error due to limit of 36 characters
+            errorMessage = message.substring(0, 34);
+        }
+        AnalyticsHelper.logViewDialogFailedEvent(
+                EventConstants.DIALOG_GENERAL_STATUS_FAILED,
+                tag + " - " + errorMessage);
     }
 
     protected void showSuccessDialog(
@@ -105,6 +116,8 @@ public class BaseFragment extends RxFragment {
                 .setDialogButtonText(buttonText)
                 .setClickListener(clickListener)
                 .showDialog();
+
+        AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_DOCTOR_CALL_LATE_HOURS);
     }
 
     protected void showProgressDialog() {

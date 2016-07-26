@@ -1,6 +1,8 @@
 package com.bima.dokterpribadimu.view.activities;
 
 import com.bima.dokterpribadimu.BR;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.data.remote.api.DirectionsApi;
 import com.bima.dokterpribadimu.model.Discount;
 import com.bima.dokterpribadimu.model.directions.DirectionsResponse;
@@ -134,6 +136,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         binding.toolbarHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_MENU_DRAWER);
                 binding.drawerLayout.openDrawer(Gravity.LEFT);
             }
         });
@@ -148,6 +151,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         binding.partnersMyLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_MYLOCATION_SCREEN_PARTNERS_MAP);
                 if (map != null && location != null) {
                     updateUserLocation(true);
                 }
@@ -157,6 +161,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         binding.partnersFooterMyLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_MYLOCATION_SCREEN_PARTNERS_MAP);
                 if (map != null && location != null) {
                     // Move the camera to user's location
                     LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -168,6 +173,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         binding.partnersCarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_DIRECTIONS_SCREEN_PARTNERS_MAP);
                 updatePolyLines();
             }
         });
@@ -188,6 +194,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         binding.partnersMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_CATEGORY_SCREEN_PARTNERS_MAP);
                 if (categories.size() > 0) {
                     binding.appbar.setVisibility(View.INVISIBLE);
                     binding.overlayView.setVisibility(View.VISIBLE);
@@ -197,6 +204,10 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                     categoriesPopupWindow.setClickListener(new CategoryClickListener() {
                         @Override
                         public void onClick(Category category) {
+                            AnalyticsHelper.logCategoryBtnClickEvent(
+                                    EventConstants.BTN_CATEGORY_WINDOW_CATEGORIES,
+                                    category.getCategoryName()
+                            );
                             categoriesPopupWindow.dismiss();
 
                             // reset selected
@@ -224,6 +235,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                             0,
                             POPUP_BOTTOM_MARGIN
                     );
+                    AnalyticsHelper.logViewWindowEvent(EventConstants.WINDOW_PARTNERS_CATEGORIES);
                 }
             }
         });
@@ -268,6 +280,8 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         binding.partnersCarButton.setSelected(true);
         binding.partnersAddress.setText("Duration"); // TODO: change with category name
         binding.partnersMyLocationButton.setVisibility(View.GONE);
+
+        AnalyticsHelper.logViewWindowEvent(EventConstants.WINDOW_PARTNERS_MAP_DETAILS_FULL);
     }
 
     private void hideDetailFooter() {
@@ -318,6 +332,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
     @Override
     protected void onResume() {
         super.onResume();
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_PARTNERS_MAP);
 
         if (locationTracker != null) {
             locationTracker.startListening();
@@ -627,6 +642,7 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
                             binding.partnersMyLocationButton.setVisibility(View.GONE);
                             binding.partnersMenuButton.setVisibility(View.GONE);
                             binding.partnersFooterRelativeLayout.setVisibility(View.VISIBLE);
+                            AnalyticsHelper.logViewWindowEvent(EventConstants.WINDOW_PARTNERS_MAP_DETAILS_SHORT);
                             return true;
                         }
                     }

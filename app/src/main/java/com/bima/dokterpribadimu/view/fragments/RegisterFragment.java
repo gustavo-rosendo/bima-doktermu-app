@@ -5,13 +5,14 @@ import android.Manifest;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
 import com.bima.dokterpribadimu.databinding.FragmentRegisterBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
@@ -23,13 +24,9 @@ import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.TokenUtils;
 import com.bima.dokterpribadimu.utils.ValidationUtils;
-import com.bima.dokterpribadimu.view.activities.RegisterNameActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
-import com.google.ads.conversiontracking.AdWordsConversionReporter;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import java.util.List;
 
@@ -99,6 +96,7 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
 //        Log.d(TAG, "Setting screen name: " + TAG);
 //        mTracker.setScreenName("Image~" + TAG);
 //        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_REGISTER);
     }
 
     @AfterPermissionGranted(RC_PHONE_STATE_PERMISSION)
@@ -116,6 +114,7 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
         binding.registerFacebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_FB_SCREEN_REGISTER);
                 ((SignInActivity) getActivity()).snsLogin(Constants.LOGIN_TYPE_FACEBOOK);
             }
         });
@@ -123,6 +122,7 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
         binding.registerGplusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_GPLUS_SCREEN_REGISTER);
                 ((SignInActivity) getActivity()).snsLogin(Constants.LOGIN_TYPE_GOOGLE);
             }
         });
@@ -130,6 +130,8 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
         binding.registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_REGISTER_SCREEN_REGISTER);
+
                 final String email = binding.registerEmailField.getText().toString();
                 String password = binding.registerPasswordField.getText().toString();
                 String referral = binding.registerAgentField.getText().toString();
@@ -332,6 +334,7 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
                                             IntentUtils.startHomeActivityOnTop(DokterPribadimuApplication.getInstance().getApplicationContext());
                                         }
                                     });
+                            AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_REGISTER_SUCCESS);
                         } else {
                             handleError(TAG, registerResponse.getMessage());
                         }

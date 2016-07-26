@@ -1,10 +1,7 @@
 package com.bima.dokterpribadimu.view.activities;
 
-import com.google.ads.conversiontracking.AdWordsConversionReporter;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-import com.google.android.gms.analytics.ecommerce.Product;
-import com.google.android.gms.analytics.ecommerce.ProductAction;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.EventConstants;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
@@ -15,7 +12,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -177,7 +173,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
             @Override
             public void onFailed() {
                 // TODO: handle this
-                showErrorDialog(
+                showErrorDialog(TAG,
                         R.drawable.ic_bug,
                         getString(R.string.dialog_failed),
                         getString(R.string.dialog_sign_in_failed_message),
@@ -210,6 +206,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
 //                            .setLabel("Subscription")
 //                            .setValue(1)
 //                            .build());
+                    AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_ACTIVATE_SCREEN_SUBSCRIPTION);
 
                     UserProfile userProfile = UserProfileUtils.getUserProfile(SubscriptionActivity.this);
                     if (userProfile != null) {
@@ -227,7 +224,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                         updateUser(userProfile);
 
                     } else {
-                        showErrorDialog(
+                        showErrorDialog(TAG,
                                 R.drawable.ic_bug,
                                 getString(R.string.dialog_failed),
                                 getString(R.string.dialog_sign_in_failed_message),
@@ -312,6 +309,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
     @Override
     protected void onResume() {
         super.onResume();
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_SUBSCRIPTION);
 
 //        Log.d(TAG, "Setting screen name: " + TAG);
 //        mTracker.setScreenName("Image~" + TAG);
@@ -476,10 +474,12 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
 //                        // Send the transaction data with the event.
 //                        mTracker.send(builder.build());
 
+                        AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_SUBSCRIPTION_GOOGLEPLAY_SUCCESS);
+
                         registerSubscription(subscription);
 
                     } else {
-                        showErrorDialog(
+                        showErrorDialog(TAG,
                                 R.drawable.ic_bug,
                                 getString(R.string.dialog_failed),
                                 getString(R.string.dialog_google_play_failed_message)
@@ -609,6 +609,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                                         }
                                     }
                             );
+                            AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_SUBSCRIPTION_BACKEND_SUCCESS);
                         } else {
                             handleError(TAG, response.getMessage());
                         }

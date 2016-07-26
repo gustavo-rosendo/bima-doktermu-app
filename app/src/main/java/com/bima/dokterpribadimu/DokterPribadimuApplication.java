@@ -1,12 +1,12 @@
 package com.bima.dokterpribadimu;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
-
 import android.app.Application;
 
+import com.bima.dokterpribadimu.analytics.TagManagerHelper;
 import com.bima.dokterpribadimu.injection.DokterPribadimuComponent;
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import io.fabric.sdk.android.Fabric;
@@ -19,10 +19,8 @@ public class DokterPribadimuApplication extends Application {
     private static DokterPribadimuApplication sInstance;
     private DokterPribadimuComponent mComponent;
 
-    /*
-     * Google Analytics tracker
-     */
-//    private Tracker mTracker;
+    // Google Analytics tracker
+    private Tracker mGoogleAnalytics;
 
     // FirebaseAnalytics instance
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -36,10 +34,10 @@ public class DokterPribadimuApplication extends Application {
     }
 
     /**
-     * Gets the default {@link Tracker} for this {@link Application}.
-     * @return tracker
+     * Gets the default {@link FirebaseAnalytics} for this {@link Application}.
+     * @return mFirebaseAnalytics
      */
-    synchronized public FirebaseAnalytics getDefaultFirebaseAnalytics() {
+    public FirebaseAnalytics getDefaultFirebaseAnalytics() {
         if (mFirebaseAnalytics == null) {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -47,20 +45,20 @@ public class DokterPribadimuApplication extends Application {
         return mFirebaseAnalytics;
     }
 
-//    /**
-//     * Gets the default FirebaseAnalytics instance for this {@link Application}.
-//     * @return m
-//     */
-//    synchronized public Tracker getDefaultTracker() {
-//        if (mTracker == null) {
-//            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+    /**
+     * Gets the default GoogleAnalytics instance for this {@link Application}.
+     * @return mTracker
+     */
+    synchronized public Tracker getDefaultGATracker() {
+        if (mGoogleAnalytics == null) {
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
             // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
-            //mTracker = analytics.newTracker(R.xml.global_tracker);
-//        }
+            mGoogleAnalytics = analytics.newTracker(R.xml.global_tracker);
+        }
         //Enable Advertising Features
-//        mTracker.enableAdvertisingIdCollection(true);
-//        return mTracker;
-//    }
+        mGoogleAnalytics.enableAdvertisingIdCollection(true);
+        return mGoogleAnalytics;
+    }
 
     @Override
     public void onCreate() {
@@ -72,6 +70,13 @@ public class DokterPribadimuApplication extends Application {
         mComponent = DokterPribadimuComponent.Initializer.init(this);
 
         // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mFirebaseAnalytics = getDefaultFirebaseAnalytics();
+
+        // Obtain the GoogleAnalytics instance.
+        mGoogleAnalytics = getDefaultGATracker();
+
+        // Initialize TagManager and load the container from the web
+        // (if loading from the web fails, load the default container saved in res/raw)
+        //TagManagerHelper.initializeTagManager(this);
     }
 }

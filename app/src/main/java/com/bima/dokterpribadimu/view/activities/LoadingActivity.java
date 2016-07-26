@@ -1,16 +1,14 @@
 package com.bima.dokterpribadimu.view.activities;
 
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+import com.bima.dokterpribadimu.analytics.EventConstants;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.ActivityLoadingBinding;
 import com.bima.dokterpribadimu.model.UserProfile;
@@ -65,6 +63,8 @@ public class LoadingActivity extends BaseActivity {
 //        Log.d(TAG, "Setting screen name: " + TAG);
 //        mTracker.setScreenName("Image~" + TAG);
 //        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
+        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_LOADING);
     }
 
     @Override
