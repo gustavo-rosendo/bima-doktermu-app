@@ -109,18 +109,22 @@ public class LoadingActivity extends BaseActivity {
                 .subscribe(new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
-                        UserProfile userProfile = GsonUtils.fromJson(
-                                StorageUtils.getString(LoadingActivity.this, Constants.KEY_USER_PROFILE, ""),
-                                UserProfile.class
-                        );
-
-                        /*if (userProfile == null) {
-                            IntentUtils.startLandingActivity(LoadingActivity.this);
-                        } else {
-                            IntentUtils.startHomeActivityOnTop(LoadingActivity.this);
-                        }*/
-                        // FIXME: fix onboarding flow. this current flow is for testing purpose only
-                        IntentUtils.startOnboardingActivity(LoadingActivity.this);
+                        boolean onboardingFinished = StorageUtils.getBoolean(LoadingActivity.this,
+                                Constants.KEY_ONBOARDING_FINISHED, false);
+                        if(onboardingFinished) {
+                            UserProfile userProfile = GsonUtils.fromJson(
+                                    StorageUtils.getString(LoadingActivity.this, Constants.KEY_USER_PROFILE, ""),
+                                    UserProfile.class
+                            );
+                            if (userProfile == null) {
+                                IntentUtils.startLandingActivity(LoadingActivity.this);
+                            } else {
+                                IntentUtils.startHomeActivityOnTop(LoadingActivity.this);
+                            }
+                        }
+                        else {
+                            IntentUtils.startOnboardingActivity(LoadingActivity.this);
+                        }
 
                         finish();
                     }

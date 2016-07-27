@@ -145,6 +145,8 @@ public class OnboardingActivity extends BaseActivity {
                     IntentUtils.startHomeActivityOnTop(OnboardingActivity.this);
                 }
 
+                StorageUtils.putBoolean(OnboardingActivity.this, Constants.KEY_ONBOARDING_FINISHED, true);
+
                 finish();
             }
         });
