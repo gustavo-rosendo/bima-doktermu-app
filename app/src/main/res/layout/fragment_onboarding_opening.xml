@@ -28,8 +28,8 @@
             android:layout_marginBottom="@dimen/generic_large_margin"
             android:layout_centerHorizontal="true"
             android:layout_above="@+id/onboarding_info_text"
+            android:gravity="center"
             android:text="Title"
-            android:textAllCaps="true"
             android:textColor="@android:color/white"
             android:textSize="@dimen/generic_headline_text_size"/>
 
@@ -43,7 +43,7 @@
             android:paddingStart="@dimen/generic_large_padding"
             android:paddingRight="@dimen/generic_large_padding"
             android:paddingEnd="@dimen/generic_large_padding"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:text="This is just dummy placeholder message text"
             android:textColor="@android:color/white"
             android:textSize="@dimen/generic_subheading_text_size"/>
