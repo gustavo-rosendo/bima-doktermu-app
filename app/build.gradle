@@ -9,7 +9,6 @@ buildscript {
 }
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
-apply plugin: 'com.android.databinding'
 apply plugin: 'com.neenbedankt.android-apt'
 
 repositories {
@@ -70,6 +69,11 @@ android {
         production {
             buildConfigField "String", "BASE_URL", "\"https://bimaindonesia.co.id/\""
         }
+    }
+
+    // Enable data binding support
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -234,6 +238,6 @@ dependencies {
 }
 
 /**
- * For some weird reason, we must put appy plugin after dependencies for it to work
+ * For some weird reason, we must put apply plugin after dependencies for it to work
  */
 apply plugin: 'com.google.gms.google-services'
