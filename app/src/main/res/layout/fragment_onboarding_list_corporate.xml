@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:layout_above="@+id/onboarding_info_text"
-            app:layoutManager="@{LayoutManagers.grid(2)}"
+            app:layoutManager="@{LayoutManagers.linear()}"
             app:items="@{viewModel.items}"
             app:itemView="@{viewModel.itemView}"/>
 
