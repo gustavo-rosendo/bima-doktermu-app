@@ -17,6 +17,7 @@ import com.bima.dokterpribadimu.databinding.FragmentOnboardingListTestimonialBin
 import com.bima.dokterpribadimu.model.Onboarding;
 import com.bima.dokterpribadimu.model.OnboardingList;
 import com.bima.dokterpribadimu.utils.GsonUtils;
+import com.bima.dokterpribadimu.viewmodel.NewsItemViewModel;
 import com.bima.dokterpribadimu.viewmodel.OnboardingCorporateItemViewModel;
 import com.bima.dokterpribadimu.viewmodel.OnboardingTestimonialItemViewModel;
 
@@ -71,6 +72,8 @@ public class OnboardingListCorporateFragment extends Fragment {
 
         List<OnboardingList> onboardingLists = onboarding.getListTemplate();
         if (onboardingLists != null) {
+            listViewModel.items.clear();
+
             for (OnboardingList onboardingList : onboardingLists) {
                 listViewModel.items.add(new OnboardingCorporateItemViewModel(onboardingList));
             }

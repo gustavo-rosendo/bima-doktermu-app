@@ -69,6 +69,8 @@ public class OnboardingListTestimonialFragment extends Fragment {
 
         List<OnboardingList> onboardingLists = onboarding.getListTemplate();
         if (onboardingLists != null) {
+            listViewModel.items.clear();
+
             for (OnboardingList onboardingList : onboardingLists) {
                 listViewModel.items.add(new OnboardingTestimonialItemViewModel(onboardingList));
             }

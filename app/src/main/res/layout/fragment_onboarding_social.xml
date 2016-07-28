@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,7 +30,6 @@
             android:paddingRight="@dimen/generic_large_padding"
             android:paddingEnd="@dimen/generic_large_padding"
             android:gravity="center"
-            android:text="This is just dummy placeholder message text"
             android:textColor="@android:color/white"
             android:textSize="@dimen/generic_subheading_text_size"/>
 
