@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
+import com.google.ads.conversiontracking.AdWordsConversionReporter;
 import com.google.android.gms.analytics.HitBuilders;
 
 /**
@@ -16,6 +17,18 @@ public class AnalyticsHelper {
     // Flags to enable/disable Firebase/GoogleAnalytics
     private static final boolean FIREBASE           = true;
     private static final boolean GOOGLE_ANALYTICS   = true;
+
+    public static void reportAdWordsConversionRegistration() {
+        //Google Android in-app conversion tracking snippet for successful Registration
+        AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
+                "926691219", "bo6bCMjIu2UQk9_wuQM", "1.00", true);
+    }
+
+    public static void reportAdWordsConversionSubscription() {
+        //Google AdWords Android in-app conversion tracking snippet for successful Subscription
+        AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
+                "926691219", "yAbrCLeyyGUQk9_wuQM", "1.00", true);
+    }
 
     public static void logViewScreenEvent(String screenName) {
         // [START view_screen event]
@@ -45,6 +58,8 @@ public class AnalyticsHelper {
         if(FIREBASE) {
             Bundle bundle = new Bundle();
             bundle.putString(EventConstants.PARAM_EVENT_NAME, screenName);
+            //avoid Firebase error due to limit of characters in an event parameter
+            newsCategory = trimLongString(newsCategory);
             bundle.putString(EventConstants.PARAM_NEWS_CATEGORY, newsCategory);
             DokterPribadimuApplication.getInstance()
                     .getDefaultFirebaseAnalytics().logEvent(EventConstants.TYPE_VIEW_SCREEN, bundle);
@@ -112,6 +127,8 @@ public class AnalyticsHelper {
         if(FIREBASE) {
             Bundle bundle = new Bundle();
             bundle.putString(EventConstants.PARAM_EVENT_NAME, dialogName);
+            //avoid Firebase error due to limit of characters in an event parameter
+            message = trimLongString(message);
             bundle.putString(EventConstants.PARAM_MESSAGE, message);
             DokterPribadimuApplication.getInstance()
                     .getDefaultFirebaseAnalytics().logEvent(EventConstants.TYPE_VIEW_DIALOG, bundle);
@@ -198,6 +215,8 @@ public class AnalyticsHelper {
         if(FIREBASE) {
             Bundle bundle = new Bundle();
             bundle.putString(EventConstants.PARAM_EVENT_NAME, buttonName);
+            //avoid Firebase error due to limit of characters in an event parameter
+            categoryName = trimLongString(categoryName);
             bundle.putString(EventConstants.PARAM_CATEGORY, categoryName);
             DokterPribadimuApplication.getInstance()
                     .getDefaultFirebaseAnalytics().logEvent(EventConstants.TYPE_BUTTON_CLICK, bundle);
@@ -218,6 +237,8 @@ public class AnalyticsHelper {
         if(FIREBASE) {
             Bundle bundle = new Bundle();
             bundle.putString(EventConstants.PARAM_EVENT_NAME, screenName);
+            //avoid Firebase error due to limit of characters in an event parameter
+            keyword = trimLongString(keyword);
             bundle.putString(EventConstants.PARAM_SEARCH_KEYWORD, keyword);
             DokterPribadimuApplication.getInstance()
                     .getDefaultFirebaseAnalytics().logEvent(EventConstants.TYPE_SEARCH, bundle);
@@ -240,6 +261,8 @@ public class AnalyticsHelper {
             Bundle bundle = new Bundle();
             bundle.putString(EventConstants.PARAM_EVENT_NAME, screenName);
             bundle.putString(EventConstants.PARAM_NEWS_CATEGORY, newsCategory);
+            //avoid Firebase error due to limit of characters in an event parameter
+            title = trimLongString(title);
             bundle.putString(EventConstants.PARAM_NEWS_TITLE, title);
             bundle.putString(EventConstants.PARAM_NEWS_DATE, date);
             DokterPribadimuApplication.getInstance()
@@ -255,5 +278,14 @@ public class AnalyticsHelper {
                             + EventConstants.PARAM_NEWS_DATE + ": " + date).build());
         }
         // [END item_view event]
+    }
+
+    private static String trimLongString(String str) {
+        String trimmedMessage = str;
+        if(trimmedMessage.length() > 35) {
+            //avoid Firebase error due to limit of 36 characters
+            trimmedMessage = str.substring(0, 35);
+        }
+        return trimmedMessage;
     }
 }

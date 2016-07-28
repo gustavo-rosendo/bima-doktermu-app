@@ -312,8 +312,7 @@ public class RegisterFragment extends BaseFragment implements EasyPermissions.Pe
 
                             //Doktermu AdMobs Tracking - Registration
                             //Google Android in-app conversion tracking snippet for successful Registration
-//                            AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
-//                                    "926691219", "bo6bCMjIu2UQk9_wuQM", "1.00", true);
+                            AnalyticsHelper.reportAdWordsConversionRegistration();
 
                             //Google Analytics to track number of registrations (all: from AdMobs + others)
 //                            mTracker.send(new HitBuilders.EventBuilder()

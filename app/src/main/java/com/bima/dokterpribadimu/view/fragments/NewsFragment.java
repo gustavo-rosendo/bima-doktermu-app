@@ -133,15 +133,10 @@ public class NewsFragment extends BaseFragment {
                                             new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
-                                                    String newsTitle = news.getNewsTitle();
-                                                    if(newsTitle.length() > 35) {
-                                                        //avoid Firebase error due to limit of 36 characters
-                                                        newsTitle = news.getNewsTitle().substring(0, 34);
-                                                    }
                                                     AnalyticsHelper.logItemViewEvent(
                                                             EventConstants.SCREEN_NEWS_DETAILS,
                                                             newsCategory,
-                                                            newsTitle,
+                                                            news.getNewsTitle(),
                                                             news.getNewsDate());
                                                     IntentUtils.startNewsDetailActivity(getActivity(), news);
                                                 }
