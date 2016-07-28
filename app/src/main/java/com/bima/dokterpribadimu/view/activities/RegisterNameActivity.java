@@ -1,8 +1,5 @@
 package com.bima.dokterpribadimu.view.activities;
 
-import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
-import com.bima.dokterpribadimu.analytics.EventConstants;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +11,8 @@ import android.view.View;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
 import com.bima.dokterpribadimu.databinding.ActivityRegisterNameBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
@@ -222,8 +221,7 @@ public class RegisterNameActivity extends BaseActivity implements EasyPermission
 
                             //Doktermu AdMobs Tracking - Registration
                             //Google Android in-app conversion tracking snippet for successful Registration
-//                            AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
-//                                    "926691219", "bo6bCMjIu2UQk9_wuQM", "1.00", true);
+                            AnalyticsHelper.reportAdWordsConversionRegistration();
 
                             //Google Analytics to track number of registrations (all: from AdMobs + others)
 //                            mTracker.send(new HitBuilders.EventBuilder()

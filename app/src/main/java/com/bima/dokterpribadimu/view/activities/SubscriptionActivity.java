@@ -1,8 +1,5 @@
 package com.bima.dokterpribadimu.view.activities;
 
-import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
-import com.bima.dokterpribadimu.analytics.EventConstants;
-
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -21,6 +18,8 @@ import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
 import com.bima.dokterpribadimu.data.inappbilling.BillingInitializationListener;
 import com.bima.dokterpribadimu.data.inappbilling.QueryInventoryListener;
@@ -173,7 +172,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
             @Override
             public void onFailed() {
                 // TODO: handle this
-                showErrorDialog(TAG,
+                showErrorDialog(TAG + ".QueryIabInventoryFailed",
                         R.drawable.ic_bug,
                         getString(R.string.dialog_failed),
                         getString(R.string.dialog_sign_in_failed_message),
@@ -224,7 +223,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                         updateUser(userProfile);
 
                     } else {
-                        showErrorDialog(TAG,
+                        showErrorDialog(TAG + ".SubscribeButtonClickFailed",
                                 R.drawable.ic_bug,
                                 getString(R.string.dialog_failed),
                                 getString(R.string.dialog_sign_in_failed_message),
@@ -452,8 +451,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
 
                         //Doktermu Tracking - Subscription
                         //Google AdWords Android in-app conversion tracking snippet for successful Subscription
-//                        AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
-//                                "926691219", "yAbrCLeyyGUQk9_wuQM", "1.00", true);
+                        AnalyticsHelper.reportAdWordsConversionSubscription();
 
                         //Google Analytics tracking for successful Subscription
 //                        Product product = new Product()
@@ -479,7 +477,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                         registerSubscription(subscription);
 
                     } else {
-                        showErrorDialog(TAG,
+                        showErrorDialog(TAG + ".GooglePurchaseFailedOrCanceled",
                                 R.drawable.ic_bug,
                                 getString(R.string.dialog_failed),
                                 getString(R.string.dialog_google_play_failed_message)
@@ -513,7 +511,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
 
                     @Override
                     public void onError(Throwable e) {
-                        handleError(TAG, e.getMessage());
+                        handleError(TAG + ".UpdateUserBeforeSubscription", e.getMessage());
                     }
 
                     @Override
@@ -521,7 +519,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                         if (response.getStatus() == Constants.Status.SUCCESS) {
                             initPurchaseFlow();
                         } else {
-                            handleError(TAG, response.getMessage());
+                            handleError(TAG + ".UpdateUserBeforeSubscription", response.getMessage());
                         }
                     }
                 });
@@ -551,7 +549,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                     public void onError(Throwable e) {
                         dismissProgressDialog();
 
-                        handleError(TAG, e.getMessage());
+                        handleError(TAG + ".RegisterSubscriptionAfterPayment", e.getMessage());
                     }
 
                     @Override
@@ -563,7 +561,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                             //now query Google to update the product_name and the price
                             initBillingClient();
                         } else {
-                            handleError(TAG, response.getMessage());
+                            handleError(TAG + ".RegisterSubscriptionAfterPayment", response.getMessage());
                         }
                     }
                 });
@@ -590,7 +588,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
 
                     @Override
                     public void onError(Throwable e) {
-                        handleError(TAG, e.getMessage());
+                        handleError(TAG + ".UpdateSubscriptionAfterPayment", e.getMessage());
                     }
 
                     @Override
@@ -611,7 +609,7 @@ public class SubscriptionActivity extends BaseActivity implements EasyPermission
                             );
                             AnalyticsHelper.logViewDialogEvent(EventConstants.DIALOG_SUBSCRIPTION_BACKEND_SUCCESS);
                         } else {
-                            handleError(TAG, response.getMessage());
+                            handleError(TAG + ".UpdateSubscriptionAfterPayment", response.getMessage());
                         }
                     }
                 });
