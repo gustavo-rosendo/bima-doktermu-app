@@ -4,9 +4,12 @@ import android.app.Application;
 
 import com.bima.dokterpribadimu.view.activities.AboutActivity;
 import com.bima.dokterpribadimu.view.activities.BookCallActivity;
+import com.bima.dokterpribadimu.view.activities.CurrentHealthActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
+import com.bima.dokterpribadimu.view.activities.GeneralInformationActivity;
 import com.bima.dokterpribadimu.view.activities.HomeActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
+import com.bima.dokterpribadimu.view.activities.MedicineInformationActivity;
 import com.bima.dokterpribadimu.view.activities.NewsActivity;
 import com.bima.dokterpribadimu.view.activities.NewsDetailActivity;
 import com.bima.dokterpribadimu.view.activities.OnboardingActivity;
@@ -22,6 +25,7 @@ import com.bima.dokterpribadimu.view.fragments.AboutFragment;
 import com.bima.dokterpribadimu.view.fragments.DoctorCallFragment;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
 import com.bima.dokterpribadimu.view.fragments.HomeFragment;
+import com.bima.dokterpribadimu.view.fragments.MedicineInformationFragment;
 import com.bima.dokterpribadimu.view.fragments.NewsFragment;
 import com.bima.dokterpribadimu.view.fragments.OnboardingListCorporateFragment;
 import com.bima.dokterpribadimu.view.fragments.OnboardingListTestimonialFragment;
@@ -63,6 +67,9 @@ public interface DokterPribadimuComponent {
     void inject(NewsActivity newsActivity);
     void inject(NewsDetailActivity newsDetailActivity);
     void inject(ProfileActivity profileActivity);
+    void inject(GeneralInformationActivity generalInformationActivity);
+    void inject(CurrentHealthActivity currentHealthActivity);
+    void inject(MedicineInformationActivity medicineInformationActivity);
     void inject(AboutActivity aboutActivity);
     void inject(OnboardingOpeningFragment onboardingOpeningFragment);
     void inject(OnboardingPhotoFragment onboardingPhotoFragment);
@@ -77,6 +84,7 @@ public interface DokterPribadimuComponent {
     void inject(PartnersFragment partnersFragment);
     void inject(NewsFragment newsFragment);
     void inject(ProfileFragment profileFragment);
+    void inject(MedicineInformationFragment medicineInformationFragment);
     void inject(AboutFragment profileFragment);
 
     final class Initializer {

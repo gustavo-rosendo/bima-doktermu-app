@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Doktermu</string>
     <string name="ok">OK</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="kg">kg</string>
+    <string name="cm">cm</string>
 
     <!-- facebook -->
     <string name="facebook_app_id">1568480343444186</string>
@@ -89,6 +93,10 @@
     <string name="profile_password">Kata sandi</string>
     <string name="profile_asterisk_password">********</string>
     <string name="my_phone_number">Nomor telepon</string>
+    <string name="profile_my_personal_info">Info personal saya</string>
+    <string name="profile_general_information">General information</string>
+    <string name="profile_current_health">Current health condition</string>
+    <string name="profile_medicine_information">Medicine information</string>
     <string name="profile_call_history_info">Konsultasi terakhir</string>
     <string name="profile_call_history_more">Selebihnya</string>
     <string name="profile_app_info">
@@ -97,6 +105,31 @@
         A concept designed and developed by Cerise
     </string>
     <string name="cerise">Cerise</string>
+
+    <!-- general information -->
+    <string name="general_height">Height</string>
+    <string name="general_weight">Weight</string>
+    <string name="general_religion">Religion</string>
+    <string name="general_blood_type">Blood type</string>
+    <string name="general_smoker">Smoker</string>
+    <string name="general_physical_exercise">Physical exercise</string>
+    <string name="general_health_insurance">Health insurance</string>
+
+    <!-- current health -->
+    <string name="current_health_diabetes">Diabetes</string>
+    <string name="current_health_cancer">Cancer</string>
+    <string name="current_health_blood_pressure">Blood pressure</string>
+    <string name="current_health_allergies">Allergies</string>
+    <string name="current_health_asthma">Asthma</string>
+    <string name="current_health_pregnant">Pregnant</string>
+
+    <!-- medicine information -->
+    <string name="medicine_prescription">Prescription</string>
+    <string name="medicine_immunisation">Immunisation</string>
+    <string name="medicine_date">Date</string>
+    <string name="medicine_name">Name</string>
+    <string name="medicine_duration">Duration</string>
+    <string name="medicine_renewal">Renewal</string>
 
     <!-- drawer -->
     <string name="drawer_doctor_on_call">Doktermu</string>
@@ -287,8 +320,5 @@
         <item>Perempuan</item>
         <item>Pilih jenis kelamin</item>
     </string-array>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

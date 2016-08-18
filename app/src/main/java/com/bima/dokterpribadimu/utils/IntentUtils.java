@@ -6,9 +6,12 @@ import android.content.Intent;
 import com.bima.dokterpribadimu.model.News;
 import com.bima.dokterpribadimu.model.Partner;
 import com.bima.dokterpribadimu.view.activities.BookCallActivity;
+import com.bima.dokterpribadimu.view.activities.CurrentHealthActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
+import com.bima.dokterpribadimu.view.activities.GeneralInformationActivity;
 import com.bima.dokterpribadimu.view.activities.HomeActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
+import com.bima.dokterpribadimu.view.activities.MedicineInformationActivity;
 import com.bima.dokterpribadimu.view.activities.NewsActivity;
 import com.bima.dokterpribadimu.view.activities.NewsDetailActivity;
 import com.bima.dokterpribadimu.view.activities.OnboardingActivity;
@@ -132,5 +135,29 @@ public class IntentUtils {
         Intent intent = new Intent(context, DoctorCallActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
+    }
+
+    /**
+     * Start GeneralInformationActivity
+     * @param context caller's activity / fragment context
+     */
+    public static void startGeneralInformationActivity(Context context) {
+        context.startActivity(new Intent(context, GeneralInformationActivity.class));
+    }
+
+    /**
+     * Start CurrentHealthActivity
+     * @param context caller's activity / fragment context
+     */
+    public static void startCurrentHealthActivity(Context context) {
+        context.startActivity(new Intent(context, CurrentHealthActivity.class));
+    }
+
+    /**
+     * Start MedicineInformationActivity
+     * @param context caller's activity / fragment context
+     */
+    public static void startMedicineInformationActivity(Context context) {
+        context.startActivity(new Intent(context, MedicineInformationActivity.class));
     }
 }

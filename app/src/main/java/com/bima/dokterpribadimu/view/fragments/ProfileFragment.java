@@ -14,8 +14,8 @@ import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
-import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.data.remote.api.CallHistoryApi;
 import com.bima.dokterpribadimu.data.remote.api.ProfileApi;
 import com.bima.dokterpribadimu.data.remote.api.UserApi;
@@ -27,6 +27,7 @@ import com.bima.dokterpribadimu.model.ProfileResponse;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.GsonUtils;
+import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
@@ -243,6 +244,27 @@ public class ProfileFragment extends BaseFragment {
             public void onClick(View view) {
                 AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SETTING_SCREEN_PROFILE);
                 startViewIntent(Constants.GOOGLE_PLAY_MANAGE_SUBSCRIPTION);
+            }
+        });
+
+        binding.profileGeneralInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentUtils.startGeneralInformationActivity(getActivity());
+            }
+        });
+
+        binding.profileCurrentHealthButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentUtils.startCurrentHealthActivity(getActivity());
+            }
+        });
+
+        binding.profileMedicineInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentUtils.startMedicineInformationActivity(getActivity());
             }
         });
     }

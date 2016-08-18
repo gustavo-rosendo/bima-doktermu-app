@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/generic_toolbar_height"
+                android:background="@color/bima_blue"
+                app:elevation="4dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/toolbar_back_button"
+                        android:layout_width="@dimen/generic_toolbar_button_height"
+                        android:layout_height="@dimen/generic_toolbar_button_height"
+                        android:padding="@dimen/generic_toolbar_image_button_padding"
+                        android:src="@drawable/ic_arrow_back"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_toRightOf="@+id/toolbar_back_button"
+                        android:layout_toEndOf="@+id/toolbar_back_button"
+                        android:text="@string/profile_general_information"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"/>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/general_height"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/general_height_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"
+                tools:text="@string/general_height"/>
+
+            <LinearLayout
+                android:id="@+id/general_height_edit_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <EditText
+                        android:id="@+id/general_height_edit_text"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:inputType="numberSigned"
+                        android:maxLength="3"
+                        android:textSize="@dimen/generic_body_text_size"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/kg"
+                        android:textSize="@dimen/generic_body_text_size"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:layout_marginTop="-2dp"
+                    android:background="@android:color/darker_gray"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/general_weight"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/general_weight_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"
+                tools:text="@string/general_weight"/>
+
+            <LinearLayout
+                android:id="@+id/general_weight_edit_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <EditText
+                        android:id="@+id/general_weight_edit_text"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:inputType="numberSigned"
+                        android:maxLength="3"
+                        android:textSize="@dimen/generic_body_text_size"/>
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/cm"
+                        android:textSize="@dimen/generic_body_text_size"/>
+                    
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:layout_marginTop="-2dp"
+                    android:background="@android:color/darker_gray"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/general_religion"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/general_religion_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"
+                tools:text="@string/general_religion"/>
+
+            <LinearLayout
+                android:id="@+id/general_religion_edit_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <Spinner
+                    android:id="@+id/general_religion_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:background="@android:color/darker_gray"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/general_blood_type"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/general_blood_type_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"
+                tools:text="@string/general_blood_type"/>
+
+            <LinearLayout
+                android:id="@+id/general_blood_type_edit_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <Spinner
+                    android:id="@+id/general_blood_type_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:background="@android:color/darker_gray"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/general_smoker"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/general_smoker_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"
+                tools:text="@string/general_smoker"/>
+
+            <LinearLayout
+                android:id="@+id/general_smoker_edit_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <Spinner
+                    android:id="@+id/general_smoker_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:background="@android:color/darker_gray"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/general_physical_exercise"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/general_physical_exercise_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"
+                tools:text="@string/general_physical_exercise"/>
+
+            <LinearLayout
+                android:id="@+id/general_physical_exercise_edit_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <Spinner
+                    android:id="@+id/general_physical_exercise_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:background="@android:color/darker_gray"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/general_health_insurance"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/general_health_insurance_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"
+                tools:text="@string/general_health_insurance"/>
+
+            <LinearLayout
+                android:id="@+id/general_health_insurance_edit_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <Spinner
+                    android:id="@+id/general_health_insurance_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_separator_height"
+                    android:background="@android:color/darker_gray"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        
+        <Button
+            android:id="@+id/general_edit_button"
+            android:layout_width="150dp"
+            android:layout_height="@dimen/generic_button_height"
+            android:layout_marginTop="@dimen/generic_large_margin"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:background="@drawable/rounded_bima_blue_bg_selector"
+            android:text="@string/edit"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/generic_subheading_text_size"/>
+
+        <Button
+            android:id="@+id/general_save_button"
+            android:layout_width="150dp"
+            android:layout_height="@dimen/generic_button_height"
+            android:layout_marginTop="@dimen/generic_large_margin"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:background="@drawable/rounded_green_bg_selector"
+            android:text="@string/save"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/generic_subheading_text_size"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</layout>

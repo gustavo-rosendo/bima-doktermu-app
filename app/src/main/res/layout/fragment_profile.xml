@@ -53,12 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="@dimen/generic_xlarge_margin"
-                android:layout_marginBottom="@dimen/generic_xlarge_margin"
-                android:layout_marginLeft="@dimen/generic_xlarge_margin"
-                android:layout_marginStart="@dimen/generic_xlarge_margin"
-                android:layout_marginRight="@dimen/generic_xlarge_margin"
-                android:layout_marginEnd="@dimen/generic_xlarge_margin"
+                android:layout_margin="@dimen/generic_large_margin"
                 android:layout_below="@+id/profile_name_text">
 
                 <TextView
@@ -330,6 +325,103 @@
                     android:layout_height="@dimen/generic_separator_height"
                     android:layout_marginTop="@dimen/generic_xlarge_margin"
                     android:background="@color/grey_light"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_xlarge_margin"
+                    android:text="@string/profile_my_personal_info"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/generic_subheading_text_size"/>
+
+                <LinearLayout
+                    android:id="@+id/profile_general_info_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_button_height"
+                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:orientation="horizontal"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/profile_general_information"
+                        android:textSize="@dimen/generic_body_text_size"/>
+
+                    <com.bima.dokterpribadimu.view.components.AspectRatioImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_chevron_right"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:scaleType="centerCrop"
+                        app:aspectRatio="1.0"
+                        app:aspectRatioEnabled="true"
+                        app:dominantMeasurement="height"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/profile_current_health_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_button_height"
+                    android:orientation="horizontal"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/profile_current_health"
+                        android:textSize="@dimen/generic_body_text_size"/>
+
+                    <com.bima.dokterpribadimu.view.components.AspectRatioImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_chevron_right"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:scaleType="centerCrop"
+                        app:aspectRatio="1.0"
+                        app:aspectRatioEnabled="true"
+                        app:dominantMeasurement="height"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/profile_medicine_info_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generic_button_height"
+                    android:orientation="horizontal"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/profile_medicine_information"
+                        android:textSize="@dimen/generic_body_text_size"/>
+
+                    <com.bima.dokterpribadimu.view.components.AspectRatioImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_chevron_right"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:scaleType="centerCrop"
+                        app:aspectRatio="1.0"
+                        app:aspectRatioEnabled="true"
+                        app:dominantMeasurement="height"/>
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"

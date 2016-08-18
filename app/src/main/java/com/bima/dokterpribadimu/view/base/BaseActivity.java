@@ -56,6 +56,10 @@ public class BaseActivity extends RxAppCompatActivity {
     }
 
     protected void handleError(String tag, String errorMessage) {
+        handleError(tag, errorMessage, null);
+    }
+
+    protected void handleError(String tag, String errorMessage, OnDokterPribadimuDialogClickListener clickListener) {
         if (errorMessage == null || errorMessage.contains(Constants.ILLEGAL_STATE_EXCEPTION)) {
             errorMessage = getString(R.string.dialog_sign_in_failed_message);
         }
@@ -71,7 +75,7 @@ public class BaseActivity extends RxAppCompatActivity {
                     getString(R.string.dialog_failed),
                     errorMessage,
                     getString(R.string.dialog_try_once_more),
-                    null);
+                    clickListener);
         }
     }
 

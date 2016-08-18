@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.bima.dokterpribadimu.view.fragments.MedicineInformationFragment.MedicineInformationListViewModel"/>
+        <import
+            type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/generic_large_padding"
+        android:paddingStart="@dimen/generic_large_padding"
+        android:paddingRight="@dimen/generic_large_padding"
+        android:paddingEnd="@dimen/generic_large_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_button_height"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:text="@string/medicine_date"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:text="@string/medicine_name"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/medicine_info_duration_renewal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:text="@string/medicine_duration"
+                android:textSize="@dimen/generic_body_text_size"
+                android:gravity="center_vertical|end"/>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/medicine_info_recycler"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/generic_small_padding"
+            android:paddingStart="@dimen/generic_small_padding"
+            android:paddingRight="@dimen/generic_small_padding"
+            android:paddingEnd="@dimen/generic_small_padding"
+            app:layoutManager="@{LayoutManagers.linear()}"
+            app:items="@{viewModel.items}"
+            app:itemView="@{viewModel.itemView}"/>
+
+    </LinearLayout>
+
+</layout>

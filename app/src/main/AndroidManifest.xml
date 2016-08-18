@@ -31,6 +31,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activities.ProfileActivity" />
+        <activity android:name=".view.activities.MedicineInformationActivity" />
+        <activity android:name=".view.activities.CurrentHealthActivity" />
+        <activity android:name=".view.activities.GeneralInformationActivity" />
         <activity android:name=".view.activities.AboutActivity" />
         <activity android:name=".view.activities.SubscriptionActivity" />
         <activity android:name=".view.activities.SignInActivity" />
@@ -44,7 +47,7 @@
         <activity android:name=".view.activities.PartnersDetailActivity" />
         <activity android:name=".view.activities.NewsDetailActivity" />
         <activity android:name=".view.activities.NewsActivity" />
-        <activity android:name=".view.activities.OnboardingActivity"/>
+        <activity android:name=".view.activities.OnboardingActivity" />
 
         <receiver
             android:name="com.google.ads.conversiontracking.InstallReceiver"
@@ -71,7 +74,6 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
     </application>
 
 </manifest>

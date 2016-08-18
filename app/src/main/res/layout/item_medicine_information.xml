@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="medicine_info_item_viewmodel"
+            type="com.bima.dokterpribadimu.viewmodel.MedicineInformationViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/generic_button_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:text="@{medicine_info_item_viewmodel.date}"
+            android:textSize="@dimen/generic_body_text_size"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:text="@{medicine_info_item_viewmodel.name}"
+            android:textSize="@dimen/generic_body_text_size"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="@{medicine_info_item_viewmodel.durationOrRenewal}"
+            android:textSize="@dimen/generic_body_text_size"
+            android:gravity="center_vertical|end"/>
+
+    </LinearLayout>
+
+</layout>
