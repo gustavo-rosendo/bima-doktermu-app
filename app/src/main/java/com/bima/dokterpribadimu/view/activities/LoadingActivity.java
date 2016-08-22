@@ -6,7 +6,9 @@ import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.bima.dokterpribadimu.R;
@@ -54,6 +56,17 @@ public class LoadingActivity extends BaseActivity {
 
         initAnim();
         runSplash();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Get the intent that started this Activity.
+        // If it was started by a Campaign, log it in GA.
+        Intent intent = this.getIntent();
+        Uri uri = intent.getData();
+        AnalyticsHelper.reportCampaignSourceAttribution(uri, EventConstants.SCREEN_LOADING);
     }
 
     @Override

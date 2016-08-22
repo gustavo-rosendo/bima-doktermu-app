@@ -45,6 +45,18 @@
         <activity android:name=".view.activities.NewsDetailActivity" />
         <activity android:name=".view.activities.NewsActivity" />
 
+        <!-- Used for Google Play Store Campaign Measurement-->
+        <receiver android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.google.android.gms.analytics.CampaignTrackingService"
+            android:enabled="true"
+            android:exported="false" />
+
         <receiver
             android:name="com.google.ads.conversiontracking.InstallReceiver"
             android:exported="true">
