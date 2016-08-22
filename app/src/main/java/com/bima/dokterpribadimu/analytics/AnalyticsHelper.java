@@ -1,5 +1,6 @@
 package com.bima.dokterpribadimu.analytics;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -18,6 +19,10 @@ public class AnalyticsHelper {
     private static final boolean FIREBASE           = true;
     private static final boolean GOOGLE_ANALYTICS   = true;
 
+    // This assumes the use of Google Analytics campaign
+    // "utm" parameters, like "utm_source".
+    private static final String CAMPAIGN_SOURCE_PARAM = "utm_source";
+
     public static void reportAdWordsConversionRegistration() {
         //Google Android in-app conversion tracking snippet for successful Registration
         AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
@@ -28,6 +33,29 @@ public class AnalyticsHelper {
         //Google AdWords Android in-app conversion tracking snippet for successful Subscription
         AdWordsConversionReporter.reportWithConversionId(DokterPribadimuApplication.getInstance().getApplicationContext(),
                 "926691219", "yAbrCLeyyGUQk9_wuQM", "1.00", true);
+    }
+
+    public static void reportCampaignSourceAttribution(Uri uri, String screenName) {
+        // If no URI, return here.
+        if (uri == null) { return; }
+
+        HitBuilders.EventBuilder campaignBuilder = new HitBuilders.EventBuilder()
+                .setCategory(EventConstants.TYPE_VIEW_SCREEN)
+                .setAction(screenName);
+
+        // Source is the only required campaign field.
+        // No need to continue if not present.
+        if (uri.getQueryParameter(CAMPAIGN_SOURCE_PARAM) != null) {
+
+            // MapBuilder.setCampaignParamsFromUrl parses Google Analytics campaign
+            // ("UTM") parameters from a string URL into a Map that can be set on
+            // the Tracker.
+            campaignBuilder.setCampaignParamsFromUrl(uri.toString());
+
+            //Send the event to GoogleAnalytics
+            DokterPribadimuApplication.getInstance().
+                    getDefaultGATracker().send(campaignBuilder.build());
+        }
     }
 
     public static void logViewScreenEvent(String screenName) {
