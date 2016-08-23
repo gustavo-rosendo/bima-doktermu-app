@@ -8,6 +8,7 @@ import com.bima.dokterpribadimu.model.Partner;
 import com.bima.dokterpribadimu.view.activities.BookCallActivity;
 import com.bima.dokterpribadimu.view.activities.CurrentHealthActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
+import com.bima.dokterpribadimu.view.activities.DoctorProfileActivity;
 import com.bima.dokterpribadimu.view.activities.GeneralInformationActivity;
 import com.bima.dokterpribadimu.view.activities.HomeActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
@@ -160,4 +161,14 @@ public class IntentUtils {
     public static void startMedicineInformationActivity(Context context) {
         context.startActivity(new Intent(context, MedicineInformationActivity.class));
     }
+
+    /**
+     *
+     * @param context caller's activity / fragment context
+     * @param partner partner's detail to be displayed
+     */
+    public static void startDoctorProfileActivity(Context context, String doctorId) {
+        context.startActivity(DoctorProfileActivity.create(context, doctorId));
+    }
+
 }

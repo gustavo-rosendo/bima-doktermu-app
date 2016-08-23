@@ -175,7 +175,7 @@
                             android:textSize="16sp"/>
 
                         <TextView
-                            android:id="@+id/profile_member_number_text"
+                            android:id="@+id/doctor_university"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -208,6 +208,7 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/doctor_bio"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="-"
