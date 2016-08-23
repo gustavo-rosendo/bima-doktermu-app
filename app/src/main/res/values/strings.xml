@@ -106,6 +106,14 @@
     </string>
     <string name="cerise">Cerise</string>
 
+    <!-- doctor profile -->
+    <string name="doctor_profile">Doctor Profile</string>
+    <string name="doctor_information">Doctor Information</string>
+    <string name="doctor_certification_code">Certification code:</string>
+    <string name="doctor_speciality">Speciality:</string>
+    <string name="doctor_university">University:</string>
+    <string name="doctor_bio">Doctor bio</string>
+
     <!-- general information -->
     <string name="general_height">Height</string>
     <string name="general_weight">Weight</string>
