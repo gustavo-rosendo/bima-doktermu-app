@@ -329,4 +329,45 @@
         <item>Pilih jenis kelamin</item>
     </string-array>
 
+    <!-- religion  -->
+    <string-array name="religion_arrays">
+        <item>Islam</item>
+        <item>Protestan</item>
+        <item>Katolik</item>
+        <item>Hindu</item>
+        <item>Buddha</item>
+        <item>Khonghucu</item>
+        <item>Lain-lain</item>
+        <item>-</item>
+    </string-array>
+
+    <!-- blood type  -->
+    <string-array name="blood_type_arrays">
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>O+</item>
+        <item>O-</item>
+        <item>-</item>
+    </string-array>
+
+    <!-- question  -->
+    <string-array name="question_arrays">
+        <item>Ya</item>
+        <item>Tidak</item>
+        <item>-</item>
+    </string-array>
+
+    <!-- physical exercise  -->
+    <string-array name="physical_exercise_arrays">
+        <item>Sering</item>
+        <item>Terkadang</item>
+        <item>Jarang</item>
+        <item>Tidak pernah</item>
+        <item>-</item>
+    </string-array>
+
 </resources>

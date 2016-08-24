@@ -117,7 +117,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/generic_separator_height"
-                    android:layout_marginTop="-2dp"
+                    android:layout_marginTop="-4dp"
                     android:background="@android:color/darker_gray"/>
 
             </LinearLayout>
@@ -162,6 +162,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="0dp"
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
@@ -232,7 +233,8 @@
                 <Spinner
                     android:id="@+id/general_religion_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/generic_body_text_size"/>
 
                 <View
                     android:layout_width="match_parent"

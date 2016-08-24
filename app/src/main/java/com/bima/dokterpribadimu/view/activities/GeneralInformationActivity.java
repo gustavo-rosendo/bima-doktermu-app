@@ -3,6 +3,7 @@ package com.bima.dokterpribadimu.view.activities;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
@@ -63,6 +64,66 @@ public class GeneralInformationActivity extends BaseActivity {
                 updateEditLayout(View.GONE);
             }
         });
+
+        ArrayAdapter<String> spinnerReligionAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.religion_arrays)){
+            @Override
+            public int getCount() {
+                return super.getCount() - 1; // don't display last item. It is used as hint.
+            }
+        };
+        spinnerReligionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.generalReligionSpinner.setAdapter(spinnerReligionAdapter);
+        binding.generalReligionSpinner.setSelection(spinnerReligionAdapter.getCount());
+
+        ArrayAdapter<String> spinnerBloodTypeAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.blood_type_arrays)){
+            @Override
+            public int getCount() {
+                return super.getCount() - 1; // don't display last item. It is used as hint.
+            }
+        };
+        spinnerBloodTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.generalBloodTypeSpinner.setAdapter(spinnerBloodTypeAdapter);
+        binding.generalBloodTypeSpinner.setSelection(spinnerBloodTypeAdapter.getCount());
+
+        ArrayAdapter<String> spinnerSmokerAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.question_arrays)){
+            @Override
+            public int getCount() {
+                return super.getCount() - 1; // don't display last item. It is used as hint.
+            }
+        };
+        spinnerSmokerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.generalSmokerSpinner.setAdapter(spinnerSmokerAdapter);
+        binding.generalSmokerSpinner.setSelection(spinnerSmokerAdapter.getCount());
+
+        ArrayAdapter<String> spinnerPhysicalExerciseAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.physical_exercise_arrays)){
+            @Override
+            public int getCount() {
+                return super.getCount() - 1; // don't display last item. It is used as hint.
+            }
+        };
+        spinnerPhysicalExerciseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.generalPhysicalExerciseSpinner.setAdapter(spinnerPhysicalExerciseAdapter);
+        binding.generalPhysicalExerciseSpinner.setSelection(spinnerPhysicalExerciseAdapter.getCount());
+
+        ArrayAdapter<String> spinnerHealthInsuranceAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.question_arrays)){
+            @Override
+            public int getCount() {
+                return super.getCount() - 1; // don't display last item. It is used as hint.
+            }
+        };
+        spinnerHealthInsuranceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.generalHealthInsuranceSpinner.setAdapter(spinnerHealthInsuranceAdapter);
+        binding.generalHealthInsuranceSpinner.setSelection(spinnerHealthInsuranceAdapter.getCount());
 
         getHealthInformation(UserProfileUtils.getUserProfile(this).getAccessToken());
     }
