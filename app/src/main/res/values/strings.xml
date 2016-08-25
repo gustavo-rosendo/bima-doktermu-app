@@ -232,6 +232,7 @@
     <string name="dialog_already_subscribed_message">Anda sudah terdaftar</string>
     <string name="dialog_reset_password_email_not_registered_title">Email tidak terdaftar</string>
     <string name="dialog_reset_password_email_not_registered_message">Cek kembali alamat email yang Anda masukkan</string>
+    <string name="dialog_profile_saved_success_message">Profil Anda berhasil disimpan.</string>
 
     <!-- permission -->
     <string name="rationale_location">Doktermu perlu mengakses GPS anda untuk mengaktifkan semua fitur aplikasi.</string>

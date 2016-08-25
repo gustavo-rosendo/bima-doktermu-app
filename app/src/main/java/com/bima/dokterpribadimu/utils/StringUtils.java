@@ -8,6 +8,6 @@ public class StringUtils {
     private static final String DASH = "-";
 
     public static String getStringOrDashIfNull(String string) {
-        return string != null ? string : DASH;
+        return (string != null && string != "") ? string : DASH;
     }
 }

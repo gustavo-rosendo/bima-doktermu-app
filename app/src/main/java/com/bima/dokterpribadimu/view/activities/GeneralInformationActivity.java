@@ -60,6 +60,25 @@ public class GeneralInformationActivity extends BaseActivity {
         binding.generalSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String height = binding.generalHeightEditText.getText().toString();
+                String weight = binding.generalWeightEditText.getText().toString();
+                String religion = binding.generalReligionSpinner.getSelectedItem().toString();
+                String bloodType = binding.generalBloodTypeSpinner.getSelectedItem().toString();
+                String smoker = binding.generalSmokerSpinner.getSelectedItem().toString();
+                String physicalExercise = binding.generalPhysicalExerciseSpinner.getSelectedItem().toString();
+                String healthInsurance = binding.generalHealthInsuranceSpinner.getSelectedItem().toString();
+
+                updateHealthInformation(
+                        (height != "")? height : null,
+                        (weight != "")? weight : null,
+                        (religion != "" && religion != "-")? religion : null,
+                        (bloodType != "" && bloodType != "-")? bloodType : null,
+                        (smoker != "" && smoker != "-")? smoker : null,
+                        (physicalExercise != "" && physicalExercise != "-")? physicalExercise : null,
+                        (healthInsurance != "" && healthInsurance != "-")? healthInsurance : null,
+                        UserProfileUtils.getUserProfile(GeneralInformationActivity.this).getAccessToken()
+                );
+
                 updateInfoLayout(View.VISIBLE);
                 updateEditLayout(View.GONE);
             }
@@ -148,6 +167,10 @@ public class GeneralInformationActivity extends BaseActivity {
         binding.generalPhysicalExerciseEditLayout.setVisibility(visibility);
         binding.generalHealthInsuranceEditLayout.setVisibility(visibility);
         binding.generalSaveButton.setVisibility(visibility);
+
+        if(visibility == View.VISIBLE) {
+            updateEditViews();
+        }
     }
 
     /**
@@ -192,6 +215,65 @@ public class GeneralInformationActivity extends BaseActivity {
                 });
     }
 
+    /**
+     * Get user's health info
+     * @param accessToken user's access token
+     */
+    private void updateHealthInformation(final String height, final String weight, final String religion,
+                                         final String bloodType, final String smoker, final String physicalExercise,
+                                         final String healthInsurance, final String accessToken) {
+        profileApi.updateHealthInformation(height, weight, religion, bloodType,
+                                        smoker, physicalExercise, healthInsurance, accessToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse>() {
+
+                    @Override
+                    public void onStart() {
+                        showProgressDialog();
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        dismissProgressDialog();
+
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse response) {
+                        dismissProgressDialog();
+                        if (response.getStatus() == Constants.Status.SUCCESS) {
+                            Information information = new Information();
+                            information.setHeight(height);
+                            information.setWeight(weight);
+                            information.setReligion(religion);
+                            information.setBloodType(bloodType);
+                            information.setSmoker(smoker);
+                            information.setPhysicalExercise(physicalExercise);
+                            information.setHealthInsurance(healthInsurance);
+                            //Update the "view-mode" of the screen with the new information
+                            updateViews(information);
+
+                            showSuccessDialog(
+                                    R.drawable.ic_thumb_up,
+                                    getString(R.string.dialog_success),
+                                    getString(R.string.dialog_profile_saved_success_message),
+                                    getString(R.string.ok),
+                                    null);
+                        } else {
+                            handleError(TAG, response.getMessage());
+                        }
+                    }
+                });
+    }
+
     private void updateViews(Information information) {
         binding.generalHeightText.setText(StringUtils.getStringOrDashIfNull(information.getHeight()));
         binding.generalWeightText.setText(StringUtils.getStringOrDashIfNull(information.getWeight()));
@@ -200,5 +282,58 @@ public class GeneralInformationActivity extends BaseActivity {
         binding.generalSmokerText.setText(StringUtils.getStringOrDashIfNull(information.getSmoker()));
         binding.generalPhysicalExerciseText.setText(StringUtils.getStringOrDashIfNull(information.getPhysicalExercise()));
         binding.generalHealthInsuranceText.setText(StringUtils.getStringOrDashIfNull(information.getHealthInsurance()));
+    }
+
+    private void updateEditViews() {
+        String height = binding.generalHeightText.getText().toString();
+        String weight = binding.generalWeightText.getText().toString();
+        String religion = binding.generalReligionText.getText().toString();
+        String bloodType = binding.generalBloodTypeText.getText().toString();
+        String smoker = binding.generalSmokerText.getText().toString();
+        String physicalExercise = binding.generalPhysicalExerciseText.getText().toString();
+        String healthInsurance = binding.generalHealthInsuranceText.getText().toString();
+
+        binding.generalHeightEditText.setText(height);
+        binding.generalWeightEditText.setText(weight);
+
+        String[] religionArr = getResources().getStringArray(R.array.religion_arrays);
+        for(int i = 0; i < religionArr.length; i++) {
+            if(religionArr[i].equalsIgnoreCase(religion) && i <= binding.generalReligionSpinner.getCount()) {
+                binding.generalReligionSpinner.setSelection(i);
+                break;
+            }
+        }
+
+        String[] bloodTypeArr = getResources().getStringArray(R.array.blood_type_arrays);
+        for(int i = 0; i < bloodTypeArr.length; i++) {
+            if(bloodTypeArr[i].equalsIgnoreCase(bloodType) && i <= binding.generalBloodTypeSpinner.getCount()) {
+                binding.generalBloodTypeSpinner.setSelection(i);
+                break;
+            }
+        }
+
+        String[] smokerArr = getResources().getStringArray(R.array.question_arrays);
+        for(int i = 0; i < smokerArr.length; i++) {
+            if(smokerArr[i].equalsIgnoreCase(smoker) && i <= binding.generalSmokerSpinner.getCount()) {
+                binding.generalSmokerSpinner.setSelection(i);
+                break;
+            }
+        }
+
+        String[] physicalExerciseArr = getResources().getStringArray(R.array.physical_exercise_arrays);
+        for(int i = 0; i < smokerArr.length; i++) {
+            if(physicalExerciseArr[i].equalsIgnoreCase(physicalExercise) && i <= binding.generalPhysicalExerciseSpinner.getCount()) {
+                binding.generalPhysicalExerciseSpinner.setSelection(i);
+                break;
+            }
+        }
+
+        String[] healthInsuranceArr = getResources().getStringArray(R.array.question_arrays);
+        for(int i = 0; i < healthInsuranceArr.length; i++) {
+            if(healthInsuranceArr[i].equalsIgnoreCase(healthInsurance) && i <= binding.generalHealthInsuranceSpinner.getCount()) {
+                binding.generalHealthInsuranceSpinner.setSelection(i);
+                break;
+            }
+        }
     }
 }

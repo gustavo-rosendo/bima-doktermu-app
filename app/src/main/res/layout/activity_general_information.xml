@@ -109,7 +109,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="@string/kg"
+                        android:text="@string/cm"
                         android:textSize="@dimen/generic_body_text_size"/>
 
                 </LinearLayout>
@@ -180,7 +180,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="@string/cm"
+                        android:text="@string/kg"
                         android:textSize="@dimen/generic_body_text_size"/>
                     
                 </LinearLayout>

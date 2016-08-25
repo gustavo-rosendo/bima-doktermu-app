@@ -122,14 +122,14 @@ public class ProfileApi extends BaseApi<ProfileService> {
      * @return Observable<BaseResponse>
      */
     public Observable<BaseResponse> updateHealthInformation(final String height, final String weight, final String religion,
-                                                            final String physicalExercise, final String bloodType, final String smoker,
+                                                            final String bloodType, final String smoker, final String physicalExercise,
                                                             final String healthInsurance, final String accessToken){
         return Observable.create(new Observable.OnSubscribe<BaseResponse>(){
             @Override
             public void call(final Subscriber<? super BaseResponse> subscriber){
                 try{
                     Response response = profileService.updateHealthInformation(
-                            height, weight, religion, physicalExercise, bloodType, smoker, healthInsurance, accessToken).execute();
+                            height, weight, religion, bloodType, smoker, physicalExercise, healthInsurance, accessToken).execute();
                     if(response.isSuccessful()){
                         subscriber.onNext((BaseResponse)response.body());
                         subscriber.onCompleted();
