@@ -60,8 +60,8 @@ public class GeneralInformationActivity extends BaseActivity {
         binding.generalSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String height = binding.generalHeightEditText.getText().toString();
-                String weight = binding.generalWeightEditText.getText().toString();
+                String height = binding.generalHeightEditText.getText().toString().trim();
+                String weight = binding.generalWeightEditText.getText().toString().trim();
                 String religion = binding.generalReligionSpinner.getSelectedItem().toString();
                 String bloodType = binding.generalBloodTypeSpinner.getSelectedItem().toString();
                 String smoker = binding.generalSmokerSpinner.getSelectedItem().toString();
@@ -275,8 +275,8 @@ public class GeneralInformationActivity extends BaseActivity {
     }
 
     private void updateViews(Information information) {
-        binding.generalHeightText.setText(StringUtils.getStringOrDashIfNull(information.getHeight()));
-        binding.generalWeightText.setText(StringUtils.getStringOrDashIfNull(information.getWeight()));
+        binding.generalHeightText.setText(StringUtils.getStringOrDashIfNull(information.getHeight()) + " " + getResources().getString(R.string.cm));
+        binding.generalWeightText.setText(StringUtils.getStringOrDashIfNull(information.getWeight()) + " " + getResources().getString(R.string.kg));
         binding.generalReligionText.setText(StringUtils.getStringOrDashIfNull(information.getReligion()));
         binding.generalBloodTypeText.setText(StringUtils.getStringOrDashIfNull(information.getBloodType()));
         binding.generalSmokerText.setText(StringUtils.getStringOrDashIfNull(information.getSmoker()));
