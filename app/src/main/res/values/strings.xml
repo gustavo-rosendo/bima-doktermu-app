@@ -124,12 +124,14 @@
     <string name="general_health_insurance">Health insurance</string>
 
     <!-- current health -->
-    <string name="current_health_diabetes">Diabetes</string>
-    <string name="current_health_cancer">Cancer</string>
-    <string name="current_health_blood_pressure">Blood pressure</string>
-    <string name="current_health_allergies">Allergies</string>
-    <string name="current_health_asthma">Asthma</string>
-    <string name="current_health_pregnant">Pregnant</string>
+    <string name="current_health_diabetes">Diabetes:</string>
+    <string name="current_health_cancer">Cancer:</string>
+    <string name="current_health_blood_pressure">Blood pressure:</string>
+    <string name="current_health_allergies">Allergies:</string>
+    <string name="current_health_asthma">Asthma:</string>
+    <string name="current_health_pregnant">Pregnant:</string>
+    <string name="current_health_add_info">ADD INFO</string>
+    <string name="current_health_add_new">ADD NEW</string>
 
     <!-- medicine information -->
     <string name="medicine_prescription">Prescription</string>
@@ -369,6 +371,43 @@
         <item>Jarang</item>
         <item>Tidak pernah</item>
         <item>-</item>
+    </string-array>
+
+    <!-- blood pressure  -->
+    <string-array name="blood_pressure_arrays">
+        <item>Normal</item>
+        <item>Tinggi</item>
+        <item>Rendah</item>
+        <item>ADD INFO</item>
+    </string-array>
+
+    <!-- cancer  -->
+    <string-array name="cancer_arrays">
+        <item>Prostate</item>
+        <item>Liver</item>
+        <item>Lungs</item>
+        <item>Breast</item>
+        <item>Brain</item>
+        <item>Other</item>
+        <item>ADD NEW</item>
+    </string-array>
+
+    <!-- Allergies  -->
+    <string-array name="allergies_arrays">
+        <item>Dogs</item>
+        <item>Cats</item>
+        <item>Bees</item>
+        <item>Pollens</item>
+        <item>Dust</item>
+        <item>Other</item>
+        <item>ADD NEW</item>
+    </string-array>
+
+    <!-- Yes/No dropdown  -->
+    <string-array name="current_health_yes_no_arrays">
+        <item>Ya</item>
+        <item>Tidak</item>
+        <item>ADD INFO</item>
     </string-array>
 
 </resources>
