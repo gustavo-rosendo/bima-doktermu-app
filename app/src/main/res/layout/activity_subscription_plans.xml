@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/generic_toolbar_height"
+                android:background="@color/bima_blue"
+                app:elevation="4dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/toolbar_back_button"
+                        android:layout_width="@dimen/generic_toolbar_button_height"
+                        android:layout_height="@dimen/generic_toolbar_button_height"
+                        android:padding="@dimen/generic_toolbar_image_button_padding"
+                        android:src="@drawable/ic_arrow_back"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_toRightOf="@+id/toolbar_back_button"
+                        android:layout_toEndOf="@+id/toolbar_back_button"
+                        android:text="@string/subscription"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"/>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/generic_large_padding"
+                android:paddingBottom="@dimen/generic_xlarge_padding"
+                android:paddingLeft="@dimen/generic_large_padding"
+                android:paddingStart="@dimen/generic_large_padding"
+                android:paddingRight="@dimen/generic_large_padding"
+                android:paddingEnd="@dimen/generic_large_padding">
+
+                <TextView
+                    android:id="@+id/subscription_plan_info_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/generic_large_margin"
+                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:gravity="left"
+                    android:text="@string/subscription_plan_info"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/generic_title_text_size"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/generic_large_margin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/subscription_plan_1_month_field"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_large_margin"
+                        android:textColor="@android:color/black"
+                        android:text="@string/subscription_1_month"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/subscription_plan_1_month_desc_field"
+                        android:layout_below="@id/subscription_plan_1_month_field"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_normal_margin"
+                        android:text="@string/subscription_1_month_desc"
+                        android:textSize="16sp"/>
+
+                    <Button
+                        android:id="@+id/subscription_plan_1_month_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/generic_button_height"
+                        android:minWidth="100dp"
+                        android:layout_marginTop="@dimen/generic_large_margin"
+                        android:text="@string/subscription_pilih"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/rounded_bima_blue_bg_selector"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/subscription_plan_3_months_field"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_large_margin"
+                        android:textColor="@android:color/black"
+                        android:text="@string/subscription_3_month"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/subscription_plan_3_months_desc_field"
+                        android:layout_below="@id/subscription_plan_3_months_field"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_normal_margin"
+                        android:text="@string/subscription_3_months_desc"
+                        android:textSize="16sp"/>
+
+                    <Button
+                        android:id="@+id/subscription_plan_3_months_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/generic_button_height"
+                        android:minWidth="100dp"
+                        android:layout_marginTop="@dimen/generic_large_margin"
+                        android:text="@string/subscription_pilih"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/rounded_bima_yellow_bg_selector"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>
