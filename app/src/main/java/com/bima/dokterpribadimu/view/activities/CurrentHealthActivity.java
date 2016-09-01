@@ -1,11 +1,16 @@
 package com.bima.dokterpribadimu.view.activities;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableWrapper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
@@ -118,18 +123,38 @@ public class CurrentHealthActivity extends BaseActivity {
         binding.currentHealthCancerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                String cancer = binding.currentHealthCancerSpinner.getSelectedItem().toString();
+                final String cancer = binding.currentHealthCancerSpinner.getSelectedItem().toString();
                 if(position != adapterView.getCount()) {
-                    TextView cancerTextView = new TextView(CurrentHealthActivity.this);
+                    final TextView cancerTextView = new TextView(CurrentHealthActivity.this);
                     cancerTextView.setText(cancer);
-                    cancerTextView.setLayoutParams(new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT));
+                    cancerTextView.setLayoutParams(new RelativeLayout.LayoutParams(
+                            RelativeLayout.LayoutParams.MATCH_PARENT,
+                            RelativeLayout.LayoutParams.WRAP_CONTENT));
                     int padding = (int) getResources().getDimension(R.dimen.generic_large_padding);
                     cancerTextView.setPadding(padding, padding, padding, padding);
 
-                    LinearLayout linearLayout = (LinearLayout) findViewById(R.id.current_health_cancer_edit_layout);
-                    linearLayout.addView(cancerTextView, 0);
+                    final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.current_health_cancer_edit_rel_layout);
+                    relativeLayout.addView(cancerTextView, 0);
+
+                    final ImageButton cancerBtn = new ImageButton(CurrentHealthActivity.this);
+                    cancerBtn.setImageResource(R.drawable.ic_close_bima_blue);
+                    cancerBtn.setBackgroundColor(0);
+                    RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(
+                            RelativeLayout.LayoutParams.WRAP_CONTENT,
+                            RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    p.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    cancerBtn.setLayoutParams(p);
+
+                    cancerBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            relativeLayout.removeView(cancerTextView);
+                            relativeLayout.removeView(cancerBtn);
+                            cancerArrayList.remove(cancer);
+                        }
+                    });
+
+                    relativeLayout.addView(cancerBtn, 0);
 
                     //Add selected value to the list
                     cancerArrayList.add(cancer);
