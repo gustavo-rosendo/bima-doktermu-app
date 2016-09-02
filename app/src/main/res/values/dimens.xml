@@ -36,6 +36,7 @@
     <dimen name="generic_body_text_size">14sp</dimen>
     <dimen name="generic_button_text_size">14sp</dimen>
     <dimen name="generic_small_text_size">12sp</dimen>
+    <dimen name="generic_super_small_text_size">11sp</dimen>
 
     <!-- loading -->
     <dimen name="loading_bima_icon_width">155dp</dimen>

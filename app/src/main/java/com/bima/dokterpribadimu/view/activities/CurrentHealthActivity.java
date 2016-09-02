@@ -1,6 +1,9 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
 import android.os.Bundle;
@@ -125,36 +128,49 @@ public class CurrentHealthActivity extends BaseActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 final String cancer = binding.currentHealthCancerSpinner.getSelectedItem().toString();
                 if(position != adapterView.getCount()) {
+                    final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.current_health_cancer_edit_layout);
+
+                    final RelativeLayout relativeLayout = new RelativeLayout(CurrentHealthActivity.this);
+                    RelativeLayout.LayoutParams p1 = new RelativeLayout.LayoutParams(
+                            RelativeLayout.LayoutParams.MATCH_PARENT,
+                            RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    p1.addRule(RelativeLayout.ABOVE, R.id.current_health_cancer_spinner);
+                    relativeLayout.setLayoutParams(p1);
+
                     final TextView cancerTextView = new TextView(CurrentHealthActivity.this);
                     cancerTextView.setText(cancer);
-                    cancerTextView.setLayoutParams(new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams p2 = new RelativeLayout.LayoutParams(
                             RelativeLayout.LayoutParams.MATCH_PARENT,
-                            RelativeLayout.LayoutParams.WRAP_CONTENT));
+                            RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    cancerTextView.setLayoutParams(p2);
+                    cancerTextView.setTextColor(Color.BLACK);
+                    cancerTextView.setTextSize(getResources().getDimension(R.dimen.generic_super_small_text_size));
                     int padding = (int) getResources().getDimension(R.dimen.generic_large_padding);
                     cancerTextView.setPadding(padding, padding, padding, padding);
-
-                    final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.current_health_cancer_edit_rel_layout);
                     relativeLayout.addView(cancerTextView, 0);
 
                     final ImageButton cancerBtn = new ImageButton(CurrentHealthActivity.this);
                     cancerBtn.setImageResource(R.drawable.ic_close_bima_blue);
                     cancerBtn.setBackgroundColor(0);
-                    RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams p3 = new RelativeLayout.LayoutParams(
                             RelativeLayout.LayoutParams.WRAP_CONTENT,
                             RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    p.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                    cancerBtn.setLayoutParams(p);
+                    p3.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    cancerBtn.setLayoutParams(p3);
 
                     cancerBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             relativeLayout.removeView(cancerTextView);
                             relativeLayout.removeView(cancerBtn);
+                            linearLayout.removeView(relativeLayout);
                             cancerArrayList.remove(cancer);
                         }
                     });
 
-                    relativeLayout.addView(cancerBtn, 0);
+                    relativeLayout.addView(cancerBtn);
+
+                    linearLayout.addView(relativeLayout, 0);
 
                     //Add selected value to the list
                     cancerArrayList.add(cancer);
@@ -196,18 +212,50 @@ public class CurrentHealthActivity extends BaseActivity {
         binding.currentHealthAllergiesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                String allergy = binding.currentHealthAllergiesSpinner.getSelectedItem().toString();
+                final String allergy = binding.currentHealthAllergiesSpinner.getSelectedItem().toString();
                 if(position != adapterView.getCount()) {
-                    TextView allergyTextView = new TextView(CurrentHealthActivity.this);
+                    final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.current_health_allergies_edit_layout);
+
+                    final RelativeLayout relativeLayout = new RelativeLayout(CurrentHealthActivity.this);
+                    RelativeLayout.LayoutParams p1 = new RelativeLayout.LayoutParams(
+                            RelativeLayout.LayoutParams.MATCH_PARENT,
+                            RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    relativeLayout.setLayoutParams(p1);
+
+                    final TextView allergyTextView = new TextView(CurrentHealthActivity.this);
                     allergyTextView.setText(allergy);
-                    allergyTextView.setLayoutParams(new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT));
+                    RelativeLayout.LayoutParams p2 = new RelativeLayout.LayoutParams(
+                            RelativeLayout.LayoutParams.MATCH_PARENT,
+                            RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    allergyTextView.setLayoutParams(p2);
+                    allergyTextView.setTextColor(Color.BLACK);
+                    allergyTextView.setTextSize(getResources().getDimension(R.dimen.generic_super_small_text_size));
                     int padding = (int) getResources().getDimension(R.dimen.generic_large_padding);
                     allergyTextView.setPadding(padding, padding, padding, padding);
+                    relativeLayout.addView(allergyTextView, 0);
 
-                    LinearLayout linearLayout = (LinearLayout) findViewById(R.id.current_health_allergies_edit_layout);
-                    linearLayout.addView(allergyTextView, 0);
+                    final ImageButton allergyBtn = new ImageButton(CurrentHealthActivity.this);
+                    allergyBtn.setImageResource(R.drawable.ic_close_bima_blue);
+                    allergyBtn.setBackgroundColor(0);
+                    RelativeLayout.LayoutParams p3 = new RelativeLayout.LayoutParams(
+                            RelativeLayout.LayoutParams.WRAP_CONTENT,
+                            RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    p3.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    allergyBtn.setLayoutParams(p3);
+
+                    allergyBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            relativeLayout.removeView(allergyTextView);
+                            relativeLayout.removeView(allergyBtn);
+                            linearLayout.removeView(relativeLayout);
+                            cancerArrayList.remove(allergy);
+                        }
+                    });
+
+                    relativeLayout.addView(allergyBtn);
+
+                    linearLayout.addView(relativeLayout, 0);
 
                     //Add selected value to the list
                     allergiesArrayList.add(allergy);

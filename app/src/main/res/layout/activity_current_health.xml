@@ -72,17 +72,22 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="@string/current_health_diabetes"
-                    android:textSize="@dimen/generic_body_text_size"
+                    android:textSize="@dimen/generic_subheading_text_size"
+                    android:textColor="@android:color/black"
                     android:gravity="center_vertical"/>
 
                 <TextView
                     android:id="@+id/current_health_diabetes_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/generic_body_text_size"
+                    android:textColor="@color/bima_blue"
+                    android:textStyle="bold"
                     android:gravity="center_vertical"
                     tools:text="@string/current_health_add_info"/>
 
@@ -112,21 +117,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="@dimen/generic_button_height"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/generic_large_padding"
                 android:paddingStart="@dimen/generic_large_padding"
                 android:paddingRight="@dimen/generic_large_padding"
-                android:paddingEnd="@dimen/generic_large_padding"
-                android:paddingBottom="@dimen/generic_normal_padding">
+                android:paddingEnd="@dimen/generic_large_padding">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="@string/current_health_cancer"
-                    android:textSize="@dimen/generic_body_text_size"
-                    android:paddingTop="@dimen/generic_large_padding"
-                    android:gravity="start"/>
+                    android:textSize="@dimen/generic_subheading_text_size"
+                    android:textColor="@android:color/black"
+                    android:gravity="center_vertical"/>
 
                 <TextView
                     android:id="@+id/current_health_cancer_text"
@@ -136,23 +142,19 @@
                     android:layout_weight="1"
                     android:textSize="@dimen/generic_body_text_size"
                     android:gravity="center_vertical"
+                    android:textColor="@color/bima_blue"
+                    android:textStyle="bold"
                     tools:text="@string/current_health_add_new"/>
 
                 <LinearLayout
                     android:id="@+id/current_health_cancer_edit_layout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center_vertical"
                     android:visibility="gone">
-
-                    <RelativeLayout
-                        android:id="@+id/current_health_cancer_edit_rel_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                    </RelativeLayout>
 
                     <Spinner
                         android:id="@+id/current_health_cancer_spinner"
@@ -180,17 +182,22 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="@string/current_health_blood_pressure"
-                    android:textSize="@dimen/generic_body_text_size"
+                    android:textSize="@dimen/generic_subheading_text_size"
+                    android:textColor="@android:color/black"
                     android:gravity="center_vertical"/>
 
                 <TextView
                     android:id="@+id/current_health_blood_pressure_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/generic_body_text_size"
+                    android:textColor="@color/bima_blue"
+                    android:textStyle="bold"
                     android:gravity="center_vertical"
                     tools:text="@string/current_health_add_info"/>
 
@@ -206,7 +213,8 @@
                     <Spinner
                         android:id="@+id/current_health_blood_pressure_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -220,21 +228,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="@dimen/generic_button_height"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/generic_large_padding"
                 android:paddingStart="@dimen/generic_large_padding"
                 android:paddingRight="@dimen/generic_large_padding"
-                android:paddingEnd="@dimen/generic_large_padding"
-                android:paddingBottom="@dimen/generic_normal_padding">
+                android:paddingEnd="@dimen/generic_large_padding">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="@string/current_health_allergies"
-                    android:textSize="@dimen/generic_body_text_size"
-                    android:paddingTop="@dimen/generic_large_padding"
-                    android:gravity="start"/>
+                    android:textSize="@dimen/generic_subheading_text_size"
+                    android:textColor="@android:color/black"
+                    android:gravity="center_vertical"/>
 
                 <TextView
                     android:id="@+id/current_health_allergies_text"
@@ -243,6 +252,8 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/generic_body_text_size"
+                    android:textColor="@color/bima_blue"
+                    android:textStyle="bold"
                     android:gravity="center_vertical"
                     tools:text="@string/current_health_add_new"/>
 
@@ -250,6 +261,7 @@
                     android:id="@+id/current_health_allergies_edit_layout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center_vertical"
@@ -258,7 +270,8 @@
                     <Spinner
                         android:id="@+id/current_health_allergies_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -281,17 +294,22 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="@string/current_health_asthma"
-                    android:textSize="@dimen/generic_body_text_size"
+                    android:textSize="@dimen/generic_subheading_text_size"
+                    android:textColor="@android:color/black"
                     android:gravity="center_vertical"/>
 
                 <TextView
                     android:id="@+id/current_health_asthma_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/generic_body_text_size"
+                    android:textColor="@color/bima_blue"
+                    android:textStyle="bold"
                     android:gravity="center_vertical"
                     tools:text="@string/current_health_add_info"/>
 
@@ -307,7 +325,8 @@
                     <Spinner
                         android:id="@+id/current_health_asthma_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -330,17 +349,22 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="@string/current_health_pregnant"
-                    android:textSize="@dimen/generic_body_text_size"
+                    android:textSize="@dimen/generic_subheading_text_size"
+                    android:textColor="@android:color/black"
                     android:gravity="center_vertical"/>
 
                 <TextView
                     android:id="@+id/current_health_pregnant_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/generic_body_text_size"
+                    android:textColor="@color/bima_blue"
+                    android:textStyle="bold"
                     android:gravity="center_vertical"
                     tools:text="@string/current_health_add_info"/>
 
@@ -356,7 +380,8 @@
                     <Spinner
                         android:id="@+id/current_health_pregnant_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"/>
 
                     <View
                         android:layout_width="match_parent"
