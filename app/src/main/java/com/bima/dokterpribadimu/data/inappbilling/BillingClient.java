@@ -6,6 +6,9 @@ import android.content.IntentFilter;
 import android.util.Log;
 
 import com.bima.dokterpribadimu.BuildConfig;
+import com.bima.dokterpribadimu.DokterPribadimuApplication;
+import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.iabutil.IabBroadcastReceiver;
 import com.bima.dokterpribadimu.utils.iabutil.IabBroadcastReceiver.IabBroadcastListener;
 import com.bima.dokterpribadimu.utils.iabutil.IabHelper;
@@ -23,8 +26,15 @@ public class BillingClient implements IabBroadcastListener {
     private static final String TAG = "BillingClient";
     private static final int RC_REQUEST = 10001;
 
-    // SKU for our subscription
+    // SKU for our subscription - OLD price (up to V2)
+    @Deprecated
     public static final String SKU_DOKTER_PRIBADIKU_MONTHLY = "dokterpribadimu_monthly_subscription_01";
+
+    // SKU for new monthly subscription
+    public static final String SKU_DOKTER_PRIBADIKU_1_MONTH_SUBSCRIPTION = "dokterpribadimu_monthly_subscription_02";
+
+    // SKU for new 3 months subscription
+    public static final String SKU_DOKTER_PRIBADIKU_3_MONTHS_SUBSCRIPTION = "dokterpribadimu_monthly_subscription_03";
 
     private Activity activity;
 
@@ -141,11 +151,37 @@ public class BillingClient implements IabBroadcastListener {
              * verifyDeveloperPayload().
              */
 
-            // First find out which subscription is auto renewing
-            Purchase dokterPribadiKuMonthly = inventory.getPurchase(SKU_DOKTER_PRIBADIKU_MONTHLY);
+            Purchase dokterPribadiKuMonthly = null;
 
+            // Get the SKU of the previously purchased subscription
+            String subscriptionSKU = StorageUtils.getString(
+                    DokterPribadimuApplication.getInstance().getApplicationContext(),
+                    Constants.KEY_USER_SUBSCRIPTION_SKU,
+                    null);
+
+            if(subscriptionSKU != null) {
+                dokterPribadiKuMonthly = inventory.getPurchase(subscriptionSKU);
+            }
+            else {
+                dokterPribadiKuMonthly = inventory.getPurchase(SKU_DOKTER_PRIBADIKU_3_MONTHS_SUBSCRIPTION);
+                subscriptionSKU = SKU_DOKTER_PRIBADIKU_3_MONTHS_SUBSCRIPTION;
+                if(dokterPribadiKuMonthly == null) {
+                    dokterPribadiKuMonthly = inventory.getPurchase(SKU_DOKTER_PRIBADIKU_1_MONTH_SUBSCRIPTION);
+                    subscriptionSKU = SKU_DOKTER_PRIBADIKU_1_MONTH_SUBSCRIPTION;
+
+                    // Third attempt, by order of priority: try the old deprecated SKU
+                    // (maybe there are still users with this subscription)
+                    if(dokterPribadiKuMonthly == null) {
+                        dokterPribadiKuMonthly = inventory.getPurchase(SKU_DOKTER_PRIBADIKU_MONTHLY);
+                        subscriptionSKU = SKU_DOKTER_PRIBADIKU_MONTHLY;
+                    }
+                }
+            }
+
+
+            // First find out which subscription is auto renewing
             if (dokterPribadiKuMonthly != null && dokterPribadiKuMonthly.isAutoRenewing()) {
-                currentSubscriptionSku = SKU_DOKTER_PRIBADIKU_MONTHLY;
+                currentSubscriptionSku = subscriptionSKU;
                 autoRenewEnabled = dokterPribadiKuMonthly.isAutoRenewing();
             } else {
                 currentSubscriptionSku = "";
@@ -240,10 +276,19 @@ public class BillingClient implements IabBroadcastListener {
         return "";
     }
 
+    @Deprecated
     public void launchSubscriptionPurchaseFlow(OnIabPurchaseFinishedListener listener) {
         iabHelper.launchSubscriptionPurchaseFlow(
                 activity,
                 SKU_DOKTER_PRIBADIKU_MONTHLY,
+                RC_REQUEST,
+                listener);
+    }
+
+    public void launchSubscriptionPurchaseFlow(String sku, OnIabPurchaseFinishedListener listener) {
+        iabHelper.launchSubscriptionPurchaseFlow(
+                activity,
+                sku,
                 RC_REQUEST,
                 listener);
     }

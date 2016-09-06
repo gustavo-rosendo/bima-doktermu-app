@@ -21,6 +21,7 @@ import com.bima.dokterpribadimu.view.activities.PartnersDetailActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersLandingActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersSearchActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
+import com.bima.dokterpribadimu.view.activities.SubscriptionPlansActivity;
 
 /**
  * Created by apradanas on 5/9/16.
@@ -170,5 +171,14 @@ public class IntentUtils {
     public static void startDoctorProfileActivity(Context context, String doctorId) {
         context.startActivity(DoctorProfileActivity.create(context, doctorId));
     }
+
+    /**
+     * Start SubscriptionPlansActivity
+     * @param context caller's activity / fragment context
+     */
+    public static void startSubscriptionPlansActivity(Context context) {
+        context.startActivity(new Intent(context, SubscriptionPlansActivity.class));
+    }
+
 
 }
