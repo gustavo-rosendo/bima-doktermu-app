@@ -33,6 +33,7 @@
         <activity android:name=".view.activities.ProfileActivity" />
         <activity android:name=".view.activities.AboutActivity" />
         <activity android:name=".view.activities.SubscriptionActivity" />
+        <activity android:name=".view.activities.SubscriptionPlansActivity" />
         <activity android:name=".view.activities.SignInActivity" />
         <activity android:name=".view.activities.DoctorCallActivity" />
         <activity android:name=".view.activities.BookCallActivity" />

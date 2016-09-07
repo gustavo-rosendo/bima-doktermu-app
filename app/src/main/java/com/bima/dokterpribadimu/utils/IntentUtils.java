@@ -16,6 +16,7 @@ import com.bima.dokterpribadimu.view.activities.PartnersDetailActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersLandingActivity;
 import com.bima.dokterpribadimu.view.activities.PartnersSearchActivity;
 import com.bima.dokterpribadimu.view.activities.SignInActivity;
+import com.bima.dokterpribadimu.view.activities.SubscriptionPlansActivity;
 
 /**
  * Created by apradanas on 5/9/16.
@@ -124,4 +125,13 @@ public class IntentUtils {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
     }
+
+    /**
+     * Start SubscriptionPlansActivity
+     * @param context caller's activity / fragment context
+     */
+     public static void startSubscriptionPlansActivity(Context context) {
+        context.startActivity(new Intent(context, SubscriptionPlansActivity.class));
+     }
+
 }

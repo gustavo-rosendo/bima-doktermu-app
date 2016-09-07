@@ -120,6 +120,13 @@
     <string name="subscription_disabled">Tidak aktif</string>
     <string name="manage_subscription">Pengaturan</string>
     <string name="subscription_info">Mohon isi form di bawah ini untuk mengaktifkan seluruh layanan Doktermu.</string>
+    <string name="subscription_plan_info">Pilih masa berlanggananmu:</string>
+    <string name="subscription_1_month">Kurang dari Rp. 10.000/bulan</string>
+    <string name="subscription_1_month_desc">1 bulan masa langganan</string>
+    <string name="subscription_3_month">Kurang dari Rp. 8.000/bulan</string>
+    <string name="subscription_3_months_desc">3 bulan masa langganan</string>
+    <string name="subscription_pilih">Pilih</string>
+
 
     <!-- sign out -->
     <string name="sign_out">Keluar</string>
