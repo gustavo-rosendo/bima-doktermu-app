@@ -23,6 +23,7 @@ public class Subscription {
     private String dateOfPurchase;
     private String policyActiveDate;
     private String policyExpiryDate;
+    private String policy;
     private String accessToken;
 
     public Subscription() {
@@ -35,7 +36,7 @@ public class Subscription {
             String name, String orderDate, String orderId,
             String paymentMethod, String phoneNumber, String productName,
             String price, String dateOfBirth, String gender, String dateOfPurchase,
-            String policyActiveDate, String policyExpiryDate, String accessToken) {
+            String policyActiveDate, String policyExpiryDate, String policy, String accessToken) {
         this.subscriptionType = subscriptionType;
         this.subscriptionLat = subscriptionLat;
         this.subscriptionLong = subscriptionLong;
@@ -54,6 +55,7 @@ public class Subscription {
         this.dateOfPurchase = dateOfPurchase;
         this.policyActiveDate = policyActiveDate;
         this.policyExpiryDate = policyExpiryDate;
+        this.policy = policy;
         this.accessToken = accessToken;
     }
 
@@ -189,6 +191,14 @@ public class Subscription {
 
     public void setPolicyExpiryDate(String policyExpiryDate) {
         this.policyExpiryDate = policyExpiryDate;
+    }
+
+    public String getPolicy() {
+        return policy;
+    }
+
+    public void setPolicy(String policy) {
+        this.policy = policy;
     }
 
     public String getAccessToken() {

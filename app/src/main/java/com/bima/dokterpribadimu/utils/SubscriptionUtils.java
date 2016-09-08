@@ -5,6 +5,10 @@ package com.bima.dokterpribadimu.utils;
  */
 public class SubscriptionUtils {
 
+    public static final String POLICY_1_MONTH_OLD   = "App Basic";
+    public static final String POLICY_1_MONTH       = "App 10";
+    public static final String POLICY_3_MONTHS      = "App 25";
+
     private static final String JANUARI     = "Jan";
     private static final String FEBRUARI    = "Feb";
     private static final String MARET       = "Mar";

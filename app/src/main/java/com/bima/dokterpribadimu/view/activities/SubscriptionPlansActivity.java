@@ -242,6 +242,17 @@ public class SubscriptionPlansActivity extends BaseActivity implements EasyPermi
                         subscription.setDateOfPurchase(subscription.getOrderDate());
                         subscription.setPolicyActiveDate(subscription.getSubscriptionStart());
                         subscription.setPolicyExpiryDate(subscription.getSubscriptionEnd());
+
+                        if(sku.equalsIgnoreCase(BillingClient.SKU_DOKTER_PRIBADIKU_3_MONTHS_SUBSCRIPTION)) {
+                            subscription.setPolicy(SubscriptionUtils.POLICY_3_MONTHS);
+                        }
+                        else if(sku.equalsIgnoreCase(BillingClient.SKU_DOKTER_PRIBADIKU_1_MONTH_SUBSCRIPTION)) {
+                            subscription.setPolicy(SubscriptionUtils.POLICY_1_MONTH);
+                        }
+                        else {
+                            subscription.setPolicy(SubscriptionUtils.POLICY_1_MONTH_OLD);
+                        }
+
                         subscription.setAccessToken(
                                 UserProfileUtils.getUserProfile(SubscriptionPlansActivity.this).getAccessToken());
 
