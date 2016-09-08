@@ -228,7 +228,7 @@ public class SubscriptionPlansActivity extends BaseActivity implements EasyPermi
 
                         subscription.setSubscriptionToken(info.getToken());
                         subscription.setSubscriptionStart(TimeUtils.getSubscriptionStartDate());
-                        subscription.setSubscriptionEnd(TimeUtils.getSubscriptionEndDate());
+                        subscription.setSubscriptionEnd(TimeUtils.getSubscriptionEndDate(sku));
                         subscription.setOrderDate(TimeUtils.getSubscriptionOrderDate());
                         subscription.setOrderId(info.getOrderId());
                         //save the orderId for later use by /v1/subscription/update
