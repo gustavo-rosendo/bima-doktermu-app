@@ -1,5 +1,7 @@
 package com.bima.dokterpribadimu.utils;
 
+import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,12 +36,19 @@ public class TimeUtils {
         return sdf.format(new Date());
     }
 
-    public static String getSubscriptionEndDate() {
+    public static String getSubscriptionEndDate(String sku) {
         SimpleDateFormat sdf = new SimpleDateFormat(SUBSCRIPTION_ORDER_DATE_FORMAT, new Locale("id", "ID"));
         Date dateToday = new Date();
         Calendar calendar = Calendar.getInstance(new Locale("id", "ID"));
         calendar.setTimeInMillis(dateToday.getTime());
-        calendar.add(Calendar.MONTH, 1);
+
+        if(sku.equalsIgnoreCase(BillingClient.SKU_DOKTER_PRIBADIKU_3_MONTHS_SUBSCRIPTION)) {
+            calendar.add(Calendar.MONTH, 3);
+        }
+        else {
+            calendar.add(Calendar.MONTH, 1);
+        }
+
         return sdf.format(calendar.getTime());
     }
 
