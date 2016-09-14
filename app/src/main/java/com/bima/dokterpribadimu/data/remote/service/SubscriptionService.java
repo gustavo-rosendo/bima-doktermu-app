@@ -30,6 +30,7 @@ public interface SubscriptionService {
             @Field("date_of_purchase") String dateOfPurchase,
             @Field("policy_active_date") String policyActiveDate,
             @Field("policy_expiry_date") String policyExpiryDate,
+            @Field("policy") String policy,
             @Field("access_token") String accessToken
     );
 

@@ -53,6 +53,7 @@ public class SubscriptionApi extends BaseApi<SubscriptionService> {
                             subscription.getDateOfPurchase(),
                             subscription.getPolicyActiveDate(),
                             subscription.getPolicyExpiryDate(),
+                            subscription.getPolicy(),
                             subscription.getAccessToken()
                     ).execute();
                     if (response.isSuccessful()) {
