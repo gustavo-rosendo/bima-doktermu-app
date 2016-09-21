@@ -10,7 +10,7 @@ public class HealthCondition {
     private String diabetes;
     private List<String> cancer;
     private String bloodPressure;
-    private List<String> allergies;
+    private List<String> alergies;
     private String asthma;
     private String pregnant;
 
@@ -39,11 +39,11 @@ public class HealthCondition {
     }
 
     public List<String> getAllergies() {
-        return allergies;
+        return alergies;
     }
 
     public void setAllergies(List<String> allergies) {
-        this.allergies = allergies;
+        this.alergies = allergies;
     }
 
     public String getAsthma() {

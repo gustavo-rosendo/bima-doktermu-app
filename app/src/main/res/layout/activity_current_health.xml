@@ -115,6 +115,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/current_health_cancer_view_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/generic_button_height"
@@ -126,8 +127,9 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:paddingTop="10dp"
                     android:layout_weight="1"
                     android:text="@string/current_health_cancer"
                     android:textSize="@dimen/generic_subheading_text_size"
@@ -137,11 +139,11 @@
                 <TextView
                     android:id="@+id/current_health_cancer_text"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:paddingTop="10dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/generic_body_text_size"
-                    android:gravity="center_vertical"
                     android:textColor="@color/bima_blue"
                     android:textStyle="bold"
                     tools:text="@string/current_health_add_new"/>
@@ -237,8 +239,9 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:paddingTop="10dp"
                     android:layout_weight="1"
                     android:text="@string/current_health_allergies"
                     android:textSize="@dimen/generic_subheading_text_size"
@@ -248,13 +251,13 @@
                 <TextView
                     android:id="@+id/current_health_allergies_text"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:paddingTop="10dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/generic_body_text_size"
                     android:textColor="@color/bima_blue"
                     android:textStyle="bold"
-                    android:gravity="center_vertical"
                     tools:text="@string/current_health_add_new"/>
 
                 <LinearLayout

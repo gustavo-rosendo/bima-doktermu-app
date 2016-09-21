@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,7 +32,10 @@ import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.inject.Inject;
 
@@ -319,12 +323,72 @@ public class CurrentHealthActivity extends BaseActivity {
     }
 
     private void updateInfoViews(HealthCondition healthCondition) {
-        binding.currentHealthDiabetesText.setText(healthCondition.getDiabetes());
-        binding.currentHealthCancerText.setText(healthCondition.getCancer().toString());
-        binding.currentHealthBloodPressureText.setText(healthCondition.getBloodPressure());
-        binding.currentHealthAllergiesText.setText(healthCondition.getAllergies().toString());
-        binding.currentHealthAsthmaText.setText(healthCondition.getAsthma());
-        binding.currentHealthPregnantText.setText(healthCondition.getPregnant());
+        List<String> auxArr = null;
+        String aux = null;
+
+        aux = healthCondition.getDiabetes();
+        if(aux == null || aux.isEmpty()) {
+            binding.currentHealthDiabetesText.setText(getResources().getString(R.string.minus));
+        } else {
+            binding.currentHealthDiabetesText.setText(healthCondition.getDiabetes());
+        }
+
+        auxArr = healthCondition.getCancer();
+        if(auxArr == null || auxArr.isEmpty()) {
+            binding.currentHealthCancerText.setText(getResources().getString(R.string.minus));
+        } else {
+            binding.currentHealthCancerText.setText("");
+
+            for (int i = 0; i < auxArr.size(); i++) {
+                String item = auxArr.get(i);
+                if(item != null) {
+                    binding.currentHealthCancerText.setText(binding.currentHealthCancerText.getText() + item);
+                    //add a new line up to the last item
+                    if(i != auxArr.size() - 1) {
+                        binding.currentHealthCancerText.append("\n\n");
+                    }
+                }
+            }
+        }
+
+        aux = healthCondition.getBloodPressure();
+        if(aux == null || aux.isEmpty()) {
+            binding.currentHealthBloodPressureText.setText(getResources().getString(R.string.minus));
+        } else {
+            binding.currentHealthBloodPressureText.setText(healthCondition.getBloodPressure());
+        }
+
+        auxArr = healthCondition.getAllergies();
+        if(auxArr == null || auxArr.isEmpty()) {
+            binding.currentHealthAllergiesText.setText(getResources().getString(R.string.minus));
+        } else {
+            binding.currentHealthAllergiesText.setText("");
+
+            for (int i = 0; i < auxArr.size(); i++) {
+                String item = auxArr.get(i);
+                if(item != null) {
+                    binding.currentHealthAllergiesText.setText(binding.currentHealthAllergiesText.getText() + item);
+                    //add a new line up to the last item
+                    if(i != auxArr.size() - 1) {
+                        binding.currentHealthAllergiesText.append("\n\n");
+                    }
+                }
+            }
+        }
+
+        aux = healthCondition.getAsthma();
+        if(aux == null || aux.isEmpty()) {
+            binding.currentHealthAsthmaText.setText(getResources().getString(R.string.minus));
+        } else {
+            binding.currentHealthAsthmaText.setText(healthCondition.getAsthma());
+        }
+
+        aux = healthCondition.getPregnant();
+        if(aux == null || aux.isEmpty()) {
+            binding.currentHealthPregnantText.setText(getResources().getString(R.string.minus));
+        } else {
+            binding.currentHealthPregnantText.setText(healthCondition.getPregnant());
+        }
     }
 
     /**

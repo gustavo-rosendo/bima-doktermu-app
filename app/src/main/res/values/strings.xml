@@ -5,6 +5,7 @@
     <string name="save">Save</string>
     <string name="kg">kg</string>
     <string name="cm">cm</string>
+    <string name="minus">-</string>
 
     <!-- facebook -->
     <string name="facebook_app_id">1568480343444186</string>
