@@ -49,7 +49,7 @@
                             android:gravity="center_vertical"
                             android:layout_toRightOf="@+id/toolbar_back_button"
                             android:layout_toEndOf="@+id/toolbar_back_button"
-                            android:text="@string/profile_general_information"
+                            android:text="@string/profile_current_health"
                             android:textColor="@android:color/white"
                             android:textSize="18sp"/>
 
@@ -151,7 +151,7 @@
                 <LinearLayout
                     android:id="@+id/current_health_cancer_edit_layout"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
@@ -161,7 +161,8 @@
                     <Spinner
                         android:id="@+id/current_health_cancer_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -263,7 +264,7 @@
                 <LinearLayout
                     android:id="@+id/current_health_allergies_edit_layout"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical"

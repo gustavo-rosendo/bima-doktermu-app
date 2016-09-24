@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
@@ -86,21 +87,23 @@ public class CurrentHealthActivity extends BaseActivity {
         binding.currentHealthSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String diabetes = binding.currentHealthDiabetesSpinner.getSelectedItem().toString();
-                String bloodPressure = binding.currentHealthBloodPressureSpinner.getSelectedItem().toString();
-                String asthma = binding.currentHealthAsthmaSpinner.getSelectedItem().toString();
-                String pregnant = binding.currentHealthPregnantSpinner.getSelectedItem().toString();
+                if(validateFields()) {
+                    String diabetes = binding.currentHealthDiabetesSpinner.getSelectedItem().toString();
+                    String bloodPressure = binding.currentHealthBloodPressureSpinner.getSelectedItem().toString();
+                    String asthma = binding.currentHealthAsthmaSpinner.getSelectedItem().toString();
+                    String pregnant = binding.currentHealthPregnantSpinner.getSelectedItem().toString();
 
-                updateHealthCondition((diabetes != "" && diabetes != "-")? diabetes : null,
-                        (cancerArrayList.isEmpty())? null : cancerArrayList,
-                        (bloodPressure != "" && bloodPressure != "-")? bloodPressure : null,
-                        (allergiesArrayList.isEmpty())? null : allergiesArrayList,
-                        (asthma != "" && asthma != "-")? asthma : null,
-                        (pregnant != "" && pregnant != "-")? pregnant : null,
-                        UserProfileUtils.getUserProfile(CurrentHealthActivity.this).getAccessToken());
+                    updateHealthCondition((diabetes != "" && diabetes != "-")? diabetes : null,
+                            (cancerArrayList.isEmpty())? null : cancerArrayList,
+                            (bloodPressure != "" && bloodPressure != "-")? bloodPressure : null,
+                            (allergiesArrayList.isEmpty())? null : allergiesArrayList,
+                            (asthma != "" && asthma != "-")? asthma : null,
+                            (pregnant != "" && pregnant != "-")? pregnant : null,
+                            UserProfileUtils.getUserProfile(CurrentHealthActivity.this).getAccessToken());
 
-                updateInfoLayout(View.VISIBLE);
-                updateEditLayout(View.GONE);
+                    updateInfoLayout(View.VISIBLE);
+                    updateEditLayout(View.GONE);
+                }
             }
         });
 
@@ -253,7 +256,7 @@ public class CurrentHealthActivity extends BaseActivity {
                             relativeLayout.removeView(allergyTextView);
                             relativeLayout.removeView(allergyBtn);
                             linearLayout.removeView(relativeLayout);
-                            cancerArrayList.remove(allergy);
+                            allergiesArrayList.remove(allergy);
                         }
                     });
 
@@ -489,6 +492,46 @@ public class CurrentHealthActivity extends BaseActivity {
                         }
                     }
                 });
+    }
+
+    boolean validateFields() {
+        boolean valid = true;
+        String validationMsg = "";
+        String diabetes = binding.currentHealthDiabetesSpinner.getSelectedItem().toString();
+        String bloodPressure = binding.currentHealthBloodPressureSpinner.getSelectedItem().toString();
+        String asthma = binding.currentHealthAsthmaSpinner.getSelectedItem().toString();
+        String pregnant = binding.currentHealthPregnantSpinner.getSelectedItem().toString();
+
+        String[] yesNoArr = getResources().getStringArray(R.array.current_health_yes_no_arrays);
+        String[] bloodPressureArr = getResources().getStringArray(R.array.blood_pressure_arrays);
+
+        //check if the text showing is still 'ADD INFO'
+        if(diabetes.equals(yesNoArr[yesNoArr.length-1])) {
+            Toast.makeText(this,
+                    R.string.current_health_invalid_diabetes,
+                    Toast.LENGTH_SHORT).show();
+            valid = false;
+        }
+        else if(bloodPressure.equals(bloodPressureArr[bloodPressureArr.length-1])) {
+            Toast.makeText(this,
+                    R.string.current_health_invalid_blood_pressure,
+                    Toast.LENGTH_SHORT).show();
+            valid = false;
+        }
+        else if(asthma.equals(yesNoArr[yesNoArr.length-1])) {
+            Toast.makeText(this,
+                    R.string.current_health_invalid_asthma,
+                    Toast.LENGTH_SHORT).show();
+            valid = false;
+        }
+        else if(pregnant.equals(yesNoArr[yesNoArr.length-1])) {
+            Toast.makeText(this,
+                    R.string.current_health_invalid_pregnant,
+                    Toast.LENGTH_SHORT).show();
+            valid = false;
+        }
+
+        return valid;
     }
 
 }

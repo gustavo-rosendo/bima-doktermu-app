@@ -61,7 +61,7 @@ public interface ProfileService {
             @Field("diabetes") String diabetes,
             @Field("cancer") List<String> cancer,
             @Field("blood_pressure") String bloodPressure,
-            @Field("allergies") List<String> allergies,
+            @Field("alergies") List<String> allergies,
             @Field("asthma") String asthma,
             @Field("pregnant") String pregnant,
             @Field("access_token") String accessToken

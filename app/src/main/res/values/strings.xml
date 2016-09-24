@@ -133,6 +133,10 @@
     <string name="current_health_pregnant">Pregnant:</string>
     <string name="current_health_add_info">ADD INFO</string>
     <string name="current_health_add_new">ADD NEW</string>
+    <string name="current_health_invalid_diabetes">Please choose an answer for diabetes.</string>
+    <string name="current_health_invalid_blood_pressure">Please choose an answer for blood pressure.</string>
+    <string name="current_health_invalid_asthma">Please choose an answer for asthma.</string>
+    <string name="current_health_invalid_pregnant">Please choose an answer for pregnant.</string>
 
     <!-- medicine information -->
     <string name="medicine_prescription">Prescription</string>
