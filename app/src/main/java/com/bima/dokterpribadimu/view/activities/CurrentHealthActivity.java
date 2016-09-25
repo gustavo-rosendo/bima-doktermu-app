@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -135,52 +136,8 @@ public class CurrentHealthActivity extends BaseActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 final String cancer = binding.currentHealthCancerSpinner.getSelectedItem().toString();
                 if(position != adapterView.getCount()) {
-                    final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.current_health_cancer_edit_layout);
+                    addCancerTextView(cancer);
 
-                    final RelativeLayout relativeLayout = new RelativeLayout(CurrentHealthActivity.this);
-                    RelativeLayout.LayoutParams p1 = new RelativeLayout.LayoutParams(
-                            RelativeLayout.LayoutParams.MATCH_PARENT,
-                            RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    p1.addRule(RelativeLayout.ABOVE, R.id.current_health_cancer_spinner);
-                    relativeLayout.setLayoutParams(p1);
-
-                    final TextView cancerTextView = new TextView(CurrentHealthActivity.this);
-                    cancerTextView.setText(cancer);
-                    RelativeLayout.LayoutParams p2 = new RelativeLayout.LayoutParams(
-                            RelativeLayout.LayoutParams.MATCH_PARENT,
-                            RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    cancerTextView.setLayoutParams(p2);
-                    cancerTextView.setTextColor(Color.BLACK);
-                    cancerTextView.setTextSize(getResources().getDimension(R.dimen.generic_super_small_text_size));
-                    int padding = (int) getResources().getDimension(R.dimen.generic_large_padding);
-                    cancerTextView.setPadding(padding, padding, padding, padding);
-                    relativeLayout.addView(cancerTextView, 0);
-
-                    final ImageButton cancerBtn = new ImageButton(CurrentHealthActivity.this);
-                    cancerBtn.setImageResource(R.drawable.ic_close_bima_blue);
-                    cancerBtn.setBackgroundColor(0);
-                    RelativeLayout.LayoutParams p3 = new RelativeLayout.LayoutParams(
-                            RelativeLayout.LayoutParams.WRAP_CONTENT,
-                            RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    p3.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                    cancerBtn.setLayoutParams(p3);
-
-                    cancerBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            relativeLayout.removeView(cancerTextView);
-                            relativeLayout.removeView(cancerBtn);
-                            linearLayout.removeView(relativeLayout);
-                            cancerArrayList.remove(cancer);
-                        }
-                    });
-
-                    relativeLayout.addView(cancerBtn);
-
-                    linearLayout.addView(relativeLayout, 0);
-
-                    //Add selected value to the list
-                    cancerArrayList.add(cancer);
                     //Reset the selection
                     binding.currentHealthCancerSpinner.setSelection(adapterView.getCount());
                 }
@@ -221,51 +178,7 @@ public class CurrentHealthActivity extends BaseActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 final String allergy = binding.currentHealthAllergiesSpinner.getSelectedItem().toString();
                 if(position != adapterView.getCount()) {
-                    final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.current_health_allergies_edit_layout);
-
-                    final RelativeLayout relativeLayout = new RelativeLayout(CurrentHealthActivity.this);
-                    RelativeLayout.LayoutParams p1 = new RelativeLayout.LayoutParams(
-                            RelativeLayout.LayoutParams.MATCH_PARENT,
-                            RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    relativeLayout.setLayoutParams(p1);
-
-                    final TextView allergyTextView = new TextView(CurrentHealthActivity.this);
-                    allergyTextView.setText(allergy);
-                    RelativeLayout.LayoutParams p2 = new RelativeLayout.LayoutParams(
-                            RelativeLayout.LayoutParams.MATCH_PARENT,
-                            RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    allergyTextView.setLayoutParams(p2);
-                    allergyTextView.setTextColor(Color.BLACK);
-                    allergyTextView.setTextSize(getResources().getDimension(R.dimen.generic_super_small_text_size));
-                    int padding = (int) getResources().getDimension(R.dimen.generic_large_padding);
-                    allergyTextView.setPadding(padding, padding, padding, padding);
-                    relativeLayout.addView(allergyTextView, 0);
-
-                    final ImageButton allergyBtn = new ImageButton(CurrentHealthActivity.this);
-                    allergyBtn.setImageResource(R.drawable.ic_close_bima_blue);
-                    allergyBtn.setBackgroundColor(0);
-                    RelativeLayout.LayoutParams p3 = new RelativeLayout.LayoutParams(
-                            RelativeLayout.LayoutParams.WRAP_CONTENT,
-                            RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    p3.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                    allergyBtn.setLayoutParams(p3);
-
-                    allergyBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            relativeLayout.removeView(allergyTextView);
-                            relativeLayout.removeView(allergyBtn);
-                            linearLayout.removeView(relativeLayout);
-                            allergiesArrayList.remove(allergy);
-                        }
-                    });
-
-                    relativeLayout.addView(allergyBtn);
-
-                    linearLayout.addView(relativeLayout, 0);
-
-                    //Add selected value to the list
-                    allergiesArrayList.add(allergy);
+                    addAllergyTextView(allergy);
                     //Reset the selection
                     binding.currentHealthAllergiesSpinner.setSelection(adapterView.getCount());
                 }
@@ -394,6 +307,166 @@ public class CurrentHealthActivity extends BaseActivity {
         }
     }
 
+    private void updateEditViews(HealthCondition healthCondition) {
+        List<String> auxArr = null;
+        String aux = null;
+
+        aux = healthCondition.getDiabetes();
+        populateStringSpinner(binding.currentHealthDiabetesSpinner, aux);
+
+        auxArr = healthCondition.getCancer();
+        binding.currentHealthCancerSpinner.setSelection(binding.currentHealthCancerSpinner.getCount());
+        if(auxArr != null && !auxArr.isEmpty()) {
+            for (int i = 0; i < auxArr.size(); i++) {
+                String item = auxArr.get(i);
+                if(item != null) {
+                    addCancerTextView(item);
+                }
+            }
+        }
+
+        aux = healthCondition.getBloodPressure();
+        populateStringSpinner(binding.currentHealthBloodPressureSpinner, aux);
+
+        auxArr = healthCondition.getAllergies();
+        binding.currentHealthAllergiesSpinner.setSelection(binding.currentHealthAllergiesSpinner.getCount());
+        if(auxArr != null && !auxArr.isEmpty()) {
+            for (int i = 0; i < auxArr.size(); i++) {
+                String item = auxArr.get(i);
+                if(item != null) {
+                    addAllergyTextView(item);
+                }
+            }
+        }
+
+        aux = healthCondition.getAsthma();
+        populateStringSpinner(binding.currentHealthAsthmaSpinner, aux);
+
+        aux = healthCondition.getPregnant();
+        populateStringSpinner(binding.currentHealthPregnantSpinner, aux);
+    }
+
+    private void populateStringSpinner(Spinner spinner, String item) {
+        spinner.setSelection(spinner.getCount());
+        if(item != null && !item.isEmpty()) {
+            for (int i = 0; i < spinner.getCount(); i++) {
+                if (item.equals(spinner.getItemAtPosition(i).toString())) {
+                    spinner.setSelection(i);
+                }
+            }
+        }
+    }
+
+    private void addCancerTextView(final String cancer) {
+        if(cancerArrayList.contains(cancer)) {
+            Toast.makeText(this,
+                    R.string.current_health_already_selected,
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {
+            final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.current_health_cancer_edit_layout);
+
+            final RelativeLayout relativeLayout = new RelativeLayout(CurrentHealthActivity.this);
+            RelativeLayout.LayoutParams p1 = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.MATCH_PARENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            p1.addRule(RelativeLayout.ABOVE, R.id.current_health_cancer_spinner);
+            relativeLayout.setLayoutParams(p1);
+
+            final TextView cancerTextView = new TextView(CurrentHealthActivity.this);
+            cancerTextView.setText(cancer);
+            RelativeLayout.LayoutParams p2 = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.MATCH_PARENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            cancerTextView.setLayoutParams(p2);
+            cancerTextView.setTextColor(Color.BLACK);
+            cancerTextView.setTextSize(getResources().getDimension(R.dimen.generic_super_small_text_size));
+            int padding = (int) getResources().getDimension(R.dimen.generic_large_padding);
+            cancerTextView.setPadding(padding, padding, padding, padding);
+            relativeLayout.addView(cancerTextView, 0);
+
+            final ImageButton cancerBtn = new ImageButton(CurrentHealthActivity.this);
+            cancerBtn.setImageResource(R.drawable.ic_close_bima_blue);
+            cancerBtn.setBackgroundColor(0);
+            RelativeLayout.LayoutParams p3 = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            p3.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            cancerBtn.setLayoutParams(p3);
+
+            cancerBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    relativeLayout.removeView(cancerTextView);
+                    relativeLayout.removeView(cancerBtn);
+                    linearLayout.removeView(relativeLayout);
+                    cancerArrayList.remove(cancer);
+                }
+            });
+
+            relativeLayout.addView(cancerBtn);
+            linearLayout.addView(relativeLayout, 0);
+
+            //Add selected value to the list
+            cancerArrayList.add(cancer);
+        }
+    }
+
+    private void addAllergyTextView(final String allergy) {
+        if(allergiesArrayList.contains(allergy)) {
+            Toast.makeText(this,
+                    R.string.current_health_already_selected,
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {
+            final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.current_health_allergies_edit_layout);
+
+            final RelativeLayout relativeLayout = new RelativeLayout(CurrentHealthActivity.this);
+            RelativeLayout.LayoutParams p1 = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.MATCH_PARENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            relativeLayout.setLayoutParams(p1);
+
+            final TextView allergyTextView = new TextView(CurrentHealthActivity.this);
+            allergyTextView.setText(allergy);
+            RelativeLayout.LayoutParams p2 = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.MATCH_PARENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            allergyTextView.setLayoutParams(p2);
+            allergyTextView.setTextColor(Color.BLACK);
+            allergyTextView.setTextSize(getResources().getDimension(R.dimen.generic_super_small_text_size));
+            int padding = (int) getResources().getDimension(R.dimen.generic_large_padding);
+            allergyTextView.setPadding(padding, padding, padding, padding);
+            relativeLayout.addView(allergyTextView, 0);
+
+            final ImageButton allergyBtn = new ImageButton(CurrentHealthActivity.this);
+            allergyBtn.setImageResource(R.drawable.ic_close_bima_blue);
+            allergyBtn.setBackgroundColor(0);
+            RelativeLayout.LayoutParams p3 = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            p3.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            allergyBtn.setLayoutParams(p3);
+
+            allergyBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    relativeLayout.removeView(allergyTextView);
+                    relativeLayout.removeView(allergyBtn);
+                    linearLayout.removeView(relativeLayout);
+                    allergiesArrayList.remove(allergy);
+                }
+            });
+
+            relativeLayout.addView(allergyBtn);
+
+            linearLayout.addView(relativeLayout, 0);
+
+            //Add selected value to the list
+            allergiesArrayList.add(allergy);
+        }
+    }
+
     /**
      * Get user's health condition
      * @param accessToken user's access token
@@ -428,6 +501,7 @@ public class CurrentHealthActivity extends BaseActivity {
                             HealthCondition healthCondition = healthConditionResponse.getData().getHealthCondition();
                             if (healthCondition != null) {
                                 updateInfoViews(healthCondition);
+                                updateEditViews(healthCondition);
                             }
                         } else {
                             handleError(TAG, healthConditionResponse.getMessage());
