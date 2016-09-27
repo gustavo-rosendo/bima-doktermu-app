@@ -5,6 +5,7 @@ import android.databinding.Bindable;
 
 import com.bima.dokterpribadimu.model.Immunisation;
 import com.bima.dokterpribadimu.model.Prescription;
+import com.bima.dokterpribadimu.utils.DateFormatterUtils;
 
 /**
  * Created by apradanas.
@@ -24,7 +25,15 @@ public class MedicineInformationViewModel extends BaseObservable {
 
     @Bindable
     public String getDate() {
-        return prescription != null ? prescription.getDate() : immunisation.getDate();
+        String date = "";
+        if(prescription != null) {
+            date = DateFormatterUtils.getMedicineDisplayDate(prescription.getDate());
+        }
+        else if(immunisation != null) {
+            date = DateFormatterUtils.getMedicineDisplayDate(immunisation.getDate());
+        }
+
+        return date;
     }
 
     @Bindable
