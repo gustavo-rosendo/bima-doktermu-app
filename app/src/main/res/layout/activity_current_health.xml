@@ -86,7 +86,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/generic_body_text_size"
-                    android:textColor="@color/bima_blue"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
                     tools:text="@string/current_health_add_info"/>
@@ -144,7 +144,7 @@
                     android:paddingTop="10dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/generic_body_text_size"
-                    android:textColor="@color/bima_blue"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold"
                     tools:text="@string/current_health_add_new"/>
 
@@ -199,7 +199,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/generic_body_text_size"
-                    android:textColor="@color/bima_blue"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
                     tools:text="@string/current_health_add_info"/>
@@ -257,7 +257,7 @@
                     android:paddingTop="10dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/generic_body_text_size"
-                    android:textColor="@color/bima_blue"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold"
                     tools:text="@string/current_health_add_new"/>
 
@@ -312,7 +312,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/generic_body_text_size"
-                    android:textColor="@color/bima_blue"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
                     tools:text="@string/current_health_add_info"/>
@@ -367,7 +367,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/generic_body_text_size"
-                    android:textColor="@color/bima_blue"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
                     tools:text="@string/current_health_add_info"/>

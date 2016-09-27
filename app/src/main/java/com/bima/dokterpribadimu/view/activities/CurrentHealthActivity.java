@@ -388,6 +388,8 @@ public class CurrentHealthActivity extends BaseActivity {
             final ImageButton cancerBtn = new ImageButton(CurrentHealthActivity.this);
             cancerBtn.setImageResource(R.drawable.ic_close_bima_blue);
             cancerBtn.setBackgroundColor(0);
+            cancerBtn.setScaleX(0.7f);
+            cancerBtn.setScaleY(0.7f);
             RelativeLayout.LayoutParams p3 = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.WRAP_CONTENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -442,6 +444,8 @@ public class CurrentHealthActivity extends BaseActivity {
             final ImageButton allergyBtn = new ImageButton(CurrentHealthActivity.this);
             allergyBtn.setImageResource(R.drawable.ic_close_bima_blue);
             allergyBtn.setBackgroundColor(0);
+            allergyBtn.setScaleX(0.7f);
+            allergyBtn.setScaleY(0.7f);
             RelativeLayout.LayoutParams p3 = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.WRAP_CONTENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT);
