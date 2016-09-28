@@ -39,4 +39,13 @@ public class DateFormatterUtils {
             return "";
         }
     }
+
+    public static String getRenewalDisplayDate(String date) {
+        try {
+            return MEDICINE_DISPLAY_DATE.format(SERVER_DATE.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 }

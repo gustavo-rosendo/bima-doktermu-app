@@ -43,6 +43,13 @@ public class MedicineInformationViewModel extends BaseObservable {
 
     @Bindable
     public String getDurationOrRenewal() {
-        return prescription != null ? prescription.getDuration() : immunisation.getRenewal();
+        String durationOrRenewal = "";
+        if(prescription != null) {
+            durationOrRenewal = prescription.getDuration();
+        }
+        else if(immunisation != null) {
+            durationOrRenewal = DateFormatterUtils.getRenewalDisplayDate(immunisation.getRenewal());
+        }
+        return durationOrRenewal;
     }
 }
