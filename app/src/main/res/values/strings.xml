@@ -107,6 +107,13 @@
     </string>
     <string name="cerise">Cerise</string>
 
+    <!-- call history details -->
+    <string name="call_history_details">Call history details</string>
+    <string name="call_history_prescription">Prescription</string>
+    <string name="call_history_immunisation">Immunisation</string>
+    <string name="call_history_my_notes">My notes</string>
+    <string name="call_history_my_pictures">My pictures</string>
+
     <!-- doctor profile -->
     <string name="doctor_profile">Doctor Profile</string>
     <string name="doctor_information">Doctor Information</string>

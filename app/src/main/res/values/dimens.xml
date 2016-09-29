@@ -92,6 +92,9 @@
     <!-- call history -->
     <dimen name="call_history_image_height">60dp</dimen>
 
+    <!-- call history details -->
+    <dimen name="call_history_details_image_height">40dp</dimen>
+
     <!-- search -->
     <dimen name="search_icon_width_height">48dp</dimen>
     <dimen name="search_discount_icon_width_height">16dp</dimen>
