@@ -1,6 +1,7 @@
 package com.bima.dokterpribadimu.data.remote.service;
 
 import com.bima.dokterpribadimu.model.BaseResponse;
+import com.bima.dokterpribadimu.model.CallHistoryDetailsResponse;
 import com.bima.dokterpribadimu.model.CallHistoryResponse;
 
 import retrofit2.Call;
@@ -18,4 +19,9 @@ public interface CallHistoryService {
             @Query("access_token") String accessToken
     );
 
+    @GET("/v3/booking/details")
+    Call<BaseResponse<CallHistoryDetailsResponse>> getCallHistoryDetails(
+            @Query("call_id") String callId,
+            @Query("access_token") String accessToken
+    );
 }

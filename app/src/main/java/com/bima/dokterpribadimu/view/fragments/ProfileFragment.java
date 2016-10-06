@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.BuildConfig;
@@ -22,7 +23,9 @@ import com.bima.dokterpribadimu.data.remote.api.UserApi;
 import com.bima.dokterpribadimu.databinding.FragmentProfileBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.BimaCall;
+import com.bima.dokterpribadimu.model.CallHistoryDetailsResponse;
 import com.bima.dokterpribadimu.model.CallHistoryResponse;
+import com.bima.dokterpribadimu.model.Prescription;
 import com.bima.dokterpribadimu.model.ProfileResponse;
 import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
@@ -126,13 +129,15 @@ public class ProfileFragment extends BaseFragment {
                 if(indexNextItem < callHistoryItems.size()) {
                     int i = 0;
                     for(; i < MAX_NUM_CALLS_TO_SHOW && (indexNextItem + i < callHistoryItems.size()) ; i++) {
+                        final BimaCall callToAdd = callHistoryItems.get(indexNextItem + i);
                         callHistoryListViewModel.items.add(
                                 new CallHistoryItemViewModel(
-                                        callHistoryItems.get(indexNextItem + i),
+                                        callToAdd,
                                         new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
                                                 // add action when user clicks on a call
+                                                getCallHistoryDetails(callToAdd.getCallId(), UserProfileUtils.getUserProfile(getActivity()).getAccessToken());
                                             }
                                         })
                         );
@@ -498,6 +503,55 @@ public class ProfileFragment extends BaseFragment {
                             }
                         } else {
                             handleError(TAG, callHistoryResponse.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * Get call history details
+     * @param callId restrict the number of returned calls from the history
+     * @param accessToken user's access token
+     */
+    private void getCallHistoryDetails(final String callId, final String accessToken) {
+        callHistoryApi.getCallHistoryDetails(callId, accessToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse<CallHistoryDetailsResponse>>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse<CallHistoryDetailsResponse>>() {
+
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        binding.dialogProgressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        binding.dialogProgressBar.setVisibility(View.GONE);
+
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse<CallHistoryDetailsResponse> callHistoryDetailsResponse) {
+                        if (callHistoryDetailsResponse.getStatus() == Constants.Status.SUCCESS) {
+                            if(callHistoryDetailsResponse.getData() == null ||
+                                    callHistoryDetailsResponse.getData().getCallHistoryDetails() == null) {
+                                Toast.makeText(DokterPribadimuApplication.getInstance().getApplicationContext(),
+                                        "Call History Details not found for callId=" + callId,
+                                        Toast.LENGTH_LONG).show();
+                            }
+                            else {
+                                Toast.makeText(DokterPribadimuApplication.getInstance().getApplicationContext(),
+                                        "Call Details fetched for callId=" + callId,
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            handleError(TAG, callHistoryDetailsResponse.getMessage());
                         }
                     }
                 });

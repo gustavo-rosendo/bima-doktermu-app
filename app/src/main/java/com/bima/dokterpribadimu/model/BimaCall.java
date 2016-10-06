@@ -9,10 +9,19 @@ import com.bima.dokterpribadimu.utils.BookingUtils;
  */
 public class BimaCall {
 
+    private String callId;
     private String bookingStatus;
     private String bookingCreated;
     private String bookingTopic;
     private String bookingSubtopic;
+
+    public String getCallId() {
+        return callId;
+    }
+
+    public void setCallId(String callId) {
+        this.callId = callId;
+    }
 
     public String getBookingStatus() {
         return bookingStatus;
