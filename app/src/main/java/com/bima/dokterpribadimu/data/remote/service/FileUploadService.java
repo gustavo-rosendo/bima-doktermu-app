@@ -18,9 +18,7 @@ public interface FileUploadService {
     Retrofit get annotation with our URL
     And our method that will return us the List of Contacts
     */
-    @GET("/php_upload")
     @Multipart
-    @POST("upload.php")
-    Call<BaseResponse> uploadFile(@Part MultipartBody.Part file,
-                                  @Field("access_token") String accessToken);
+    @POST("/php_upload/upload.php")
+    Call<BaseResponse> uploadFile(@Part MultipartBody.Part file);
 }

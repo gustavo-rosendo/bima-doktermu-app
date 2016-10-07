@@ -318,12 +318,13 @@ public class BookCallActivity extends BaseActivity {
 
                         if(uploadFile(ImagePickerUtils.getImageUri(), UserProfileUtils.getUserProfile(BookCallActivity.this).getAccessToken()) == true) {
 
+                            bookCall(topic, subTopic, userNotes,
+                            UserProfileUtils.getUserProfile(BookCallActivity.this).getMsisdn(),
+                            UserProfileUtils.getUserProfile(BookCallActivity.this).getAccessToken());
+
                         }
                     }
 
-//                    bookCall(topic, subTopic, userNotes,
-//                            UserProfileUtils.getUserProfile(BookCallActivity.this).getMsisdn(),
-//                            UserProfileUtils.getUserProfile(BookCallActivity.this).getAccessToken());
                 }
             }
         });
@@ -696,7 +697,7 @@ public class BookCallActivity extends BaseActivity {
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("uploaded_file", file.getName(), requestFile);
 
-        fileUploadApi.uploadFile(body ,accessToken)
+        fileUploadApi.uploadFile(body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(this.<BaseResponse>bindToLifecycle())
