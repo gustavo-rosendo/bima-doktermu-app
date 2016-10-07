@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
@@ -233,6 +234,8 @@ public class DoctorCallFragment extends BaseFragment {
     }
 
     private boolean isValidBookCallTime() {
+        if(BuildConfig.DEBUG) return true;
+
         boolean isValidTime;
 
         if (sntpClient != null) {

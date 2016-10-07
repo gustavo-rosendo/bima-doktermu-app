@@ -1,5 +1,6 @@
 package com.bima.dokterpribadimu.utils;
 
+import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
 
 import java.text.SimpleDateFormat;
@@ -60,6 +61,8 @@ public class TimeUtils {
 
     public static boolean hasOneHourPassed(double initialTimeMillis) {
         boolean oneHourPassed = false;
+
+        if(BuildConfig.DEBUG) return true;
 
         double deltaTimeMillis = getElapsedTimeMillis() - initialTimeMillis;
 

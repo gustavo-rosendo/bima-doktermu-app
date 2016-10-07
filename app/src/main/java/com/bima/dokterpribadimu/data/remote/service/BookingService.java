@@ -17,6 +17,7 @@ public interface BookingService {
     Call<BaseResponse> bookCall(
             @Field("call_topic") String callTopic,
             @Field("call_subtopic") String callSubTopic,
+            @Field("user_notes") CharSequence userNotes,
             @Field("phone_number") String phoneNumber,
             @Field("access_token") String accessToken
     );

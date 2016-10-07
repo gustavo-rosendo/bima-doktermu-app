@@ -61,222 +61,966 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/book_call_main_margin_left"
+                android:layout_marginLeft="@dimen/book_call_main_margin_left"
+                android:layout_marginRight="@dimen/book_call_main_margin_right"
+                android:layout_marginEnd="@dimen/book_call_main_margin_bottom"
+                android:layout_marginTop="@dimen/book_call_main_margin_top"
                 android:orientation="vertical">
 
-                <!--
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/generic_xxlarge_margin"
-                    android:layout_marginBottom="@dimen/generic_large_margin"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/book_call_tell_us_more"
-                    android:textColor="@android:color/black"
-                    android:textSize="30sp"
-                    android:textStyle="bold"/>
-                    -->
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/generic_large_padding"
-                    android:paddingStart="@dimen/generic_large_padding"
-                    android:paddingRight="@dimen/generic_large_padding"
-                    android:paddingEnd="@dimen/generic_large_padding"
-                    android:gravity="center_horizontal"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/generic_large_margin"
-                    android:text="@string/book_call_about"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
-
-                <Spinner
-                    android:id="@+id/book_call_topic_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/generic_xxlarge_margin"
-                    android:layout_marginLeft="@dimen/generic_xxlarge_margin"
-                    android:layout_marginRight="@dimen/generic_xxlarge_margin"
-                    android:layout_marginEnd="@dimen/generic_xxlarge_margin"
-                    android:paddingStart="-8dp"
-                    android:paddingLeft="-8dp"
-                    android:paddingEnd="-8dp"
-                    android:paddingRight="-8dp"
-                    android:layout_marginTop="@dimen/generic_xlarge_margin"
-                    android:entries="@array/call_topics_arrays"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/generic_separator_height"
-                    android:layout_marginStart="@dimen/generic_xxlarge_margin"
-                    android:layout_marginLeft="@dimen/generic_xxlarge_margin"
-                    android:layout_marginRight="@dimen/generic_xxlarge_margin"
-                    android:layout_marginEnd="@dimen/generic_xxlarge_margin"
-                    android:background="@android:color/darker_gray"/>
-
-                <Spinner
-                    android:id="@+id/book_call_subtopic_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/generic_xxlarge_margin"
-                    android:layout_marginLeft="@dimen/generic_xxlarge_margin"
-                    android:layout_marginRight="@dimen/generic_xxlarge_margin"
-                    android:layout_marginEnd="@dimen/generic_xxlarge_margin"
-                    android:paddingStart="-8dp"
-                    android:paddingLeft="-8dp"
-                    android:paddingEnd="-8dp"
-                    android:paddingRight="-8dp"
-                    android:layout_marginTop="@dimen/generic_xlarge_margin"/>
-
-                <View
-                    android:id="@+id/book_call_subtopic_underline_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/generic_separator_height"
-                    android:layout_marginStart="@dimen/generic_xxlarge_margin"
-                    android:layout_marginLeft="@dimen/generic_xxlarge_margin"
-                    android:layout_marginRight="@dimen/generic_xxlarge_margin"
-                    android:layout_marginEnd="@dimen/generic_xxlarge_margin"
-                    android:background="@android:color/darker_gray"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/generic_xlarge_margin"
-                    android:layout_marginBottom="@dimen/generic_normal_margin"
-                    android:paddingLeft="@dimen/generic_large_padding"
-                    android:paddingStart="@dimen/generic_large_padding"
-                    android:paddingRight="@dimen/generic_large_padding"
-                    android:paddingEnd="@dimen/generic_large_padding"
-                    android:gravity="center_horizontal"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/book_call_info_1"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"/>
-
+                <!-- Step 1 (Empty - Active) -->
                 <LinearLayout
-                    android:id="@+id/book_call_email"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/book_call_step_1_empty"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center_horizontal">
+                    android:visibility="visible"
+                    android:orientation="horizontal">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/book_call_email"
-                        android:gravity="center"
-                        android:textColor="@color/bima_blue"
-                        android:textSize="16sp"/>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                    <View
+                            <ImageView
+                                android:layout_width="@dimen/book_call_dot_icon_width"
+                                android:layout_height="@dimen/book_call_dot_icon_height"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:src="@drawable/ic_blue_dot_1" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:background="#BDBDBD" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/generic_separator_height"
-                        android:background="@color/bima_blue"/>
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="start"
+                                android:text="@string/book_call_choose_topic"
+                                android:textColor="@android:color/black"
+                                android:textSize="14sp"
+                                android:textStyle="bold"/>
+                            <Spinner
+                                android:id="@+id/book_call_topic_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:paddingStart="0dp"
+                                android:paddingLeft="0dp"
+                                android:paddingEnd="0dp"
+                                android:paddingRight="0dp"
+                                android:layout_marginTop="0dp"
+                                android:entries="@array/call_topics_arrays"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/generic_separator_height"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:background="@android:color/darker_gray"/>
+
+                            <Spinner
+                                android:id="@+id/book_call_subtopic_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:paddingStart="0dp"
+                                android:paddingLeft="0dp"
+                                android:paddingEnd="0dp"
+                                android:paddingRight="0dp"
+                                android:layout_marginTop="10dp"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/generic_separator_height"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:background="@android:color/darker_gray"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    />
+                                <Button
+                                    android:id="@+id/book_call_step_1_next_button"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/book_call_standard_button_height"
+                                    android:minWidth="@dimen/book_call_standard_button_width"
+                                    android:layout_marginTop="@dimen/generic_large_margin"
+                                    android:layout_gravity="right"
+                                    android:text="@string/book_call_next"
+                                    android:textAllCaps="true"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="14sp"
+                                    android:background="@drawable/rounded_bima_blue_bg_selector"/>
+                            </LinearLayout>
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/generic_large_margin"
-                    android:layout_marginBottom="@dimen/generic_large_margin"
-                    android:paddingLeft="@dimen/generic_large_padding"
-                    android:paddingStart="@dimen/generic_large_padding"
-                    android:paddingRight="@dimen/generic_large_padding"
-                    android:paddingEnd="@dimen/generic_large_padding"
-                    android:gravity="center_horizontal"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/book_call_info_2"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/generic_large_padding"
-                    android:paddingStart="@dimen/generic_large_padding"
-                    android:paddingRight="@dimen/generic_large_padding"
-                    android:paddingEnd="@dimen/generic_large_padding"
-                    android:gravity="center_horizontal"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
-                    android:text="@string/book_call_phone"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
-
+                <!-- Step 1 (Complete - Checked) -->
                 <LinearLayout
+                    android:id="@+id/book_call_step_1_complete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/generic_large_padding"
-                    android:paddingStart="@dimen/generic_large_padding"
-                    android:paddingRight="@dimen/generic_large_padding"
-                    android:paddingEnd="@dimen/generic_large_padding"
-                    android:orientation="horizontal"
-                    android:gravity="center_horizontal"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/generic_large_margin">
+                    android:visibility="gone"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/book_call_phone_number"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/generic_large_margin"
-                        android:layout_marginTop="@dimen/generic_normal_margin"
-                        android:paddingLeft="@dimen/generic_large_padding"
-                        android:paddingStart="@dimen/generic_large_padding"
-                        android:paddingRight="@dimen/generic_large_padding"
-                        android:paddingEnd="@dimen/generic_large_padding"
-                        android:gravity="center_horizontal"
-                        android:layout_gravity="center_horizontal"
-                        android:textColor="@color/grey_dark"
-                        android:textSize="16sp"/>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/book_call_phone_info_modal"
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:id="@+id/book_call_icon_1_checked"
+                            android:layout_width="@dimen/book_call_dot_icon_width"
+                            android:layout_height="@dimen/book_call_dot_icon_height"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:src="@drawable/ic_blue_dot_check"
+                            android:contentDescription="@string/app_name"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="#BDBDBD" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/generic_normal_padding"
-                        android:paddingStart="@dimen/generic_normal_padding"
-                        android:paddingRight="@dimen/generic_normal_padding"
-                        android:paddingEnd="@dimen/generic_normal_padding"
-                        android:gravity="end"
-                        android:text="@string/book_call_phone_info_modal"
-                        android:textColor="@color/bima_blue"
-                        android:textSize="16sp"/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="@string/book_call_choose_topic"
+                            android:textSize="14sp"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"
+                            android:id="@+id/textView4" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="Topic - Reproduksi"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="Sub Topic - Reproduksi"
+                            android:textSize="14sp" />
+
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/book_call_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/generic_button_height"
-                    android:minWidth="225dp"
-                    android:layout_marginBottom="@dimen/generic_large_margin"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/book_my_call"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    android:background="@drawable/rounded_green_bg_selector"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- Step 2 (Empty - Active) -->
+                <LinearLayout
+                    android:id="@+id/book_call_step_2_empty"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/generic_large_margin"
-                    android:paddingLeft="@dimen/generic_large_padding"
-                    android:paddingStart="@dimen/generic_large_padding"
-                    android:paddingRight="@dimen/generic_large_padding"
-                    android:paddingEnd="@dimen/generic_large_padding"
-                    android:gravity="center_horizontal"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/book_call_rules"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"/>
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/book_call_icon_2_blue"
+                            android:layout_width="@dimen/book_call_dot_icon_width"
+                            android:layout_height="@dimen/book_call_dot_icon_height"
+                            android:layout_gravity="center_vertical|center_horizontal"
+
+                            android:src="@drawable/ic_blue_dot_2"
+                            android:contentDescription="@string/app_name"/>
+
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="#BDBDBD" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/book_call_user_notes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="@string/book_call_add_some_notes"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"/>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="@string/book_call_optional"
+                            android:textSize="14sp" />
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:inputType="textMultiLine"
+                            android:hint="Maximum 280 Characters"
+                            android:maxLength="280"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:id="@+id/book_call_subtopic_underline_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/generic_separator_height"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:background="@android:color/darker_gray"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+                            <Button
+                                android:id="@+id/book_call_step_2_prev_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:minWidth="80dp"
+                                android:layout_marginTop="@dimen/generic_large_margin"
+                                android:layout_gravity="left"
+                                android:text="@string/book_call_prev"
+                                android:textAllCaps="true"
+                                android:textColor="@android:color/white"
+                                android:textSize="14sp"
+                                android:background="@drawable/rounded_bima_blue_bg_selector"/>
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                />
+                            <Button
+                                android:id="@+id/book_call_step_2_next_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:minWidth="80dp"
+                                android:layout_marginTop="@dimen/generic_large_margin"
+                                android:layout_gravity="right"
+                                android:text="@string/book_call_next"
+                                android:textAllCaps="true"
+                                android:textColor="@android:color/white"
+                                android:textSize="14sp"
+                                android:background="@drawable/rounded_bima_blue_bg_selector"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text=" "
+                            android:textSize="16sp"
+                            android:textStyle="bold"/>
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Step 2 (Empty - Grey) -->
+                <LinearLayout
+                    android:id="@+id/book_call_step_2_grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/book_call_dot_icon_width"
+                            android:layout_height="@dimen/book_call_dot_icon_height"
+                            android:layout_gravity="center_vertical|center_horizontal"
+
+                            android:src="@drawable/ic_grey_dot_2"
+                            android:contentDescription="@string/app_name"/>
+
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="#BDBDBD" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="@string/book_call_add_some_notes"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:id="@+id/textView2" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="@string/book_call_optional"
+                            android:textSize="14sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text=" "
+                            android:textSize="14sp" />
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Step 2 (Complete - Checked) -->
+                <LinearLayout
+                    android:id="@+id/book_call_step_2_complete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/book_call_dot_icon_width"
+                            android:layout_height="@dimen/book_call_dot_icon_height"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:src="@drawable/ic_blue_dot_check" />
+
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="#BDBDBD" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="@string/book_call_add_some_notes"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="These are the notes left by the user to tell the doctor the problem that they are having."
+                            android:textSize="14sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text=" "
+                            android:textSize="14sp" />
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Step 3 (Empty - Active) -->
+                <LinearLayout
+                    android:id="@+id/book_call_step_3_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/book_call_dot_icon_width"
+                            android:layout_height="@dimen/book_call_dot_icon_height"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:src="@drawable/ic_blue_dot_3" />
+
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="#BDBDBD" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="@string/book_call_add_some_pictures"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"/>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="@string/book_call_optional"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/book_call_icon_add_image_1"
+                            android:layout_width="60dp"
+                            android:layout_height="90dp"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:src="@drawable/ic_blank_photo"
+                            android:contentDescription="@string/app_name"/>
+                        <ImageView
+                            android:id="@+id/book_call_icon_add_image_2"
+                            android:layout_width="60dp"
+                            android:layout_height="90dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:src="@drawable/ic_blank_photo"
+                            android:contentDescription="@string/app_name"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+                            <Button
+                                android:id="@+id/book_call_step_3_prev_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:minWidth="80dp"
+                                android:layout_marginTop="@dimen/generic_large_margin"
+                                android:layout_gravity="left"
+                                android:text="Prev"
+                                android:textAllCaps="true"
+                                android:textColor="@android:color/white"
+                                android:textSize="14sp"
+                                android:background="@drawable/rounded_bima_blue_bg_selector"/>
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                />
+                            <Button
+                                android:id="@+id/book_call_step_3_next_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:minWidth="80dp"
+                                android:layout_marginTop="@dimen/generic_large_margin"
+                                android:layout_gravity="right"
+                                android:text="@string/book_call_next"
+                                android:textAllCaps="true"
+                                android:textColor="@android:color/white"
+                                android:textSize="14sp"
+                                android:background="@drawable/rounded_bima_blue_bg_selector"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text=" "
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Step 3 (Complete - Checked) -->
+                <LinearLayout
+                    android:id="@+id/book_call_step_3_complete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/book_call_dot_icon_width"
+                            android:layout_height="@dimen/book_call_dot_icon_height"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:src="@drawable/ic_blue_dot_check" />
+
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="#BDBDBD" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="@string/book_call_add_some_pictures"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="JP1234.jpg"
+                            android:textSize="14sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text=" "
+                            android:textSize="14sp" />
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Step 3 (Empty - Grey) -->
+                <LinearLayout
+                    android:id="@+id/book_call_step_3_grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/book_call_icon_3"
+                            android:layout_width="@dimen/book_call_dot_icon_width"
+                            android:layout_height="@dimen/book_call_dot_icon_height"
+                            android:layout_gravity="center_vertical|center_horizontal"
+
+                            android:src="@drawable/ic_grey_dot_3"
+                            android:contentDescription="@string/app_name"/>
+
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="#BDBDBD" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="@string/book_call_add_some_pictures"
+
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:id="@+id/textView3" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="@string/book_call_optional"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text=" "
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Step 4 (Empty - Active) -->
+                <LinearLayout
+                    android:id="@+id/book_call_step_4_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/book_call_icon_2"
+                            android:layout_width="@dimen/book_call_dot_icon_width"
+                            android:layout_height="@dimen/book_call_dot_icon_height"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:src="@drawable/ic_blue_dot_4"
+                            android:contentDescription="@string/app_name"/>
+
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="#BDBDBD" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="Finalize Booking"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:id="@+id/textView2" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="We will call you on the:"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="26dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/book_call_phone_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="center_vertical"
+                                android:text="0812 0011 2233"
+                                android:textSize="14sp" />
+
+                            <ImageView
+                                android:id="@+id/book_call_icon_2"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:layout_marginLeft="5dp"
+                                android:src="@drawable/ic_question_mark"
+                                android:contentDescription="@string/app_name"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+                            <Button
+                                android:id="@+id/book_call_step_4_prev_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:minWidth="80dp"
+                                android:layout_marginTop="@dimen/generic_large_margin"
+                                android:layout_gravity="left"
+                                android:text="@string/book_call_prev"
+                                android:textAllCaps="true"
+                                android:textColor="@android:color/white"
+                                android:textSize="14sp"
+                                android:background="@drawable/rounded_bima_blue_bg_selector"/>
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                />
+                            <Button
+                                android:id="@+id/book_call_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:minWidth="150dp"
+                                android:layout_marginBottom="@dimen/generic_large_margin"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/book_my_call"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/white"
+                                android:textSize="14sp"
+                                android:background="@drawable/rounded_green_bg_selector"/>
+
+                        </LinearLayout>
+
+
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text=" "
+                            android:textSize="14sp" />
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Step 4 (Empty - Grey) -->
+                <LinearLayout
+                    android:id="@+id/book_call_step_4_grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/book_call_icon_4"
+                            android:layout_width="@dimen/book_call_dot_icon_width"
+                            android:layout_height="@dimen/book_call_dot_icon_height"
+                            android:layout_gravity="center_vertical|center_horizontal"
+
+                            android:src="@drawable/ic_grey_dot_4"
+                            android:contentDescription="@string/app_name"/>
+
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="#BDBDBD" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="start"
+                            android:text="@string/book_call_book_the_call"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
-
         </ScrollView>
 
     </LinearLayout>

@@ -34,6 +34,7 @@ public class BookingApi extends BaseApi<BookingService> {
      */
     public Observable<BaseResponse> bookCall(
             final String callTopic, final String callSubTopic,
+            final CharSequence callUserNotes,
             final String phoneNumber, final String accessToken) {
         return Observable.create(new Observable.OnSubscribe<BaseResponse>() {
             @Override
@@ -41,6 +42,7 @@ public class BookingApi extends BaseApi<BookingService> {
                 try {
                     Response response = bookingService.bookCall(callTopic,
                                                                 callSubTopic,
+                                                                callUserNotes,
                                                                 phoneNumber,
                                                                 accessToken).execute();
                     if (response.isSuccessful()) {

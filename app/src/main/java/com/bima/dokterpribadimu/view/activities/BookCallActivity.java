@@ -3,9 +3,11 @@ package com.bima.dokterpribadimu.view.activities;
 import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.data.remote.api.BookingApi;
+import com.bima.dokterpribadimu.data.remote.api.FileUploadApi;
 import com.bima.dokterpribadimu.databinding.ActivityBookCallBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.utils.BookingUtils;
@@ -28,6 +31,7 @@ import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.TimeUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
+import com.bima.dokterpribadimu.utils.ImagePickerUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.bima.dokterpribadimu.view.components.PhoneInfoModalDialog;
@@ -36,6 +40,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
+
+import java.io.File;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -46,9 +55,17 @@ public class BookCallActivity extends BaseActivity {
     private static final String TAG = BookCallActivity.class.getSimpleName();
 
     private static final String CALL_ID = "call_id";
+    private static final int PICK_IMAGE_ID = 234; // the number doesn't matter
+    private static boolean FileUploadResult = false;
+
+    private static boolean HasFileUploadImage1 = false;
+    private static String FileUploadImage1Uri = "";
 
     @Inject
     BookingApi bookingApi;
+
+    @Inject
+    FileUploadApi fileUploadApi;
 
     private ActivityBookCallBinding binding;
 
@@ -87,7 +104,132 @@ public class BookCallActivity extends BaseActivity {
             }
         });
 
+        binding.bookCallIconAddImage1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onPickImage(view);
+            }
+        });
+
         validateBookTimeLimit(); //Gray-out the button if a call was booked in less than the minimum interval
+
+        binding.bookCallStep1Empty.setVisibility(View.VISIBLE);
+        binding.bookCallStep1Complete.setVisibility(View.GONE);
+        binding.bookCallStep2Grey.setVisibility(View.VISIBLE);
+        binding.bookCallStep2Empty.setVisibility(View.GONE);
+        binding.bookCallStep2Complete.setVisibility(View.GONE);
+        binding.bookCallStep3Grey.setVisibility(View.VISIBLE);
+        binding.bookCallStep3Empty.setVisibility(View.GONE);
+        binding.bookCallStep3Complete.setVisibility(View.GONE);
+        binding.bookCallStep4Grey.setVisibility(View.VISIBLE);
+        binding.bookCallStep4Empty.setVisibility(View.GONE);
+
+
+        binding.bookCallStep1NextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                binding.bookCallStep1Empty.setVisibility(View.GONE);
+                binding.bookCallStep1Complete.setVisibility(View.VISIBLE);
+                binding.bookCallStep2Grey.setVisibility(View.GONE);
+                binding.bookCallStep2Empty.setVisibility(View.VISIBLE);
+                binding.bookCallStep2Complete.setVisibility(View.GONE);
+                binding.bookCallStep3Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep3Empty.setVisibility(View.GONE);
+                binding.bookCallStep3Complete.setVisibility(View.GONE);
+                binding.bookCallStep4Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep4Empty.setVisibility(View.GONE);
+
+            }
+        });
+
+        binding.bookCallStep2PrevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                binding.bookCallStep1Empty.setVisibility(View.VISIBLE);
+                binding.bookCallStep1Complete.setVisibility(View.GONE);
+                binding.bookCallStep2Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep2Empty.setVisibility(View.GONE);
+                binding.bookCallStep2Complete.setVisibility(View.GONE);
+                binding.bookCallStep3Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep3Empty.setVisibility(View.GONE);
+                binding.bookCallStep3Complete.setVisibility(View.GONE);
+                binding.bookCallStep4Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep4Empty.setVisibility(View.GONE);
+
+            }
+        });
+
+        binding.bookCallStep2NextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                binding.bookCallStep1Empty.setVisibility(View.GONE);
+                binding.bookCallStep1Complete.setVisibility(View.VISIBLE);
+                binding.bookCallStep2Grey.setVisibility(View.GONE);
+                binding.bookCallStep2Empty.setVisibility(View.GONE);
+                binding.bookCallStep2Complete.setVisibility(View.VISIBLE);
+                binding.bookCallStep3Grey.setVisibility(View.GONE);
+                binding.bookCallStep3Empty.setVisibility(View.VISIBLE);
+                binding.bookCallStep3Complete.setVisibility(View.GONE);
+                binding.bookCallStep4Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep4Empty.setVisibility(View.GONE);
+            }
+        });
+
+        binding.bookCallStep3PrevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                binding.bookCallStep1Empty.setVisibility(View.GONE);
+                binding.bookCallStep1Complete.setVisibility(View.VISIBLE);
+                binding.bookCallStep2Grey.setVisibility(View.GONE);
+                binding.bookCallStep2Empty.setVisibility(View.VISIBLE);
+                binding.bookCallStep2Complete.setVisibility(View.GONE);
+                binding.bookCallStep3Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep3Empty.setVisibility(View.GONE);
+                binding.bookCallStep3Complete.setVisibility(View.GONE);
+                binding.bookCallStep4Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep4Empty.setVisibility(View.GONE);
+            }
+        });
+
+        binding.bookCallStep3NextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                binding.bookCallStep1Empty.setVisibility(View.GONE);
+                binding.bookCallStep1Complete.setVisibility(View.VISIBLE);
+                binding.bookCallStep2Grey.setVisibility(View.GONE);
+                binding.bookCallStep2Empty.setVisibility(View.GONE);
+                binding.bookCallStep2Complete.setVisibility(View.VISIBLE);
+                binding.bookCallStep3Grey.setVisibility(View.GONE);
+                binding.bookCallStep3Empty.setVisibility(View.GONE);
+                binding.bookCallStep3Complete.setVisibility(View.VISIBLE);
+                binding.bookCallStep4Grey.setVisibility(View.GONE);
+                binding.bookCallStep4Empty.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        binding.bookCallStep4PrevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                binding.bookCallStep1Empty.setVisibility(View.GONE);
+                binding.bookCallStep1Complete.setVisibility(View.VISIBLE);
+                binding.bookCallStep2Grey.setVisibility(View.GONE);
+                binding.bookCallStep2Empty.setVisibility(View.GONE);
+                binding.bookCallStep2Complete.setVisibility(View.VISIBLE);
+                binding.bookCallStep3Grey.setVisibility(View.GONE);
+                binding.bookCallStep3Empty.setVisibility(View.VISIBLE);
+                binding.bookCallStep3Complete.setVisibility(View.GONE);
+                binding.bookCallStep4Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep4Empty.setVisibility(View.GONE);
+
+            }
+        });
 
         binding.bookCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +237,9 @@ public class BookCallActivity extends BaseActivity {
                 if (validateTopic() && validateSubTopic() && validatePhoneNumber() && validateBookTimeLimit()) {
                     String topic = "";
                     String subTopic = "";
+                    CharSequence userNotes = "";
+
+                    userNotes = binding.bookCallUserNotes.getText();
 
                     final int topicPosition = binding.bookCallTopicSpinner.getSelectedItemPosition();
                     int subTopicPosition = -1;
@@ -169,9 +314,16 @@ public class BookCallActivity extends BaseActivity {
                             topic,
                             subTopic);
 
-                    bookCall(topic, subTopic,
-                            UserProfileUtils.getUserProfile(BookCallActivity.this).getMsisdn(),
-                            UserProfileUtils.getUserProfile(BookCallActivity.this).getAccessToken());
+                    if(HasFileUploadImage1 == true) {
+
+                        if(uploadFile(ImagePickerUtils.getImageUri(), UserProfileUtils.getUserProfile(BookCallActivity.this).getAccessToken()) == true) {
+
+                        }
+                    }
+
+//                    bookCall(topic, subTopic, userNotes,
+//                            UserProfileUtils.getUserProfile(BookCallActivity.this).getMsisdn(),
+//                            UserProfileUtils.getUserProfile(BookCallActivity.this).getAccessToken());
                 }
             }
         });
@@ -303,31 +455,9 @@ public class BookCallActivity extends BaseActivity {
             }
         });
 
-        binding.bookCallPhoneInfoModal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(phoneInfoModalDialog == null) {
-                    phoneInfoModalDialog = new PhoneInfoModalDialog(BookCallActivity.this);
-                }
 
-                phoneInfoModalDialog.setListener(new PhoneInfoModalDialog.OnPhoneInfoModalDialogClickListener() {
-                    @Override
-                    public void onClick(PhoneInfoModalDialog dialog) {
-                        dismissPhoneInfoModalDialog();
-                    }
-                });
 
-                phoneInfoModalDialog.showDialog();
-            }
-        });
 
-        binding.bookCallEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = getResources().getString(R.string.book_call_email);
-                startMailIntent(email);
-            }
-        });
     }
 
     private void startMailIntent(String email) {
@@ -438,8 +568,9 @@ public class BookCallActivity extends BaseActivity {
      * @param accessToken user's access token
      */
     private void bookCall(final String callTopic, final String callSubTopic,
+                          final CharSequence userNotes,
                           final String phoneNumber, final String accessToken) {
-        bookingApi.bookCall(callTopic, callSubTopic, phoneNumber, accessToken)
+        bookingApi.bookCall(callTopic, callSubTopic, userNotes, phoneNumber, accessToken)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(this.<BaseResponse>bindToLifecycle())
@@ -517,4 +648,104 @@ public class BookCallActivity extends BaseActivity {
                     }
                 });
     }
+
+
+
+    public void onPickImage(View view) {
+        Intent chooseImageIntent = ImagePickerUtils.getPickImageIntent(this);
+        startActivityForResult(chooseImageIntent, PICK_IMAGE_ID);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(requestCode) {
+            case PICK_IMAGE_ID:
+                Bitmap bitmap = ImagePickerUtils.getImageFromResult(this, resultCode, data);
+                HasFileUploadImage1 = true;
+                FileUploadImage1Uri = data.toUri(0);
+                binding.bookCallIconAddImage1.setImageBitmap(bitmap);
+                // TODO use bitmap
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
+    }
+
+    /**
+     * Upload a File.
+     * @param fileNameUri File Name Uri to Upload
+     * @param accessToken user's access token
+     */
+    private boolean uploadFile(final Uri fileNameUri,
+                            final String accessToken) {
+
+        FileUploadResult = false;
+
+
+        /**
+         * Progressbar to Display if you need
+         */
+        //File creating from selected URL
+        File file = new File(fileNameUri.getPath());
+
+        // create RequestBody instance from file
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+        // MultipartBody.Part is used to send also the actual file name
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("uploaded_file", file.getName(), requestFile);
+
+        fileUploadApi.uploadFile(body ,accessToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse>() {
+
+                    @Override
+                    public void onStart() {
+                        showProgressDialog();
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        dismissProgressDialog();
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse response) {
+                        dismissProgressDialog();
+
+                        if (response.getStatus() == Constants.Status.SUCCESS) {
+
+                            if(response.getData() != null) {
+                                String jsonResponse = response.getData().toString();
+                                try {
+                                    JSONObject jsonObject = new JSONObject(jsonResponse);
+                                    if(jsonObject.has("success")) {
+                                        Log.d(TAG, "File Sucessfully Uploaded.");
+                                        FileUploadResult = true;
+                                    }
+                                } catch (JSONException e) {
+                                    Log.e(TAG, "Error reading call_id from jsonResponse = " + jsonResponse);
+                                    Log.e(TAG, "Error message = " + e.getMessage());
+                                }
+
+                            }
+
+
+                        } else {
+                            handleError(TAG, response.getMessage());
+                        }
+                    }
+                });
+
+        return FileUploadResult;
+    }
+
 }
