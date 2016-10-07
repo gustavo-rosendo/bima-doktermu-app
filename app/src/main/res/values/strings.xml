@@ -53,6 +53,15 @@
     <string name="doctor_on_call_subscribe">Aktivasi</string>
 
     <!-- book a call -->
+    <string name="book_call_choose_topic">Choose a topic and subtopic</string>
+    <string name="book_call_add_some_notes">Add some notes</string>
+    <string name="book_call_add_some_pictures">Add some pictures</string>
+    <string name="book_call_optional">(Optional)</string>
+    <string name="book_call_book_the_call">Book the call</string>
+    <string name="book_call_next">Next</string>
+    <string name="book_call_prev">Prev</string>
+    <string name="book_call_pick_image_intent_text">pick_image_intent_text</string>
+
     <string name="book_call_tell_us_more">Topik konsultasi</string>
     <string name="book_call_info_1">
         Jika lebih dari 1 jam anda tidak dihubungi oleh team kami, silahkan mengirim email ke:
@@ -278,6 +287,9 @@
     <string name="rate_your_call_invalid">Tolong memberikan rating minimal 1 bintang</string>
     <string name="dialog_rate_your_call_success">Berhasil!</string>
     <string name="dialog_rate_your_call_success_message">Terimakasih.</string>
+
+    <!-- Upload File -->
+    <string name="file_upload_progressbar">Uploading.. Wait for a while...</string>
 
     <!-- province -->
     <string-array name="province_arrays">
