@@ -90,7 +90,7 @@
                     android:layout_centerHorizontal="true"
                     android:textAllCaps="true"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/generic_title_text_size"
                     android:textStyle="bold"/>
 
                 <LinearLayout
@@ -101,6 +101,7 @@
                     android:layout_below="@+id/doctor_name_text">
 
                     <TextView
+                        android:layout_marginTop="@dimen/generic_xlarge_margin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/doctor_information"
@@ -112,7 +113,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="@dimen/generic_large_margin">
+                        android:layout_marginTop="@dimen/generic_xlarge_margin">
 
                         <TextView
                             android:layout_width="0dp"
@@ -138,7 +139,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="@dimen/generic_normal_margin">
+                        android:layout_marginTop="@dimen/generic_large_margin">
 
                         <TextView
                             android:layout_width="0dp"
@@ -164,7 +165,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="@dimen/generic_normal_margin">
+                        android:layout_marginTop="@dimen/generic_large_margin">
 
                         <TextView
                             android:layout_width="0dp"
@@ -194,6 +195,7 @@
                         android:orientation="vertical">
 
                         <View
+                            android:layout_marginTop="@dimen/generic_normal_margin"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/generic_separator_height"
                             android:background="@color/grey_light"/>
@@ -209,6 +211,7 @@
 
                         <TextView
                             android:id="@+id/doctor_bio"
+                            android:layout_marginTop="@dimen/generic_normal_margin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="-"
