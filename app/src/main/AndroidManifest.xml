@@ -41,6 +41,8 @@
         <activity android:name=".view.activities.SubscriptionPlansActivity" />
         <activity android:name=".view.activities.SignInActivity" />
         <activity android:name=".view.activities.DoctorCallActivity" />
+        <activity android:name=".view.activities.DoctorProfileActivity" />
+        <activity android:name=".view.activities.CallDetailsActivity" />
         <activity android:name=".view.activities.BookCallActivity" />
         <activity android:name=".view.activities.RegisterNameActivity" />
         <activity android:name=".view.activities.HomeActivity" />

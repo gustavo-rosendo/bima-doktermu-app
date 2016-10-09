@@ -77,6 +77,8 @@
     <string name="book_call_rules">
         Jam buka 06.00 - 22.00 WIB\n
         Anda akan dihubungi dalam 1 jam ke depan (maksimal)</string>
+    <string name="book_call_pending">Konsultasi Anda masih dalam proses</string>
+    <string name="book_call_details_not_found">Info tentang konsultasi ini tidak tersedia.</string>
 
     <!-- partners -->
     <string name="partners_inactive_info">Segera aktivasi dan dapatkan potongan harga dari
@@ -122,6 +124,7 @@
     <string name="call_history_immunisation">Immunisation</string>
     <string name="call_history_my_notes">My notes</string>
     <string name="call_history_my_pictures">My pictures</string>
+    <string name="call_history_details_summary">Call summary</string>
 
     <!-- doctor profile -->
     <string name="doctor_profile">Doctor Profile</string>

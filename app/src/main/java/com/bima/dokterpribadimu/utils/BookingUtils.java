@@ -23,4 +23,10 @@ public class BookingUtils {
     public static final String SUBTOPIC_EYE_DISEASE = "penyakit_mata";
     public static final String SUBTOPIC_THT_DISEASE = "penyakit_tht";
 
+    //Booking status
+    public static final String STATUS_PENDING   = "pending";
+    public static final String STATUS_CANCELLED = "canceled";
+    public static final String STATUS_EXPIRED   = "expired";
+    public static final String STATUS_FINISHED  = "completed";
+
 }

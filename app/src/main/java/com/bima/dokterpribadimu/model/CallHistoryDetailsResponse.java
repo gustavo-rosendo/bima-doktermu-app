@@ -5,13 +5,13 @@ package com.bima.dokterpribadimu.model;
  */
 public class CallHistoryDetailsResponse {
 
-    CallHistoryDetails callHistoryDetails;
+    CallHistoryDetails callDetails;
 
     public CallHistoryDetails getCallHistoryDetails() {
-        return callHistoryDetails;
+        return callDetails;
     }
 
-    public void setCallHistoryDetails(CallHistoryDetails callHistoryDetails) {
-        this.callHistoryDetails = callHistoryDetails;
+    public void setCallHistoryDetails(CallHistoryDetails callDetails) {
+        this.callDetails = callDetails;
     }
 }

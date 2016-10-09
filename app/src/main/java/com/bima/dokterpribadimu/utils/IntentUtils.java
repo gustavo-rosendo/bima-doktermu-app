@@ -3,9 +3,11 @@ package com.bima.dokterpribadimu.utils;
 import android.content.Context;
 import android.content.Intent;
 
+import com.bima.dokterpribadimu.model.CallHistoryDetails;
 import com.bima.dokterpribadimu.model.News;
 import com.bima.dokterpribadimu.model.Partner;
 import com.bima.dokterpribadimu.view.activities.BookCallActivity;
+import com.bima.dokterpribadimu.view.activities.CallDetailsActivity;
 import com.bima.dokterpribadimu.view.activities.CurrentHealthActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorProfileActivity;
@@ -166,10 +168,19 @@ public class IntentUtils {
     /**
      *
      * @param context caller's activity / fragment context
-     * @param partner partner's detail to be displayed
+     * @param doctorId partner's detail to be displayed
      */
     public static void startDoctorProfileActivity(Context context, String doctorId) {
         context.startActivity(DoctorProfileActivity.create(context, doctorId));
+    }
+
+    /**
+     *
+     * @param context caller's activity / fragment context
+     * @param callHistoryDetails call details to be displayed
+     */
+    public static void startCallDetailsActivity(Context context, CallHistoryDetails callHistoryDetails) {
+        context.startActivity(CallDetailsActivity.create(context, callHistoryDetails));
     }
 
     /**

@@ -89,8 +89,7 @@
                     android:paddingEnd="@dimen/generic_large_padding"
                     android:text="@string/call_history_details"
                     android:textColor="@android:color/primary_text_light"
-                    android:textSize="@dimen/generic_headline_text_size"
-                    android:textStyle="bold"/>
+                    android:textSize="@dimen/generic_headline_text_size"/>
 
                 <TextView
                     android:id="@+id/call_date"
@@ -103,11 +102,13 @@
                     android:paddingEnd="@dimen/generic_large_padding"
                     android:text="@string/call_history_details"
                     android:textColor="@color/grey_dark"
-                    android:textSize="@dimen/generic_subheading_text_size"/>
+                    android:textSize="@dimen/generic_body_text_size"/>
 
                 <RelativeLayout
+                    android:id="@+id/call_details_doctor_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_small_margin">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/call_doctor_picture_image"
@@ -139,7 +140,7 @@
                     android:paddingStart="@dimen/generic_large_padding"
                     android:paddingRight="@dimen/generic_large_padding"
                     android:paddingEnd="@dimen/generic_large_padding"
-                    android:text="@string/call_history_details"
+                    android:text="@string/call_history_details_summary"
                     android:textColor="@android:color/primary_text_light"
                     android:textSize="@dimen/generic_subheading_text_size"
                     android:textStyle="bold"/>
@@ -153,7 +154,7 @@
                     android:paddingStart="@dimen/generic_large_padding"
                     android:paddingRight="@dimen/generic_large_padding"
                     android:paddingEnd="@dimen/generic_large_padding"
-                    android:text="@string/call_history_details"
+                    android:text="@string/call_history_details_summary"
                     android:textColor="@android:color/primary_text_light"
                     android:textSize="@dimen/generic_body_text_size"/>
 
@@ -161,7 +162,7 @@
                     android:id="@+id/call_prescription_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:layout_marginTop="@dimen/generic_xlarge_margin"
                     android:paddingLeft="@dimen/generic_large_padding"
                     android:paddingStart="@dimen/generic_large_padding"
                     android:paddingRight="@dimen/generic_large_padding"
@@ -201,7 +202,7 @@
                     android:id="@+id/call_immunisation_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:layout_marginTop="@dimen/generic_xlarge_margin"
                     android:paddingLeft="@dimen/generic_large_padding"
                     android:paddingStart="@dimen/generic_large_padding"
                     android:paddingRight="@dimen/generic_large_padding"
@@ -246,7 +247,7 @@
                     android:id="@+id/call_my_notes_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:layout_marginTop="@dimen/generic_large_margin"
                     android:paddingLeft="@dimen/generic_large_padding"
                     android:paddingStart="@dimen/generic_large_padding"
                     android:paddingRight="@dimen/generic_large_padding"
@@ -273,38 +274,57 @@
                     android:id="@+id/call_my_pictures_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:layout_marginTop="@dimen/generic_xlarge_margin"
                     android:paddingLeft="@dimen/generic_large_padding"
                     android:paddingStart="@dimen/generic_large_padding"
                     android:paddingRight="@dimen/generic_large_padding"
                     android:paddingEnd="@dimen/generic_large_padding"
-                    android:text="@string/call_history_my_notes"
+                    android:text="@string/call_history_my_pictures"
                     android:textColor="@android:color/primary_text_light"
                     android:textSize="@dimen/generic_subheading_text_size"
                     android:textStyle="bold"/>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <ImageButton
-                        android:id="@+id/call_my_pictures_1"
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:id="@+id/call_my_pictures_1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/generic_large_margin"
+                            android:layout_weight="1"
+                            android:scaleType="fitStart"
+                            android:adjustViewBounds="true"
+                            android:background="@android:color/transparent"
+                            android:visibility="gone"/>
+
+                        <ImageView
+                            android:id="@+id/call_my_pictures_2"
+                            android:layout_toRightOf="@+id/call_my_pictures_1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/generic_large_margin"
+                            android:layout_weight="1"
+                            android:scaleType="fitStart"
+                            android:adjustViewBounds="true"
+                            android:background="@android:color/transparent"
+                            android:visibility="gone"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/call_my_pictures_text"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/generic_large_margin"
-                        android:padding="@dimen/generic_large_padding"
-                        android:scaleType="fitXY"/>
-
-                    <ImageButton
-                        android:id="@+id/call_my_pictures_2"
-                        android:layout_toRightOf="@+id/call_my_pictures_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/generic_large_margin"
-                        android:padding="@dimen/generic_large_padding"
-                        android:scaleType="fitXY"/>
-
-                </RelativeLayout>
+                        android:layout_marginTop="@dimen/generic_normal_margin"
+                        android:paddingLeft="@dimen/generic_large_padding"
+                        android:paddingStart="@dimen/generic_large_padding"
+                        android:paddingRight="@dimen/generic_large_padding"
+                        android:paddingEnd="@dimen/generic_large_padding"
+                        android:textColor="@android:color/primary_text_light"
+                        android:textSize="@dimen/generic_body_text_size"
+                        android:visibility="gone"/>
 
             </LinearLayout>
 
