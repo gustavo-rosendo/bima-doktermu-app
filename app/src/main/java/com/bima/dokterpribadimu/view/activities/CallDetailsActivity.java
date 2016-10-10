@@ -3,11 +3,14 @@ package com.bima.dokterpribadimu.view.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
+import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.ActivityCallHistoryDetailsBinding;
@@ -17,7 +20,11 @@ import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StringUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
+import com.bima.dokterpribadimu.viewmodel.CallDetailsItemViewModel;
+import com.bima.dokterpribadimu.viewmodel.NewsItemViewModel;
 import com.squareup.picasso.Picasso;
+
+import me.tatarka.bindingcollectionadapter.ItemView;
 
 /**
  * Created by gusta_000 on 8/10/2016.
@@ -167,4 +174,9 @@ public class CallDetailsActivity extends BaseActivity {
         super.onDestroy();
     }
 
+    public static class CallDetailsListViewModel {
+        public final ObservableList<CallDetailsItemViewModel> items = new ObservableArrayList<>();
+        public final ItemView prescriptionItemView = ItemView.of(BR.call_details_item_viewmodel, R.layout.item_call_details_prescription);
+        public final ItemView immunisationItemView = ItemView.of(BR.call_details_item_viewmodel, R.layout.item_call_details_immunisation);
+    }
 }

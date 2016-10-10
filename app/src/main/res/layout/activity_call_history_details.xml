@@ -5,19 +5,11 @@
 
     <data>
         <variable
-            name="viewModelPrescription"
-            type="com.bima.dokterpribadimu.view.fragments.ProfileFragment.CallHistoryListViewModel"/>
+            name="viewModel"
+            type="com.bima.dokterpribadimu.view.activities.CallDetailsActivity.CallDetailsListViewModel"/>
         <import
             type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
     </data>
-
-    <!--<data>-->
-        <!--<variable-->
-            <!--name="viewModelImmunisation"-->
-            <!--type="com.bima.dokterpribadimu.view.fragments.ProfileFragment.CallHistoryListViewModel"/>-->
-        <!--<import-->
-            <!--type="me.tatarka.bindingcollectionadapter.LayoutManagers" />-->
-    <!--</data>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -185,8 +177,8 @@
                         android:paddingRight="@dimen/generic_small_padding"
                         android:paddingEnd="@dimen/generic_small_padding"
                         app:layoutManager="@{LayoutManagers.linear()}"
-                        app:items="@{viewModelPrescription.items}"
-                        app:itemView="@{viewModelPrescription.itemView}"/>
+                        app:items="@{viewModel.items}"
+                        app:itemView="@{viewModel.prescriptionItemView}"/>
 
                     <ProgressBar
                         android:id="@+id/prescription_dialog_progress_bar"
@@ -216,17 +208,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <!--<android.support.v7.widget.RecyclerView-->
-                        <!--android:id="@+id/call_history_immunisation_recycler"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:paddingLeft="@dimen/generic_small_padding"-->
-                        <!--android:paddingStart="@dimen/generic_small_padding"-->
-                        <!--android:paddingRight="@dimen/generic_small_padding"-->
-                        <!--android:paddingEnd="@dimen/generic_small_padding"-->
-                        <!--app:layoutManager="@{LayoutManagers.linear()}"-->
-                        <!--app:items="@{viewModelImmunisation.items}"-->
-                        <!--app:itemView="@{viewModelImmunisation.itemView}"/>-->
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/call_history_immunisation_recycler"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:paddingLeft="@dimen/generic_small_padding"
+                        android:paddingStart="@dimen/generic_small_padding"
+                        android:paddingRight="@dimen/generic_small_padding"
+                        android:paddingEnd="@dimen/generic_small_padding"
+                        app:layoutManager="@{LayoutManagers.linear()}"
+                        app:items="@{viewModel.items}"
+                        app:itemView="@{viewModel.immunisationItemView}"/>
 
                     <ProgressBar
                         android:id="@+id/immunisation_dialog_progress_bar"
