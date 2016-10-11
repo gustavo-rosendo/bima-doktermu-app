@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.view.View;
 
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
@@ -62,6 +63,13 @@ public class DoctorProfileActivity extends BaseActivity {
         Picasso.with(this)
                 .load(R.drawable.ic_profile_picture)
                 .into(binding.doctorPictureImage);
+
+        binding.toolbarBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         doctorId = getIntent().getExtras().getString(DOCTOR_ID);
 

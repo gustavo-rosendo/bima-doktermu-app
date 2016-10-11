@@ -63,7 +63,15 @@ public class NewsDetailActivity extends BaseActivity {
                 )
         );
 
-        Picasso.with(this).load(news.getNewsImage()).into(binding.newsImage);
+        try {
+            Picasso.with(this)
+                    .load(news.getNewsImage())
+                    .error(R.drawable.ic_img_placeholder)
+                    .placeholder(R.drawable.ic_img_placeholder)
+                    .into(binding.newsImage);
+        } catch (RuntimeException re) {
+            re.printStackTrace();
+        }
 
         binding.newsContent.setText(Html.fromHtml(news.getNewsContent()));
     }

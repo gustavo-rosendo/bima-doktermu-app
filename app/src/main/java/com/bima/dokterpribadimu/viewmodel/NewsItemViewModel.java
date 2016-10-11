@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.bima.dokterpribadimu.model.News;
 import com.bima.dokterpribadimu.utils.DateFormatterUtils;
 import com.squareup.picasso.Picasso;
+import com.bima.dokterpribadimu.R;
 
 /**
  * Created by apradanas on 5/11/16.
@@ -39,7 +40,15 @@ public class NewsItemViewModel extends BaseObservable {
 
     @BindingAdapter({"android:src"})
     public static void setImageResource(ImageView imageView, String url){
-        Picasso.with(imageView.getContext()).load(url).into(imageView);
+        try{
+            Picasso.with(imageView.getContext())
+                    .load(url)
+                    .error(R.drawable.ic_img_placeholder)
+                    .placeholder(R.drawable.ic_img_placeholder)
+                    .into(imageView);
+        } catch (RuntimeException re) {
+            re.printStackTrace();
+        }
     }
 
     @Bindable

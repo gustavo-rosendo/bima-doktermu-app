@@ -23,11 +23,13 @@ import com.bima.dokterpribadimu.data.remote.api.UserApi;
 import com.bima.dokterpribadimu.databinding.FragmentProfileBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.BimaCall;
+import com.bima.dokterpribadimu.model.CallHistoryDetails;
 import com.bima.dokterpribadimu.model.CallHistoryDetailsResponse;
 import com.bima.dokterpribadimu.model.CallHistoryResponse;
 import com.bima.dokterpribadimu.model.Prescription;
 import com.bima.dokterpribadimu.model.ProfileResponse;
 import com.bima.dokterpribadimu.model.UserProfile;
+import com.bima.dokterpribadimu.utils.BookingUtils;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.IntentUtils;
@@ -137,7 +139,7 @@ public class ProfileFragment extends BaseFragment {
                                             @Override
                                             public void onClick(View view) {
                                                 // add action when user clicks on a call
-                                                getCallHistoryDetails(callToAdd.getCallId(), UserProfileUtils.getUserProfile(getActivity()).getAccessToken());
+                                                showCallDetails(callToAdd);
                                             }
                                         })
                         );
@@ -282,6 +284,16 @@ public class ProfileFragment extends BaseFragment {
         callHistoryListViewModel.items.clear();
 
         super.onDestroy();
+    }
+
+    private void showCallDetails(BimaCall call) {
+        if(!call.getBookingStatus().contentEquals(BookingUtils.STATUS_PENDING)){
+            getCallHistoryDetails(call.getCallId(), UserProfileUtils.getUserProfile(getActivity()).getAccessToken());
+        }
+        else {
+            Toast.makeText(DokterPribadimuApplication.getInstance().getApplicationContext(),
+                    getString(R.string.book_call_pending), Toast.LENGTH_LONG).show();
+        }
     }
 
     /**
@@ -489,6 +501,7 @@ public class ProfileFragment extends BaseFragment {
                                                         @Override
                                                         public void onClick(View view) {
                                                             // add action when user clicks on a call
+                                                            showCallDetails(booking);
                                                         }
                                                     })
                                     );
@@ -542,13 +555,14 @@ public class ProfileFragment extends BaseFragment {
                             if(callHistoryDetailsResponse.getData() == null ||
                                     callHistoryDetailsResponse.getData().getCallHistoryDetails() == null) {
                                 Toast.makeText(DokterPribadimuApplication.getInstance().getApplicationContext(),
-                                        "Call History Details not found for callId=" + callId,
-                                        Toast.LENGTH_LONG).show();
+                                        getString(R.string.book_call_pending),
+                                        Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                Toast.makeText(DokterPribadimuApplication.getInstance().getApplicationContext(),
-                                        "Call Details fetched for callId=" + callId,
-                                        Toast.LENGTH_LONG).show();
+                                CallHistoryDetails callHistoryDetails = callHistoryDetailsResponse.getData().getCallHistoryDetails();
+
+                                //Start CallDetailsActivity
+                                IntentUtils.startCallDetailsActivity(getActivity(), callHistoryDetails);
                             }
                         } else {
                             handleError(TAG, callHistoryDetailsResponse.getMessage());
