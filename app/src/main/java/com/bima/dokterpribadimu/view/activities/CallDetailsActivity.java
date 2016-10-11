@@ -3,28 +3,28 @@ package com.bima.dokterpribadimu.view.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableList;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
-import com.bima.dokterpribadimu.BR;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.databinding.ActivityCallHistoryDetailsBinding;
 import com.bima.dokterpribadimu.model.CallHistoryDetails;
-import com.bima.dokterpribadimu.utils.DateFormatterUtils;
+import com.bima.dokterpribadimu.model.Immunisation;
+import com.bima.dokterpribadimu.model.Prescription;
+import com.bima.dokterpribadimu.utils.BookingUtils;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StringUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
-import com.bima.dokterpribadimu.viewmodel.CallDetailsItemViewModel;
-import com.bima.dokterpribadimu.viewmodel.NewsItemViewModel;
 import com.squareup.picasso.Picasso;
-
-import me.tatarka.bindingcollectionadapter.ItemView;
 
 /**
  * Created by gusta_000 on 8/10/2016.
@@ -57,7 +57,7 @@ public class CallDetailsActivity extends BaseActivity {
 
     private void init() {
         callHistoryDetails = GsonUtils.fromJson(getIntent().getExtras().getString(CALL_HISTORY_DETAILS),
-                                                    CallHistoryDetails.class);
+                CallHistoryDetails.class);
 
         initViews();
     }
@@ -73,10 +73,10 @@ public class CallDetailsActivity extends BaseActivity {
 
         //Set call topic and subtopic texts
         if(callHistoryDetails.getBookingTopic() != null && !callHistoryDetails.getBookingTopic().isEmpty()) {
-            binding.toolbarTitle.setText(callHistoryDetails.getBookingTopic());
+            binding.toolbarTitle.setText(BookingUtils.getTopicSimpleName(callHistoryDetails.getBookingTopic()));
         }
         if(callHistoryDetails.getBookingSubTopic() != null && !callHistoryDetails.getBookingSubTopic().isEmpty()) {
-            binding.callSubtopic.setText(callHistoryDetails.getBookingSubTopic());
+            binding.callSubtopic.setText(BookingUtils.getSubTopicSimpleName(callHistoryDetails.getBookingSubTopic()));
         }
 
         //Set call booking date
@@ -125,9 +125,25 @@ public class CallDetailsActivity extends BaseActivity {
         //Set call summary content (doctor's notes)
         binding.callSummaryContent.setText(StringUtils.getStringOrDashIfNull(callHistoryDetails.getCallSummary()));
 
-        //TODO: set prescription list
+        //Set prescription list
+        if(callHistoryDetails.getPrescription() != null && !callHistoryDetails.getPrescription().isEmpty()) {
+            for(Prescription prescription : callHistoryDetails.getPrescription()) {
+                addNewPrescriptionItem(prescription);
+            }
+        }
+        else {
+            binding.callPrescriptionEmpty.setVisibility(View.VISIBLE);
+        }
 
-        //TODO: set immunisation list
+        //Set immunisation list
+        if(callHistoryDetails.getImmunisation() != null && !callHistoryDetails.getImmunisation().isEmpty()) {
+            for(Immunisation immunisation : callHistoryDetails.getImmunisation()) {
+                addNewImmunisationItem(immunisation);
+            }
+        }
+        else {
+            binding.callImmunisationEmpty.setVisibility(View.VISIBLE);
+        }
 
         //Set user notes content
         binding.callMyNotesContent.setText(StringUtils.getStringOrDashIfNull(callHistoryDetails.getNotes()));
@@ -174,9 +190,94 @@ public class CallDetailsActivity extends BaseActivity {
         super.onDestroy();
     }
 
-    public static class CallDetailsListViewModel {
-        public final ObservableList<CallDetailsItemViewModel> items = new ObservableArrayList<>();
-        public final ItemView prescriptionItemView = ItemView.of(BR.call_details_item_viewmodel, R.layout.item_call_details_prescription);
-        public final ItemView immunisationItemView = ItemView.of(BR.call_details_item_viewmodel, R.layout.item_call_details_immunisation);
+    void addNewPrescriptionItem(Prescription prescription) {
+        final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.call_prescription_layout);
+
+        final TextView prescriptionName = new TextView(CallDetailsActivity.this);
+        prescriptionName.setText(prescription.getName());
+        TableRow.LayoutParams params = new TableRow.LayoutParams(0,
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                2.0f);
+        prescriptionName.setLayoutParams(params);
+        prescriptionName.setPadding(
+                (int)getResources().getDimension(R.dimen.generic_large_padding),
+                (int)getResources().getDimension(R.dimen.generic_large_padding),
+                (int)getResources().getDimension(R.dimen.generic_large_padding),
+                (int)getResources().getDimension(R.dimen.generic_large_padding)
+        );
+        prescriptionName.setTextColor(Color.BLACK);
+        prescriptionName.setTypeface(null, Typeface.BOLD);
+
+        final TextView prescriptionDuration = new TextView(CallDetailsActivity.this);
+        prescriptionDuration.setText(prescription.getDuration());
+        params = new TableRow.LayoutParams(0,
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                1.0f);
+        prescriptionDuration.setLayoutParams(params);
+        prescriptionDuration.setGravity(Gravity.RIGHT);
+        prescriptionDuration.setPadding(
+                (int)getResources().getDimension(R.dimen.generic_large_padding),
+                (int)getResources().getDimension(R.dimen.generic_large_padding),
+                (int)getResources().getDimension(R.dimen.generic_large_padding),
+                (int)getResources().getDimension(R.dimen.generic_large_padding)
+        );
+        prescriptionDuration.setTextColor(Color.BLACK);
+
+        final LinearLayout itemLinearLayout = new LinearLayout(CallDetailsActivity.this);
+        itemLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        itemLinearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+
+        itemLinearLayout.addView(prescriptionName);
+        itemLinearLayout.addView(prescriptionDuration);
+
+        linearLayout.addView(itemLinearLayout);
     }
+
+    void addNewImmunisationItem(Immunisation immunisation) {
+        final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.call_immunisation_layout);
+
+        final TextView immunisationName = new TextView(CallDetailsActivity.this);
+        immunisationName.setText(immunisation.getName());
+        TableRow.LayoutParams params = new TableRow.LayoutParams(0,
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                2.0f);
+        immunisationName.setLayoutParams(params);
+        immunisationName.setPadding(
+                (int)getResources().getDimension(R.dimen.generic_large_padding),
+                (int)getResources().getDimension(R.dimen.generic_large_padding),
+                (int)getResources().getDimension(R.dimen.generic_large_padding),
+                (int)getResources().getDimension(R.dimen.generic_large_padding)
+        );
+        immunisationName.setTextColor(Color.BLACK);
+        immunisationName.setTypeface(null, Typeface.BOLD);
+
+        final TextView immunisationRenewal = new TextView(CallDetailsActivity.this);
+        immunisationRenewal.setText(immunisation.getRenewal());
+        params = new TableRow.LayoutParams(0,
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                1.0f);
+        immunisationRenewal.setLayoutParams(params);
+        immunisationRenewal.setGravity(Gravity.RIGHT);
+        immunisationRenewal.setPadding(
+                (int)getResources().getDimension(R.dimen.generic_large_padding),
+                (int)getResources().getDimension(R.dimen.generic_large_padding),
+                (int)getResources().getDimension(R.dimen.generic_large_padding),
+                (int)getResources().getDimension(R.dimen.generic_large_padding)
+        );
+        immunisationRenewal.setTextColor(Color.BLACK);
+
+        final LinearLayout itemLinearLayout = new LinearLayout(CallDetailsActivity.this);
+        itemLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        itemLinearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+
+        itemLinearLayout.addView(immunisationName);
+        itemLinearLayout.addView(immunisationRenewal);
+
+        linearLayout.addView(itemLinearLayout);
+    }
+
 }

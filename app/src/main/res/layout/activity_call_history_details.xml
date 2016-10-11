@@ -3,14 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="viewModel"
-            type="com.bima.dokterpribadimu.view.activities.CallDetailsActivity.CallDetailsListViewModel"/>
-        <import
-            type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
-    </data>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -164,30 +156,27 @@
                     android:textSize="@dimen/generic_subheading_text_size"
                     android:textStyle="bold"/>
 
-                <RelativeLayout
+                <LinearLayout
+                    android:id="@+id/call_prescription_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/call_history_prescription_recycler"
-                        android:layout_height="match_parent"
+                    <TextView
+                        android:id="@+id/call_prescription_empty"
                         android:layout_width="match_parent"
-                        android:paddingLeft="@dimen/generic_small_padding"
-                        android:paddingStart="@dimen/generic_small_padding"
-                        android:paddingRight="@dimen/generic_small_padding"
-                        android:paddingEnd="@dimen/generic_small_padding"
-                        app:layoutManager="@{LayoutManagers.linear()}"
-                        app:items="@{viewModel.items}"
-                        app:itemView="@{viewModel.prescriptionItemView}"/>
-
-                    <ProgressBar
-                        android:id="@+id/prescription_dialog_progress_bar"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:indeterminate="true"/>
+                        android:layout_marginTop="@dimen/generic_normal_margin"
+                        android:paddingLeft="@dimen/generic_large_padding"
+                        android:paddingStart="@dimen/generic_large_padding"
+                        android:paddingRight="@dimen/generic_large_padding"
+                        android:paddingEnd="@dimen/generic_large_padding"
+                        android:text="@string/minus"
+                        android:textColor="@android:color/primary_text_light"
+                        android:textSize="@dimen/generic_body_text_size"
+                        android:visibility="gone"/>
 
-                </RelativeLayout>
+                </LinearLayout>
 
 
                 <TextView
@@ -204,30 +193,27 @@
                     android:textSize="@dimen/generic_subheading_text_size"
                     android:textStyle="bold"/>
 
-                <RelativeLayout
+                <LinearLayout
+                    android:id="@+id/call_immunisation_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/call_history_immunisation_recycler"
-                        android:layout_height="match_parent"
+                    <TextView
+                        android:id="@+id/call_immunisation_empty"
                         android:layout_width="match_parent"
-                        android:paddingLeft="@dimen/generic_small_padding"
-                        android:paddingStart="@dimen/generic_small_padding"
-                        android:paddingRight="@dimen/generic_small_padding"
-                        android:paddingEnd="@dimen/generic_small_padding"
-                        app:layoutManager="@{LayoutManagers.linear()}"
-                        app:items="@{viewModel.items}"
-                        app:itemView="@{viewModel.immunisationItemView}"/>
-
-                    <ProgressBar
-                        android:id="@+id/immunisation_dialog_progress_bar"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:indeterminate="true"/>
+                        android:layout_marginTop="@dimen/generic_normal_margin"
+                        android:paddingLeft="@dimen/generic_large_padding"
+                        android:paddingStart="@dimen/generic_large_padding"
+                        android:paddingRight="@dimen/generic_large_padding"
+                        android:paddingEnd="@dimen/generic_large_padding"
+                        android:text="@string/minus"
+                        android:textColor="@android:color/primary_text_light"
+                        android:textSize="@dimen/generic_body_text_size"
+                        android:visibility="gone"/>
 
-                </RelativeLayout>
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -276,47 +262,47 @@
                     android:textSize="@dimen/generic_subheading_text_size"
                     android:textStyle="bold"/>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:id="@+id/call_my_pictures_1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/generic_large_margin"
-                            android:layout_weight="1"
-                            android:scaleType="fitStart"
-                            android:adjustViewBounds="true"
-                            android:background="@android:color/transparent"
-                            android:visibility="gone"/>
-
-                        <ImageView
-                            android:id="@+id/call_my_pictures_2"
-                            android:layout_toRightOf="@+id/call_my_pictures_1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/generic_large_margin"
-                            android:layout_weight="1"
-                            android:scaleType="fitStart"
-                            android:adjustViewBounds="true"
-                            android:background="@android:color/transparent"
-                            android:visibility="gone"/>
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/call_my_pictures_text"
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/call_my_pictures_1"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/generic_normal_margin"
-                        android:paddingLeft="@dimen/generic_large_padding"
-                        android:paddingStart="@dimen/generic_large_padding"
-                        android:paddingRight="@dimen/generic_large_padding"
-                        android:paddingEnd="@dimen/generic_large_padding"
-                        android:textColor="@android:color/primary_text_light"
-                        android:textSize="@dimen/generic_body_text_size"
+                        android:layout_margin="@dimen/generic_large_margin"
+                        android:layout_weight="1"
+                        android:scaleType="fitStart"
+                        android:adjustViewBounds="true"
+                        android:background="@android:color/transparent"
                         android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/call_my_pictures_2"
+                        android:layout_toRightOf="@+id/call_my_pictures_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/generic_large_margin"
+                        android:layout_weight="1"
+                        android:scaleType="fitStart"
+                        android:adjustViewBounds="true"
+                        android:background="@android:color/transparent"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/call_my_pictures_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_normal_margin"
+                    android:paddingLeft="@dimen/generic_large_padding"
+                    android:paddingStart="@dimen/generic_large_padding"
+                    android:paddingRight="@dimen/generic_large_padding"
+                    android:paddingEnd="@dimen/generic_large_padding"
+                    android:textColor="@android:color/primary_text_light"
+                    android:textSize="@dimen/generic_body_text_size"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 
