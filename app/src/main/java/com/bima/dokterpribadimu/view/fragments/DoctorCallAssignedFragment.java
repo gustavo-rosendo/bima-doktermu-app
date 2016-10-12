@@ -14,12 +14,15 @@ import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.data.remote.api.BookingApi;
 import com.bima.dokterpribadimu.databinding.FragmentDoctorCallAssignedBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
+import com.bima.dokterpribadimu.model.CallAssigned;
+import com.bima.dokterpribadimu.model.CallAssignedResponse;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 import com.bima.dokterpribadimu.view.components.CancelCallModalDialog;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -82,10 +85,6 @@ public class DoctorCallAssignedFragment extends BaseFragment {
     }
 
     private void initViews() {
-
-        binding.bookCallAssignedMessage.setText(getResources().getString(R.string.book_call_assigned_message));
-        binding.bookCallAssignedTime.setText(getResources().getString(R.string.book_call_assigned_time));
-        binding.bookCallAssignedCancelCallButton.setText(getResources().getString(R.string.book_call_assigned_cancel_call));
 
         binding.bookCallAssignedCancelCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,6 +195,96 @@ public class DoctorCallAssignedFragment extends BaseFragment {
                 });
     }
 
+    /**
+     * Get call assigned details
+     * @param callId the id of the assigned call
+     * @param accessToken user's access token
+     */
+    private void getCallAssignment(final String callId, final String accessToken) {
+        bookingApi.getCallAssignment(callId, accessToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse<CallAssignedResponse>>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse<CallAssignedResponse>>() {
+
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse<CallAssignedResponse> callAssignedResponse) {
+                        if (callAssignedResponse.getStatus() == Constants.Status.SUCCESS) {
+                            if(callAssignedResponse.getData() != null &&
+                                    callAssignedResponse.getData().getCallAssignment() != null) {
+                                CallAssigned callAssigned = callAssignedResponse.getData().getCallAssignment();
+
+                                //Update the layout with the information
+                                updateViewsInfo(callAssigned);
+                            }
+                        } else {
+                            handleError(TAG, callAssignedResponse.getMessage());
+                        }
+                    }
+                });
+    }
+
+    private void updateViewsInfo(final CallAssigned callAssigned) {
+        if(callAssigned == null) return;
+
+        if(callAssigned.getDoctorName() != null && !callAssigned.getDoctorName().isEmpty()) {
+            binding.bookCallAssignedDoctor.setText(callAssigned.getDoctorName());
+        }
+
+        if(callAssigned.getTimeEstimation() != null && !callAssigned.getTimeEstimation().isEmpty()) {
+            binding.bookCallAssignedTime.setText(callAssigned.getTimeEstimation());
+        }
+
+        if(callAssigned.getDoctorPicture() != null && !callAssigned.getDoctorPicture().isEmpty()) {
+            try{
+                Picasso.with(getContext()).load(callAssigned.getDoctorPicture())
+                        .centerCrop()
+                        .fit()
+                        .error(R.drawable.ic_profile_picture)
+                        .placeholder(R.drawable.ic_profile_picture)
+                        .into(binding.doctorCallIcon);
+            } catch(RuntimeException re) {
+                re.printStackTrace();
+            }
+        }
+
+        //Set action for when user clicks on the doctor's picture
+        binding.doctorCallIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Redirect to doctor profile, if possible
+                if(callAssigned.getDoctorId() != null &&
+                        !callAssigned.getDoctorId().isEmpty()) {
+                    IntentUtils.startDoctorProfileActivity(getContext(), callAssigned.getDoctorId());
+                }
+            }
+        });
+
+        //Set action for when user clicks on the doctor's name
+        binding.bookCallAssignedDoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Redirect to doctor profile, if possible
+                if(callAssigned.getDoctorId() != null &&
+                        !callAssigned.getDoctorId().isEmpty()) {
+                    IntentUtils.startDoctorProfileActivity(getContext(), callAssigned.getDoctorId());
+                }
+            }
+        });
+    }
 
     private void dismissCancelCallDialog() {
         cancelCallModalDialog.dismiss();

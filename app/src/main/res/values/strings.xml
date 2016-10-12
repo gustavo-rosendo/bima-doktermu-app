@@ -68,9 +68,9 @@
     <string name="book_call_pending_cancel_call">Cancel Call</string>
 
     <!-- book a call assigned-->
-    <string name="book_call_assigned_doctor">Dr. Anjasmuro</string>
+    <string name="book_call_assigned_doctor">Our doctor</string>
     <string name="book_call_assigned_message">has been assigned to you.\n\nThey should call you in about:</string>
-    <string name="book_call_assigned_time">12 min</string>
+    <string name="book_call_assigned_time">A few minutes</string>
     <string name="book_call_assigned_cancel_call">Cancel Call</string>
 
     <string name="book_call_tell_us_more">Topik konsultasi</string>
