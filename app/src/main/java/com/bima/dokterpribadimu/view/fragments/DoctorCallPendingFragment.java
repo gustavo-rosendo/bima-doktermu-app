@@ -104,6 +104,7 @@ public class DoctorCallPendingFragment extends BaseFragment {
                             //Call backend to call the booking
                             cancelCall(String.valueOf(lastCallId),
                                     UserProfileUtils.getUserProfile(getContext()).getAccessToken());
+                            dismissCancelCallDialog();
                         }
                         else {
                             dismissCancelCallDialog();

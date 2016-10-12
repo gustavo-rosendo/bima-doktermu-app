@@ -16,6 +16,21 @@
         android:background="@drawable/dialog_bg">
 
         <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding"
+            android:layout_marginTop="@dimen/generic_large_margin"
+            android:gravity="center"
+            android:text="@string/dialog_cancel_call_modal_title"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
+        <TextView
             android:id="@+id/cancel_call_modal_dialog_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,8 +38,8 @@
             android:paddingStart="@dimen/generic_large_padding"
             android:paddingRight="@dimen/generic_large_padding"
             android:paddingEnd="@dimen/generic_large_padding"
-            android:layout_marginTop="@dimen/generic_xlarge_margin"
-            android:gravity="center"
+            android:layout_marginTop="@dimen/generic_large_margin"
+            android:gravity="start"
             android:text="@string/dialog_cancel_call_modal_text"
             android:textColor="@android:color/black"
             android:textSize="16sp"/>

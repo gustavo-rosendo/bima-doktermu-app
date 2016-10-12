@@ -94,6 +94,7 @@
     <!-- book a call cancelled-->
     <string name="book_call_cancelled">Berhasil!</string>
     <string name="book_call_cancelled_message">Konsultasi Anda telah dibatalkan.</string>
+    <string name="dialog_cancel_call_modal_title">Are you sure?</string>
     <string name="dialog_cancel_call_modal_text">
         If you cancel it now you will have to
         wait again if you want to make another one later!</string>
