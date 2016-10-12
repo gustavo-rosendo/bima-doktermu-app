@@ -61,4 +61,33 @@ public class BookingApi extends BaseApi<BookingService> {
             }
         });
     }
+
+    /**
+     * BookingApi implementation to cancel a call
+     * @return Observable<BaseResponse>
+     */
+    public Observable<BaseResponse> cancelCall(
+            final String callId, final String accessToken) {
+        return Observable.create(new Observable.OnSubscribe<BaseResponse>() {
+            @Override
+            public void call(final Subscriber<? super BaseResponse> subscriber) {
+                try {
+                    Response response = bookingService.cancelCall(callId,
+                            accessToken).execute();
+                    if (response.isSuccessful()) {
+                        subscriber.onNext((BaseResponse) response.body());
+                        subscriber.onCompleted();
+                    } else {
+                        BaseResponse error = GsonUtils.fromJson(
+                                response.errorBody().string(),
+                                BaseResponse.class);
+                        subscriber.onError(new Exception(error.getMessage()));
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    subscriber.onError(e);
+                }
+            }
+        });
+    }
 }

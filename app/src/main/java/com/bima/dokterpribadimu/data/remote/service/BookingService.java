@@ -21,4 +21,11 @@ public interface BookingService {
             @Field("phone_number") String phoneNumber,
             @Field("access_token") String accessToken
     );
+
+    @FormUrlEncoded
+    @POST("/v3/booking/cancel")
+    Call<BaseResponse> cancelCall(
+            @Field("call_id") String callTopic,
+            @Field("access_token") String accessToken
+    );
 }

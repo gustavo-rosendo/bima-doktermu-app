@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minWidth="@dimen/dialog_min_width"
+        android:paddingLeft="@dimen/generic_large_padding"
+        android:paddingStart="@dimen/generic_large_padding"
+        android:paddingRight="@dimen/generic_large_padding"
+        android:paddingEnd="@dimen/generic_large_padding"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@drawable/dialog_bg">
+
+        <TextView
+            android:id="@+id/cancel_call_modal_dialog_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding"
+            android:layout_marginTop="@dimen/generic_xlarge_margin"
+            android:gravity="center"
+            android:text="@string/dialog_cancel_call_modal_text"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/generic_normal_padding"
+            android:paddingStart="@dimen/generic_normal_padding"
+            android:paddingRight="@dimen/generic_normal_padding"
+            android:paddingEnd="@dimen/generic_normal_padding"
+            android:orientation="horizontal"
+            android:layout_gravity="end">
+
+            <Button
+                android:id="@+id/cancel_call_modal_no_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_normal_margin"
+                android:layout_marginRight="@dimen/generic_xlarge_margin"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/dialog_cancel"
+                android:textColor="@color/bima_blue"
+                android:textSize="16sp"/>
+
+            <Button
+                android:id="@+id/cancel_call_modal_confirm_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_normal_margin"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/dialog_confirm"
+                android:textColor="@color/bima_blue"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

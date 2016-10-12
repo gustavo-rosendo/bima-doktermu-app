@@ -127,5 +127,5 @@ public class EventConstants {
     public static final String BTN_EMAIL_SCREEN_ABOUT_BIMA              = "Btn_Email_Scr_About_Bima";
     public static final String BTN_ACTIVATE_SCREEN_SUBSCRIPTION         = "Btn_Activate_Scr_Subscription";
     public static final String BTN_BOOK_CALL_PENDING_CANCEL_CALL        = "Btn_Book_Call_Pending_Scr_Cancel";
-    public static final String BTN_BOOK_CALL_ASSIGNED_CANCEL_CALL        = "Btn_Book_Call_Assigned_Scr_Cancel";
+    public static final String BTN_BOOK_CALL_ASSIGNED_CANCEL_CALL       = "Btn_Book_Call_Assigned_Scr_Cancel";
 }
