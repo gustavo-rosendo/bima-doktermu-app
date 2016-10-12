@@ -7,30 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.analytics.EventConstants;
-import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
-import com.bima.dokterpribadimu.data.inappbilling.BillingInitializationListener;
-import com.bima.dokterpribadimu.data.inappbilling.QueryInventoryListener;
-import com.bima.dokterpribadimu.data.remote.api.RateYourCallApi;
-import com.bima.dokterpribadimu.data.servertime.ServerTimeClient;
-import com.bima.dokterpribadimu.data.servertime.SntpClient;
+import com.bima.dokterpribadimu.data.remote.api.BookingApi;
 import com.bima.dokterpribadimu.databinding.FragmentDoctorCallAssignedBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
-import com.bima.dokterpribadimu.utils.TimeUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
-import com.bima.dokterpribadimu.view.components.RateYourCallDialog;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
+import com.bima.dokterpribadimu.view.components.CancelCallModalDialog;
 
 import javax.inject.Inject;
 
@@ -45,29 +34,12 @@ public class DoctorCallAssignedFragment extends BaseFragment {
 
     private static final String TAG = DoctorCallAssignedFragment.class.getSimpleName();
 
-    private static final String HOUR_PATTERN = "HH";
-    private static final SimpleDateFormat HOUR_FORMAT = new SimpleDateFormat(HOUR_PATTERN);
-    private static final String TIME_ZONE = "GMT+7";
-
-    private static final int NIGHT_HOUR_LIMIT = 10;
-    private static final int NIGHT_HOUR_LIMIT_24_FORMAT = 22;
-    private static final int MORNING_HOUR_LIMIT = 6;
-
-    @Inject
-    RateYourCallApi rateYourCallApi;
-
-    @Inject
-    BillingClient billingClient;
-
-    @Inject
-    ServerTimeClient serverTimeClient;
-
     private FragmentDoctorCallAssignedBinding binding;
 
-    private SntpClient sntpClient;
+    private CancelCallModalDialog cancelCallModalDialog;
 
-    private RateYourCallDialog rateYourCallDialog;
-    private int lastCallId = 0;
+    @Inject
+    BookingApi bookingApi;
 
     public static DoctorCallAssignedFragment newInstance() {
         DoctorCallAssignedFragment fragment = new DoctorCallAssignedFragment();
@@ -79,8 +51,6 @@ public class DoctorCallAssignedFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
 
         DokterPribadimuApplication.getComponent().inject(this);
-
-        HOUR_FORMAT.setTimeZone(TimeZone.getTimeZone(TIME_ZONE));
     }
 
     @Override
@@ -98,60 +68,17 @@ public class DoctorCallAssignedFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
 
-        initBillingClient();
-
-        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_DOCTOR_CALL);
-
-        if(canShowRateYourCall()) {
-            if(rateYourCallDialog != null) {
-                rateYourCallDialog.showDialog();
-            }
-        }
+//        AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_DOCTOR_CALL);
     }
 
     @Override
     public void onPause() {
-        billingClient.release();
-
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
-        billingClient.release();
-
         super.onDestroy();
-    }
-
-    private void initBillingClient() {
-        billingClient.setBillingInitializationListener(new BillingInitializationListener() {
-            @Override
-            public void onSuccess() {
-                billingClient.queryInventoryAsync();
-            }
-
-            @Override
-            public void onFailed() {
-                // TODO: handle this
-            }
-        });
-
-        billingClient.setQueryInventoryListener(new QueryInventoryListener() {
-            @Override
-            public void onSuccess(boolean isSubscribed) {
-                StorageUtils.putBoolean(
-                        getActivity(),
-                        Constants.KEY_USER_SUBSCIPTION,
-                        isSubscribed);
-            }
-
-            @Override
-            public void onFailed() {
-                // TODO: handle this
-            }
-        });
-
-        billingClient.init(getActivity());
     }
 
     private void initViews() {
@@ -165,132 +92,66 @@ public class DoctorCallAssignedFragment extends BaseFragment {
             public void onClick(View view) {
 
             AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_BOOK_CALL_ASSIGNED_CANCEL_CALL);
-            checkServerTime();
+
+                if(cancelCallModalDialog == null) {
+                    cancelCallModalDialog = new CancelCallModalDialog(getContext());
+                }
+
+                cancelCallModalDialog.setListener(new CancelCallModalDialog.OnCancelCallModalDialogClickListener() {
+                    @Override
+                    public void onClick(CancelCallModalDialog dialog) {
+                        int lastCallId = getCallId();
+                        if(lastCallId > 0) {
+                            //Call backend to call the booking
+                            cancelCall(String.valueOf(lastCallId),
+                                    UserProfileUtils.getUserProfile(getContext()).getAccessToken());
+                        }
+                        else {
+                            dismissCancelCallDialog();
+                            //Invalid call id, show default error message
+                            handleError(TAG, null);
+                        }
+                    }
+                });
+
+                cancelCallModalDialog.showDialog();
             }
         });
 
     }
 
-    private void checkServerTime() {
-        serverTimeClient.getSntpClient()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(this.<SntpClient>bindToLifecycle())
-                .subscribe(new Subscriber<SntpClient>() {
-
-                    @Override
-                    public void onStart() {
-                        showProgressDialog();
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                        dismissProgressDialog();
-
-                        processBookCall();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        dismissProgressDialog();
-
-                        handleError(TAG, e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(SntpClient sntpClient) {
-                        DoctorCallAssignedFragment.this.sntpClient = sntpClient;
-                    }
-                });
-    }
-
-    private void processBookCall() {
-        if (!isValidBookCallTime()) {
-            showLateDialog(getString(R.string.dialog_take_me_home), null);
-        } else {
-            startBookCallActivity();
-        }
-    }
-
-    private boolean isValidBookCallTime() {
-        if(BuildConfig.DEBUG) return true;
-
-        boolean isValidTime;
-
-        if (sntpClient != null) {
-            long time = sntpClient.getNtpTime();
-            Date date = new Date(time);
-            int hour = Integer.parseInt(HOUR_FORMAT.format(date));
-
-            Log.d("Server Time", date.toString());
-            Log.d("GMT+7 Hour", HOUR_FORMAT.format(date));
-
-            isValidTime = !(hour >= NIGHT_HOUR_LIMIT_24_FORMAT
-                    || hour < MORNING_HOUR_LIMIT);
-        } else {
-            int hour = TimeUtils.getCurrentTimeHour();
-            int ampm = TimeUtils.getCurrentTimeAmPm();
-
-            isValidTime = !((ampm == Calendar.PM && hour >= NIGHT_HOUR_LIMIT)
-                    || (ampm == Calendar.AM && hour < MORNING_HOUR_LIMIT));
-        }
-
-        return isValidTime;
-    }
-
-
     /**
      * Check if the minimum time between calls has already passed and should show Rate Your Call dialog
      * @return boolean true if rate your call dialog can already be shown, boolean false if otherwise
      */
-    private boolean canShowRateYourCall() {
-        double lastBookedCallTimeMillis = StorageUtils.getDouble(
-                DokterPribadimuApplication.getInstance().getApplicationContext(),
-                Constants.KEY_BOOK_CALL_TIME_MILLIS,
-                -1);
-        //if it's not found, it shouldn't show the rate call dialog
-        if(lastBookedCallTimeMillis == -1) {
-            return false;
-        }
-
+    private int getCallId() {
         String callId = StorageUtils.getString(
                 DokterPribadimuApplication.getInstance().getApplicationContext(),
                 Constants.KEY_BOOK_CALL_ID_LAST_CALL,
                 "0");
 
-        this.lastCallId = 0;
+        //Just check if it is a valid integer
+        int lastCallId;
         try {
-            this.lastCallId = Integer.parseInt(callId);
+            lastCallId = Integer.parseInt(callId);
         } catch (NumberFormatException e) {
-            Log.e(TAG, "Couldn't get the last call id: " + callId
+            Log.e(TAG, "Couldn't get the last call id (Invalid callId): " + callId
                     + " - error message: "
                     + e.getMessage());
             e.printStackTrace();
-            return false;
+            lastCallId = 0;
         }
 
-        boolean canShowRateYourCall = false;
-        if(this.lastCallId != 0 && TimeUtils.hasOneHourPassed(lastBookedCallTimeMillis)) {
-            canShowRateYourCall = true;
-        }
-
-        return canShowRateYourCall;
+        return lastCallId;
     }
-
-    private void dismissRateYourCallDialog() {
-        rateYourCallDialog.dismiss();
-        rateYourCallDialog.clearReference();
-        rateYourCallDialog = null;
-    }
-
 
     /**
-     * Rate the call received in the last hour
+     * Cancel the booked call
      * @param callId Id of the last call
-     * @param rating Rating given by the user
+     * @param accessToken Access token of the user
      */
-    private void rateCall(final String callId, final Integer rating, final String accessToken) {
-        rateYourCallApi.rateCall(callId, rating, accessToken)
+    private void cancelCall(final String callId, final String accessToken) {
+        bookingApi.cancelCall(callId, accessToken)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(this.<BaseResponse>bindToLifecycle())
@@ -313,22 +174,32 @@ public class DoctorCallAssignedFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onNext(BaseResponse rateCallResponse) {
+                    public void onNext(BaseResponse cancelCallResponse) {
                         dismissProgressDialog();
 
-                        if (rateCallResponse.getStatus() == Constants.Status.SUCCESS) {
+                        if (cancelCallResponse.getStatus() == Constants.Status.SUCCESS) {
                             showSuccessDialog(
                                     R.drawable.ic_smiley,
-                                    getString(R.string.dialog_rate_your_call_success),
-                                    getString(R.string.dialog_rate_your_call_success_message),
+                                    getString(R.string.book_call_cancelled),
+                                    getString(R.string.book_call_cancelled_message),
                                     getString(R.string.ok),
                                     null);
-                            AnalyticsHelper.logViewDialogRatingEvent(EventConstants.DIALOG_DOCTOR_CALL_RATING_SUCCESS, rating);
+
+                            //If the call is succesfully canceled, just go back to Doctor On Call screen
+                            IntentUtils.startDoctorCallActivityOnTop(
+                                    DokterPribadimuApplication.getInstance().getApplicationContext());
                         } else {
-                            handleError(TAG, rateCallResponse.getMessage());
+                            handleError(TAG, cancelCallResponse.getMessage());
                         }
                     }
                 });
+    }
+
+
+    private void dismissCancelCallDialog() {
+        cancelCallModalDialog.dismiss();
+        cancelCallModalDialog.clearReference();
+        cancelCallModalDialog = null;
     }
 
 }
