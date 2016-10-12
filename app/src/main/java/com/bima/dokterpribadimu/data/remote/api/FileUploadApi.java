@@ -12,6 +12,7 @@ import retrofit2.Response;
 import rx.Observable;
 import rx.Subscriber;
 import okhttp3.MultipartBody;
+import retrofit2.http.Part;
 
 /**
  * Created by Patrick Nugent on 07/10/2016.
@@ -35,12 +36,12 @@ public class FileUploadApi extends BaseApi<FileUploadService> {
      * FileUploadApi implementation to get call history
      * @return Observable<BaseResponse>
      */
-    public Observable<BaseResponse<FileUploadResponse>> uploadFile(final MultipartBody.Part body) {
+    public Observable<BaseResponse<FileUploadResponse>> uploadFile(final MultipartBody.Part file, final MultipartBody.Part access_token, final MultipartBody.Part call_id) {
         return Observable.create(new Observable.OnSubscribe<BaseResponse<FileUploadResponse>>() {
             @Override
             public void call(final Subscriber<? super BaseResponse<FileUploadResponse>> subscriber) {
                 try {
-                    Response response = fileUploadService.uploadFile(body).execute();
+                    Response response = fileUploadService.uploadFile(file, access_token, call_id).execute();
                     if (response.isSuccessful()) {
                         subscriber.onNext((BaseResponse<FileUploadResponse>) response.body());
                         subscriber.onCompleted();

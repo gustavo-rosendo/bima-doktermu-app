@@ -19,6 +19,6 @@ public interface FileUploadService {
     And our method that will return us the List of Contacts
     */
     @Multipart
-    @POST("/php_upload/upload.php")
-    Call<BaseResponse> uploadFile(@Part MultipartBody.Part file);
+    @POST("/v3/php_upload/upload")
+    Call<BaseResponse> uploadFile(@Part MultipartBody.Part file, @Part MultipartBody.Part accessToken, @Part MultipartBody.Part callID);
 }

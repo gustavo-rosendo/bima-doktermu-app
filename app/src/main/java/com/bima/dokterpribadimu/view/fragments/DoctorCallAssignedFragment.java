@@ -18,7 +18,7 @@ import com.bima.dokterpribadimu.data.inappbilling.QueryInventoryListener;
 import com.bima.dokterpribadimu.data.remote.api.RateYourCallApi;
 import com.bima.dokterpribadimu.data.servertime.ServerTimeClient;
 import com.bima.dokterpribadimu.data.servertime.SntpClient;
-import com.bima.dokterpribadimu.databinding.FragmentDoctorCallBinding;
+import com.bima.dokterpribadimu.databinding.FragmentDoctorCallAssignedBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.StorageUtils;
@@ -41,9 +41,9 @@ import rx.schedulers.Schedulers;
 /**
  * A simple {@link BaseFragment} subclass.
  */
-public class DoctorCallFragment extends BaseFragment {
+public class DoctorCallAssignedFragment extends BaseFragment {
 
-    private static final String TAG = DoctorCallFragment.class.getSimpleName();
+    private static final String TAG = DoctorCallAssignedFragment.class.getSimpleName();
 
     private static final String HOUR_PATTERN = "HH";
     private static final SimpleDateFormat HOUR_FORMAT = new SimpleDateFormat(HOUR_PATTERN);
@@ -62,15 +62,15 @@ public class DoctorCallFragment extends BaseFragment {
     @Inject
     ServerTimeClient serverTimeClient;
 
-    private FragmentDoctorCallBinding binding;
+    private FragmentDoctorCallAssignedBinding binding;
 
     private SntpClient sntpClient;
 
     private RateYourCallDialog rateYourCallDialog;
     private int lastCallId = 0;
 
-    public static DoctorCallFragment newInstance() {
-        DoctorCallFragment fragment = new DoctorCallFragment();
+    public static DoctorCallAssignedFragment newInstance() {
+        DoctorCallAssignedFragment fragment = new DoctorCallAssignedFragment();
         return fragment;
     }
 
@@ -87,7 +87,7 @@ public class DoctorCallFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentDoctorCallBinding.inflate(inflater, container, false);
+        binding = FragmentDoctorCallAssignedBinding.inflate(inflater, container, false);
 
         initViews();
 
@@ -102,7 +102,11 @@ public class DoctorCallFragment extends BaseFragment {
 
         AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_DOCTOR_CALL);
 
-
+        if(canShowRateYourCall()) {
+            if(rateYourCallDialog != null) {
+                rateYourCallDialog.showDialog();
+            }
+        }
     }
 
     @Override
@@ -151,26 +155,17 @@ public class DoctorCallFragment extends BaseFragment {
     }
 
     private void initViews() {
-        if (billingClient.isSubscribedToDokterPribadiKu()) {
-            binding.doctorCallInfoText.setText(getResources().getString(R.string.doctor_on_call_info));
-            binding.bookCallButton.setText(getResources().getString(R.string.doctor_on_call_book_a_call));
-        }
-        else {
-            binding.doctorCallInfoText.setText(getResources().getString(R.string.doctor_on_call_subscription_info));
-            binding.bookCallButton.setText(getResources().getString(R.string.doctor_on_call_subscribe));
-        }
 
-        binding.bookCallButton.setOnClickListener(new View.OnClickListener() {
+        binding.bookCallAssignedMessage.setText(getResources().getString(R.string.book_call_assigned_message));
+        binding.bookCallAssignedTime.setText(getResources().getString(R.string.book_call_assigned_time));
+        binding.bookCallAssignedCancelCallButton.setText(getResources().getString(R.string.book_call_assigned_cancel_call));
+
+        binding.bookCallAssignedCancelCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (billingClient.isSubscribedToDokterPribadiKu()) {
-                    AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_BOOK_SCREEN_DOCTOR_CALL);
-                    checkServerTime();
-                }
-                else {
-                    AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_SUBSCRIBE_SCREEN_DOCTOR_CALL);
-                    startSubscriptionActivity();
-                }
+
+            AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_BOOK_CALL_ASSIGNED_CANCEL_CALL);
+            checkServerTime();
             }
         });
 
@@ -204,7 +199,7 @@ public class DoctorCallFragment extends BaseFragment {
 
                     @Override
                     public void onNext(SntpClient sntpClient) {
-                        DoctorCallFragment.this.sntpClient = sntpClient;
+                        DoctorCallAssignedFragment.this.sntpClient = sntpClient;
                     }
                 });
     }
@@ -241,6 +236,99 @@ public class DoctorCallFragment extends BaseFragment {
         }
 
         return isValidTime;
+    }
+
+
+    /**
+     * Check if the minimum time between calls has already passed and should show Rate Your Call dialog
+     * @return boolean true if rate your call dialog can already be shown, boolean false if otherwise
+     */
+    private boolean canShowRateYourCall() {
+        double lastBookedCallTimeMillis = StorageUtils.getDouble(
+                DokterPribadimuApplication.getInstance().getApplicationContext(),
+                Constants.KEY_BOOK_CALL_TIME_MILLIS,
+                -1);
+        //if it's not found, it shouldn't show the rate call dialog
+        if(lastBookedCallTimeMillis == -1) {
+            return false;
+        }
+
+        String callId = StorageUtils.getString(
+                DokterPribadimuApplication.getInstance().getApplicationContext(),
+                Constants.KEY_BOOK_CALL_ID_LAST_CALL,
+                "0");
+
+        this.lastCallId = 0;
+        try {
+            this.lastCallId = Integer.parseInt(callId);
+        } catch (NumberFormatException e) {
+            Log.e(TAG, "Couldn't get the last call id: " + callId
+                    + " - error message: "
+                    + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+
+        boolean canShowRateYourCall = false;
+        if(this.lastCallId != 0 && TimeUtils.hasOneHourPassed(lastBookedCallTimeMillis)) {
+            canShowRateYourCall = true;
+        }
+
+        return canShowRateYourCall;
+    }
+
+    private void dismissRateYourCallDialog() {
+        rateYourCallDialog.dismiss();
+        rateYourCallDialog.clearReference();
+        rateYourCallDialog = null;
+    }
+
+
+    /**
+     * Rate the call received in the last hour
+     * @param callId Id of the last call
+     * @param rating Rating given by the user
+     */
+    private void rateCall(final String callId, final Integer rating, final String accessToken) {
+        rateYourCallApi.rateCall(callId, rating, accessToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse>() {
+
+                    @Override
+                    public void onStart() {
+                        showProgressDialog();
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        dismissProgressDialog();
+
+                        handleError(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse rateCallResponse) {
+                        dismissProgressDialog();
+
+                        if (rateCallResponse.getStatus() == Constants.Status.SUCCESS) {
+                            showSuccessDialog(
+                                    R.drawable.ic_smiley,
+                                    getString(R.string.dialog_rate_your_call_success),
+                                    getString(R.string.dialog_rate_your_call_success_message),
+                                    getString(R.string.ok),
+                                    null);
+                            AnalyticsHelper.logViewDialogRatingEvent(EventConstants.DIALOG_DOCTOR_CALL_RATING_SUCCESS, rating);
+                        } else {
+                            handleError(TAG, rateCallResponse.getMessage());
+                        }
+                    }
+                });
     }
 
 }

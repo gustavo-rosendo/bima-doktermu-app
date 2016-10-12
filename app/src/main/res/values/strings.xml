@@ -62,6 +62,17 @@
     <string name="book_call_prev">Prev</string>
     <string name="book_call_pick_image_intent_text">pick_image_intent_text</string>
 
+    <!-- book a call pending-->
+    <string name="book_call_pending_customer">Hey John!</string>
+    <string name="book_call_pending_message">Your call request has been taken into consideration.\n A doctor will be assigned to you soon.</string>
+    <string name="book_call_pending_cancel_call">Cancel Call</string>
+
+    <!-- book a call assigned-->
+    <string name="book_call_assigned_doctor">Dr. Anjasmuro</string>
+    <string name="book_call_assigned_message">has been assigned to you.\n\nThey should call you in about:</string>
+    <string name="book_call_assigned_time">12 min</string>
+    <string name="book_call_assigned_cancel_call">Cancel Call</string>
+
     <string name="book_call_tell_us_more">Topik konsultasi</string>
     <string name="book_call_info_1">
         Jika lebih dari 1 jam anda tidak dihubungi oleh team kami, silahkan mengirim email ke:

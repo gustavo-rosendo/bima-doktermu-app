@@ -101,6 +101,7 @@ dependencies {
     final PLAY_SERVICE_ANALYTICS_VERSION = '9.0.0'
     final PLAY_SERVICES_TAGMANAGER_VERSION = '9.0.0'
     final FIREBASE_SDK_CORE_LIBRARY_VERSION = '9.0.2'
+    final FIREBASE_SDK_MESSAGING_LIBRARY_VERSION = '9.0.2'
     final FIREBASE_SDK_ANALYTICS_LIBRARY_VERSION = '9.0.2'
     final FIREBASE_SDK_ADMOB_LIBRARY_VERSION = '9.0.2'
     final VIEW_PAGER_INDICATOR_VERSION = '2.4.1'
@@ -218,6 +219,10 @@ dependencies {
      */
     compile "com.google.firebase:firebase-ads:$FIREBASE_SDK_ADMOB_LIBRARY_VERSION"
 
+    /**
+     *  Firebase Messaging library
+     */
+    compile "com.google.firebase:firebase-messaging:$FIREBASE_SDK_MESSAGING_LIBRARY_VERSION"
     /**
      *  Google Play Services for TagManager library
      */

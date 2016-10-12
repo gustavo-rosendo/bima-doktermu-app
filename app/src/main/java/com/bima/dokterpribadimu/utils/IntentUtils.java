@@ -10,6 +10,8 @@ import com.bima.dokterpribadimu.view.activities.BookCallActivity;
 import com.bima.dokterpribadimu.view.activities.CallDetailsActivity;
 import com.bima.dokterpribadimu.view.activities.CurrentHealthActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
+import com.bima.dokterpribadimu.view.activities.DoctorCallPendingActivity;
+import com.bima.dokterpribadimu.view.activities.DoctorCallAssignedActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorProfileActivity;
 import com.bima.dokterpribadimu.view.activities.GeneralInformationActivity;
 import com.bima.dokterpribadimu.view.activities.HomeActivity;
@@ -137,6 +139,26 @@ public class IntentUtils {
      */
     public static void startDoctorCallActivityOnTop(Context context) {
         Intent intent = new Intent(context, DoctorCallActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+    }
+
+    /**
+     * Start DoctorCallPendingActivity and clear any stack behind it
+     * @param context caller's activity / fragment context
+     */
+    public static void startDoctorCallPendingActivityOnTop(Context context) {
+        Intent intent = new Intent(context, DoctorCallPendingActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+    }
+
+    /**
+     * Start DoctorCallAssignedActivity and clear any stack behind it
+     * @param context caller's activity / fragment context
+     */
+    public static void startDoctorCallAssignedActivityOnTop(Context context) {
+        Intent intent = new Intent(context, DoctorCallAssignedActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
     }

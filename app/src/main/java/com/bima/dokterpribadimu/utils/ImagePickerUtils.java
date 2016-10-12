@@ -2,6 +2,7 @@ package com.bima.dokterpribadimu.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.content.res.AssetFileDescriptor;
@@ -14,6 +15,7 @@ import android.net.Uri;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
+
 
 import com.bima.dokterpribadimu.R;
 
@@ -36,7 +38,7 @@ public class ImagePickerUtils {
     private static final String TEMP_IMAGE_NAME = "tempImage";
 
     public static int minWidthQuality = DEFAULT_MIN_WIDTH_QUALITY;
-    public static Uri selectedImage;
+    public static String imageFileName = "";
 
     public static Intent getPickImageIntent(Context context) {
         Intent chooserIntent = null;
@@ -72,15 +74,29 @@ public class ImagePickerUtils {
         return list;
     }
 
-
-    public static Uri getImageUri() {
-       return selectedImage;
+    private static String getRealPathFromURI(Context context, Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(context, contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
     }
+
+    public static String getImageFileName() {
+       return imageFileName;
+    }
+
+
 
     public static Bitmap getImageFromResult(Context context, int resultCode,
                                             Intent imageReturnedIntent) {
         Log.d(TAG, "getImageFromResult, resultCode: " + resultCode);
         Bitmap bm = null;
+        Uri selectedImage;
+
         File imageFile = getTempFile(context);
         if (resultCode == Activity.RESULT_OK) {
             boolean isCamera = (imageReturnedIntent == null ||
@@ -92,6 +108,8 @@ public class ImagePickerUtils {
                 selectedImage = imageReturnedIntent.getData();
             }
             Log.d(TAG, "selectedImage: " + selectedImage);
+
+            imageFileName = getRealPathFromURI(context, selectedImage);
 
             bm = getImageResized(context, selectedImage);
             int rotation = getRotation(context, selectedImage, isCamera);

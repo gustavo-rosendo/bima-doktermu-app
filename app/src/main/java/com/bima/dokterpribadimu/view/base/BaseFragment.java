@@ -15,6 +15,8 @@ import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.view.activities.AboutActivity;
 import com.bima.dokterpribadimu.view.activities.BookCallActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
+import com.bima.dokterpribadimu.view.activities.DoctorCallPendingActivity;
+import com.bima.dokterpribadimu.view.activities.DoctorCallAssignedActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
 import com.bima.dokterpribadimu.view.activities.ProfileActivity;
 import com.bima.dokterpribadimu.view.activities.SubscriptionActivity;
@@ -133,6 +135,26 @@ public class BaseFragment extends RxFragment {
 
     protected void startDoctorCallActivityOnTop() {
         Intent intent = new Intent(getActivity(), DoctorCallActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    protected void startDoctorCallPendingActivity() {
+        startActivity(new Intent(getActivity(), DoctorCallPendingActivity.class));
+    }
+
+    protected void startDoctorCallActivityPendingOnTop() {
+        Intent intent = new Intent(getActivity(), DoctorCallPendingActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    protected void startDoctorCallAssignedActivity() {
+        startActivity(new Intent(getActivity(), DoctorCallAssignedActivity.class));
+    }
+
+    protected void startDoctorCallAssignedActivityOnTop() {
+        Intent intent = new Intent(getActivity(), DoctorCallAssignedActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

@@ -73,7 +73,7 @@
                     android:id="@+id/book_call_step_1_empty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -105,7 +105,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
+                                android:layout_marginTop="3dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="start"
@@ -191,7 +191,7 @@
                     android:id="@+id/book_call_step_1_complete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -225,7 +225,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="3dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginLeft="5dp"
                             android:layout_gravity="start"
@@ -236,6 +236,7 @@
                             android:id="@+id/textView4" />
 
                         <TextView
+                            android:id="@+id/book_call_topic_grey"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -246,6 +247,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/book_call_subtopic_grey"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -301,7 +303,7 @@
                             android:id="@+id/book_call_user_notes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="3dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginLeft="5dp"
                             android:layout_gravity="start"
@@ -321,6 +323,7 @@
                             android:text="@string/book_call_optional"
                             android:textSize="14sp" />
                         <EditText
+                            android:id="@+id/book_call_step_2_edit_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -402,7 +405,7 @@
                     android:id="@+id/book_call_step_2_grey"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -436,7 +439,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="3dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginLeft="5dp"
                             android:layout_gravity="start"
@@ -476,7 +479,7 @@
                     android:id="@+id/book_call_step_2_complete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -508,7 +511,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="3dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginLeft="5dp"
                             android:layout_gravity="start"
@@ -518,12 +521,14 @@
                             android:textColor="@android:color/black" />
 
                         <TextView
+                            android:id="@+id/book_call_step_2_notes_grey"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginLeft="5dp"
                             android:layout_gravity="start"
+                            android:maxLines="4"
                             android:text="These are the notes left by the user to tell the doctor the problem that they are having."
                             android:textSize="14sp"/>
                         <TextView
@@ -548,7 +553,7 @@
                     android:id="@+id/book_call_step_3_empty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -580,7 +585,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="3dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginLeft="5dp"
                             android:layout_gravity="start"
@@ -712,7 +717,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="3dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginLeft="5dp"
                             android:layout_gravity="start"
@@ -752,7 +757,7 @@
                     android:id="@+id/book_call_step_3_grey"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -787,7 +792,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="3dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginLeft="5dp"
                             android:layout_gravity="start"
@@ -862,15 +867,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="3dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginLeft="5dp"
                             android:layout_gravity="start"
                             android:text="Finalize Booking"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            android:textColor="@android:color/black"
-                            android:id="@+id/textView2" />
+                            android:textColor="@android:color/black" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -900,7 +904,7 @@
                                 android:textSize="14sp" />
 
                             <ImageView
-                                android:id="@+id/book_call_icon_2"
+                                android:id="@+id/book_call_icon_question"
                                 android:layout_width="23dp"
                                 android:layout_height="23dp"
                                 android:layout_gravity="center_vertical|center_horizontal"
@@ -1005,7 +1009,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="3dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginLeft="5dp"
                             android:layout_gravity="start"

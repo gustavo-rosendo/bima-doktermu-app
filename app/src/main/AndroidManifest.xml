@@ -19,6 +19,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        android:name="android.support.multidex.MultiDexApplication">
         <activity android:name=".view.activities.LandingActivity" />
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -40,7 +41,9 @@
         <activity android:name=".view.activities.SubscriptionActivity" />
         <activity android:name=".view.activities.SubscriptionPlansActivity" />
         <activity android:name=".view.activities.SignInActivity" />
-        <activity android:name=".view.activities.DoctorCallActivity" />
+        <activity android:name=".view.activities.DoctorCallPendingActivity" />
+        <activity android:name=".view.activities.DoctorCallAssignedActivity" />
+        <activity android:name=".view.activities.DoctorCallActivity" />        
         <activity android:name=".view.activities.DoctorProfileActivity" />
         <activity android:name=".view.activities.CallDetailsActivity" />
         <activity android:name=".view.activities.BookCallActivity" />
@@ -65,7 +68,18 @@
         <service android:name="com.google.android.gms.analytics.CampaignTrackingService"
             android:enabled="true"
             android:exported="false" />
-
+        <service
+            android:name=".messaging.FirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".messaging.FirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
         <receiver
             android:name="com.google.ads.conversiontracking.InstallReceiver"
             android:exported="true">

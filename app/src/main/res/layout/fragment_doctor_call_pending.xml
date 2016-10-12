@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/generic_xlarge_padding"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/book_call_main_margin_top">
+
+        <ImageView
+            android:id="@+id/doctor_call_icon"
+            android:layout_width="@dimen/doctor_call_icon_width"
+            android:layout_height="@dimen/doctor_call_icon_height"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_doctor"
+            android:contentDescription="@string/app_name"/>
+
+        <TextView
+            android:id="@+id/book_call_pending_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/book_call_pending_customer"
+            android:layout_marginBottom="@dimen/generic_xlarge_margin"
+            android:paddingLeft="@dimen/generic_large_padding"
+            android:paddingStart="@dimen/generic_large_padding"
+            android:paddingRight="@dimen/generic_large_padding"
+            android:paddingEnd="@dimen/generic_large_padding"
+            android:gravity="center_horizontal"
+            android:text="@string/book_call_pending_message"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/doctor_call_info_text_size"/>
+
+        <Button
+            android:id="@+id/book_call_pending_cancel_call_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/generic_button_height"
+            android:minWidth="225dp"
+            android:layout_below="@+id/book_call_pending_message"
+            android:layout_centerHorizontal="true"
+            android:text="@string/book_call_pending_cancel_call"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@drawable/rounded_bima_orange_bg_selector"/>
+
+        <TextView
+            android:id="@+id/book_call_pending_customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/book_call_pending_customer"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/doctor_call_title_text_size"
+            android:layout_below="@+id/doctor_call_icon"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+</layout>
