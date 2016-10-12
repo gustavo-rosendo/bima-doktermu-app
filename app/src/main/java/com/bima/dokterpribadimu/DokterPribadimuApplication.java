@@ -1,6 +1,8 @@
 package com.bima.dokterpribadimu;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.bima.dokterpribadimu.analytics.TagManagerHelper;
 import com.bima.dokterpribadimu.injection.DokterPribadimuComponent;
@@ -78,5 +80,14 @@ public class DokterPribadimuApplication extends Application {
         // Initialize TagManager and load the container from the web
         // (if loading from the web fails, load the default container saved in res/raw)
         //TagManagerHelper.initializeTagManager(this);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+
+        if(BuildConfig.DEBUG) {
+            MultiDex.install(this);
+        }
     }
 }
