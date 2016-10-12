@@ -105,6 +105,7 @@ dependencies {
     final FIREBASE_SDK_ADMOB_LIBRARY_VERSION = '9.0.2'
     final VIEW_PAGER_INDICATOR_VERSION = '2.4.1'
     final BOTTOMSHEET_VERSION = '1.5.1'
+    final MULTIDEX_SUPPORT = '1.0.0'
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -238,6 +239,11 @@ dependencies {
      */
     compile "com.flipboard:bottomsheet-core:$BOTTOMSHEET_VERSION"
     compile "com.flipboard:bottomsheet-commons:$BOTTOMSHEET_VERSION"
+
+    /**
+     * Add support for multidexing in debug builds
+     */
+    compile "com.android.support:multidex:$MULTIDEX_SUPPORT"
 }
 
 /**
