@@ -62,8 +62,6 @@ public class TimeUtils {
     public static boolean hasOneHourPassed(double initialTimeMillis) {
         boolean oneHourPassed = false;
 
-        if(BuildConfig.DEBUG) return true;
-
         double deltaTimeMillis = getElapsedTimeMillis() - initialTimeMillis;
 
         if(deltaTimeMillis >= ONE_HOUR_MS || deltaTimeMillis < 0.0) {

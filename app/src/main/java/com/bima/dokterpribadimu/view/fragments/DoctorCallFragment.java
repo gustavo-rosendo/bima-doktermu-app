@@ -102,11 +102,12 @@ public class DoctorCallFragment extends BaseFragment {
 
         AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_DOCTOR_CALL);
 
-        if(canShowRateYourCall()) {
-            if(rateYourCallDialog != null) {
-                rateYourCallDialog.showDialog();
-            }
-        }
+        //TODO: implement Rate your call dialog after call completed
+//        if(canShowRateYourCall()) {
+//            if(rateYourCallDialog != null) {
+//                rateYourCallDialog.showDialog();
+//            }
+//        }
     }
 
     @Override
@@ -155,7 +156,7 @@ public class DoctorCallFragment extends BaseFragment {
     }
 
     private void initViews() {
-        if (billingClient.isSubscribedToDokterPribadiKu()) {
+        if (billingClient.isSubscribedToDokterPribadiKu() || BuildConfig.DEBUG) {
             binding.doctorCallInfoText.setText(getResources().getString(R.string.doctor_on_call_info));
             binding.bookCallButton.setText(getResources().getString(R.string.doctor_on_call_book_a_call));
         }
@@ -167,7 +168,7 @@ public class DoctorCallFragment extends BaseFragment {
         binding.bookCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (billingClient.isSubscribedToDokterPribadiKu()) {
+                if (billingClient.isSubscribedToDokterPribadiKu() || BuildConfig.DEBUG) {
                     AnalyticsHelper.logButtonClickEvent(EventConstants.BTN_BOOK_SCREEN_DOCTOR_CALL);
                     checkServerTime();
                 }
