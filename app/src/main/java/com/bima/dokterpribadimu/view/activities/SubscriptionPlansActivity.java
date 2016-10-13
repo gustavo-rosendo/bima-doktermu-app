@@ -165,12 +165,19 @@ public class SubscriptionPlansActivity extends BaseActivity implements EasyPermi
                 if (isSubscribed && isRegisterSubscriptionDone) {
                     if (subscription == null) {
                         subscription = new Subscription();
-                        String orderId = StorageUtils.getString(
-                                SubscriptionPlansActivity.this,
-                                Constants.KEY_USER_SUBSCRIPTION_ORDER_ID,
-                                "");
-                        subscription.setOrderId(orderId);
                     }
+
+                    String orderId = StorageUtils.getString(
+                            SubscriptionPlansActivity.this,
+                            Constants.KEY_USER_SUBSCRIPTION_ORDER_ID,
+                            "");
+                    subscription.setOrderId(orderId);
+
+                    String subscriptionToken = StorageUtils.getString(
+                            SubscriptionPlansActivity.this,
+                            Constants.KEY_USER_SUBSCRIPTION_TOKEN,
+                            "");
+                    subscription.setSubscriptionToken(subscriptionToken);
 
                     // Get the SKU of the previously purchased subscription
                     String subscriptionSKU = StorageUtils.getString(
@@ -227,6 +234,11 @@ public class SubscriptionPlansActivity extends BaseActivity implements EasyPermi
                         }
 
                         subscription.setSubscriptionToken(info.getToken());
+                        //save the SubscriptionToken for later use by /v1/subscription/update
+                        StorageUtils.putString(
+                                SubscriptionPlansActivity.this,
+                                Constants.KEY_USER_SUBSCRIPTION_TOKEN,
+                                subscription.getSubscriptionToken());
                         subscription.setSubscriptionStart(TimeUtils.getSubscriptionStartDate());
                         subscription.setSubscriptionEnd(TimeUtils.getSubscriptionEndDate(sku));
                         subscription.setOrderDate(TimeUtils.getSubscriptionOrderDate());

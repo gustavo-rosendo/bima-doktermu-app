@@ -47,6 +47,7 @@ public class Constants {
     public static final String KEY_USER_SUBSCRIPTION_SKU = "user_subscription_sku";
     public static final String KEY_USER_SUBSCIPTION = "user_subscription";
     public static final String KEY_USER_SUBSCRIPTION_ORDER_ID = "user_subscription_order_id";
+    public static final String KEY_USER_SUBSCRIPTION_TOKEN = "user_subscription_token";
     public static final String KEY_BOOK_CALL_TIME_MILLIS = "book_call_time_millis";
     public static final String KEY_BOOK_CALL_ID_LAST_CALL = "book_call_id_last_call";
 
