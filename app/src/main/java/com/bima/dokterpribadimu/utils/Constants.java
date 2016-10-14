@@ -53,6 +53,9 @@ public class Constants {
 
     public static final String KEY_ONBOARDING_FINISHED = "onboarding_finished";
 
+    public static final String KEY_FIREBASE_ACCESS_TOKEN = "firebase_access_token";
+    public static final String KEY_FIREBASE_ACCESS_TOKEN_SAVED = "firebase_access_token_saved";
+    
     public static final String DEVICE_TYPE_FORMAT = "%s %s";
     public static final String DEVICE_SOFTWARE_FORMAT = "Android %s";
 
