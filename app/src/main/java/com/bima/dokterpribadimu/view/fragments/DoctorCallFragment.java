@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
@@ -15,7 +16,6 @@ import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.data.inappbilling.BillingClient;
 import com.bima.dokterpribadimu.data.inappbilling.BillingInitializationListener;
 import com.bima.dokterpribadimu.data.inappbilling.QueryInventoryListener;
-import com.bima.dokterpribadimu.data.remote.api.RateYourCallApi;
 import com.bima.dokterpribadimu.data.servertime.ServerTimeClient;
 import com.bima.dokterpribadimu.data.servertime.SntpClient;
 import com.bima.dokterpribadimu.databinding.FragmentDoctorCallBinding;
@@ -25,7 +25,6 @@ import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.TimeUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
-import com.bima.dokterpribadimu.view.components.RateYourCallDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -54,9 +53,6 @@ public class DoctorCallFragment extends BaseFragment {
     private static final int MORNING_HOUR_LIMIT = 6;
 
     @Inject
-    RateYourCallApi rateYourCallApi;
-
-    @Inject
     BillingClient billingClient;
 
     @Inject
@@ -66,8 +62,6 @@ public class DoctorCallFragment extends BaseFragment {
 
     private SntpClient sntpClient;
 
-    private RateYourCallDialog rateYourCallDialog;
-    private int lastCallId = 0;
 
     public static DoctorCallFragment newInstance() {
         DoctorCallFragment fragment = new DoctorCallFragment();
@@ -102,12 +96,6 @@ public class DoctorCallFragment extends BaseFragment {
 
         AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_DOCTOR_CALL);
 
-        //TODO: implement Rate your call dialog after call completed
-//        if(canShowRateYourCall()) {
-//            if(rateYourCallDialog != null) {
-//                rateYourCallDialog.showDialog();
-//            }
-//        }
     }
 
     @Override
@@ -179,18 +167,6 @@ public class DoctorCallFragment extends BaseFragment {
             }
         });
 
-        if(rateYourCallDialog == null) {
-            rateYourCallDialog = new RateYourCallDialog(getActivity());
-        }
-        rateYourCallDialog.setListener(new RateYourCallDialog.OnRateYourCallDialogClickListener() {
-            @Override
-            public void onClick(RateYourCallDialog dialog, float rating) {
-                dismissRateYourCallDialog();
-
-                Integer ratingInt = Integer.valueOf(Math.round(rating));
-                rateCall(String.valueOf(lastCallId), ratingInt, UserProfileUtils.getUserProfile(getActivity()).getAccessToken());
-            }
-        });
     }
 
     private void checkServerTime() {
@@ -229,11 +205,33 @@ public class DoctorCallFragment extends BaseFragment {
     private void processBookCall() {
         if (!isValidBookCallTime()) {
             showLateDialog(getString(R.string.dialog_take_me_home), null);
+        } else if(!validatePhoneNumber()) {
+            // The toast will show so we do nothing else
         } else {
             startBookCallActivity();
         }
     }
 
+    /**
+     * Validate book a call phone number. A phone number is valid if it has at least 11 digits, like in: 02742112462
+     * @return boolean true if phone number is valid, boolean false if otherwise
+     */
+    private boolean validatePhoneNumber() {
+        boolean isValid = false;
+
+        if(UserProfileUtils.getUserProfile(getActivity()).getMsisdn().length() < Constants.PHONE_NUMBER_MINIMAL_DIGITS) {
+            Toast.makeText(
+                    getActivity(),
+                    getString(R.string.invalid_call_phone_number_message),
+                    Toast.LENGTH_LONG
+            ).show();
+        }
+        else {
+            isValid = true;
+        }
+
+        return isValid;
+    }
     private boolean isValidBookCallTime() {
         if(BuildConfig.DEBUG) return true;
 
@@ -261,96 +259,5 @@ public class DoctorCallFragment extends BaseFragment {
     }
 
 
-    /**
-     * Check if the minimum time between calls has already passed and should show Rate Your Call dialog
-     * @return boolean true if rate your call dialog can already be shown, boolean false if otherwise
-     */
-    private boolean canShowRateYourCall() {
-        double lastBookedCallTimeMillis = StorageUtils.getDouble(
-                DokterPribadimuApplication.getInstance().getApplicationContext(),
-                Constants.KEY_BOOK_CALL_TIME_MILLIS,
-                -1);
-        //if it's not found, it shouldn't show the rate call dialog
-        if(lastBookedCallTimeMillis == -1) {
-            return false;
-        }
-
-        String callId = StorageUtils.getString(
-                DokterPribadimuApplication.getInstance().getApplicationContext(),
-                Constants.KEY_BOOK_CALL_ID_LAST_CALL,
-                "0");
-
-        this.lastCallId = 0;
-        try {
-            this.lastCallId = Integer.parseInt(callId);
-        } catch (NumberFormatException e) {
-            Log.e(TAG, "Couldn't get the last call id: " + callId
-                    + " - error message: "
-                    + e.getMessage());
-            e.printStackTrace();
-            return false;
-        }
-
-        boolean canShowRateYourCall = false;
-        if(this.lastCallId != 0 && TimeUtils.hasOneHourPassed(lastBookedCallTimeMillis)) {
-            canShowRateYourCall = true;
-        }
-
-        return canShowRateYourCall;
-    }
-
-    private void dismissRateYourCallDialog() {
-        rateYourCallDialog.dismiss();
-        rateYourCallDialog.clearReference();
-        rateYourCallDialog = null;
-    }
-
-
-    /**
-     * Rate the call received in the last hour
-     * @param callId Id of the last call
-     * @param rating Rating given by the user
-     */
-    private void rateCall(final String callId, final Integer rating, final String accessToken) {
-        rateYourCallApi.rateCall(callId, rating, accessToken)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(this.<BaseResponse>bindToLifecycle())
-                .subscribe(new Subscriber<BaseResponse>() {
-
-                    @Override
-                    public void onStart() {
-                        showProgressDialog();
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        dismissProgressDialog();
-
-                        handleError(TAG, e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(BaseResponse rateCallResponse) {
-                        dismissProgressDialog();
-
-                        if (rateCallResponse.getStatus() == Constants.Status.SUCCESS) {
-                            showSuccessDialog(
-                                    R.drawable.ic_smiley,
-                                    getString(R.string.dialog_rate_your_call_success),
-                                    getString(R.string.dialog_rate_your_call_success_message),
-                                    getString(R.string.ok),
-                                    null);
-                            AnalyticsHelper.logViewDialogRatingEvent(EventConstants.DIALOG_DOCTOR_CALL_RATING_SUCCESS, rating);
-                        } else {
-                            handleError(TAG, rateCallResponse.getMessage());
-                        }
-                    }
-                });
-    }
 
 }

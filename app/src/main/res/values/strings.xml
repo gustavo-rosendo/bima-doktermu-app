@@ -73,6 +73,9 @@
     <string name="book_call_assigned_time">A few minutes</string>
     <string name="book_call_assigned_cancel_call">Cancel Call</string>
 
+    <!-- book a call assigned-->
+    <string name="book_call_complete_message">Congratulations:\n\nYou have successfully booked and completed a call.</string>
+
     <string name="book_call_tell_us_more">Topik konsultasi</string>
     <string name="book_call_info_1">
         Jika lebih dari 1 jam anda tidak dihubungi oleh team kami, silahkan mengirim email ke:

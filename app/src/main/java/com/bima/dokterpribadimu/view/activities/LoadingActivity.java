@@ -1,6 +1,8 @@
 package com.bima.dokterpribadimu.view.activities;
 
 
+
+import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 
@@ -20,7 +22,11 @@ import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 
+
+
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -51,11 +57,14 @@ public class LoadingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_loading);
 
+        DokterPribadimuApplication.getComponent().inject(this);
+
         // Obtain the shared Tracker instance.
 //        mTracker = DokterPribadimuApplication.getInstance().getDefaultTracker();
 
         initAnim();
         runSplash();
+
     }
 
     @Override
@@ -168,4 +177,8 @@ public class LoadingActivity extends BaseActivity {
             }
         });
     }
+
+
+
+
 }

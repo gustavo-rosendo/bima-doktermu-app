@@ -12,6 +12,7 @@ import com.bima.dokterpribadimu.view.activities.CurrentHealthActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallPendingActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallAssignedActivity;
+import com.bima.dokterpribadimu.view.activities.DoctorCallCompleteActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorProfileActivity;
 import com.bima.dokterpribadimu.view.activities.GeneralInformationActivity;
 import com.bima.dokterpribadimu.view.activities.HomeActivity;
@@ -163,6 +164,15 @@ public class IntentUtils {
         context.startActivity(intent);
     }
 
+    /**
+     * Start DoctorCallCompeteActivity and clear any stack behind it
+     * @param context caller's activity / fragment context
+     */
+    public static void startDoctorCallCompleteActivityOnTop(Context context) {
+        Intent intent = new Intent(context, DoctorCallCompleteActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+    }
     /**
      * Start GeneralInformationActivity
      * @param context caller's activity / fragment context

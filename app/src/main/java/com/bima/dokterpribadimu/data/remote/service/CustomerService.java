@@ -22,4 +22,11 @@ public interface CustomerService {
             @Field("email") String email,
             @Field("access_token") String accessToken
     );
+
+    @FormUrlEncoded
+    @POST("/v3/customer/firebase_token")
+    Call<BaseResponse> changeFirebaseToken(
+            @Field("firebase_token") String newFirebaseToken,
+            @Field("access_token") String accessToken
+    );
 }

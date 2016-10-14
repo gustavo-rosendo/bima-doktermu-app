@@ -3,12 +3,8 @@ package com.bima.dokterpribadimu.messaging;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
-import java.io.IOException;
-
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
+import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.StorageUtils;
 
 import android.util.Log;
 
@@ -17,35 +13,43 @@ import android.util.Log;
  */
 public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
 
-    private static final String TAG = "MyFirebaseIIDService";
+    private static final String TAG = "DPM_FirebaseIIDService";
 
     @Override
     public void onTokenRefresh() {
 
-        String token = FirebaseInstanceId.getInstance().getToken();
+        String firebase_token = FirebaseInstanceId.getInstance().getToken();
 
-        registerToken(token);
+        registerToken(firebase_token);
 
         //Displaying token on logcat
-        Log.d(TAG, "Refreshed token: " + token);
+        Log.d(TAG, "Refreshed token: " + firebase_token);
     }
 
-    private void registerToken(String token) {
+    public static String getToken() {
 
-        OkHttpClient client = new OkHttpClient();
-        RequestBody body = new FormBody.Builder()
-                .add("Token",token)
-                .build();
+        String firebase_token = FirebaseInstanceId.getInstance().getToken();
 
-        Request request = new Request.Builder()
-                .url("http://192.168.1.6/notification-client/register.php")
-                .post(body)
-                .build();
+        //Displaying token on logcat
+        Log.d(TAG, "Get token: " + firebase_token);
 
-        try {
-            client.newCall(request).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return firebase_token;
+    }
+
+    /**
+     * Do register token.
+     * @param firebaseToken firebase client token received from the firebase messaging service
+     */
+    private void registerToken(final String firebaseToken) {
+
+
+        StorageUtils.putString(FirebaseInstanceIDService.this,
+                               Constants.KEY_FIREBASE_ACCESS_TOKEN,
+                               firebaseToken);
+
+        StorageUtils.putBoolean(FirebaseInstanceIDService.this,
+                Constants.KEY_FIREBASE_ACCESS_TOKEN_SAVED,
+                false);
+
     }
 }
