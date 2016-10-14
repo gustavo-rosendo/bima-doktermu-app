@@ -61,6 +61,8 @@
     <string name="book_call_next">Next</string>
     <string name="book_call_prev">Prev</string>
     <string name="book_call_pick_image_intent_text">pick_image_intent_text</string>
+    <string name="book_call_error_picture_upload">Could not upload picture: </string>
+    <string name="book_call_success_picture_upload">Upload successful: </string>
 
     <!-- book a call pending-->
     <string name="book_call_pending_customer">Hey John!</string>

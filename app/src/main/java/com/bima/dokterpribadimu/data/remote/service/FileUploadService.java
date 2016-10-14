@@ -20,5 +20,9 @@ public interface FileUploadService {
     */
     @Multipart
     @POST("/v3/php_upload/upload")
-    Call<BaseResponse> uploadFile(@Part MultipartBody.Part file, @Part MultipartBody.Part accessToken, @Part MultipartBody.Part callID);
+    Call<BaseResponse> uploadFile(
+            @Part MultipartBody.Part file,
+            @Part MultipartBody.Part callId,
+            @Part MultipartBody.Part fileName,
+            @Part MultipartBody.Part accessToken);
 }

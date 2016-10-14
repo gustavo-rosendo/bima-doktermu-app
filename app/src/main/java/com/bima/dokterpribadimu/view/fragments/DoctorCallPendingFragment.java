@@ -178,12 +178,12 @@ public class DoctorCallPendingFragment extends BaseFragment {
                         dismissProgressDialog();
 
                         if (cancelCallResponse.getStatus() == Constants.Status.SUCCESS) {
-                            showSuccessDialog(
-                                    R.drawable.ic_smiley,
-                                    getString(R.string.book_call_cancelled),
-                                    getString(R.string.book_call_cancelled_message),
-                                    getString(R.string.ok),
-                                    null);
+//                            showSuccessDialog(
+//                                    R.drawable.ic_smiley,
+//                                    getString(R.string.book_call_cancelled),
+//                                    getString(R.string.book_call_cancelled_message),
+//                                    getString(R.string.ok),
+//                                    null);
 
                             //If the call is succesfully canceled, just go back to Doctor On Call screen
                             IntentUtils.startDoctorCallActivityOnTop(

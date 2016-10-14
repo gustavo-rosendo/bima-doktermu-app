@@ -31,17 +31,28 @@ public class FileUploadApi extends BaseApi<FileUploadService> {
         return FileUploadService.class;
     }
 
+    public FileUploadService getFileUploadService() {
+        return this.fileUploadService;
+    }
 
     /**
      * FileUploadApi implementation to get call history
      * @return Observable<BaseResponse>
      */
-    public Observable<BaseResponse<FileUploadResponse>> uploadFile(final MultipartBody.Part file, final MultipartBody.Part access_token, final MultipartBody.Part call_id) {
+    public Observable<BaseResponse<FileUploadResponse>> uploadFile(
+            final MultipartBody.Part file,
+            final MultipartBody.Part callId,
+            final MultipartBody.Part fileName,
+            final MultipartBody.Part access_token) {
         return Observable.create(new Observable.OnSubscribe<BaseResponse<FileUploadResponse>>() {
             @Override
             public void call(final Subscriber<? super BaseResponse<FileUploadResponse>> subscriber) {
                 try {
-                    Response response = fileUploadService.uploadFile(file, access_token, call_id).execute();
+                    Response response = fileUploadService.uploadFile(
+                            file,
+                            callId,
+                            fileName,
+                            access_token).execute();
                     if (response.isSuccessful()) {
                         subscriber.onNext((BaseResponse<FileUploadResponse>) response.body());
                         subscriber.onCompleted();

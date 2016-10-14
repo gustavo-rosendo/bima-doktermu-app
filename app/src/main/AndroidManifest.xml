@@ -79,6 +79,12 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
+
+        <!-- android:exported="false" so the service is only available to this app. -->
+        <service
+            android:name=".service.FileUploadBackgroundService"
+            android:exported="false"/>
+
         <receiver
             android:name="com.google.ads.conversiontracking.InstallReceiver"
             android:exported="true">

@@ -25,6 +25,7 @@ import com.bima.dokterpribadimu.data.remote.api.BookingApi;
 import com.bima.dokterpribadimu.data.remote.api.FileUploadApi;
 import com.bima.dokterpribadimu.databinding.ActivityBookCallBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
+import com.bima.dokterpribadimu.service.FileUploadBackgroundService;
 import com.bima.dokterpribadimu.utils.BookingUtils;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.IntentUtils;
@@ -60,13 +61,12 @@ public class BookCallActivity extends BaseActivity {
     private static final String CALL_ID = "call_id";
     private static final int PICK_IMAGE_ID_1 = 234; // the number doesn't matter
     private static final int PICK_IMAGE_ID_2 = 235; // the number doesn't matter
-    private static boolean FileUploadResult = false;
 
     private static String topic = "";
     private static String subTopic = "";
     private static CharSequence userNotes = "";
 
-    private static List<String> ImagesToUpload = new ArrayList<String>();
+    private static String ImagesToUpload[] = {"",""};
 
     @Inject
     BookingApi bookingApi;
@@ -297,12 +297,6 @@ public class BookCallActivity extends BaseActivity {
                 binding.bookCallStep3Complete.setVisibility(View.VISIBLE);
                 binding.bookCallStep4Grey.setVisibility(View.GONE);
                 binding.bookCallStep4Empty.setVisibility(View.VISIBLE);
-
-                if(!ImagesToUpload.isEmpty())
-                {
-                    FileUploadResult = true;
-                }
-
 
             }
         });
@@ -643,6 +637,13 @@ public class BookCallActivity extends BaseActivity {
                                     JSONObject jsonObject = new JSONObject(jsonResponse);
                                     if(jsonObject.has(CALL_ID)) {
                                         callId = String.valueOf(jsonObject.optInt(CALL_ID));
+
+                                        //Start Retrofit task to upload pictures
+                                        int fileCount = 0;
+                                        for(String fileName : ImagesToUpload) {
+                                            fileCount++;
+                                            uploadFile(fileName, callId, fileCount, accessToken);
+                                        }
                                     }
                                 } catch (JSONException e) {
                                     Log.e(TAG, "Error reading call_id from jsonResponse = " + jsonResponse);
@@ -691,14 +692,14 @@ public class BookCallActivity extends BaseActivity {
         switch(requestCode) {
             case PICK_IMAGE_ID_1:
                 Bitmap bitmap_1 = ImagePickerUtils.getImageFromResult(this, resultCode, data);
-                ImagesToUpload.add(data.toUri(0));
+                ImagesToUpload[0] = ImagePickerUtils.getImageFileName();
                 binding.bookCallIconAddImage1.setImageBitmap(bitmap_1);
                 // TODO use bitmap
                 break;
             case PICK_IMAGE_ID_2:
                 Bitmap bitmap_2 = ImagePickerUtils.getImageFromResult(this, resultCode, data);
-                ImagesToUpload.add(data.toUri(0));
-                binding.bookCallIconAddImage1.setImageBitmap(bitmap_2);
+                ImagesToUpload[1] = ImagePickerUtils.getImageFileName();
+                binding.bookCallIconAddImage2.setImageBitmap(bitmap_2);
                 // TODO use bitmap
                 break;
             default:
@@ -712,74 +713,85 @@ public class BookCallActivity extends BaseActivity {
      * @param fileName File Name to Upload
      * @param accessToken user's access token
      */
-    private boolean uploadFile(final String fileName,
-                            final String accessToken) {
+    private boolean uploadFile(final String fileName, final String callId,
+                            final int fileCount, final String accessToken) {
 
-        FileUploadResult = false;
+        String fileExtension = "";
+        int index = fileName.lastIndexOf(".");
+        if(index > 0) {
+            fileExtension = fileName.substring(index);
+        }
+        String uniqueFileName = "picture_" + callId + "_" + String.valueOf(fileCount) + fileExtension;
 
+        Intent uploadServiceIntent = new Intent(BookCallActivity.this, FileUploadBackgroundService.class);
+        uploadServiceIntent.putExtra(FileUploadBackgroundService.FILE_URL, fileName);
+        uploadServiceIntent.putExtra(FileUploadBackgroundService.CALL_ID, callId);
+        uploadServiceIntent.putExtra(FileUploadBackgroundService.UNIQUE_FILE_NAME, uniqueFileName);
+        uploadServiceIntent.putExtra(FileUploadBackgroundService.ACCESS_TOKEN, accessToken);
 
-        /**
-         * Progressbar to Display if you need
-         */
-        //File creating from selected URL
-        File file = new File(fileName);
-
-        // create RequestBody instance from file
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-
-        // MultipartBody.Part is used to send also the actual file name
-        MultipartBody.Part file_data = MultipartBody.Part.createFormData("uploaded_file", file.getName(), requestFile);
-
-        MultipartBody.Part access_token = MultipartBody.Part.createFormData("access_token", accessToken);
-
-        MultipartBody.Part call_id = MultipartBody.Part.createFormData("call_id", "24");
-
-
-        fileUploadApi.uploadFile(file_data, access_token, call_id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(this.<BaseResponse>bindToLifecycle())
-                .subscribe(new Subscriber<BaseResponse>() {
-
-                    @Override
-                    public void onStart() {
-                        showProgressDialog();
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        dismissProgressDialog();
-                        handleError(TAG, e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(BaseResponse response) {
-                        dismissProgressDialog();
-
-                        if (response.getStatus() == Constants.Status.SUCCESS) {
-
-                            if(response.getMessage() != null) {
-                                String ResponseString = response.getMessage().toString();
-                                if(ResponseString.equals("File Uploaded.")) {
-                                  Log.d(TAG, "File Sucessfully Uploaded.");
-                                  FileUploadResult = true;
-                                }
-
-
-                            }
-
-
-                        } else {
-                            handleError(TAG, response.getMessage());
-                        }
-                    }
-                });
+        //Start file upload in the background service
+        BookCallActivity.this.startService(uploadServiceIntent);
 
         return true;
+
+//        /**
+//         * Progressbar to Display if you need
+//         */
+//        //File creating from selected URL
+//        final File file = new File(fileName);
+//
+//        // create RequestBody instance from file
+//        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+//
+//        // MultipartBody.Part is used to send also the actual file name
+//        MultipartBody.Part file_data = MultipartBody.Part.createFormData("uploaded_file", file.getName(), requestFile);
+//
+//        MultipartBody.Part access_token = MultipartBody.Part.createFormData("access_token", accessToken);
+//
+//        MultipartBody.Part call_id = MultipartBody.Part.createFormData("call_id", callId);
+
+//        MultipartBody.Part uniqueFileName = MultipartBody.Part.createFormData("filename", tempFileName);
+
+//        fileUploadApi.uploadFile(file_data, call_id, uniqueFileName, access_token)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .compose(this.<BaseResponse>bindToLifecycle())
+//                .subscribe(new Subscriber<BaseResponse>() {
+//
+//                    @Override
+//                    public void onStart() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onCompleted() {
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Toast.makeText(BookCallActivity.this,
+//                                getString(R.string.book_call_error_picture_upload) + file.getName(),
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void onNext(BaseResponse response) {
+//                        if (response.getStatus() == Constants.Status.SUCCESS) {
+//                                Log.d(TAG, "File Sucessfully Uploaded.");
+//                                FileUploadResult = true;
+//                                Toast.makeText(BookCallActivity.this,
+//                                        getString(R.string.book_call_error_picture_upload) + file.getName(),
+//                                        Toast.LENGTH_SHORT).show();
+//                        }
+//                        else {
+//                            Toast.makeText(BookCallActivity.this,
+//                                    getString(R.string.book_call_error_picture_upload) + file.getName(),
+//                                    Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//
+//        return true;
     }
 
 }
