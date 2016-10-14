@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/generic_xlarge_padding"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/book_call_main_margin_top">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_xxlarge_margin"
+            android:layout_marginBottom="@dimen/generic_large_margin"
+            android:layout_centerHorizontal="true"
+            android:text="@string/book_call_complete_message"
+            android:textAllCaps="false"
+            android:textColor="@color/bima_blue"
+            android:textSize="@dimen/doctor_call_title_text_size"
+            android:textStyle="normal|bold" />
+
+    </RelativeLayout>
+
+</layout>

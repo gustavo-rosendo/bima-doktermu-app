@@ -62,4 +62,33 @@ public class CustomerApi extends BaseApi<CustomerService> {
             }
         });
     }
+
+    /**
+     * CustomerApi implementation to change firebase token
+     *
+     * @return Observable<BaseResponse>
+     */
+    public Observable<BaseResponse> changeFirebaseToken(
+            final String newFirebaseToken, final String accessToken){
+        return Observable.create(new Observable.OnSubscribe<BaseResponse>(){
+            @Override
+            public void call(final Subscriber<? super BaseResponse> subscriber){
+                try{
+                    Response response = customerService.changeFirebaseToken(newFirebaseToken, accessToken).execute();
+                    if(response.isSuccessful()){
+                        subscriber.onNext((BaseResponse)response.body());
+                        subscriber.onCompleted();
+                    }else{
+                        BaseResponse error= GsonUtils.fromJson(
+                                response.errorBody().string(),
+                                BaseResponse.class);
+                        subscriber.onError(new Exception(error.getMessage()));
+                    }
+                }catch(IOException e){
+                    e.printStackTrace();
+                    subscriber.onError(e);
+                }
+            }
+        });
+    }
 }

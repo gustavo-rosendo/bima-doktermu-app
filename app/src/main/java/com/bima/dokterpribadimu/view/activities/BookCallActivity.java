@@ -322,7 +322,7 @@ public class BookCallActivity extends BaseActivity {
         binding.bookCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (validatePhoneNumber() && validateBookTimeLimit()) {
+                if (validateBookTimeLimit()) {
 
                     AnalyticsHelper.logBookCallBtnClickEvent(
                             EventConstants.BTN_BOOK_SCREEN_BOOK_CALL,
@@ -533,27 +533,6 @@ public class BookCallActivity extends BaseActivity {
             } else {
                 return true;
             }
-        }
-        else {
-            isValid = true;
-        }
-
-        return isValid;
-    }
-
-    /**
-     * Validate book a call phone number. A phone number is valid if it has at least 11 digits, like in: 02742112462
-     * @return boolean true if phone number is valid, boolean false if otherwise
-     */
-    private boolean validatePhoneNumber() {
-        boolean isValid = false;
-
-        if(binding.bookCallPhoneNumber.getText().length() < Constants.PHONE_NUMBER_MINIMAL_DIGITS) {
-            Toast.makeText(
-                    this,
-                    getString(R.string.invalid_call_phone_number_message),
-                    Toast.LENGTH_LONG
-            ).show();
         }
         else {
             isValid = true;

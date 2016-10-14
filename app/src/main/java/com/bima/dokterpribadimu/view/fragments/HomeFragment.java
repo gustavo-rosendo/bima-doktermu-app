@@ -21,13 +21,16 @@ import com.bima.dokterpribadimu.databinding.FragmentHomeBinding;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
+import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
 import com.bima.dokterpribadimu.viewmodel.HomeItemViewModel;
 
 import javax.inject.Inject;
 
 import me.tatarka.bindingcollectionadapter.ItemView;
-
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -40,6 +43,8 @@ public class HomeFragment extends BaseFragment {
 
     @Inject
     BillingClient billingClient;
+
+
 
     private int[] resIds = {
             R.drawable.ic_home_doctor, R.drawable.ic_home_partners, R.drawable.ic_home_news,
@@ -232,4 +237,5 @@ public class HomeFragment extends BaseFragment {
         public final ObservableList<HomeItemViewModel> items = new ObservableArrayList<>();
         public final ItemView itemView = ItemView.of(BR.home_item_viewmodel, R.layout.item_home);
     }
+
 }

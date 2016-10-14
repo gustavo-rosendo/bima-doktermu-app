@@ -9,10 +9,12 @@ import com.bima.dokterpribadimu.view.activities.CurrentHealthActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallPendingActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorCallAssignedActivity;
+import com.bima.dokterpribadimu.view.activities.DoctorCallCompleteActivity;
 import com.bima.dokterpribadimu.view.activities.DoctorProfileActivity;
 import com.bima.dokterpribadimu.view.activities.GeneralInformationActivity;
 import com.bima.dokterpribadimu.view.activities.HomeActivity;
 import com.bima.dokterpribadimu.view.activities.LandingActivity;
+import com.bima.dokterpribadimu.view.activities.LoadingActivity;
 import com.bima.dokterpribadimu.view.activities.MedicineInformationActivity;
 import com.bima.dokterpribadimu.view.activities.NewsActivity;
 import com.bima.dokterpribadimu.view.activities.NewsDetailActivity;
@@ -30,6 +32,7 @@ import com.bima.dokterpribadimu.view.fragments.AboutFragment;
 import com.bima.dokterpribadimu.view.fragments.DoctorCallFragment;
 import com.bima.dokterpribadimu.view.fragments.DoctorCallPendingFragment;
 import com.bima.dokterpribadimu.view.fragments.DoctorCallAssignedFragment;
+import com.bima.dokterpribadimu.view.fragments.DoctorCallCompleteFragment;
 import com.bima.dokterpribadimu.view.fragments.DrawerFragment;
 import com.bima.dokterpribadimu.view.fragments.HomeFragment;
 import com.bima.dokterpribadimu.view.fragments.MedicineInformationFragment;
@@ -59,7 +62,8 @@ import dagger.Component;
 
 public interface DokterPribadimuComponent {
 
-    void inject(OnboardingActivity landingActivity);
+    void inject(LoadingActivity loadingActivity);
+    void inject(OnboardingActivity onboardingActivity);
     void inject(LandingActivity landingActivity);
     void inject(SignInActivity signInActivity);
     void inject(RegisterNameActivity registerNameActivity);
@@ -67,6 +71,7 @@ public interface DokterPribadimuComponent {
     void inject(DoctorCallActivity doctorCallActivity);
     void inject(DoctorCallPendingActivity doctorCallPendingActivity);
     void inject(DoctorCallAssignedActivity doctorCallAssignedActivity);
+    void inject(DoctorCallCompleteActivity doctorCallCompleteActivity);
     void inject(SubscriptionActivity subscriptionActivity);
     void inject(SubscriptionPlansActivity subscriptionPlansActivity);
     void inject(BookCallActivity bookCallActivity);
@@ -95,6 +100,7 @@ public interface DokterPribadimuComponent {
     void inject(DoctorCallFragment doctorCallFragment);
     void inject(DoctorCallPendingFragment doctorCallPendingFragment);
     void inject(DoctorCallAssignedFragment doctorCallAssignedFragment);
+    void inject(DoctorCallCompleteFragment doctorCallCompleteFragment);
     void inject(PartnersFragment partnersFragment);
     void inject(NewsFragment newsFragment);
     void inject(ProfileFragment profileFragment);
