@@ -1,6 +1,7 @@
 package com.bima.dokterpribadimu.view.fragments;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -111,7 +112,16 @@ public class DoctorCallCompleteFragment extends BaseFragment {
                 Integer ratingInt = Integer.valueOf(Math.round(rating));
                 rateCall(String.valueOf(lastCallId), ratingInt, UserProfileUtils.getUserProfile(getActivity()).getAccessToken());
             }
+
+            @Override
+            public void onClick(RateYourCallDialog dialog) {
+                dismissRateYourCallDialog();
+
+                IntentUtils.startHomeActivityOnTop(getActivity());
+            }
+
         });
+
     }
 
     /**

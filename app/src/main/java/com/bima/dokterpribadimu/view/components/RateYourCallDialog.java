@@ -31,6 +31,7 @@ public class RateYourCallDialog extends Dialog {
 
     public interface OnRateYourCallDialogClickListener {
         void onClick(RateYourCallDialog dialog, float rating);
+        void onClick(RateYourCallDialog dialog);
     }
 
     public RateYourCallDialog(Context context) {
@@ -105,8 +106,11 @@ public class RateYourCallDialog extends Dialog {
         binding.rateCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dismiss();
+                if (listener != null) {
+                    listener.onClick(RateYourCallDialog.this);
+                }
             }
+
         });
     }
 
