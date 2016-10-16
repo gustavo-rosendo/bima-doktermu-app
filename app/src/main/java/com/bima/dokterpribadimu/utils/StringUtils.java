@@ -10,4 +10,9 @@ public class StringUtils {
     public static String getStringOrDashIfNull(String string) {
         return (string != null && string != "") ? string : DASH;
     }
+
+    public static String getFileNameOnly(String string) {
+        int index = string.lastIndexOf("/");
+        return string.substring(index + 1);
+    }
 }

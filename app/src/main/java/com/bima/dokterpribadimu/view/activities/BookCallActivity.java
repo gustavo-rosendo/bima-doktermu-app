@@ -30,6 +30,7 @@ import com.bima.dokterpribadimu.utils.BookingUtils;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
+import com.bima.dokterpribadimu.utils.StringUtils;
 import com.bima.dokterpribadimu.utils.TimeUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.utils.ImagePickerUtils;
@@ -114,15 +115,115 @@ public class BookCallActivity extends BaseActivity {
         binding.bookCallIconAddImage1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onPickImage(view,PICK_IMAGE_ID_1);
+
+                if(ImagesToUpload[0].isEmpty())
+                {
+                    onPickImage(view,PICK_IMAGE_ID_1);
+                }
+                else {
+
+                    binding.bookCallIconAddImage1.setImageDrawable(null);
+                    binding.bookCallIconAddImage1Overlay.setImageResource(R.drawable.ic_photo_add);
+
+                    ImagesToUpload[0] = "";
+
+                    //If the user removed image one when there was an image 2
+                    //Remove image 1 and make image two the new image 1
+                    if(ImagesToUpload[1].isEmpty()) {
+                        binding.bookCallIconAddImage2.setImageDrawable(null);;
+                        binding.bookCallIconAddImage2Layout.setVisibility(View.GONE);
+                        binding.bookCallIconAddImage2Overlay.setImageResource(R.drawable.ic_photo_add);
+                    }
+                    else {
+                        binding.bookCallIconAddImage1.setImageDrawable(binding.bookCallIconAddImage2.getDrawable());
+                        binding.bookCallIconAddImage1Overlay.setImageResource(R.drawable.ic_photo_remove);
+
+                        binding.bookCallIconAddImage2.setImageDrawable(null);;
+                        binding.bookCallIconAddImage2Layout.setVisibility(View.GONE);
+                        binding.bookCallIconAddImage2Overlay.setImageResource(R.drawable.ic_photo_add);
+
+                        ImagesToUpload[0] = ImagesToUpload[1];
+                        ImagesToUpload[1] = "";
+                    }
+
+                }
+
+
             }
         });
+
         binding.bookCallIconAddImage2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onPickImage(view,PICK_IMAGE_ID_2);
+
+                if(ImagesToUpload[1].isEmpty())
+                {
+                    onPickImage(view,PICK_IMAGE_ID_2);
+                }
+                else {
+
+                    binding.bookCallIconAddImage2.setImageDrawable(null);
+                    binding.bookCallIconAddImage2Overlay.setImageResource(R.drawable.ic_photo_add);
+                    binding.bookCallIconAddImage2Layout.setVisibility(View.GONE);
+
+                    ImagesToUpload[1] = "";
+                }
+
             }
         });
+
+        binding.bookCallStep1Title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                binding.bookCallStep1Empty.setVisibility(View.VISIBLE);
+                binding.bookCallStep1Complete.setVisibility(View.GONE);
+                binding.bookCallStep2Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep2Empty.setVisibility(View.GONE);
+                binding.bookCallStep2Complete.setVisibility(View.GONE);
+                binding.bookCallStep3Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep3Empty.setVisibility(View.GONE);
+                binding.bookCallStep3Complete.setVisibility(View.GONE);
+                binding.bookCallStep4Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep4Empty.setVisibility(View.GONE);
+            }
+        });
+
+        binding.bookCallStep2Title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                binding.bookCallStep1Empty.setVisibility(View.GONE);
+                binding.bookCallStep1Complete.setVisibility(View.VISIBLE);
+                binding.bookCallStep2Grey.setVisibility(View.GONE);
+                binding.bookCallStep2Empty.setVisibility(View.VISIBLE);
+                binding.bookCallStep2Complete.setVisibility(View.GONE);
+                binding.bookCallStep3Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep3Empty.setVisibility(View.GONE);
+                binding.bookCallStep3Complete.setVisibility(View.GONE);
+                binding.bookCallStep4Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep4Empty.setVisibility(View.GONE);
+            }
+        });
+
+        binding.bookCallStep3Title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                binding.bookCallStep1Empty.setVisibility(View.GONE);
+                binding.bookCallStep1Complete.setVisibility(View.VISIBLE);
+                binding.bookCallStep2Grey.setVisibility(View.GONE);
+                binding.bookCallStep2Empty.setVisibility(View.GONE);
+                binding.bookCallStep2Complete.setVisibility(View.VISIBLE);
+                binding.bookCallStep3Grey.setVisibility(View.GONE);
+                binding.bookCallStep3Empty.setVisibility(View.VISIBLE);
+                binding.bookCallStep3Complete.setVisibility(View.GONE);
+                binding.bookCallStep4Grey.setVisibility(View.VISIBLE);
+                binding.bookCallStep4Empty.setVisibility(View.GONE);
+
+            }
+        });
+
         validateBookTimeLimit(); //Gray-out the button if a call was booked in less than the minimum interval
 
         binding.bookCallStep1Empty.setVisibility(View.VISIBLE);
@@ -151,6 +252,8 @@ public class BookCallActivity extends BaseActivity {
                     binding.bookCallStep3Complete.setVisibility(View.GONE);
                     binding.bookCallStep4Grey.setVisibility(View.VISIBLE);
                     binding.bookCallStep4Empty.setVisibility(View.GONE);
+
+                    binding.bookCallStep1Title.setClickable(true);
 
                     final int topicPosition = binding.bookCallTopicSpinner.getSelectedItemPosition();
                     int subTopicPosition = -1;
@@ -259,9 +362,42 @@ public class BookCallActivity extends BaseActivity {
                 binding.bookCallStep4Grey.setVisibility(View.VISIBLE);
                 binding.bookCallStep4Empty.setVisibility(View.GONE);
 
+                binding.bookCallStep2Title.setClickable(true);
+
                 userNotes = binding.bookCallStep2EditText.getText();
 
+                if(userNotes.length() == 0)
+                {
+                    binding.bookCallStep2Optional.setVisibility(View.VISIBLE);
+                    binding.bookCallStep2NotesGrey.setVisibility(View.GONE);
+                }
+                else {
+                    binding.bookCallStep2Optional.setVisibility(View.GONE);
+                    binding.bookCallStep2NotesGrey.setVisibility(View.VISIBLE);
+                }
                 binding.bookCallStep2NotesGrey.setText(userNotes);
+
+
+                if(ImagesToUpload[0].isEmpty() && ImagesToUpload[1].isEmpty())
+                {
+                    binding.bookCallIconAddImage1Layout.setVisibility(View.VISIBLE);
+                    binding.bookCallIconAddImage2Layout.setVisibility(View.GONE);
+                }
+                else {
+                    if(ImagesToUpload[0].isEmpty()) {
+                        binding.bookCallIconAddImage1Layout.setVisibility(View.VISIBLE);
+                        binding.bookCallIconAddImage1Overlay.setImageResource(R.drawable.ic_photo_add);
+                    } else {
+                        binding.bookCallIconAddImage1Overlay.setImageResource(R.drawable.ic_photo_remove);
+                    }
+
+                    if(ImagesToUpload[1].isEmpty()) {
+                        binding.bookCallIconAddImage2Layout.setVisibility(View.VISIBLE);
+                        binding.bookCallIconAddImage2Overlay.setImageResource(R.drawable.ic_photo_add);
+                    } else {
+                        binding.bookCallIconAddImage2Overlay.setImageResource(R.drawable.ic_photo_remove);
+                    }
+                }
 
             }
         });
@@ -297,6 +433,28 @@ public class BookCallActivity extends BaseActivity {
                 binding.bookCallStep3Complete.setVisibility(View.VISIBLE);
                 binding.bookCallStep4Grey.setVisibility(View.GONE);
                 binding.bookCallStep4Empty.setVisibility(View.VISIBLE);
+
+                binding.bookCallStep3Title.setClickable(true);
+
+                if(ImagesToUpload[0].isEmpty() && ImagesToUpload[1].isEmpty())
+                {
+                    binding.bookCallStep3CompleteOptional.setVisibility(View.VISIBLE);
+                    binding.bookCallStep3CompleteFileNames.setVisibility(View.GONE);
+                }
+                else {
+                    binding.bookCallStep2NotesGrey.setText(userNotes);
+                    binding.bookCallStep3CompleteOptional.setVisibility(View.GONE);
+                    binding.bookCallStep3CompleteFileNames.setVisibility(View.VISIBLE);
+
+                    if(ImagesToUpload[0].isEmpty()) {
+                        binding.bookCallStep3CompleteFileNames.setText(StringUtils.getFileNameOnly(ImagesToUpload[1]));
+                    } else if(ImagesToUpload[1].isEmpty()) {
+                        binding.bookCallStep3CompleteFileNames.setText(StringUtils.getFileNameOnly(ImagesToUpload[0]));
+                    } else {
+                        binding.bookCallStep3CompleteFileNames.setText(StringUtils.getFileNameOnly(ImagesToUpload[0]) + "\n" + StringUtils.getFileNameOnly(ImagesToUpload[1]));
+                    }
+                }
+
 
             }
         });
@@ -461,7 +619,7 @@ public class BookCallActivity extends BaseActivity {
         //Show the phone number where the user will be called
         binding.bookCallPhoneNumber.setText(UserProfileUtils.getUserProfile(BookCallActivity.this).getMsisdn());
 
-        binding.bookCallPhoneNumber.setOnClickListener(new View.OnClickListener() {
+        binding.bookCallIconQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(phoneInfoModalDialog == null) {
@@ -513,6 +671,37 @@ public class BookCallActivity extends BaseActivity {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Can the new image be added. (Doesnt allow duplicates)
+     * * @return boolean true if the image can be added, boolean false if otherwise
+     */
+    private boolean canAddImage(String string) {
+
+        boolean isDuplicate = false;
+
+        if(!string.isEmpty())
+        {
+            if(ImagesToUpload[0].equals(string))
+                isDuplicate = true;
+
+            if(ImagesToUpload[1].equals(string))
+                isDuplicate = true;
+
+        }
+
+        if (isDuplicate) {
+            Toast.makeText(
+                    this,
+                    getString(R.string.book_call_add_image_duplicate),
+                    Toast.LENGTH_SHORT
+            ).show();
+
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -670,16 +859,28 @@ public class BookCallActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch(requestCode) {
             case PICK_IMAGE_ID_1:
-                Bitmap bitmap_1 = ImagePickerUtils.getImageFromResult(this, resultCode, data);
-                ImagesToUpload[0] = ImagePickerUtils.getImageFileName();
-                binding.bookCallIconAddImage1.setImageBitmap(bitmap_1);
-                // TODO use bitmap
+                if(resultCode != 0) {
+                    Bitmap bitmap_1 = ImagePickerUtils.getImageFromResult(this, resultCode, data);
+                    if(canAddImage(ImagePickerUtils.getImageFileName())) {
+                        ImagesToUpload[0] = ImagePickerUtils.getImageFileName();
+                        binding.bookCallIconAddImage1.setImageBitmap(bitmap_1);
+
+                        binding.bookCallIconAddImage1Overlay.setImageResource(R.drawable.ic_photo_remove);
+
+                        binding.bookCallIconAddImage2Layout.setVisibility(View.VISIBLE);
+                        binding.bookCallIconAddImage2Overlay.setImageResource(R.drawable.ic_photo_add);
+                    }
+                }
                 break;
             case PICK_IMAGE_ID_2:
-                Bitmap bitmap_2 = ImagePickerUtils.getImageFromResult(this, resultCode, data);
-                ImagesToUpload[1] = ImagePickerUtils.getImageFileName();
-                binding.bookCallIconAddImage2.setImageBitmap(bitmap_2);
-                // TODO use bitmap
+                if(resultCode != 0) {
+                    Bitmap bitmap_2 = ImagePickerUtils.getImageFromResult(this, resultCode, data);
+                    if(canAddImage(ImagePickerUtils.getImageFileName())) {
+                        ImagesToUpload[1] = ImagePickerUtils.getImageFileName();
+                        binding.bookCallIconAddImage2.setImageBitmap(bitmap_2);
+                        binding.bookCallIconAddImage2Overlay.setImageResource(R.drawable.ic_photo_remove);
+                    }
+                }
                 break;
             default:
                 super.onActivityResult(requestCode, resultCode, data);

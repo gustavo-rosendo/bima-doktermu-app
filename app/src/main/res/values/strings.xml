@@ -65,9 +65,10 @@
     <string name="book_call_success_picture_upload">Upload successful: </string>
 
     <!-- book a call pending-->
-    <string name="book_call_pending_customer">Hey John!</string>
+    <string name="book_call_pending_customer">Hey %s!</string>
     <string name="book_call_pending_message">Your call request has been taken into consideration.\n A doctor will be assigned to you soon.</string>
     <string name="book_call_pending_cancel_call">Cancel Call</string>
+    <string name="book_call_add_image_duplicate">Duplicate image. Cannot add.</string>
 
     <!-- book a call assigned-->
     <string name="book_call_assigned_doctor">Our doctor</string>

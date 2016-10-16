@@ -14,7 +14,9 @@ import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.data.remote.api.BookingApi;
 import com.bima.dokterpribadimu.databinding.FragmentDoctorCallPendingBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
+import com.bima.dokterpribadimu.model.UserProfile;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.GsonUtils;
 import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
@@ -83,6 +85,24 @@ public class DoctorCallPendingFragment extends BaseFragment {
     }
 
     private void initViews() {
+
+
+        UserProfile userProfile = UserProfileUtils.getUserProfile(getActivity());
+
+        if(userProfile != null) {
+            String name_to_show;
+
+            name_to_show = userProfile.getFirstName();
+            if (name_to_show.isEmpty()) {
+                name_to_show = userProfile.getLastName();
+            }
+
+            name_to_show = String.format(getResources().getString(R.string.book_call_pending_customer),
+                    name_to_show);
+
+
+            binding.bookCallPendingCustomer.setText(name_to_show);
+        }
 
         binding.bookCallPendingMessage.setText(getResources().getString(R.string.book_call_pending_message));
         binding.bookCallPendingCancelCallButton.setText(getResources().getString(R.string.book_call_pending_cancel_call));
