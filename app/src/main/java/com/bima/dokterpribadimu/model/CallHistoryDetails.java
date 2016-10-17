@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class CallHistoryDetails {
     String bookingTopic;
-    String bookingSubTopic;
+    String bookingSubtopic;
     String bookingCreated;
     String doctorId;
     String doctorName;
@@ -27,11 +27,11 @@ public class CallHistoryDetails {
     }
 
     public String getBookingSubTopic() {
-        return bookingSubTopic;
+        return bookingSubtopic;
     }
 
     public void setBookingSubTopic(String bookingSubTopic) {
-        this.bookingSubTopic = bookingSubTopic;
+        this.bookingSubtopic = bookingSubTopic;
     }
 
     public String getBookingCreated() {
