@@ -2,7 +2,7 @@
     <string name="app_name">Doktermu</string>
     <string name="ok">OK</string>
     <string name="edit">Edit</string>
-    <string name="save">Save</string>
+    <string name="save">Simpan</string>
     <string name="kg">kg</string>
     <string name="cm">cm</string>
     <string name="minus">-</string>
@@ -36,10 +36,10 @@
     <string name="or">Atau</string>
 
     <!-- home -->
-    <string name="home">Home</string>
-    <string name="welcome">Welcome!</string>
-    <string name="home_info">Now, you have access to BIMA services directly on your phone.</string>
-    <string name="home_lets_get_started">Let\'s get started!</string>
+    <string name="home">Beranda</string>
+    <string name="welcome">Selamat Datang!</string>
+    <string name="home_info">Sekarang anda dapat menikmati layanan dari BIMA dari ponsel anda.</string>
+    <string name="home_lets_get_started">Mari kita mulai!</string>
 
     <!-- doctor on call -->
     <string name="doctor_on_call">Doktermu</string>
@@ -53,31 +53,31 @@
     <string name="doctor_on_call_subscribe">Aktivasi</string>
 
     <!-- book a call -->
-    <string name="book_call_choose_topic">Choose a topic and subtopic</string>
-    <string name="book_call_add_some_notes">Add some notes</string>
-    <string name="book_call_add_some_pictures">Add some pictures</string>
-    <string name="book_call_optional">(Optional)</string>
-    <string name="book_call_book_the_call">Book the call</string>
-    <string name="book_call_next">Next</string>
-    <string name="book_call_prev">Prev</string>
+    <string name="book_call_choose_topic">Pilih topik dan subtopik</string>
+    <string name="book_call_add_some_notes">Tambahkan catatan</string>
+    <string name="book_call_add_some_pictures">Tambahkan gambar</string>
+    <string name="book_call_optional">(Pilihan)</string>
+    <string name="book_call_book_the_call">Buat janji konsultasi sekarang</string>
+    <string name="book_call_next">Berikutnya</string>
+    <string name="book_call_prev">Sebelumnya</string>
     <string name="book_call_pick_image_intent_text">pick_image_intent_text</string>
-    <string name="book_call_error_picture_upload">Could not upload picture: </string>
-    <string name="book_call_success_picture_upload">Upload successful: </string>
+    <string name="book_call_error_picture_upload">Gambar tidak bisa diunggah: </string>
+    <string name="book_call_success_picture_upload">Gambar berhasil diunggah: </string>
 
     <!-- book a call pending-->
-    <string name="book_call_pending_customer">Hey %s!</string>
-    <string name="book_call_pending_message">Your call request has been taken into consideration.\n A doctor will be assigned to you soon.</string>
-    <string name="book_call_pending_cancel_call">Cancel Call</string>
-    <string name="book_call_add_image_duplicate">Duplicate image. Cannot add.</string>
+    <string name="book_call_pending_customer">Halo %s!</string>
+    <string name="book_call_pending_message">Pemesanan anda sedang diproses.\nKami akan menetapkan dokter untuk anda segera.</string>
+    <string name="book_call_pending_cancel_call">Batalkan Konsultasi</string>
+    <string name="book_call_add_image_duplicate">Gambar duplikasi. Tidak dapat ditambahkan.</string>
 
     <!-- book a call assigned-->
-    <string name="book_call_assigned_doctor">Our doctor</string>
-    <string name="book_call_assigned_message">has been assigned to you.\n\nThey should call you in about:</string>
-    <string name="book_call_assigned_time">A few minutes</string>
-    <string name="book_call_assigned_cancel_call">Cancel Call</string>
+    <string name="book_call_assigned_doctor">Dokter kami</string>
+    <string name="book_call_assigned_message">sudah ditetapkan.\n\nAnda akan ditelpon dalam waktu:</string>
+    <string name="book_call_assigned_time">Dalam beberapa menit</string>
+    <string name="book_call_assigned_cancel_call">Batalkan Konsultasi</string>
 
     <!-- book a call assigned-->
-    <string name="book_call_complete_message">Congratulations:\n\nYou have successfully booked and completed a call.</string>
+    <string name="book_call_complete_message">Selamat :\n\nAnda telah berhasil melakukan pemesanan dan konsultasi.</string>
 
     <string name="book_call_tell_us_more">Topik konsultasi</string>
     <string name="book_call_info_1">
@@ -100,10 +100,8 @@
     <!-- book a call cancelled-->
     <string name="book_call_cancelled">Berhasil!</string>
     <string name="book_call_cancelled_message">Konsultasi Anda telah dibatalkan.</string>
-    <string name="dialog_cancel_call_modal_title">Are you sure?</string>
-    <string name="dialog_cancel_call_modal_text">
-        If you cancel it now you will have to
-        wait again if you want to make another one later!</string>
+    <string name="dialog_cancel_call_modal_title">Apakah anda yakin?</string>
+    <string name="dialog_cancel_call_modal_text">Jika anda batalkan sekarang maka anda harus\nmenunggu untuk membuat janji berikutnya!</string>
 
     <!-- partners -->
     <string name="partners_inactive_info">Segera aktivasi dan dapatkan potongan harga dari
@@ -131,9 +129,9 @@
     <string name="profile_asterisk_password">********</string>
     <string name="my_phone_number">Nomor telepon</string>
     <string name="profile_my_personal_info">Info personal saya</string>
-    <string name="profile_general_information">General information</string>
-    <string name="profile_current_health">Current health conditions</string>
-    <string name="profile_medicine_information">Medicine information</string>
+    <string name="profile_general_information">Informasi umum</string>
+    <string name="profile_current_health">Kondisi kesehatan saat ini</string>
+    <string name="profile_medicine_information">Informasi obat</string>
     <string name="profile_call_history_info">Konsultasi terakhir</string>
     <string name="profile_call_history_more">Selebihnya</string>
     <string name="profile_app_info">
@@ -144,52 +142,52 @@
     <string name="cerise">Cerise</string>
 
     <!-- call history details -->
-    <string name="call_history_details">Call history details</string>
-    <string name="call_history_prescription">Prescription</string>
-    <string name="call_history_immunisation">Immunisation</string>
-    <string name="call_history_my_notes">My notes</string>
-    <string name="call_history_my_pictures">My pictures</string>
-    <string name="call_history_details_summary">Call summary</string>
+    <string name="call_history_details">Rincian riwayat panggilan</string>
+    <string name="call_history_prescription">Resep</string>
+    <string name="call_history_immunisation">Imunisasi</string>
+    <string name="call_history_my_notes">Catatan</string>
+    <string name="call_history_my_pictures">Gambar</string>
+    <string name="call_history_details_summary">Ringkasan panggilan</string>
 
     <!-- doctor profile -->
-    <string name="doctor_profile">Doctor Profile</string>
-    <string name="doctor_information">Doctor Information</string>
-    <string name="doctor_certification_code">Certification code:</string>
-    <string name="doctor_speciality">Speciality:</string>
-    <string name="doctor_university">University:</string>
-    <string name="doctor_bio">Doctor bio</string>
+    <string name="doctor_profile">Profil dokter</string>
+    <string name="doctor_information">Informasi dokter</string>
+    <string name="doctor_certification_code">Nomor Sertifikat:</string>
+    <string name="doctor_speciality">Spesialis:</string>
+    <string name="doctor_university">Universitas:</string>
+    <string name="doctor_bio">Biografi dokter</string>
 
     <!-- general information -->
-    <string name="general_height">Height</string>
-    <string name="general_weight">Weight</string>
-    <string name="general_religion">Religion</string>
-    <string name="general_blood_type">Blood type</string>
-    <string name="general_smoker">Smoker</string>
-    <string name="general_physical_exercise">Physical exercise</string>
-    <string name="general_health_insurance">Health insurance</string>
+    <string name="general_height">Tinggi</string>
+    <string name="general_weight">Berat</string>
+    <string name="general_religion">Agama</string>
+    <string name="general_blood_type">Golongan darah</string>
+    <string name="general_smoker">Perokok</string>
+    <string name="general_physical_exercise">Olahraga</string>
+    <string name="general_health_insurance">Asuransi kesehatan</string>
 
     <!-- current health -->
     <string name="current_health_diabetes">Diabetes:</string>
-    <string name="current_health_cancer">Cancer:</string>
-    <string name="current_health_blood_pressure">Blood pressure:</string>
-    <string name="current_health_allergies">Allergies:</string>
-    <string name="current_health_asthma">Asthma:</string>
-    <string name="current_health_pregnant">Pregnant:</string>
-    <string name="current_health_add_info">ADD INFO</string>
-    <string name="current_health_add_new">ADD NEW</string>
-    <string name="current_health_invalid_diabetes">Please choose an answer for diabetes.</string>
-    <string name="current_health_invalid_blood_pressure">Please choose an answer for blood pressure.</string>
-    <string name="current_health_invalid_asthma">Please choose an answer for asthma.</string>
-    <string name="current_health_invalid_pregnant">Please choose an answer for pregnant.</string>
-    <string name="current_health_already_selected">Item already selected, please choose another one.</string>
+    <string name="current_health_cancer">Kanker:</string>
+    <string name="current_health_blood_pressure">Tekanan darah:</string>
+    <string name="current_health_allergies">Alergi:</string>
+    <string name="current_health_asthma">Asma:</string>
+    <string name="current_health_pregnant">Kehamilan:</string>
+    <string name="current_health_add_info">Tambahkan informasi</string>
+    <string name="current_health_add_new">Jika ada</string>
+    <string name="current_health_invalid_diabetes">Silahkan pilih jawaban untuk diabetes.</string>
+    <string name="current_health_invalid_blood_pressure">Silahkan pilih jawaban untuk tekanan darah.</string>
+    <string name="current_health_invalid_asthma">Silahkan pilih jawaban untuk asma.</string>
+    <string name="current_health_invalid_pregnant">Silahkan pilih jawaban untuk kehamilan.</string>
+    <string name="current_health_already_selected">Sudah dipilih, silahkan pilih yang lainnya.</string>
 
     <!-- medicine information -->
-    <string name="medicine_prescription">Prescription</string>
-    <string name="medicine_immunisation">Immunisation</string>
-    <string name="medicine_date">Date</string>
-    <string name="medicine_name">Name</string>
-    <string name="medicine_duration">Duration</string>
-    <string name="medicine_renewal">Renewal</string>
+    <string name="medicine_prescription">Resep</string>
+    <string name="medicine_immunisation">Imunisasi</string>
+    <string name="medicine_date">Tanggal</string>
+    <string name="medicine_name">Nama</string>
+    <string name="medicine_duration">Durasi</string>
+    <string name="medicine_renewal">Pembaruan</string>
 
     <!-- drawer -->
     <string name="drawer_doctor_on_call">Doktermu</string>
@@ -318,7 +316,7 @@
     <string name="dialog_rate_your_call_success_message">Terimakasih.</string>
 
     <!-- Upload File -->
-    <string name="file_upload_progressbar">Uploading.. Wait for a while...</string>
+    <string name="file_upload_progressbar">Sedang mengunggah.. Harap tunggu sebentar...</string>
 
     <!-- province -->
     <string-array name="province_arrays">
@@ -443,23 +441,23 @@
 
     <!-- cancer  -->
     <string-array name="cancer_arrays">
-        <item>Prostate</item>
-        <item>Liver</item>
-        <item>Lungs</item>
-        <item>Breast</item>
-        <item>Brain</item>
-        <item>Other</item>
+        <item>Prostat</item>
+        <item>Hati</item>
+        <item>Paru-paru</item>
+        <item>Payudara</item>
+        <item>Otak</item>
+        <item>Lainnya</item>
         <item>ADD NEW</item>
     </string-array>
 
     <!-- Allergies  -->
     <string-array name="allergies_arrays">
-        <item>Dogs</item>
-        <item>Cats</item>
-        <item>Bees</item>
-        <item>Pollens</item>
-        <item>Dust</item>
-        <item>Other</item>
+        <item>Anjing</item>
+        <item>Kucing</item>
+        <item>Lebah</item>
+        <item>Serbuk Sari</item>
+        <item>Debu</item>
+        <item>Lainnya</item>
         <item>ADD NEW</item>
     </string-array>
 
