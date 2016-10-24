@@ -334,7 +334,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/transparent"
                             android:inputType="textMultiLine"
-                            android:hint="Maximum 280 Characters"
+                            android:hint="@string/book_call_max_chars"
                             android:maxLength="280"
                             android:textSize="14sp" />
 
@@ -677,7 +677,7 @@
                                 android:minWidth="80dp"
                                 android:layout_marginTop="@dimen/generic_large_margin"
                                 android:layout_gravity="left"
-                                android:text="Prev"
+                                android:text="@string/book_call_prev"
                                 android:textAllCaps="true"
                                 android:textColor="@android:color/white"
                                 android:textSize="14sp"
@@ -922,7 +922,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginLeft="5dp"
                             android:layout_gravity="start"
-                            android:text="Finalize Booking"
+                            android:text="@string/book_call_finialze_booking"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:textColor="@android:color/black" />
@@ -934,7 +934,7 @@
                             android:layout_marginBottom="0dp"
                             android:layout_marginLeft="5dp"
                             android:layout_gravity="start"
-                            android:text="We will call you on the:"
+                            android:text="@string/book_call_number_notice"
                             android:textSize="14sp" />
 
                         <LinearLayout
@@ -997,7 +997,7 @@
                                 android:layout_marginBottom="@dimen/generic_large_margin"
                                 android:layout_gravity="center_horizontal"
                                 android:text="@string/book_my_call"
-                                android:textAllCaps="false"
+                                android:textAllCaps="true"
                                 android:textColor="@android:color/white"
                                 android:textSize="14sp"
                                 android:background="@drawable/rounded_green_bg_selector"/>

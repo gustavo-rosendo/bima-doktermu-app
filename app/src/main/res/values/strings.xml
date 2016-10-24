@@ -60,9 +60,12 @@
     <string name="book_call_book_the_call">Buat janji konsultasi sekarang</string>
     <string name="book_call_next">Berikutnya</string>
     <string name="book_call_prev">Sebelumnya</string>
-    <string name="book_call_pick_image_intent_text">pick_image_intent_text</string>
+    <string name="book_call_pick_image_intent_text">Pilih Gambar</string>
     <string name="book_call_error_picture_upload">Gambar tidak bisa diunggah: </string>
     <string name="book_call_success_picture_upload">Gambar berhasil diunggah: </string>
+    <string name="book_call_max_chars">Maksimum 280 Karakter</string>
+    <string name="book_call_number_notice">Kami akan menghubungi Anda pada:</string>
+    <string name="book_call_finialze_booking">Finalisasi janji konsultasi</string>
 
     <!-- book a call pending-->
     <string name="book_call_pending_customer">Halo %s!</string>
@@ -90,7 +93,7 @@
     <string name="book_call_about">Apa topik anda?</string>
     <string name="book_call_phone">Nomor telepon Anda:</string>
     <string name="book_call_phone_info_modal">\?</string>
-    <string name="book_my_call">Buat janji sekarang</string>
+    <string name="book_my_call">Buat janji</string>
     <string name="book_call_rules">
         Jam buka 06.00 - 22.00 WIB\n
         Anda akan dihubungi dalam 1 jam ke depan (maksimal)</string>
@@ -283,9 +286,7 @@
     <string name="dialog_forgot_password_info">Kami akan mengirimkan kata sandi yang baru ke alamat email Anda</string>
     <string name="dialog_forgot_password_success">Berhasil!</string>
     <string name="dialog_forgot_password_success_message">Kata sandi yang baru akan dikirim ke alamat email Anda</string>
-    <string name="dialog_phone_info_modal_text">
-        Dokter akan menelpon Anda pada nomor yang tertera.\n
-        Untuk merubahnya silahkan masuk ke menu profil.</string>
+    <string name="dialog_phone_info_modal_text">Dokter akan menelpon Anda pada nomor yang tertera.\nUntuk merubahnya silahkan masuk ke menu profil.</string>
     <string name="dialog_already_subscribed_message">Anda sudah terdaftar</string>
     <string name="dialog_reset_password_email_not_registered_title">Email tidak terdaftar</string>
     <string name="dialog_reset_password_email_not_registered_message">Cek kembali alamat email yang Anda masukkan</string>

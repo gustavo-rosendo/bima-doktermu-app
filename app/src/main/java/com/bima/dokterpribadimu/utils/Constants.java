@@ -50,6 +50,7 @@ public class Constants {
     public static final String KEY_USER_SUBSCRIPTION_TOKEN = "user_subscription_token";
     public static final String KEY_BOOK_CALL_TIME_MILLIS = "book_call_time_millis";
     public static final String KEY_BOOK_CALL_ID_LAST_CALL = "book_call_id_last_call";
+    public static final String KEY_BOOK_CALL_IMAGE_ID = "book_call_image_id";
 
     public static final String KEY_ONBOARDING_FINISHED = "onboarding_finished";
 

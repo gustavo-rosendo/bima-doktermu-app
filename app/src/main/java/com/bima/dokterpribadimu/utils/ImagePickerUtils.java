@@ -35,10 +35,12 @@ public class ImagePickerUtils {
 
     private static final int DEFAULT_MIN_WIDTH_QUALITY = 400;        // min pixels
     private static final String TAG = "ImagePicker";
-    private static final String TEMP_IMAGE_NAME = "tempImage";
+
+    private static final String TEMP_IMAGE_NAME = "BI%04d.jpg";  //BI = BimaImage
 
     public static int minWidthQuality = DEFAULT_MIN_WIDTH_QUALITY;
     public static String imageFileName = "";
+    public static String tempImageFileName = "";
 
     public static Intent getPickImageIntent(Context context) {
         Intent chooserIntent = null;
@@ -49,7 +51,9 @@ public class ImagePickerUtils {
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         takePhotoIntent.putExtra("return-data", true);
-        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(context)));
+        File temp_file = getTempFile(context);
+
+        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(temp_file));
         intentList = addIntentsToList(context, intentList, pickIntent);
         intentList = addIntentsToList(context, intentList, takePhotoIntent);
 
@@ -123,9 +127,13 @@ public class ImagePickerUtils {
         return bm;
     }
 
+    public static void setTempImageName(int imageID)
+    {
+        tempImageFileName = String.format(TEMP_IMAGE_NAME, imageID);
+    }
 
     private static File getTempFile(Context context) {
-        File imageFile = new File(context.getExternalCacheDir(), TEMP_IMAGE_NAME);
+        File imageFile = new File(context.getExternalCacheDir(), tempImageFileName);
         imageFile.getParentFile().mkdirs();
         return imageFile;
     }

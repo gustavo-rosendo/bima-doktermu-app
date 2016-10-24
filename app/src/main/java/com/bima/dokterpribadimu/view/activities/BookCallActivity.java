@@ -164,7 +164,7 @@ public class BookCallActivity extends BaseActivity {
 
                     binding.bookCallIconAddImage2.setImageDrawable(null);
                     binding.bookCallIconAddImage2Overlay.setImageResource(R.drawable.ic_photo_add);
-                    binding.bookCallIconAddImage2Layout.setVisibility(View.GONE);
+                    binding.bookCallIconAddImage2Layout.setVisibility(View.VISIBLE);
 
                     ImagesToUpload[1] = "";
                 }
@@ -851,6 +851,14 @@ public class BookCallActivity extends BaseActivity {
 
 
     public void onPickImage(View view, int pick_image_control) {
+
+        int image_id;
+
+        image_id = StorageUtils.getInt(BookCallActivity.this, Constants.KEY_BOOK_CALL_IMAGE_ID, 1);
+
+        StorageUtils.putInt(BookCallActivity.this, Constants.KEY_BOOK_CALL_IMAGE_ID, image_id+1);
+
+        ImagePickerUtils.setTempImageName(image_id);
         Intent chooseImageIntent = ImagePickerUtils.getPickImageIntent(this);
         startActivityForResult(chooseImageIntent, pick_image_control);
     }
