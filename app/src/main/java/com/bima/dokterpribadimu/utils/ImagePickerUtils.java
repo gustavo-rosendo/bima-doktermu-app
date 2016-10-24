@@ -76,12 +76,17 @@ public class ImagePickerUtils {
 
     private static String getRealPathFromURI(Context context, Uri contentUri) {
         String[] proj = {MediaStore.Images.Media.DATA};
-        CursorLoader loader = new CursorLoader(context, contentUri, proj, null, null, null);
-        Cursor cursor = loader.loadInBackground();
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String result = cursor.getString(column_index);
-        cursor.close();
+        String result = "";
+        try{
+            CursorLoader loader = new CursorLoader(context, contentUri, proj, null, null, null);
+            Cursor cursor = loader.loadInBackground();
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            result = cursor.getString(column_index);
+            cursor.close();
+        } catch (IllegalArgumentException iae) {
+            iae.printStackTrace();
+        }
         return result;
     }
 
@@ -104,12 +109,12 @@ public class ImagePickerUtils {
                     imageReturnedIntent.getData().toString().contains(imageFile.toString()));
             if (isCamera) {     /** CAMERA **/
                 selectedImage = Uri.fromFile(imageFile);
+                imageFileName = selectedImage.getPath();
             } else {            /** ALBUM **/
                 selectedImage = imageReturnedIntent.getData();
+                imageFileName = getRealPathFromURI(context, selectedImage);
             }
             Log.d(TAG, "selectedImage: " + selectedImage);
-
-            imageFileName = getRealPathFromURI(context, selectedImage);
 
             bm = getImageResized(context, selectedImage);
             int rotation = getRotation(context, selectedImage, isCamera);
