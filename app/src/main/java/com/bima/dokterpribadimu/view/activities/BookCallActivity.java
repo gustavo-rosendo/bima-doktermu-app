@@ -900,6 +900,10 @@ public class BookCallActivity extends BaseActivity {
         int index = fileName.lastIndexOf(".");
         if(index > 0) {
             fileExtension = fileName.substring(index);
+            // If length is bigger than 4, it's not an extension but probably part of a folder
+            if(fileExtension.length() > 4) {
+                fileExtension = "";
+            }
         }
         String uniqueFileName = "picture_" + callId + "_" + String.valueOf(fileCount) + fileExtension;
 
