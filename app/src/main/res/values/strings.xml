@@ -73,11 +73,11 @@
     <!-- book a call assigned-->
     <string name="book_call_assigned_doctor">Dokter kami</string>
     <string name="book_call_assigned_message">sudah ditetapkan.\n\nAnda akan ditelpon dalam waktu:</string>
-    <string name="book_call_assigned_time">Dalam beberapa menit</string>
+    <string name="book_call_assigned_time">beberapa menit</string>
     <string name="book_call_assigned_cancel_call">Batalkan Konsultasi</string>
 
     <!-- book a call assigned-->
-    <string name="book_call_complete_message">Selamat :\n\nAnda telah berhasil melakukan pemesanan dan konsultasi.</string>
+    <string name="book_call_complete_message">Selamat!\n\nAnda telah berhasil melakukan pemesanan dan konsultasi.</string>
 
     <string name="book_call_tell_us_more">Topik konsultasi</string>
     <string name="book_call_info_1">

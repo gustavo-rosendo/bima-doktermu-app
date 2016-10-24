@@ -16,6 +16,7 @@
             android:layout_marginTop="@dimen/generic_xxlarge_margin"
             android:layout_marginBottom="@dimen/generic_large_margin"
             android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
             android:text="@string/book_call_complete_message"
             android:textAllCaps="false"
             android:textColor="@color/bima_blue"

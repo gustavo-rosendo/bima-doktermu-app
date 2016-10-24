@@ -33,6 +33,17 @@
             android:textStyle="normal|bold" />
 
         <TextView
+            android:id="@+id/book_call_assigned_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:text="@string/book_call_assigned_message"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/doctor_call_info_text_size"
+            android:layout_below="@+id/book_call_assigned_doctor"/>
+
+        <TextView
             android:id="@+id/book_call_assigned_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,19 +73,6 @@
             android:textColor="@android:color/white"
             android:textSize="16sp"
             android:background="@drawable/rounded_bima_orange_bg_selector"/>
-
-        <TextView
-            android:id="@+id/book_call_assigned_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:text="@string/book_call_assigned_message"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/doctor_call_info_text_size"
-            android:layout_below="@+id/book_call_assigned_doctor"
-            android:layout_alignRight="@+id/book_call_assigned_cancel_call_button"
-            android:layout_alignEnd="@+id/book_call_assigned_cancel_call_button" />
 
     </RelativeLayout>
 
