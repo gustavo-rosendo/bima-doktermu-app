@@ -95,6 +95,10 @@ public class DoctorCallPendingFragment extends BaseFragment {
             name_to_show = userProfile.getFirstName();
             if (name_to_show.isEmpty()) {
                 name_to_show = userProfile.getLastName();
+                if(name_to_show.isEmpty() && !userProfile.getName().isEmpty()) {
+                    String[] fullName = userProfile.getName().split(" ");
+                    name_to_show = fullName[0]; //just show the first name
+                }
             }
 
             name_to_show = String.format(getResources().getString(R.string.book_call_pending_customer),

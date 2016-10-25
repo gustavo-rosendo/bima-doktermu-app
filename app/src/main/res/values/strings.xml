@@ -104,7 +104,7 @@
     <string name="book_call_cancelled">Berhasil!</string>
     <string name="book_call_cancelled_message">Konsultasi Anda telah dibatalkan.</string>
     <string name="dialog_cancel_call_modal_title">Apakah anda yakin?</string>
-    <string name="dialog_cancel_call_modal_text">Jika anda batalkan sekarang maka anda harus\nmenunggu untuk membuat janji berikutnya!</string>
+    <string name="dialog_cancel_call_modal_text">Jika anda batalkan sekarang maka anda harus menunggu untuk membuat janji berikutnya!</string>
 
     <!-- partners -->
     <string name="partners_inactive_info">Segera aktivasi dan dapatkan potongan harga dari
