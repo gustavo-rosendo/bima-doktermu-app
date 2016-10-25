@@ -36,7 +36,7 @@ public class ImagePickerUtils {
     private static final int DEFAULT_MIN_WIDTH_QUALITY = 400;        // min pixels
     private static final String TAG = "ImagePicker";
 
-    private static final String TEMP_IMAGE_NAME = "BI%04d.jpg";  //BI = BimaImage
+    private static final String TEMP_IMAGE_NAME = "BI%04d";  //BI = BimaImage
 
     public static int minWidthQuality = DEFAULT_MIN_WIDTH_QUALITY;
     public static String imageFileName = "";
