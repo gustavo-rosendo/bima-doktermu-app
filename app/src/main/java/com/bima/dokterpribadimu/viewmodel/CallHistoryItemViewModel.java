@@ -5,6 +5,7 @@ import android.databinding.Bindable;
 import android.view.View;
 
 import com.bima.dokterpribadimu.model.BimaCall;
+import com.bima.dokterpribadimu.utils.DateFormatterUtils;
 
 /**
  * Created by gusta_000 on 16/5/2016.
@@ -44,7 +45,7 @@ public class CallHistoryItemViewModel extends BaseObservable {
 
     @Bindable
     public String getDate() {
-        return call.getBookingCreated();
+        return DateFormatterUtils.getCallHistoryDisplayDate(call.getBookingCreated());
     }
 
     @Bindable
