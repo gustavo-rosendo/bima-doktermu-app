@@ -1,5 +1,7 @@
 package com.bima.dokterpribadimu.model;
 
+import com.bima.dokterpribadimu.utils.DateFormatterUtils;
+
 import java.util.List;
 
 /**
@@ -35,7 +37,7 @@ public class CallHistoryDetails {
     }
 
     public String getBookingCreated() {
-        return bookingCreated;
+        return DateFormatterUtils.getCallHistoryDisplayDate(bookingCreated);
     }
 
     public void setBookingCreated(String bookingCreated) {
