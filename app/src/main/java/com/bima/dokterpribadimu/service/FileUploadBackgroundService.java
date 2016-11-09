@@ -10,9 +10,6 @@ import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 
 import java.io.File;
-import java.io.IOException;
-
-import javax.inject.Inject;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -80,7 +77,7 @@ public class FileUploadBackgroundService extends IntentService {
                             Log.e(TAG, "Upload error: " + newFileName + " - " + error.getMessage());
                             Exception ex = new Exception(error.getMessage());
                             ex.printStackTrace();
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
