@@ -735,6 +735,14 @@ public class BookCallActivity extends BaseActivity {
      * @return boolean true if user can already book another call, boolean false if otherwise
      */
     private boolean validateBookTimeLimit() {
+        /*
+        * GUSTAVO:
+        * Turn off time-limit validation due to a request from BIMA.
+        * In case they want it back, just uncomment the respective code below.
+        */
+        return true;
+
+        /*
         double lastBookedCallTimeMillis = StorageUtils.getDouble(
                 BookCallActivity.this,
                 Constants.KEY_BOOK_CALL_TIME_MILLIS,
@@ -752,6 +760,7 @@ public class BookCallActivity extends BaseActivity {
             return true;
         }
         return false;
+        */
     }
 
     /**
