@@ -38,6 +38,7 @@ public abstract class BaseApi<T> {
 
     public static int MAX_IDLE_CONNECTIONS = 30;
     public static int KEEP_ALIVE_DURATION_MS = 3 * 60 * 1000;
+    public static int CONNECTION_TIMEOUT = 5; //in minutes
 
     private final Retrofit retrofit;
 
@@ -57,6 +58,9 @@ public abstract class BaseApi<T> {
                                 MAX_IDLE_CONNECTIONS,
                                 KEEP_ALIVE_DURATION_MS,
                                 TimeUnit.MILLISECONDS))
+                .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.MINUTES)
+                .writeTimeout(CONNECTION_TIMEOUT, TimeUnit.MINUTES)
+                .readTimeout(CONNECTION_TIMEOUT, TimeUnit.MINUTES)
                 .build();
 
         retrofit = new Retrofit.Builder()

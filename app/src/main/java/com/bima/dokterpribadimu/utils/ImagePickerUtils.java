@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -21,6 +22,7 @@ import com.bima.dokterpribadimu.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,9 @@ import java.util.List;
  * Email: m3ario@gmail.com
  */
 public class ImagePickerUtils {
+
+    private static final int DESIRED_WIDTH = 612;
+    private static final int DESIRED_HEIGHT = 816;
 
     private static final int DEFAULT_MIN_WIDTH_QUALITY = 400;        // min pixels
     private static final String TAG = "ImagePicker";
@@ -120,7 +125,8 @@ public class ImagePickerUtils {
             }
             Log.d(TAG, "selectedImage: " + selectedImage);
 
-            bm = getImageResized(context, selectedImage);
+            //bm = getImageResized(context, selectedImage);
+            bm = decodeAndCompressFile(context, imageFileName, selectedImage);
             int rotation = getRotation(context, selectedImage, isCamera);
             bm = rotate(bm, rotation);
         }
@@ -173,6 +179,68 @@ public class ImagePickerUtils {
         return bm;
     }
 
+    private static Bitmap decodeAndCompressFile(Context ctx, String path, Uri fileUri) {
+        String strMyImagePath = null;
+        Bitmap scaledBitmap = null;
+        Bitmap finalBitmap = null;
+        Uri finalBitmapUri = fileUri;
+
+        try {
+            // Part 1: Decode image
+            Bitmap unscaledBitmap = ScalingUtilities.decodeFile(path, DESIRED_WIDTH, DESIRED_HEIGHT, ScalingUtilities.ScalingLogic.FIT);
+
+            if (!(unscaledBitmap.getWidth() <= DESIRED_WIDTH && unscaledBitmap.getHeight() <= DESIRED_HEIGHT)) {
+                // Part 2: Scale image
+                scaledBitmap = ScalingUtilities.createScaledBitmap(unscaledBitmap, DESIRED_WIDTH, DESIRED_HEIGHT, ScalingUtilities.ScalingLogic.FIT);
+            } else {
+                //unscaledBitmap.recycle();
+                return unscaledBitmap;
+            }
+
+            // Store to tmp file
+
+            String extr = Environment.getExternalStorageDirectory().toString();
+            File mFolder = new File(extr + "/DoktermuMedia");
+            if (!mFolder.exists()) {
+                mFolder.mkdir();
+            }
+
+            String s = System.currentTimeMillis() + ".jpg";
+
+            File f = new File(mFolder.getAbsolutePath(), s);
+
+            strMyImagePath = f.getAbsolutePath();
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(f);
+                scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 75, fos);
+                fos.flush();
+                fos.close();
+
+                //If compression succeed, change the final URI
+                //Otherwise, the original file will be returned
+                finalBitmapUri = Uri.fromFile(f);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            scaledBitmap.recycle();
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+
+        // Decode bitmap to return it
+        finalBitmap = decodeBitmap(ctx, finalBitmapUri, 1);
+
+        if(strMyImagePath != null) {
+            // If compression was successful, set the path to the new file
+            imageFileName = strMyImagePath;
+        }
+
+        return finalBitmap;
+    }
 
     private static int getRotation(Context context, Uri imageUri, boolean isCamera) {
         int rotation;

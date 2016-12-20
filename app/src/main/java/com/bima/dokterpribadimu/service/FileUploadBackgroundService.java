@@ -44,6 +44,12 @@ public class FileUploadBackgroundService extends IntentService {
         final String newFileName = intent.getExtras().getString(UNIQUE_FILE_NAME);
         final String accessToken = intent.getExtras().getString(ACCESS_TOKEN);
 
+        Log.d(TAG, "Starting file upload...");
+        Log.d(TAG, "fileURL = " + fileURL);
+        Log.d(TAG, "callId = " + callId);
+        Log.d(TAG, "newFileName = " + newFileName);
+        Log.d(TAG, "accessToken = " + accessToken);
+
         //File creating from selected URL
         final File file = new File(fileURL);
 
@@ -75,7 +81,9 @@ public class FileUploadBackgroundService extends IntentService {
                                     response.errorBody().string(),
                                     BaseResponse.class);
                             Log.e(TAG, "Upload error: " + newFileName + " - " + error.getMessage());
-                            Exception ex = new Exception(error.getMessage());
+                            Log.e(TAG, "response.toString() = " + response.toString());
+                            Log.e(TAG, "error.getData().toString() = " + error.getData().toString());
+                            Exception ex = new Exception(error.getData().toString());
                             ex.printStackTrace();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -86,6 +94,7 @@ public class FileUploadBackgroundService extends IntentService {
                 @Override
                 public void onFailure(Call<BaseResponse> call, Throwable t) {
                     Log.e(TAG, "Upload error: " + newFileName + " - " + t.getMessage());
+                    t.printStackTrace();
                 }
             });
         }
