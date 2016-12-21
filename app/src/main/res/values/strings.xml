@@ -183,6 +183,7 @@
     <string name="current_health_invalid_asthma">Silahkan pilih jawaban untuk asma.</string>
     <string name="current_health_invalid_pregnant">Silahkan pilih jawaban untuk kehamilan.</string>
     <string name="current_health_already_selected">Sudah dipilih, silahkan pilih yang lainnya.</string>
+    <string name="current_health_invalid_other">Mohon isi informasi yang valid.</string>
 
     <!-- medicine information -->
     <string name="medicine_prescription">Resep</string>
