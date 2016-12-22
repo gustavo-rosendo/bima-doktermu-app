@@ -21,10 +21,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.Manifest;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
@@ -98,6 +102,8 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
     private GoogleMap map;
     private Location location;
     private LocationTracker locationTracker;
+    private LocationManager locationManager;
+    private LocationListener locationListener;
 
     private boolean isLocationSet = false;
 
@@ -323,6 +329,9 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         map.getUiSettings().setMapToolbarEnabled(false);
         map.getUiSettings().setZoomControlsEnabled(false);
 
+        LatLng indonesia = new LatLng(-0.7892749999999999, 113.921327);
+        map.moveCamera(CameraUpdateFactory.newLatLng(indonesia));
+
         binding.partnersMyLocationButton.setVisibility(View.VISIBLE);
         binding.partnersMenuButton.setVisibility(View.VISIBLE);
 
@@ -334,15 +343,33 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         super.onResume();
         AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_PARTNERS_MAP);
 
-        if (locationTracker != null) {
-            locationTracker.startListening();
+        try {
+            if (locationTracker != null) {
+                locationTracker.startListening();
+            }
+
+            if(locationManager != null
+                    && locationListener != null) {
+                locationManager.requestLocationUpdates(getBestLocationProvider(), 0, 0, locationListener);
+            }
+        } catch(SecurityException se) {
+            se.printStackTrace();
         }
     }
 
     @Override
     protected void onPause() {
-        if (locationTracker != null) {
-            locationTracker.stopListening();
+        try {
+            if (locationTracker != null) {
+                locationTracker.stopListening();
+            }
+
+            if(locationManager != null
+                    && locationListener != null) {
+                locationManager.removeUpdates(locationListener);
+            }
+        } catch(SecurityException se) {
+            se.printStackTrace();
         }
 
         super.onPause();
@@ -350,8 +377,17 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
 
     @Override
     protected void onDestroy() {
-        if (locationTracker != null) {
-            locationTracker.stopListening();
+        try {
+            if (locationTracker != null) {
+                locationTracker.stopListening();
+            }
+
+            if(locationManager != null
+                    && locationListener != null) {
+                locationManager.removeUpdates(locationListener);
+            }
+        } catch(SecurityException se) {
+            se.printStackTrace();
         }
 
         if (categoriesPopupWindow != null) {
@@ -464,7 +500,69 @@ public class PartnersLandingActivity extends BaseActivity implements OnMapReadyC
         }
     }
 
+    private void setCurrentLocation(Location currentLocation) {
+        location = currentLocation;
+    }
+
+    private String getBestLocationProvider() {
+        Criteria criteria = new Criteria();
+        String locationProvider = locationManager.getBestProvider(criteria, true);
+
+        return locationProvider;
+    }
+
     private void startLocationTracker() {
+        try {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+            String locationProvider = getBestLocationProvider();
+
+            locationListener = new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    setCurrentLocation(location);
+
+                    if (!isLocationSet) {
+                        isLocationSet = true;
+                        updateUserLocation(true);
+                    }
+                    else {
+                        updateUserLocation(false);
+                    }
+                }
+
+                @Override
+                public void onStatusChanged(String s, int i, Bundle bundle) {
+
+                }
+
+                @Override
+                public void onProviderEnabled(String s) {
+
+                }
+
+                @Override
+                public void onProviderDisabled(String s) {
+
+                }
+            };
+
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
+            //Use cached location until a more accurate location is provided
+            //We do this for faster responses for the user
+            setCurrentLocation(locationManager.getLastKnownLocation(locationProvider));
+            updateUserLocation(true);
+
+        } catch (SecurityException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void startLocationTrackerDeprecated() {
         TrackerSettings settings =
                 new TrackerSettings()
                         .setUseGPS(true)

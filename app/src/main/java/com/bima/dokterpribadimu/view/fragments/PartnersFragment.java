@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.analytics.EventConstants;
@@ -47,7 +48,7 @@ public class PartnersFragment extends BaseFragment {
     }
 
     private void initViews() {
-        final boolean subscriptionActive =
+        final boolean subscriptionActive = (BuildConfig.DEBUG)? true :
                 StorageUtils.getBoolean(getActivity(), Constants.KEY_USER_SUBSCIPTION, false);
 
         if (subscriptionActive) {
