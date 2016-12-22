@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -386,51 +387,26 @@ public class CurrentHealthActivity extends BaseActivity {
         relativeLayout.setLayoutParams(p1);
 
         final EditText allergyEditText = new EditText(CurrentHealthActivity.this);
-        //allergyEditText.setHint(R.string.current_health_add_info);
         RelativeLayout.LayoutParams p2 = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         allergyEditText.setLayoutParams(p2);
         allergyEditText.setTextColor(Color.BLACK);
-        //allergyEditText.setTextSize(getResources().getDimension(R.dimen.generic_super_small_text_size));
         int padding = (int) getResources().getDimension(R.dimen.generic_large_padding);
         allergyEditText.setPadding(padding, padding, padding, padding);
 
         final ImageButton allergyBtn = new ImageButton(CurrentHealthActivity.this);
-        allergyBtn.setImageResource(R.drawable.ic_add);
+        allergyBtn.setImageResource(R.drawable.ic_chevron_right);
         allergyBtn.setBackgroundColor(0);
-        allergyBtn.setScaleX(0.7f);
-        allergyBtn.setScaleY(0.7f);
+        allergyBtn.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        allergyBtn.setAdjustViewBounds(true);
+        allergyBtn.setMaxHeight((int)getResources().getDimension(R.dimen.generic_button_height));
+
         RelativeLayout.LayoutParams p3 = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
+                RelativeLayout.LayoutParams.MATCH_PARENT);
         p3.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         allergyBtn.setLayoutParams(p3);
-//
-//        final ImageButton cancelBtn = new ImageButton(CurrentHealthActivity.this);
-//        cancelBtn.setImageResource(R.drawable.ic_close_bima_blue);
-//        cancelBtn.setBackgroundColor(0);
-//        cancelBtn.setScaleX(0.7f);
-//        cancelBtn.setScaleY(0.7f);
-//        RelativeLayout.LayoutParams p4 = new RelativeLayout.LayoutParams(
-//                RelativeLayout.LayoutParams.WRAP_CONTENT,
-//                RelativeLayout.LayoutParams.WRAP_CONTENT);
-//        p4.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-//        cancelBtn.setLayoutParams(p4);
-//
-//        cancelBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(linearLayout != null && relativeLayout != null
-//                        && allergyEditText != null && allergyBtn != null
-//                        && cancelBtn != null) {
-//                    relativeLayout.removeView(allergyEditText);
-//                    relativeLayout.removeView(allergyBtn);
-//                    relativeLayout.removeView(cancelBtn);
-//                    linearLayout.removeView(relativeLayout);
-//                }
-//            }
-//        });
 
         allergyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -442,39 +418,22 @@ public class CurrentHealthActivity extends BaseActivity {
                             Toast.LENGTH_SHORT).show();
                 }
                 else {
-//                    if(linearLayout != null && relativeLayout != null
-//                            && allergyEditText != null && allergyBtn != null
-//                            && cancelBtn != null) {
-//                        relativeLayout.removeView(allergyEditText);
-//                        relativeLayout.removeView(allergyBtn);
-//                        relativeLayout.removeView(cancelBtn);
-//                        linearLayout.removeView(relativeLayout);
-//                    }
                     addAllergyTextView(userInput);
+                }
+
+                // Remove the edit text field
+                if(linearLayout != null && relativeLayout != null
+                        && allergyEditText != null && allergyBtn != null) {
+                    relativeLayout.removeView(allergyEditText);
+                    relativeLayout.removeView(allergyBtn);
+                    linearLayout.removeView(relativeLayout);
                 }
             }
         });
         allergyEditText.requestFocus();
 
-
-        allergyEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                // If user clicks outside, cancel the editing operation
-                if(!b) {
-                    if(linearLayout != null && relativeLayout != null
-                            && allergyEditText != null && allergyBtn != null) {
-                        relativeLayout.removeView(allergyEditText);
-                        relativeLayout.removeView(allergyBtn);
-                        linearLayout.removeView(relativeLayout);
-                    }
-                }
-            }
-        });
-
         relativeLayout.addView(allergyEditText, 0);
         relativeLayout.addView(allergyBtn);
-//        relativeLayout.addView(cancelBtn);
         linearLayout.addView(relativeLayout, 0);
 
     }
@@ -491,55 +450,29 @@ public class CurrentHealthActivity extends BaseActivity {
         RelativeLayout.LayoutParams p1 = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
-        p1.addRule(RelativeLayout.ABOVE, R.id.current_health_cancer_spinner);
+        p1.addRule(RelativeLayout.BELOW, R.id.current_health_cancer_spinner);
         relativeLayout.setLayoutParams(p1);
 
         final EditText cancerEditText = new EditText(CurrentHealthActivity.this);
-        //cancerEditText.setHint(R.string.current_health_add_info);
         RelativeLayout.LayoutParams p2 = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         cancerEditText.setLayoutParams(p2);
         cancerEditText.setTextColor(Color.BLACK);
-        //cancerEditText.setTextSize(getResources().getDimension(R.dimen.generic_super_small_text_size));
         int padding = (int) getResources().getDimension(R.dimen.generic_large_padding);
         cancerEditText.setPadding(padding, padding, padding, padding);
 
         final ImageButton cancerBtn = new ImageButton(CurrentHealthActivity.this);
-        cancerBtn.setImageResource(R.drawable.ic_add);
+        cancerBtn.setImageResource(R.drawable.ic_chevron_right);
         cancerBtn.setBackgroundColor(0);
-        cancerBtn.setScaleX(0.7f);
-        cancerBtn.setScaleY(0.7f);
+        cancerBtn.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        cancerBtn.setAdjustViewBounds(true);
+        cancerBtn.setMaxHeight((int)getResources().getDimension(R.dimen.generic_button_height));
         RelativeLayout.LayoutParams p3 = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
+                RelativeLayout.LayoutParams.MATCH_PARENT);
         p3.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         cancerBtn.setLayoutParams(p3);
-//
-//        final ImageButton cancelBtn = new ImageButton(CurrentHealthActivity.this);
-//        cancelBtn.setImageResource(R.drawable.ic_close_bima_blue);
-//        cancelBtn.setBackgroundColor(0);
-//        cancelBtn.setScaleX(0.7f);
-//        cancelBtn.setScaleY(0.7f);
-//        RelativeLayout.LayoutParams p4 = new RelativeLayout.LayoutParams(
-//                RelativeLayout.LayoutParams.WRAP_CONTENT,
-//                RelativeLayout.LayoutParams.WRAP_CONTENT);
-//        p4.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-//        cancelBtn.setLayoutParams(p4);
-//
-//        cancelBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(linearLayout != null && relativeLayout != null
-//                        && cancerEditText != null && cancerBtn != null
-//                        && cancelBtn != null) {
-//                    relativeLayout.removeView(cancerEditText);
-//                    relativeLayout.removeView(cancerBtn);
-//                    relativeLayout.removeView(cancelBtn);
-//                    linearLayout.removeView(relativeLayout);
-//                }
-//            }
-//        });
 
         cancerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -549,41 +482,26 @@ public class CurrentHealthActivity extends BaseActivity {
                     Toast.makeText(getApplicationContext(),
                             getResources().getString(R.string.current_health_invalid_other),
                             Toast.LENGTH_SHORT).show();
+
                 }
                 else {
-//                    if(linearLayout != null && relativeLayout != null
-//                            && cancerEditText != null && cancerBtn != null
-//                            && cancelBtn != null) {
-//                        relativeLayout.removeView(cancerEditText);
-//                        relativeLayout.removeView(cancerBtn);
-//                        relativeLayout.removeView(cancelBtn);
-//                        linearLayout.removeView(relativeLayout);
-//                    }
                     addCancerTextView(userInput);
+                }
+
+                // Remove the edit text field
+                if(linearLayout != null && relativeLayout != null
+                        && cancerEditText != null && cancerBtn != null) {
+                    relativeLayout.removeView(cancerEditText);
+                    relativeLayout.removeView(cancerBtn);
+                    linearLayout.removeView(relativeLayout);
                 }
             }
         });
 
         cancerEditText.requestFocus();
 
-        cancerEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                // If user clicks outside, cancel the editing operation
-                if(!b) {
-                    if(linearLayout != null && relativeLayout != null
-                            && cancerEditText != null && cancerBtn != null) {
-                        relativeLayout.removeView(cancerEditText);
-                        relativeLayout.removeView(cancerBtn);
-                        linearLayout.removeView(relativeLayout);
-                    }
-                }
-            }
-        });
-
         relativeLayout.addView(cancerEditText, 0);
         relativeLayout.addView(cancerBtn);
-//        relativeLayout.addView(cancelBtn);
         linearLayout.addView(relativeLayout, 0);
     }
 
@@ -600,7 +518,7 @@ public class CurrentHealthActivity extends BaseActivity {
             RelativeLayout.LayoutParams p1 = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.MATCH_PARENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT);
-            p1.addRule(RelativeLayout.ABOVE, R.id.current_health_cancer_spinner);
+            p1.addRule(RelativeLayout.BELOW, R.id.current_health_cancer_spinner);
             relativeLayout.setLayoutParams(p1);
 
             final TextView cancerTextView = new TextView(CurrentHealthActivity.this);
@@ -666,7 +584,7 @@ public class CurrentHealthActivity extends BaseActivity {
                     RelativeLayout.LayoutParams.WRAP_CONTENT);
             allergyTextView.setLayoutParams(p2);
             allergyTextView.setTextColor(Color.BLACK);
-            allergyTextView.setTextSize(getResources().getDimension(R.dimen.generic_super_small_text_size));
+            //allergyTextView.setTextSize(getResources().getDimension(R.dimen.generic_super_small_text_size));
             int padding = (int) getResources().getDimension(R.dimen.generic_large_padding);
             allergyTextView.setPadding(padding, padding, padding, padding);
             relativeLayout.addView(allergyTextView, 0);
