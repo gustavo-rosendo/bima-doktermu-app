@@ -4,10 +4,12 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
+import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.data.remote.api.FileUploadApi;
 import com.bima.dokterpribadimu.data.remote.service.FileUploadService;
 import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.utils.GsonUtils;
+import com.bima.dokterpribadimu.utils.LogUtils;
 
 import java.io.File;
 
@@ -101,5 +103,11 @@ public class FileUploadBackgroundService extends IntentService {
         else {
             Log.e(TAG, "Upload error: " + newFileName + " - fileUploadService == null");
         }
+
+        if(BuildConfig.DEBUG) {
+            // write log to file
+            LogUtils.printLogToFile();
+        }
     }
+
 }

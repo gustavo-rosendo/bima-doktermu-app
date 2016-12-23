@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 
+import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.data.remote.api.DoctorProfileApi;
@@ -14,6 +15,7 @@ import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.DoctorProfile;
 import com.bima.dokterpribadimu.model.DoctorProfileResponse;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.LogUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.squareup.picasso.Picasso;
@@ -99,6 +101,9 @@ public class DoctorProfileActivity extends BaseActivity {
 
                     @Override
                     public void onCompleted() {
+                        if(BuildConfig.DEBUG) {
+                            LogUtils.printLogToFile();
+                        }
                     }
 
                     @Override
