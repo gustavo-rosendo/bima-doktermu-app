@@ -1,17 +1,9 @@
 package com.bima.dokterpribadimu.view.activities;
 
-import com.bima.dokterpribadimu.BR;
-import com.bima.dokterpribadimu.BuildConfig;
-import com.bima.dokterpribadimu.analytics.EventConstants;
-import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
-
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableList;
-import android.graphics.Color;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,51 +15,40 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
+import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
+import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.data.remote.api.BookingApi;
 import com.bima.dokterpribadimu.data.remote.api.CallHistoryApi;
 import com.bima.dokterpribadimu.data.remote.api.FileUploadApi;
 import com.bima.dokterpribadimu.databinding.ActivityBookCallBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.model.BimaCall;
-import com.bima.dokterpribadimu.model.CallHistoryDetails;
-import com.bima.dokterpribadimu.model.CallHistoryDetailsResponse;
 import com.bima.dokterpribadimu.model.CallHistoryResponse;
 import com.bima.dokterpribadimu.service.FileUploadBackgroundService;
 import com.bima.dokterpribadimu.utils.BookingUtils;
 import com.bima.dokterpribadimu.utils.Constants;
+import com.bima.dokterpribadimu.utils.ImagePickerUtils;
 import com.bima.dokterpribadimu.utils.IntentUtils;
 import com.bima.dokterpribadimu.utils.LogUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.StringUtils;
 import com.bima.dokterpribadimu.utils.TimeUtils;
 import com.bima.dokterpribadimu.utils.UserProfileUtils;
-import com.bima.dokterpribadimu.utils.ImagePickerUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.bima.dokterpribadimu.view.components.PhoneInfoModalDialog;
-import com.bima.dokterpribadimu.view.fragments.ProfileFragment;
-import com.bima.dokterpribadimu.viewmodel.CallHistoryItemViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
 
-import java.io.File;
-
-import me.tatarka.bindingcollectionadapter.ItemView;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import java.util.List;
-import java.util.ArrayList;
 
 public class BookCallActivity extends BaseActivity {
 

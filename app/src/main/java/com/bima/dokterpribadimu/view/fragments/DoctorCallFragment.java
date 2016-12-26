@@ -19,7 +19,6 @@ import com.bima.dokterpribadimu.data.inappbilling.QueryInventoryListener;
 import com.bima.dokterpribadimu.data.servertime.ServerTimeClient;
 import com.bima.dokterpribadimu.data.servertime.SntpClient;
 import com.bima.dokterpribadimu.databinding.FragmentDoctorCallBinding;
-import com.bima.dokterpribadimu.model.BaseResponse;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.TimeUtils;
