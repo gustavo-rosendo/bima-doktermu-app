@@ -284,6 +284,7 @@
     <string name="dialog_confirm">Konfirm</string>
     <string name="dialog_cancel">Batalkan</string>
     <string name="time_limit_to_book_call">Anda dapat membuat maksimal 1 janji per jam dengan dokter anda</string>
+    <string name="limit_to_book_call">Janji terakhir Anda masih dalam proses, tolong tunggu sebentar</string>
     <string name="dialog_forgot_password_info">Kami akan mengirimkan kata sandi yang baru ke alamat email Anda</string>
     <string name="dialog_forgot_password_success">Berhasil!</string>
     <string name="dialog_forgot_password_success_message">Kata sandi yang baru akan dikirim ke alamat email Anda</string>

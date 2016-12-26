@@ -1,11 +1,15 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import com.bima.dokterpribadimu.BR;
+import com.bima.dokterpribadimu.BuildConfig;
 import com.bima.dokterpribadimu.analytics.EventConstants;
 import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableList;
 import android.graphics.Color;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
@@ -22,13 +26,19 @@ import android.widget.Toast;
 import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 import com.bima.dokterpribadimu.data.remote.api.BookingApi;
+import com.bima.dokterpribadimu.data.remote.api.CallHistoryApi;
 import com.bima.dokterpribadimu.data.remote.api.FileUploadApi;
 import com.bima.dokterpribadimu.databinding.ActivityBookCallBinding;
 import com.bima.dokterpribadimu.model.BaseResponse;
+import com.bima.dokterpribadimu.model.BimaCall;
+import com.bima.dokterpribadimu.model.CallHistoryDetails;
+import com.bima.dokterpribadimu.model.CallHistoryDetailsResponse;
+import com.bima.dokterpribadimu.model.CallHistoryResponse;
 import com.bima.dokterpribadimu.service.FileUploadBackgroundService;
 import com.bima.dokterpribadimu.utils.BookingUtils;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.IntentUtils;
+import com.bima.dokterpribadimu.utils.LogUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.utils.StringUtils;
 import com.bima.dokterpribadimu.utils.TimeUtils;
@@ -37,6 +47,8 @@ import com.bima.dokterpribadimu.utils.ImagePickerUtils;
 import com.bima.dokterpribadimu.view.base.BaseActivity;
 import com.bima.dokterpribadimu.view.components.DokterPribadimuDialog;
 import com.bima.dokterpribadimu.view.components.PhoneInfoModalDialog;
+import com.bima.dokterpribadimu.view.fragments.ProfileFragment;
+import com.bima.dokterpribadimu.viewmodel.CallHistoryItemViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,6 +56,8 @@ import org.json.JSONObject;
 import javax.inject.Inject;
 
 import java.io.File;
+
+import me.tatarka.bindingcollectionadapter.ItemView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -69,11 +83,17 @@ public class BookCallActivity extends BaseActivity {
 
     private static String ImagesToUpload[] = {"",""};
 
+    private static boolean canBookNewCall = true;
+    private static final int CALL_HISTORY_LIMIT = 20;
+
     @Inject
     BookingApi bookingApi;
 
     @Inject
     FileUploadApi fileUploadApi;
+
+    @Inject
+    CallHistoryApi callHistoryApi;
 
     private ActivityBookCallBinding binding;
 
@@ -97,6 +117,10 @@ public class BookCallActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        //Gray-out the "Book" button if a call is still being processed
+        checkCallStatus(CALL_HISTORY_LIMIT,
+                UserProfileUtils.getUserProfile(BookCallActivity.this).getAccessToken());
 
 //        Log.d(TAG, "Setting screen name: " + TAG);
 //        mTracker.setScreenName("Image~" + TAG);
@@ -223,8 +247,6 @@ public class BookCallActivity extends BaseActivity {
 
             }
         });
-
-        validateBookTimeLimit(); //Gray-out the button if a call was booked in less than the minimum interval
 
         binding.bookCallStep1Empty.setVisibility(View.VISIBLE);
         binding.bookCallStep1Complete.setVisibility(View.GONE);
@@ -735,32 +757,24 @@ public class BookCallActivity extends BaseActivity {
      * @return boolean true if user can already book another call, boolean false if otherwise
      */
     private boolean validateBookTimeLimit() {
-        /*
-        * GUSTAVO:
-        * Turn off time-limit validation due to a request from BIMA.
-        * In case they want it back, just uncomment the respective code below.
-        */
-        return true;
 
-        /*
         double lastBookedCallTimeMillis = StorageUtils.getDouble(
                 BookCallActivity.this,
                 Constants.KEY_BOOK_CALL_TIME_MILLIS,
                 -TimeUtils.ONE_HOUR_MS); //for the first time this is accessed
 
-        if(!TimeUtils.hasOneHourPassed(lastBookedCallTimeMillis)) {
+        if(canBookNewCall || TimeUtils.hasOneHourPassed(lastBookedCallTimeMillis)) {
+            binding.bookCallButton.getBackground().setColorFilter(null);
+            return true;
+        } else {
             binding.bookCallButton.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             Toast.makeText(
                     this,
-                    getString(R.string.time_limit_to_book_call),
+                    getString(R.string.limit_to_book_call),
                     Toast.LENGTH_LONG
             ).show();
-        } else {
-            binding.bookCallButton.getBackground().setColorFilter(null);
-            return true;
         }
         return false;
-        */
     }
 
     /**
@@ -995,4 +1009,74 @@ public class BookCallActivity extends BaseActivity {
 //        return true;
     }
 
+
+    /**
+     * Check call status from call history list
+     * @param limit restrict the number of returned calls from the history
+     * @param accessToken user's access token
+     */
+    private void checkCallStatus(final int limit, final String accessToken) {
+        callHistoryApi.getCallHistory(limit, accessToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<BaseResponse<CallHistoryResponse>>bindToLifecycle())
+                .subscribe(new Subscriber<BaseResponse<CallHistoryResponse>>() {
+
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        //In case of error, do not show an error dialog but log the error
+                        Log.e(TAG, e.getMessage());
+                        if(BuildConfig.DEBUG) {
+                            LogUtils.printLogToFile();
+                        }
+
+                        //In this case, the default behaviour is to let the user book a new call
+                        canBookNewCall = true;
+                        validateBookTimeLimit();
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse<CallHistoryResponse> callHistoryResponse) {
+                        if (callHistoryResponse.getStatus() == Constants.Status.SUCCESS) {
+                            String lastBookedCallId = StorageUtils.getString(
+                                    BookCallActivity.this,
+                                    Constants.KEY_BOOK_CALL_ID_LAST_CALL, "-1");
+
+                            for (final BimaCall booking : callHistoryResponse.getData().getCalls()) {
+                                String callId = booking.getCallId();
+
+                                if(callId.contentEquals(lastBookedCallId)) {
+                                    //Found the last call, now check the status
+                                    String status = booking.getBookingStatus();
+
+                                    if(status.contentEquals(BookingUtils.STATUS_CANCELLED)
+                                            || status.contentEquals(BookingUtils.STATUS_EXPIRED)
+                                            || status.contentEquals(BookingUtils.STATUS_FINISHED)) {
+                                        canBookNewCall = true;
+                                    }
+                                    else {
+                                        canBookNewCall = false;
+                                    }
+                                }
+                            }
+                        } else {
+                            //In case of error, do not show an error dialog but log the error
+                            Log.e(TAG, callHistoryResponse.getMessage());
+                            //In this case, the default behaviour is to let the user book a new call
+                            canBookNewCall = true;
+                        }
+
+                        //Gray-out the button if a call is still being processed
+                        validateBookTimeLimit();
+                    }
+                });
+    }
 }
