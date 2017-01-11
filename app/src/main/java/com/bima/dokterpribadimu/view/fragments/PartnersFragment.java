@@ -1,6 +1,7 @@
 package com.bima.dokterpribadimu.view.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,10 @@ import com.bima.dokterpribadimu.analytics.AnalyticsHelper;
 import com.bima.dokterpribadimu.databinding.FragmentPartnersBinding;
 import com.bima.dokterpribadimu.utils.Constants;
 import com.bima.dokterpribadimu.utils.IntentUtils;
+import com.bima.dokterpribadimu.utils.MapsUtils;
 import com.bima.dokterpribadimu.utils.StorageUtils;
 import com.bima.dokterpribadimu.view.base.BaseFragment;
+import com.bima.dokterpribadimu.view.components.GPSDisabledDialog;
 
 /**
  * A simple {@link BaseFragment} subclass.
@@ -23,6 +26,10 @@ import com.bima.dokterpribadimu.view.base.BaseFragment;
 public class PartnersFragment extends BaseFragment {
 
     private FragmentPartnersBinding binding;
+
+    private GPSDisabledDialog gpsDisabledDialog;
+
+    private boolean GPSEnabled;
 
     public static PartnersFragment newInstance() {
         PartnersFragment fragment = new PartnersFragment();
@@ -74,5 +81,32 @@ public class PartnersFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_PARTNERS_HOME);
+
+        GPSEnabled = MapsUtils.CheckGPSEnabled();
+        if(!GPSEnabled) {
+            ShowDialogNoGPS();
+        }
+    }
+
+    private void ShowDialogNoGPS() {
+        if(gpsDisabledDialog == null) {
+            gpsDisabledDialog = new GPSDisabledDialog(getActivity());
+        }
+
+        gpsDisabledDialog.setListener(new GPSDisabledDialog.OnGPSDisabledDialogClickListener() {
+            @Override
+            public void onClick(GPSDisabledDialog dialog) {
+                dismissGPSDisabledDialog();
+                startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        });
+
+        gpsDisabledDialog.showDialog();
+    }
+
+    private void dismissGPSDisabledDialog() {
+        gpsDisabledDialog.dismiss();
+        gpsDisabledDialog.clearReference();
+        gpsDisabledDialog = null;
     }
 }

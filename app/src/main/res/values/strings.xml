@@ -114,6 +114,9 @@
     <string name="partners_none_found">Belum ada mitra kami untuk kategori ini.</string>
     <string name="partners_subscribe">Aktivasi</string>
     <string name="partners_find">Cari Mitra</string>
+    <string name="partners_gps_disabled_title">GPS non-aktif</string>
+    <string name="partners_gps_disabled">Silahkan aktifkan layanan lokasi pada perangkat anda untuk memaksimalkan layanan ini.</string>
+    <string name="partners_gps_aktifkan">Aktifkan</string>
 
     <!-- about bima -->
     <string name="about_bima">Tentang BIMA</string>

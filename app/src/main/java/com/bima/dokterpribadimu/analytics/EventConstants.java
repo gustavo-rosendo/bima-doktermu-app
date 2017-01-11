@@ -80,6 +80,7 @@ public class EventConstants {
     public static final String DIALOG_PROFILE_CHANGE_PHONE_SUCCESS      = "Dlg_Profile_Change_Phone_Success";
     public static final String DIALOG_SUBSCRIPTION_GOOGLEPLAY_SUCCESS   = "Dlg_Subscription_GooglePlay_Success";
     public static final String DIALOG_SUBSCRIPTION_BACKEND_SUCCESS      = "Dlg_Subscription_Backend_Success";
+    public static final String DIALOG_PARTNERS_GPS_DISABLED             = "Dlg_Partners_GPS_Disabled";
 
     /*
     * Button names to be sent to Analytics

@@ -1,5 +1,9 @@
 package com.bima.dokterpribadimu.utils;
 
+import android.content.Context;
+import android.location.LocationManager;
+
+import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -42,5 +46,12 @@ public class MapsUtils {
         }
 
         return polylines;
+    }
+
+    public static boolean CheckGPSEnabled() {
+        LocationManager locationManager = (LocationManager) DokterPribadimuApplication.getInstance()
+                .getSystemService(Context.LOCATION_SERVICE);
+
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 }
