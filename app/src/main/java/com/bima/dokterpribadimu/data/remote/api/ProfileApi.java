@@ -186,8 +186,26 @@ public class ProfileApi extends BaseApi<ProfileService> {
             @Override
             public void call(final Subscriber<? super BaseResponse> subscriber){
                 try{
-                    Response response = profileService.updateHealthCondition(
-                            diabetes, cancer, bloodPressure, allergies, asthma, pregnant, accessToken).execute();
+                    Response response = null;
+                    if((cancer != null && cancer.size() == 1) && (allergies != null && allergies.size() == 1)) {
+                        response = profileService.updateHealthConditionSingleValue(
+                                diabetes, cancer, bloodPressure, allergies, asthma, pregnant, accessToken).execute();
+                    }
+                    else if((cancer != null && cancer.size() == 1) &&
+                            ((allergies != null && allergies.size() > 1) || allergies == null)) {
+                        response = profileService.updateHealthConditionSingleCancer(
+                                diabetes, cancer, bloodPressure, allergies, asthma, pregnant, accessToken).execute();
+                    }
+                    else if((allergies != null && allergies.size() == 1) &&
+                            ((cancer != null && cancer.size() > 1 ) || cancer == null)) {
+                        response = profileService.updateHealthConditionSingleAllergy(
+                                diabetes, cancer, bloodPressure, allergies, asthma, pregnant, accessToken).execute();
+                    }
+                    else {
+                        response = profileService.updateHealthCondition(
+                                diabetes, cancer, bloodPressure, allergies, asthma, pregnant, accessToken).execute();
+                    }
+
                     if(response.isSuccessful()){
                         subscriber.onNext((BaseResponse)response.body());
                         subscriber.onCompleted();

@@ -58,6 +58,42 @@ public interface ProfileService {
 
     @FormUrlEncoded
     @POST("/v3/profile/health")
+    Call<BaseResponse> updateHealthConditionSingleValue(
+            @Field("diabetes") String diabetes,
+            @Field("cancer") ArrayList<String> cancer,
+            @Field("blood_pressure") String bloodPressure,
+            @Field("alergies") ArrayList<String> allergies,
+            @Field("asthma") String asthma,
+            @Field("pregnant") String pregnant,
+            @Field("access_token") String accessToken
+    );
+
+    @FormUrlEncoded
+    @POST("/v3/profile/health")
+    Call<BaseResponse> updateHealthConditionSingleAllergy(
+            @Field("diabetes") String diabetes,
+            @Field("cancer[]") ArrayList<String> cancer,
+            @Field("blood_pressure") String bloodPressure,
+            @Field("alergies") ArrayList<String> allergies,
+            @Field("asthma") String asthma,
+            @Field("pregnant") String pregnant,
+            @Field("access_token") String accessToken
+    );
+
+    @FormUrlEncoded
+    @POST("/v3/profile/health")
+    Call<BaseResponse> updateHealthConditionSingleCancer(
+            @Field("diabetes") String diabetes,
+            @Field("cancer") ArrayList<String> cancer,
+            @Field("blood_pressure") String bloodPressure,
+            @Field("alergies[]") ArrayList<String> allergies,
+            @Field("asthma") String asthma,
+            @Field("pregnant") String pregnant,
+            @Field("access_token") String accessToken
+    );
+
+    @FormUrlEncoded
+    @POST("/v3/profile/health")
     Call<BaseResponse> updateHealthCondition(
             @Field("diabetes") String diabetes,
             @Field("cancer[]") ArrayList<String> cancer,
