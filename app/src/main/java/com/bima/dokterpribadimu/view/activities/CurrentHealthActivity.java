@@ -55,8 +55,8 @@ public class CurrentHealthActivity extends BaseActivity {
     @Inject
     ProfileApi profileApi;
 
-    private List<String> cancerArrayList;
-    private List<String> allergiesArrayList;
+    private ArrayList<String> cancerArrayList;
+    private ArrayList<String> allergiesArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -666,8 +666,8 @@ public class CurrentHealthActivity extends BaseActivity {
     /**
      * Update user's health condition
      */
-    private void updateHealthCondition(final String diabetes, final List<String> cancer,
-                                       final String bloodPressure, final List<String> allergies,
+    private void updateHealthCondition(final String diabetes, final ArrayList<String> cancer,
+                                       final String bloodPressure, final ArrayList<String> allergies,
                                        final String asthma, final String pregnant, final String accessToken) {
         profileApi.updateHealthCondition(diabetes, cancer, bloodPressure, allergies,
                                         asthma, pregnant, accessToken)

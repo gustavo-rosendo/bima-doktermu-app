@@ -10,6 +10,7 @@ import com.bima.dokterpribadimu.model.ProfileResponse;
 import com.bima.dokterpribadimu.utils.GsonUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Response;
@@ -178,8 +179,8 @@ public class ProfileApi extends BaseApi<ProfileService> {
      * ProfileApi implementation to update user's health condition
      * @return Observable<BaseResponse>
      */
-    public Observable<BaseResponse> updateHealthCondition(final String diabetes, final List<String> cancer,
-                                                          final String bloodPressure, final List<String> allergies,
+    public Observable<BaseResponse> updateHealthCondition(final String diabetes, final ArrayList<String> cancer,
+                                                          final String bloodPressure, final ArrayList<String> allergies,
                                                           final String asthma, final String pregnant, final String accessToken){
         return Observable.create(new Observable.OnSubscribe<BaseResponse>(){
             @Override

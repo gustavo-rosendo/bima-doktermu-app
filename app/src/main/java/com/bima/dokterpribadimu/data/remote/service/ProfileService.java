@@ -6,6 +6,7 @@ import com.bima.dokterpribadimu.model.InformationResponse;
 import com.bima.dokterpribadimu.model.MedicineInfoResponse;
 import com.bima.dokterpribadimu.model.ProfileResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -59,9 +60,9 @@ public interface ProfileService {
     @POST("/v3/profile/health")
     Call<BaseResponse> updateHealthCondition(
             @Field("diabetes") String diabetes,
-            @Field("cancer") List<String> cancer,
+            @Field("cancer[]") ArrayList<String> cancer,
             @Field("blood_pressure") String bloodPressure,
-            @Field("alergies") List<String> allergies,
+            @Field("alergies[]") ArrayList<String> allergies,
             @Field("asthma") String asthma,
             @Field("pregnant") String pregnant,
             @Field("access_token") String accessToken
