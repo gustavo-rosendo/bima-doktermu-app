@@ -59,7 +59,7 @@ public class DateFormatterUtils {
             Date dt = CALL_DISPLAY_DATE.parse(date);
             Calendar cal = Calendar.getInstance();
             cal.setTime(dt);
-            cal.add(Calendar.HOUR, 7);
+//            cal.add(Calendar.HOUR, 7);
             return CALL_DISPLAY_DATE.format(cal.getTime());
         } catch (ParseException e) {
             e.printStackTrace();
