@@ -2,6 +2,7 @@ package com.bima.dokterpribadimu.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
@@ -18,6 +19,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 
+import com.bima.dokterpribadimu.DokterPribadimuApplication;
 import com.bima.dokterpribadimu.R;
 
 import java.io.File;
@@ -202,7 +204,11 @@ public class ImagePickerUtils {
             String extr = Environment.getExternalStorageDirectory().toString();
             File mFolder = new File(extr + "/DoktermuMedia");
             if (!mFolder.exists()) {
-                mFolder.mkdir();
+                boolean success = mFolder.mkdir();
+                if(!success) {
+                    mFolder = DokterPribadimuApplication.getInstance().getFilesDir();
+                    success = mFolder.exists();
+                }
             }
 
             String s = System.currentTimeMillis() + ".jpg";

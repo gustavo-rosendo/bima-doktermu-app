@@ -1,5 +1,6 @@
 package com.bima.dokterpribadimu.view.activities;
 
+import android.Manifest;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
@@ -44,15 +45,23 @@ import com.bima.dokterpribadimu.view.components.PhoneInfoModalDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class BookCallActivity extends BaseActivity {
+public class BookCallActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
 
     private static final String TAG = BookCallActivity.class.getSimpleName();
+
+    private static final int RC_PERMISSION_CAMERA_EXTERNAL_STORAGE = 1;
+
+    private boolean permissionGranted = false;
 
     private static final String CALL_ID = "call_id";
     private static final int PICK_IMAGE_ID_1 = 234; // the number doesn't matter
@@ -109,6 +118,32 @@ public class BookCallActivity extends BaseActivity {
         AnalyticsHelper.logViewScreenEvent(EventConstants.SCREEN_BOOK_CALL);
     }
 
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        permissionGranted = true;
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        permissionGranted = false;
+    }
+
+    private void CheckForPermissions() {
+        if (EasyPermissions.hasPermissions(this,
+                android.Manifest.permission.CAMERA,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            permissionGranted = true;
+        } else {
+            // Ask for one permission
+            EasyPermissions.requestPermissions(this, getString(R.string.rationale_camera),
+                    RC_PERMISSION_CAMERA_EXTERNAL_STORAGE,
+                    android.Manifest.permission.CAMERA,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+    }
+
     private void initViews() {
         binding.toolbarBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,40 +154,44 @@ public class BookCallActivity extends BaseActivity {
 
         binding.bookCallIconAddImage1.setOnClickListener(new View.OnClickListener() {
             @Override
+            @AfterPermissionGranted(RC_PERMISSION_CAMERA_EXTERNAL_STORAGE)
             public void onClick(View view) {
-
-                if(ImagesToUpload[0].isEmpty())
-                {
-                    onPickImage(view,PICK_IMAGE_ID_1);
+                if(!permissionGranted) {
+                    CheckForPermissions();
                 }
                 else {
-
-                    binding.bookCallIconAddImage1.setImageDrawable(null);
-                    binding.bookCallIconAddImage1Overlay.setImageResource(R.drawable.ic_photo_add);
-
-                    ImagesToUpload[0] = "";
-
-                    //If the user removed image one when there was an image 2
-                    //Remove image 1 and make image two the new image 1
-                    if(ImagesToUpload[1].isEmpty()) {
-                        binding.bookCallIconAddImage2.setImageDrawable(null);;
-                        binding.bookCallIconAddImage2Layout.setVisibility(View.GONE);
-                        binding.bookCallIconAddImage2Overlay.setImageResource(R.drawable.ic_photo_add);
+                    if(ImagesToUpload[0].isEmpty())
+                    {
+                        onPickImage(view,PICK_IMAGE_ID_1);
                     }
                     else {
-                        binding.bookCallIconAddImage1.setImageDrawable(binding.bookCallIconAddImage2.getDrawable());
-                        binding.bookCallIconAddImage1Overlay.setImageResource(R.drawable.ic_photo_remove);
 
-                        binding.bookCallIconAddImage2.setImageDrawable(null);;
-                        binding.bookCallIconAddImage2Layout.setVisibility(View.GONE);
-                        binding.bookCallIconAddImage2Overlay.setImageResource(R.drawable.ic_photo_add);
+                        binding.bookCallIconAddImage1.setImageDrawable(null);
+                        binding.bookCallIconAddImage1Overlay.setImageResource(R.drawable.ic_photo_add);
 
-                        ImagesToUpload[0] = ImagesToUpload[1];
-                        ImagesToUpload[1] = "";
+                        ImagesToUpload[0] = "";
+
+                        //If the user removed image one when there was an image 2
+                        //Remove image 1 and make image two the new image 1
+                        if(ImagesToUpload[1].isEmpty()) {
+                            binding.bookCallIconAddImage2.setImageDrawable(null);;
+                            binding.bookCallIconAddImage2Layout.setVisibility(View.GONE);
+                            binding.bookCallIconAddImage2Overlay.setImageResource(R.drawable.ic_photo_add);
+                        }
+                        else {
+                            binding.bookCallIconAddImage1.setImageDrawable(binding.bookCallIconAddImage2.getDrawable());
+                            binding.bookCallIconAddImage1Overlay.setImageResource(R.drawable.ic_photo_remove);
+
+                            binding.bookCallIconAddImage2.setImageDrawable(null);;
+                            binding.bookCallIconAddImage2Layout.setVisibility(View.GONE);
+                            binding.bookCallIconAddImage2Overlay.setImageResource(R.drawable.ic_photo_add);
+
+                            ImagesToUpload[0] = ImagesToUpload[1];
+                            ImagesToUpload[1] = "";
+                        }
+
                     }
-
                 }
-
 
             }
         });

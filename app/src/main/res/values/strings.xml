@@ -300,6 +300,7 @@
     <!-- permission -->
     <string name="rationale_location">Doktermu perlu mengakses GPS anda untuk mengaktifkan semua fitur aplikasi.</string>
     <string name="rationale_phone">Doktermu perlu mengakses informasi anda untuk mengaktifkan semua fitur aplikasi.</string>
+    <string name="rationale_camera">Doktermu perlu mengakses Kamera dan SD card anda untuk mengaktifkan fitur \"tambahkan gambar\".</string>
 
     <!-- maps -->
     <string name="your_location">Lokasi anda</string>
