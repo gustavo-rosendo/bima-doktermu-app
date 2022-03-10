@@ -1,4 +1,13 @@
-##Dokter Pribadimu for Android
+## Dokter Pribadimu for Android
+
+Android app developed for BIMA Mobile's branch in Indonesia (http://www.bimamobile.com/)
+It is a mobile app that provides health-care service for its users including features like: 
+1. Scheduling and consultation with a real doctor via a phone call
+2. News about various categories on health
+3. Search for partners that offer discounts (pharmacies, hospitals, etc.)
+4. Health record of the patient/app user, with the prescription given by the doctor
+
+It is not active anymore, but you can take a look at it here: https://play.google.com/store/apps/details?id=com.bima.dokterpribadimu
 
 ### Important notes
 This project is using [ProGuard](http://proguard.sourceforge.net/) to shrink and obfuscate the packaged code. If you're having problem while running, set `minifyEnabled false` in **app level** `build.gradle` for debug and release config
